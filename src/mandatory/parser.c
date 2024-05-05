@@ -1,24 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   parser.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ishenriq <ishenriq@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/05 14:42:53 by ishenriq          #+#    #+#             */
-/*   Updated: 2024/05/05 16:44:28 by ishenriq         ###   ########.fr       */
+/*   Updated: 2024/05/05 16:46:19 by ishenriq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "mandatory/minishell.h"
 
-int	main(int argc, char **argv, char **envp)
+void	ft_parser(s_minishell *minishell)
 {
-	s_minishell	*minishell;
+	char	**split;
+	int		i;
 
-	minishell = malloc(sizeof(minishell));
-	if (minishell == NULL)
-		return (EXIT_FAILURE);
-	read_line(minishell);
-	return (0);
+	i = 0;
+	split = ft_split_quote(minishell->argv);
+	while (split[i])
+		ft_printf("%s\n", split[i++]);
 }
