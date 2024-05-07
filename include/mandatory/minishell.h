@@ -6,7 +6,7 @@
 /*   By: ishenriq <ishenriq@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/22 18:25:14 by ishenriq          #+#    #+#             */
-/*   Updated: 2024/05/05 16:46:03 by ishenriq         ###   ########.fr       */
+/*   Updated: 2024/05/05 19:07:35 by ishenriq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,8 @@
 
 typedef struct t_minishell
 {
-	char	*argv;
+	char	*prompt;
+	char	*prompt_arranged;
 	int		argc;
 } s_minishell;
 
