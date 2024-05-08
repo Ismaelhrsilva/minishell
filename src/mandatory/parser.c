@@ -6,7 +6,7 @@
 /*   By: ishenriq <ishenriq@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/05 14:42:53 by ishenriq          #+#    #+#             */
-/*   Updated: 2024/05/07 19:14:39 by ishenriq         ###   ########.fr       */
+/*   Updated: 2024/05/07 21:09:21 by ishenriq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,22 @@ static void	ft_arranging_prompt(s_minishell *minishell)
 		return ;
 	while (minishell->prompt[i] != '\0')
 	{
+		if (ft_strchr("\'\"", minishell->prompt[i]))
+		{
+			prompt_arranged[j++] = ' '; 
+			prompt_arranged[j++] = '"'; 
+			i++;
+			while (!ft_strchr("\'\"", minishell->prompt[i]))
+			{
+				if (minishell->prompt[i] == ' ')
+				{
+					prompt_arranged[j++] = 0x1A;
+					i++;
+				}
+				else
+					prompt_arranged[j++] = minishell->prompt[i++];
+			}
+		}
 		if (ft_strchr("><|&", minishell->prompt[i]))
 		{
 			prompt_arranged[j++] = ' '; 
@@ -47,10 +63,25 @@ void	ft_parser(s_minishell *minishell)
 {
 	char	**split;
 	int		i;
+	int		j;
+	int		m;
+
 
 	i = 0;
+	m = 0;
+	j = 0;
 	ft_arranging_prompt(minishell);
 	split = ft_split(minishell->prompt_arranged, ' ');
+	while (split[m])
+	{
+		while (split[m][j])
+		{
+			if (split[m][j] == 0x1A)
+				split[m][j] = ' ';
+			j++;
+		}
+		m++;
+	}
 	while (split[i])
 		ft_printf("%s\n", split[i++]);
 }
