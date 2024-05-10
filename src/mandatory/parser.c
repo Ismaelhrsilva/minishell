@@ -6,11 +6,43 @@
 /*   By: ishenriq <ishenriq@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/05 14:42:53 by ishenriq          #+#    #+#             */
-/*   Updated: 2024/05/07 21:09:21 by ishenriq         ###   ########.fr       */
+/*   Updated: 2024/05/10 20:18:23 by ishenriq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "mandatory/minishell.h"
+
+static void ft_select_quotes(s_minishell *minishell, int *i, int *j, char *prompt)
+{
+	char	*signal;
+
+	signal = "";
+	if (ft_strchr("\'\"", minishell->prompt[*i]))
+	{
+		prompt[(*j)++] = ' '; 
+		if (ft_strchr("\"", minishell->prompt[*i]))
+		{
+			prompt[(*j)++] = '\"';
+			signal = "\"";
+		}
+		else
+		{
+			prompt[(*j)++] = '\''; 
+			signal = "\'";
+		}
+		(* i)++;
+		while (!ft_strchr(signal, minishell->prompt[*i]))
+		{
+			if (minishell->prompt[*i] == ' ')
+			{
+				prompt[(*j)++] = 0x1A;
+				(* i)++;
+			}
+			else
+				prompt[(*j)++] = minishell->prompt[(*i)++];
+		}
+	}
+}
 
 static void	ft_arranging_prompt(s_minishell *minishell)
 {
@@ -29,21 +61,7 @@ static void	ft_arranging_prompt(s_minishell *minishell)
 	while (minishell->prompt[i] != '\0')
 	{
 		if (ft_strchr("\'\"", minishell->prompt[i]))
-		{
-			prompt_arranged[j++] = ' '; 
-			prompt_arranged[j++] = '"'; 
-			i++;
-			while (!ft_strchr("\'\"", minishell->prompt[i]))
-			{
-				if (minishell->prompt[i] == ' ')
-				{
-					prompt_arranged[j++] = 0x1A;
-					i++;
-				}
-				else
-					prompt_arranged[j++] = minishell->prompt[i++];
-			}
-		}
+			ft_select_quotes(minishell, &i, &j, prompt_arranged);
 		if (ft_strchr("><|&", minishell->prompt[i]))
 		{
 			prompt_arranged[j++] = ' '; 
