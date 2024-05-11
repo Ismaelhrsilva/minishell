@@ -6,13 +6,13 @@
 /*   By: ishenriq <ishenriq@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/05 14:42:53 by ishenriq          #+#    #+#             */
-/*   Updated: 2024/05/10 20:18:23 by ishenriq         ###   ########.fr       */
+/*   Updated: 2024/05/10 22:02:13 by ishenriq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "mandatory/minishell.h"
 
-static void ft_select_quotes(s_minishell *minishell, int *i, int *j, char *prompt)
+static void ft_parse_quotes(s_minishell *minishell, int *i, int *j, char *prompt)
 {
 	char	*signal;
 
@@ -44,6 +44,42 @@ static void ft_select_quotes(s_minishell *minishell, int *i, int *j, char *promp
 	}
 }
 
+static int ft_parse_char(s_minishell *minishell, int *i, int *j, char *prompt)
+{
+	if (ft_strncmp("<<", &minishell->prompt[*i], 2) == 0)
+	{
+		prompt[(*j)++] = ' '; 
+		prompt[(*j)++] = minishell->prompt[(*i)++];
+		prompt[(*j)++] = minishell->prompt[(*i)];
+		prompt[(*j)] = ' '; 
+		return (1);
+	}
+	else if (ft_strncmp("&&", &minishell->prompt[*i], 2) == 0)
+	{
+		prompt[(*j)++] = ' '; 
+		prompt[(*j)++] = minishell->prompt[(*i)++];
+		prompt[(*j)++] = minishell->prompt[(*i)];
+		prompt[(*j)] = ' '; 
+		return (1);
+	}
+	else if (ft_strncmp("||", &minishell->prompt[*i], 2) == 0)
+	{
+		prompt[(*j)++] = ' '; 
+		prompt[(*j)++] = minishell->prompt[(*i)++];
+		prompt[(*j)++] = minishell->prompt[(*i)];
+		prompt[(*j)] = ' '; 
+		return (1);
+	}
+	else if (ft_strchr("><|", minishell->prompt[*i]))
+	{
+		prompt[(*j)++] = ' '; 
+		prompt[(*j)++] = minishell->prompt[*i];
+		prompt[(*j)] = ' '; 
+		return (1);
+	}
+	return (0);
+}
+
 static void	ft_arranging_prompt(s_minishell *minishell)
 {
 	int	size;
@@ -61,14 +97,8 @@ static void	ft_arranging_prompt(s_minishell *minishell)
 	while (minishell->prompt[i] != '\0')
 	{
 		if (ft_strchr("\'\"", minishell->prompt[i]))
-			ft_select_quotes(minishell, &i, &j, prompt_arranged);
-		if (ft_strchr("><|&", minishell->prompt[i]))
-		{
-			prompt_arranged[j++] = ' '; 
-			prompt_arranged[j++] = minishell->prompt[i];
-			prompt_arranged[j] = ' '; 
-		}
-		else
+			ft_parse_quotes(minishell, &i, &j, prompt_arranged);
+		if (!ft_parse_char(minishell, &i, &j, prompt_arranged))
 			prompt_arranged[j] = minishell->prompt[i];
 		i++;
 		j++;
