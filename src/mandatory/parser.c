@@ -6,7 +6,7 @@
 /*   By: ishenriq <ishenriq@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/05 14:42:53 by ishenriq          #+#    #+#             */
-/*   Updated: 2024/05/12 19:35:24 by ishenriq         ###   ########.fr       */
+/*   Updated: 2024/05/12 20:27:02 by ishenriq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,9 +61,11 @@ int ft_parse_char(t_parse *parse, char *prompt)
 {
 	if (ft_aux_parse_char("<<", parse, prompt))
 		return (1);
-	if (ft_aux_parse_char("&&", parse, prompt))
+	else if (ft_aux_parse_char(">>", parse, prompt))
 		return (1);
-	if (ft_aux_parse_char("||", parse, prompt))
+	else if (ft_aux_parse_char("&&", parse, prompt))
+		return (1);
+	else if (ft_aux_parse_char("||", parse, prompt))
 		return (1);
 	else if (ft_strchr("><|", parse->prompt[parse->idx->i]))
 	{

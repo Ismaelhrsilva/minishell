@@ -6,7 +6,7 @@
 /*   By: ishenriq <ishenriq@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/12 18:18:14 by ishenriq          #+#    #+#             */
-/*   Updated: 2024/05/12 19:47:11 by ishenriq         ###   ########.fr       */
+/*   Updated: 2024/05/12 20:34:11 by ishenriq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@ static char	*ft_token(int n)
 	token[3] = "OR";
 	token[4] = "AND";
 	token[5] = "REDOUT";
+	token[6] = "APPEND";
 	return (token[n]);
 }
 
@@ -37,6 +38,7 @@ static char	*ft_token_before(int n)
 	token_before[3] = "||";
 	token_before[4] = "&&";
 	token_before[5] = ">";
+	token_before[6] = ">>";
 
 	return (token_before[n]);
 }
