@@ -6,108 +6,104 @@
 /*   By: ishenriq <ishenriq@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/05 14:42:53 by ishenriq          #+#    #+#             */
-/*   Updated: 2024/05/10 22:02:13 by ishenriq         ###   ########.fr       */
+/*   Updated: 2024/05/12 18:03:32 by ishenriq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "mandatory/minishell.h"
 
-static void ft_parse_quotes(s_minishell *minishell, int *i, int *j, char *prompt)
+static void ft_parse_quotes(s_parse *parse, char *prompt)
 {
 	char	*signal;
 
 	signal = "";
-	if (ft_strchr("\'\"", minishell->prompt[*i]))
+	if (ft_strchr("\'\"", parse->prompt[parse->idx->i]))
 	{
-		prompt[(*j)++] = ' '; 
-		if (ft_strchr("\"", minishell->prompt[*i]))
+		prompt[parse->idx->j++] = ' '; 
+		if (ft_strchr("\"", parse->prompt[parse->idx->i]))
 		{
-			prompt[(*j)++] = '\"';
+			prompt[parse->idx->j++] = '\"';
 			signal = "\"";
 		}
 		else
 		{
-			prompt[(*j)++] = '\''; 
+			prompt[parse->idx->j++] = '\''; 
 			signal = "\'";
 		}
-		(* i)++;
-		while (!ft_strchr(signal, minishell->prompt[*i]))
+		parse->idx->i++;
+		while (!ft_strchr(signal, parse->prompt[parse->idx->i]))
 		{
-			if (minishell->prompt[*i] == ' ')
+			if (parse->prompt[parse->idx->i] == ' ')
 			{
-				prompt[(*j)++] = 0x1A;
-				(* i)++;
+				prompt[parse->idx->j++] = 0x1A;
+				parse->idx->i++;
 			}
 			else
-				prompt[(*j)++] = minishell->prompt[(*i)++];
+				prompt[parse->idx->j++] = parse->prompt[parse->idx->i++];
 		}
 	}
 }
 
-static int ft_parse_char(s_minishell *minishell, int *i, int *j, char *prompt)
+static int ft_aux_parse_char(char *ch, s_parse *parse, char *prompt)
 {
-	if (ft_strncmp("<<", &minishell->prompt[*i], 2) == 0)
+	if (ft_strncmp(ch, &parse->prompt[parse->idx->i], 2) == 0)
 	{
-		prompt[(*j)++] = ' '; 
-		prompt[(*j)++] = minishell->prompt[(*i)++];
-		prompt[(*j)++] = minishell->prompt[(*i)];
-		prompt[(*j)] = ' '; 
-		return (1);
-	}
-	else if (ft_strncmp("&&", &minishell->prompt[*i], 2) == 0)
-	{
-		prompt[(*j)++] = ' '; 
-		prompt[(*j)++] = minishell->prompt[(*i)++];
-		prompt[(*j)++] = minishell->prompt[(*i)];
-		prompt[(*j)] = ' '; 
-		return (1);
-	}
-	else if (ft_strncmp("||", &minishell->prompt[*i], 2) == 0)
-	{
-		prompt[(*j)++] = ' '; 
-		prompt[(*j)++] = minishell->prompt[(*i)++];
-		prompt[(*j)++] = minishell->prompt[(*i)];
-		prompt[(*j)] = ' '; 
-		return (1);
-	}
-	else if (ft_strchr("><|", minishell->prompt[*i]))
-	{
-		prompt[(*j)++] = ' '; 
-		prompt[(*j)++] = minishell->prompt[*i];
-		prompt[(*j)] = ' '; 
+		prompt[parse->idx->j++] = ' '; 
+		prompt[parse->idx->j++] = parse->prompt[parse->idx->i++];
+		prompt[parse->idx->j++] = parse->prompt[parse->idx->i];
+		prompt[parse->idx->j] = ' '; 
 		return (1);
 	}
 	return (0);
 }
 
-static void	ft_arranging_prompt(s_minishell *minishell)
+static int ft_parse_char(s_parse *parse, char *prompt)
+{
+	if (ft_aux_parse_char("<<", parse, prompt))
+		return (1);
+	if (ft_aux_parse_char("&&", parse, prompt))
+		return (1);
+	if (ft_aux_parse_char("||", parse, prompt))
+		return (1);
+	else if (ft_strchr("><|", parse->prompt[parse->idx->i]))
+	{
+		prompt[parse->idx->j++] = ' '; 
+		prompt[parse->idx->j++] = parse->prompt[parse->idx->i];
+		prompt[parse->idx->j] = ' '; 
+		return (1);
+	}
+	return (0);
+}
+
+static void	ft_arranging_prompt(s_parse *parse)
 {
 	int	size;
 	char	*prompt_arranged;
-	int	i;
-	int	j;
 
-	i = 0;
-	j = 0;
-	if (minishell->prompt)
-		size = ft_strlen(minishell->prompt);
+	if (parse->prompt)
+		size = ft_strlen(parse->prompt);
 	prompt_arranged = malloc((size * 2) * sizeof(char *));
 	if (!prompt_arranged)
 		return ;
-	while (minishell->prompt[i] != '\0')
+	parse->idx = malloc(sizeof(s_index));
+	if (!parse->idx)
+		return ;
+	parse->idx->i = 0;
+	parse->idx->j = 0;
+	while (parse->prompt[parse->idx->i] != '\0')
 	{
-		if (ft_strchr("\'\"", minishell->prompt[i]))
-			ft_parse_quotes(minishell, &i, &j, prompt_arranged);
-		if (!ft_parse_char(minishell, &i, &j, prompt_arranged))
-			prompt_arranged[j] = minishell->prompt[i];
-		i++;
-		j++;
+		if (ft_strchr("\'\"", parse->prompt[parse->idx->i]))
+			ft_parse_quotes(parse, prompt_arranged);
+		if (!ft_parse_char(parse, prompt_arranged))
+			prompt_arranged[parse->idx->j] = parse->prompt[parse->idx->i];
+		parse->idx->i++;
+		parse->idx->j++;
 	}
-	prompt_arranged[j] = '\0';
-	minishell->prompt_arranged = prompt_arranged;
+	prompt_arranged[parse->idx->j] = '\0';
+	parse->prompt_arranged = prompt_arranged;
 }
 
-void	ft_parser(s_minishell *minishell)
+void	ft_parser(s_parse *parse)
 {
 	char	**split;
 	int		i;
@@ -118,8 +114,8 @@ void	ft_parser(s_minishell *minishell)
 	i = 0;
 	m = 0;
 	j = 0;
-	ft_arranging_prompt(minishell);
-	split = ft_split(minishell->prompt_arranged, ' ');
+	ft_arranging_prompt(parse);
+	split = ft_split(parse->prompt_arranged, ' ');
 	while (split[m])
 	{
 		while (split[m][j])

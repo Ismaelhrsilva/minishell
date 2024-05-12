@@ -6,7 +6,7 @@
 /*   By: ishenriq <ishenriq@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/05 14:42:53 by ishenriq          #+#    #+#             */
-/*   Updated: 2024/05/05 16:44:28 by ishenriq         ###   ########.fr       */
+/*   Updated: 2024/05/10 22:32:36 by ishenriq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,11 @@
 
 int	main(int argc, char **argv, char **envp)
 {
-	s_minishell	*minishell;
+	s_parse	*parse;
 
-	minishell = malloc(sizeof(minishell));
-	if (minishell == NULL)
+	parse = malloc(sizeof(s_parse));
+	if (parse == NULL)
 		return (EXIT_FAILURE);
-	read_line(minishell);
+	read_line(parse);
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: ishenriq <ishenriq@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/22 18:25:14 by ishenriq          #+#    #+#             */
-/*   Updated: 2024/05/05 19:07:35 by ishenriq         ###   ########.fr       */
+/*   Updated: 2024/05/10 22:42:05 by ishenriq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,15 +33,22 @@
 # include "../lib/printf/ft_printf.h"
 # include "../lib/libft/gnl/get_next_line.h"
 
-typedef struct t_minishell
+typedef	struct t_index
+{
+	int	i;
+	int	j;
+	int	m;
+}	s_index;
+
+typedef struct t_parse
 {
 	char	*prompt;
 	char	*prompt_arranged;
-	int		argc;
-} s_minishell;
+	s_index	*idx;
+} s_parse;
 
 //File: Read_inputs
-void	read_line(s_minishell *minishell);
+void	read_line(s_parse *parse);
 
-void	ft_parser(s_minishell *minishell);
+void	ft_parser(s_parse *parse);
 #endif
