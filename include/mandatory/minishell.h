@@ -6,7 +6,7 @@
 /*   By: ishenriq <ishenriq@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/22 18:25:14 by ishenriq          #+#    #+#             */
-/*   Updated: 2024/05/10 22:42:05 by ishenriq         ###   ########.fr       */
+/*   Updated: 2024/05/12 19:23:38 by ishenriq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,22 +33,53 @@
 # include "../lib/printf/ft_printf.h"
 # include "../lib/libft/gnl/get_next_line.h"
 
-typedef	struct t_index
+/*enum e_token
+{
+	< = 0,
+	<< = 1,
+	|  = 2,
+	|| = 3,
+	&& = 4,
+	> = 5,
+}	t_token;
+
+typedef struct s_token
+{
+	char **token;
+}	t_token;
+*/
+
+typedef	struct s_index
 {
 	int	i;
 	int	j;
 	int	m;
-}	s_index;
+}	t_index;
 
-typedef struct t_parse
+typedef struct s_parse
 {
 	char	*prompt;
 	char	*prompt_arranged;
-	s_index	*idx;
-} s_parse;
+	t_index	*idx;
+} t_parse;
+
+typedef struct s_shell
+{
+	char	**prompt_splitted;
+}	t_shell;
 
 //File: Read_inputs
-void	read_line(s_parse *parse);
+void	read_line(t_shell *shell);
 
-void	ft_parser(s_parse *parse);
+//File parse
+char	**ft_parser(t_parse *parse);
+void ft_parse_quotes(t_parse *parse, char *prompt);
+int ft_aux_parse_char(char *ch, t_parse *parse, char *prompt);
+int ft_parse_char(t_parse *parse, char *prompt);
+void	ft_arranging_prompt(t_parse *parse);
+
+
+//File Tokenazer
+char	*ft_set_token(char *str);
+
 #endif

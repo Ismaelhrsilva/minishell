@@ -6,13 +6,13 @@
 /*   By: ishenriq <ishenriq@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/05 14:42:53 by ishenriq          #+#    #+#             */
-/*   Updated: 2024/05/12 18:03:32 by ishenriq         ###   ########.fr       */
+/*   Updated: 2024/05/12 19:35:24 by ishenriq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "mandatory/minishell.h"
 
-static void ft_parse_quotes(s_parse *parse, char *prompt)
+void ft_parse_quotes(t_parse *parse, char *prompt)
 {
 	char	*signal;
 
@@ -44,7 +44,7 @@ static void ft_parse_quotes(s_parse *parse, char *prompt)
 	}
 }
 
-static int ft_aux_parse_char(char *ch, s_parse *parse, char *prompt)
+int ft_aux_parse_char(char *ch, t_parse *parse, char *prompt)
 {
 	if (ft_strncmp(ch, &parse->prompt[parse->idx->i], 2) == 0)
 	{
@@ -57,7 +57,7 @@ static int ft_aux_parse_char(char *ch, s_parse *parse, char *prompt)
 	return (0);
 }
 
-static int ft_parse_char(s_parse *parse, char *prompt)
+int ft_parse_char(t_parse *parse, char *prompt)
 {
 	if (ft_aux_parse_char("<<", parse, prompt))
 		return (1);
@@ -75,7 +75,7 @@ static int ft_parse_char(s_parse *parse, char *prompt)
 	return (0);
 }
 
-static void	ft_arranging_prompt(s_parse *parse)
+void	ft_arranging_prompt(t_parse *parse)
 {
 	int	size;
 	char	*prompt_arranged;
@@ -85,7 +85,7 @@ static void	ft_arranging_prompt(s_parse *parse)
 	prompt_arranged = malloc((size * 2) * sizeof(char *));
 	if (!prompt_arranged)
 		return ;
-	parse->idx = malloc(sizeof(s_index));
+	parse->idx = malloc(sizeof(t_index));
 	if (!parse->idx)
 		return ;
 	parse->idx->i = 0;
@@ -103,7 +103,7 @@ static void	ft_arranging_prompt(s_parse *parse)
 	parse->prompt_arranged = prompt_arranged;
 }
 
-void	ft_parser(s_parse *parse)
+char	**ft_parser(t_parse *parse)
 {
 	char	**split;
 	int		i;
@@ -127,5 +127,10 @@ void	ft_parser(s_parse *parse)
 		m++;
 	}
 	while (split[i])
-		ft_printf("%s\n", split[i++]);
+	{
+		//ft_printf("%s\n", split[i]);
+		ft_printf("Token--> %s\n", ft_set_token(split[i]));
+		i++;
+	}
+	return split;
 }

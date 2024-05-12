@@ -6,7 +6,7 @@
 /*   By: ishenriq <ishenriq@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/05 14:42:53 by ishenriq          #+#    #+#             */
-/*   Updated: 2024/05/10 22:32:36 by ishenriq         ###   ########.fr       */
+/*   Updated: 2024/05/12 19:26:41 by ishenriq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,11 @@
 
 int	main(int argc, char **argv, char **envp)
 {
-	s_parse	*parse;
+	t_shell	*shell;
 
-	parse = malloc(sizeof(s_parse));
-	if (parse == NULL)
+	shell = malloc(sizeof(t_shell));
+	if (shell == NULL)
 		return (EXIT_FAILURE);
-	read_line(parse);
+	read_line(shell);
 	return (0);
 }
