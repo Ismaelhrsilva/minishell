@@ -6,7 +6,7 @@
 /*   By: ishenriq <ishenriq@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/22 18:25:14 by ishenriq          #+#    #+#             */
-/*   Updated: 2024/05/13 19:44:20 by ishenriq         ###   ########.fr       */
+/*   Updated: 2024/05/13 20:23:18 by ishenriq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,8 +44,19 @@
 	AND = 6,
 	PIPE = 7
 }	t_token;*/
+typedef struct s_word
+{
+	char	*word;
+	int		token;
+}	t_word;
 
-typedef	struct s_index
+typedef struct s_phrase
+{
+	t_list	*words;
+	int	size;
+}	t_phrase;
+
+typedef struct s_index
 {
 	int	i;
 	int	j;
