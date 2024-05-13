@@ -6,7 +6,7 @@
 /*   By: ishenriq <ishenriq@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/22 18:25:14 by ishenriq          #+#    #+#             */
-/*   Updated: 2024/05/12 19:23:38 by ishenriq         ###   ########.fr       */
+/*   Updated: 2024/05/13 19:44:20 by ishenriq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,19 +35,15 @@
 
 /*enum e_token
 {
-	< = 0,
-	<< = 1,
-	|  = 2,
-	|| = 3,
-	&& = 4,
-	> = 5,
-}	t_token;
-
-typedef struct s_token
-{
-	char **token;
-}	t_token;
-*/
+	WORD = 0,
+	REDIN = 1,
+	REDOUT =  2,
+	HEREDOC = 3,
+	APPEND =  4,
+	OR = 5,
+	AND = 6,
+	PIPE = 7
+}	t_token;*/
 
 typedef	struct s_index
 {
@@ -80,6 +76,6 @@ void	ft_arranging_prompt(t_parse *parse);
 
 
 //File Tokenazer
-char	*ft_set_token(char *str);
+int	ft_set_token(char *str);
 
 #endif
