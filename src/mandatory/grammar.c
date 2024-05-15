@@ -6,49 +6,52 @@
 /*   By: ishenriq <ishenriq@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/13 20:17:19 by ishenriq          #+#    #+#             */
-/*   Updated: 2024/05/13 20:52:46 by ishenriq         ###   ########.fr       */
+/*   Updated: 2024/05/14 20:56:03 by ishenriq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "mandatory/minishell.h"
 
-typedef struct s_word
-{
-	char	*word;
-	int		token;
-}	t_word;
-
-typedef struct s_phrase
-{
-	t_list	*words;
-	int	size;
-}	t_phrase;
-
-
-static void	ft_construct_word(char *str, int n)
+static t_word	*ft_construct_word(char *str, int n)
 {
 	t_word	*word;
 
 	word = malloc(sizeof(t_word));
 	if (!word)
-		return ;
+		return ((t_word *)0);
 	word->word = str;
 	word->token = n;
 	return (word);
 }
 
-static void	ft_construct_phrase(char **split, int m)
+void	ft_construct_phrase(char **split, int m)
 {
 	t_phrase *phrase;
+	t_word	*token;
 	int	i;
 
 	phrase = malloc(sizeof(t_phrase));
 	if (!phrase)
 		return ;
+	phrase->words = NULL;
+	phrase->size = 0;
 	i = 0;
-	while (i < m--)
+	while (i < m)
 	{
-		ft_construct_word(split[i], ft_set_token(split[i]));
-
+		token = ft_construct_word(split[i], ft_set_token(split[i]));
+		if (i == 0)
+			phrase->words	= ft_lstnew(token);
+		else
+			ft_lstadd_back(&phrase->words, ft_lstnew(token));
+		phrase->size++;
+		i++;
+	}
+	while (phrase->words)
+	{
+		ft_printf("----------------------------------------------\n");
+		ft_printf("word: %s\n", ((t_word *)phrase->words->content)->word);
+		ft_printf("token: %d\n", ((t_word *)phrase->words->content)->token);
+		ft_printf("----------------------------------------------\n");
+		phrase->words = phrase->words->next;
 	}
 }

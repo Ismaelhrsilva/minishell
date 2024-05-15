@@ -6,7 +6,7 @@
 /*   By: ishenriq <ishenriq@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/22 18:25:14 by ishenriq          #+#    #+#             */
-/*   Updated: 2024/05/13 20:23:18 by ishenriq         ###   ########.fr       */
+/*   Updated: 2024/05/14 20:42:36 by ishenriq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,8 +85,10 @@ int ft_aux_parse_char(char *ch, t_parse *parse, char *prompt);
 int ft_parse_char(t_parse *parse, char *prompt);
 void	ft_arranging_prompt(t_parse *parse);
 
-
 //File Tokenazer
 int	ft_set_token(char *str);
+
+//File grammar
+void	ft_construct_phrase(char **split, int m);
 
 #endif
