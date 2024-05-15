@@ -6,7 +6,7 @@
 /*   By: ishenriq <ishenriq@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/22 18:25:14 by ishenriq          #+#    #+#             */
-/*   Updated: 2024/05/14 20:42:36 by ishenriq         ###   ########.fr       */
+/*   Updated: 2024/05/15 19:53:46 by ishenriq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,8 @@
 # include "../lib/printf/ft_printf.h"
 # include "../lib/libft/gnl/get_next_line.h"
 
-/*enum e_token
+
+enum e_token
 {
 	WORD = 0,
 	REDIN = 1,
@@ -43,7 +44,8 @@
 	OR = 5,
 	AND = 6,
 	PIPE = 7
-}	t_token;*/
+}	t_token;
+
 typedef struct s_word
 {
 	char	*word;
@@ -68,6 +70,7 @@ typedef struct s_parse
 	char	*prompt;
 	char	*prompt_arranged;
 	t_index	*idx;
+	t_phrase *phrase;
 } t_parse;
 
 typedef struct s_shell
@@ -88,7 +91,10 @@ void	ft_arranging_prompt(t_parse *parse);
 //File Tokenazer
 int	ft_set_token(char *str);
 
+//File	phrase 
+t_phrase	*ft_construct_phrase(char **split, int m);
+
 //File grammar
-void	ft_construct_phrase(char **split, int m);
+void	ft_grammar_rules(t_phrase *phrase);
 
 #endif

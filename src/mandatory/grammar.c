@@ -5,53 +5,42 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: ishenriq <ishenriq@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/05/13 20:17:19 by ishenriq          #+#    #+#             */
-/*   Updated: 2024/05/14 20:56:03 by ishenriq         ###   ########.fr       */
+/*   Created: 2024/05/15 18:38:12 by ishenriq          #+#    #+#             */
+/*   Updated: 2024/05/15 19:55:47 by ishenriq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "mandatory/minishell.h"
 
-static t_word	*ft_construct_word(char *str, int n)
+static int	ft_get_token(t_phrase *phrase, int pos)
 {
-	t_word	*word;
+	int	token;
 
-	word = malloc(sizeof(t_word));
-	if (!word)
-		return ((t_word *)0);
-	word->word = str;
-	word->token = n;
-	return (word);
+	while (phrase->words && pos-- >= 0)
+	{
+		token = ((t_word *)phrase->words->content)->token;
+		phrase->words = phrase->words->next;
+	}
+	return (token);
 }
 
-void	ft_construct_phrase(char **split, int m)
+void	ft_grammar_rules(t_phrase *phrase)
 {
-	t_phrase *phrase;
-	t_word	*token;
-	int	i;
+	int	n;
+	int i;
 
-	phrase = malloc(sizeof(t_phrase));
-	if (!phrase)
-		return ;
-	phrase->words = NULL;
-	phrase->size = 0;
 	i = 0;
-	while (i < m)
+	n = phrase->size;
+	while (n-- > 0)
 	{
-		token = ft_construct_word(split[i], ft_set_token(split[i]));
-		if (i == 0)
-			phrase->words	= ft_lstnew(token);
-		else
-			ft_lstadd_back(&phrase->words, ft_lstnew(token));
-		phrase->size++;
+		if (ft_get_token(phrase, i) == REDIN && ft_get_token(phrase, i + 1) == REDOUT)
+	  			ft_printf("Not allowed\n");
+		else if (ft_get_token(phrase, i) == REDOUT && ft_get_token(phrase, i + 1) == REDIN)
+	  			ft_printf("Not allowed\n");
+		else if (ft_get_token(phrase, i) == REDIN && ft_get_token(phrase, i + 1) == REDIN)
+	  			ft_printf("Not allowed\n");
+		else if (ft_get_token(phrase, i) == REDOUT && ft_get_token(phrase, i + 1) == REDOUT)
+	  			ft_printf("Not allowed\n");
 		i++;
-	}
-	while (phrase->words)
-	{
-		ft_printf("----------------------------------------------\n");
-		ft_printf("word: %s\n", ((t_word *)phrase->words->content)->word);
-		ft_printf("token: %d\n", ((t_word *)phrase->words->content)->token);
-		ft_printf("----------------------------------------------\n");
-		phrase->words = phrase->words->next;
 	}
 }

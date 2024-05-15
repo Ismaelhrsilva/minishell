@@ -6,7 +6,7 @@
 /*   By: ishenriq <ishenriq@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/05 14:42:53 by ishenriq          #+#    #+#             */
-/*   Updated: 2024/05/14 20:56:30 by ishenriq         ###   ########.fr       */
+/*   Updated: 2024/05/15 19:29:01 by ishenriq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -135,7 +135,8 @@ char	**ft_parser(t_parse *parse)
 	ft_arranging_prompt(parse);
 	split = ft_split(parse->prompt_arranged, ' ');
 	m = ft_change_sub_space(split);
-	ft_construct_phrase(split, m);
+	parse->phrase = ft_construct_phrase(split, m);
+	ft_grammar_rules(parse->phrase);
 	/*while (split[i])
 	{
 		ft_printf("----------------------------------------------\n");
