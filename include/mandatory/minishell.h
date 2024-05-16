@@ -6,7 +6,7 @@
 /*   By: ishenriq <ishenriq@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/22 18:25:14 by ishenriq          #+#    #+#             */
-/*   Updated: 2024/05/15 19:53:46 by ishenriq         ###   ########.fr       */
+/*   Updated: 2024/05/16 18:03:58 by ishenriq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,18 +33,18 @@
 # include "../lib/printf/ft_printf.h"
 # include "../lib/libft/gnl/get_next_line.h"
 
-
-enum e_token
+typedef enum e_token
 {
 	WORD = 0,
-	REDIN = 1,
-	REDOUT =  2,
-	HEREDOC = 3,
-	APPEND =  4,
-	OR = 5,
-	AND = 6,
-	PIPE = 7
-}	t_token;
+	REDIN = 1 << 0,
+	REDOUT =  1 << 1,
+	REDIRECTS = 3,
+	HEREDOC = 1 << 2,
+	APPEND =  1 << 3,
+	OR = 1 << 4,
+	AND = 1 << 5,
+	PIPE = 1 << 6
+} t_token;
 
 typedef struct s_word
 {
@@ -81,7 +81,7 @@ typedef struct s_shell
 //File: Read_inputs
 void	read_line(t_shell *shell);
 
-//File parse
+//File Parse
 char	**ft_parser(t_parse *parse);
 void ft_parse_quotes(t_parse *parse, char *prompt);
 int ft_aux_parse_char(char *ch, t_parse *parse, char *prompt);
@@ -91,10 +91,19 @@ void	ft_arranging_prompt(t_parse *parse);
 //File Tokenazer
 int	ft_set_token(char *str);
 
-//File	phrase 
+//File	Phrase 
 t_phrase	*ft_construct_phrase(char **split, int m);
 
-//File grammar
+//File Grammar
 void	ft_grammar_rules(t_phrase *phrase);
+
+//File Utils
+int	ft_power(int nb, int power);
+
+
+//File grammar utils
+
+int	ft_get_token(t_phrase *phrase, int pos);
+int	ft_token_equal(t_phrase *phrase, int pos, int flag);
 
 #endif

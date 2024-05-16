@@ -6,22 +6,18 @@
 /*   By: ishenriq <ishenriq@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/15 18:38:12 by ishenriq          #+#    #+#             */
-/*   Updated: 2024/05/15 19:55:47 by ishenriq         ###   ########.fr       */
+/*   Updated: 2024/05/16 18:03:23 by ishenriq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "mandatory/minishell.h"
 
-static int	ft_get_token(t_phrase *phrase, int pos)
+static int	ft_redirects_following(t_phrase *phrase, int pos)
 {
-	int	token;
-
-	while (phrase->words && pos-- >= 0)
-	{
-		token = ((t_word *)phrase->words->content)->token;
-		phrase->words = phrase->words->next;
-	}
-	return (token);
+	if (ft_get_token(phrase, pos) & REDIRECTS)
+		if (ft_get_token(phrase, pos + 1) & REDIRECTS)
+			return (1);
+	return (0);
 }
 
 void	ft_grammar_rules(t_phrase *phrase)
@@ -31,16 +27,18 @@ void	ft_grammar_rules(t_phrase *phrase)
 
 	i = 0;
 	n = phrase->size;
-	while (n-- > 0)
+	while (i < n)
 	{
-		if (ft_get_token(phrase, i) == REDIN && ft_get_token(phrase, i + 1) == REDOUT)
+		if (ft_redirects_following(phrase, i))
 	  			ft_printf("Not allowed\n");
-		else if (ft_get_token(phrase, i) == REDOUT && ft_get_token(phrase, i + 1) == REDIN)
+		/*if (ft_token_equal(phrase, i, REDIRECTS) && ft_token_equal(phrase, (i + 1), REDOUT))
 	  			ft_printf("Not allowed\n");
-		else if (ft_get_token(phrase, i) == REDIN && ft_get_token(phrase, i + 1) == REDIN)
+		else if (ft_token_equal(phrase, i, REDOUT) && ft_token_equal(phrase, i + 1, REDIN))
 	  			ft_printf("Not allowed\n");
-		else if (ft_get_token(phrase, i) == REDOUT && ft_get_token(phrase, i + 1) == REDOUT)
+		else if (ft_token_equal(phrase, i, REDIN) && ft_token_equal(phrase, i + 1, REDIN))
 	  			ft_printf("Not allowed\n");
+		else if (ft_token_equal(phrase, i, REDOUT) && ft_token_equal(phrase, i + 1, REDOUT))
+	  			ft_printf("Not allowed\n");*/
 		i++;
 	}
 }

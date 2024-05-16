@@ -6,7 +6,7 @@
 /*   By: ishenriq <ishenriq@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/12 18:18:14 by ishenriq          #+#    #+#             */
-/*   Updated: 2024/05/15 19:24:59 by ishenriq         ###   ########.fr       */
+/*   Updated: 2024/05/16 18:00:56 by ishenriq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ int	ft_set_token(char *str)
 	{
 		token_before = ft_token_before(n);
 		if (!ft_strncmp(str, token_before, 2))
-			return (n);
+			return (ft_power(2, (n - 1)));
 		n--;
 	}
 	return (n);

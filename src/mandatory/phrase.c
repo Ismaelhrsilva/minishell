@@ -6,7 +6,7 @@
 /*   By: ishenriq <ishenriq@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/13 20:17:19 by ishenriq          #+#    #+#             */
-/*   Updated: 2024/05/15 19:50:03 by ishenriq         ###   ########.fr       */
+/*   Updated: 2024/05/15 21:14:20 by ishenriq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ t_phrase	*ft_construct_phrase(char **split, int m)
 	{
 		token = ft_construct_word(split[i], ft_set_token(split[i]));
 		if (i == 0)
-			phrase->words	= ft_lstnew(token);
+			phrase->words = ft_lstnew(token);
 		else
 			ft_lstadd_back(&phrase->words, ft_lstnew(token));
 		phrase->size++;
