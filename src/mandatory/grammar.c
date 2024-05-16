@@ -6,7 +6,7 @@
 /*   By: ishenriq <ishenriq@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/15 18:38:12 by ishenriq          #+#    #+#             */
-/*   Updated: 2024/05/16 18:42:52 by ishenriq         ###   ########.fr       */
+/*   Updated: 2024/05/16 20:37:55 by ishenriq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,20 +14,21 @@
 
 static int	ft_redirects_following(t_phrase *phrase, int pos)
 {
-	if (ft_get_token(phrase, pos) & REDALL)
-		if (ft_get_token(phrase, pos + 1) & REDALL)
+	if (pos < phrase->size - 1)
+		if (ft_get_token(phrase, pos) & REDALL)
+			if (ft_get_token(phrase, pos + 1) & REDALL)
 			return (1);
 	return (0);
 }
 
-static int	ft_redirects_at_end(t_phrase *phrase)
+static int	ft_metacharacter_edges(t_phrase *phrase, int pos)
 {
-	if (ft_get_token(phrase, phrase->size) & REDALL)
+	if ((ft_get_token(phrase, 0) & ALLEXHEREDOC) && pos == 0)
+		return (1);
+	if ((ft_get_token(phrase, phrase->size - 1) & ALL) && pos == phrase->size - 1)
 		return (1);
 	return (0);
 }
-
-//static int ft_redirects_before operator()
 
 void	ft_grammar_rules(t_phrase *phrase)
 {
@@ -38,10 +39,10 @@ void	ft_grammar_rules(t_phrase *phrase)
 	n = phrase->size;
 	while (i < n)
 	{
+		if (ft_metacharacter_edges(phrase, i))
+			ft_printf("metacharacter at edges\n");
 		if (ft_redirects_following(phrase, i))
 	  			ft_printf("Not allowed\n");
-		if (ft_redirects_at_end(phrase) && phrase->size == i + 1)
-	  			ft_printf("Redirect at end\n");
 		/*if (ft_token_equal(phrase, i, REDIRECTS) && ft_token_equal(phrase, (i + 1), REDOUT))
 	  			ft_printf("Not allowed\n");
 		else if (ft_token_equal(phrase, i, REDOUT) && ft_token_equal(phrase, i + 1, REDIN))

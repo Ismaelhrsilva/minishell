@@ -6,7 +6,7 @@
 /*   By: ishenriq <ishenriq@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/15 18:38:12 by ishenriq          #+#    #+#             */
-/*   Updated: 2024/05/16 18:03:44 by ishenriq         ###   ########.fr       */
+/*   Updated: 2024/05/16 20:23:56 by ishenriq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,11 +18,12 @@ int	ft_get_token(t_phrase *phrase, int pos)
 	t_list *aux;
 
 	aux = phrase->words;
-	while (aux && pos-- >= 0)
+	while (aux && pos >= 0)
 	{
 		if (pos == 0)
 			token = ((t_word *)aux->content)->token;
 		aux = aux->next;
+		pos--;
 	}
 	return (token);
 }
