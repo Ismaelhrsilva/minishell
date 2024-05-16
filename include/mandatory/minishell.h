@@ -6,7 +6,7 @@
 /*   By: ishenriq <ishenriq@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/22 18:25:14 by ishenriq          #+#    #+#             */
-/*   Updated: 2024/05/16 18:03:58 by ishenriq         ###   ########.fr       */
+/*   Updated: 2024/05/16 18:42:22 by ishenriq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,7 @@ typedef enum e_token
 	REDIRECTS = 3,
 	HEREDOC = 1 << 2,
 	APPEND =  1 << 3,
+	REDALL = 15,
 	OR = 1 << 4,
 	AND = 1 << 5,
 	PIPE = 1 << 6
