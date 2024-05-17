@@ -6,7 +6,7 @@
 /*   By: ishenriq <ishenriq@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/05 14:42:53 by ishenriq          #+#    #+#             */
-/*   Updated: 2024/05/15 21:13:32 by ishenriq         ###   ########.fr       */
+/*   Updated: 2024/05/17 19:28:06 by ishenriq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,7 @@ int ft_parse_char(t_parse *parse, char *prompt)
 		return (1);
 	else if (ft_aux_parse_char("||", parse, prompt))
 		return (1);
-	else if (ft_strchr("><|", parse->prompt[parse->idx->i]))
+	else if (ft_strchr("><|()", parse->prompt[parse->idx->i]))
 	{
 		prompt[parse->idx->j++] = ' '; 
 		prompt[parse->idx->j++] = parse->prompt[parse->idx->i];
@@ -137,13 +137,12 @@ char	**ft_parser(t_parse *parse)
 	m = ft_change_sub_space(split);
 	parse->phrase = ft_construct_phrase(split, m);
 	ft_grammar_rules(parse->phrase);
-	/*while (split[i])
+	while (split[i])
 	{
-		ft_printf("----------------------------------------------\n");
 		ft_printf("%s\n", split[i]);
-		ft_printf("Token--> %d\n", ft_set_token(split[i]));
+		//ft_printf("Token--> %d\n", ft_set_token(split[i]));
 		ft_printf("----------------------------------------------\n");
 		i++;
-	}*/
+	}
 	return split;
 }

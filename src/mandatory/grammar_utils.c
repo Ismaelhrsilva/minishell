@@ -6,7 +6,7 @@
 /*   By: ishenriq <ishenriq@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/15 18:38:12 by ishenriq          #+#    #+#             */
-/*   Updated: 2024/05/16 20:23:56 by ishenriq         ###   ########.fr       */
+/*   Updated: 2024/05/17 19:25:35 by ishenriq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,22 @@ int	ft_get_token(t_phrase *phrase, int pos)
 		pos--;
 	}
 	return (token);
+}
+
+int	ft_count_token(t_phrase *phrase, int token)
+{
+	int	count;
+	t_list *aux;
+
+	count = 0;
+	aux = phrase->words;
+	while (aux)
+	{
+		if (token == ((t_word *)aux->content)->token)
+			count++;
+		aux = aux->next;
+	}
+	return (count);
 }
 
 int	ft_token_equal(t_phrase *phrase, int pos, int flag)

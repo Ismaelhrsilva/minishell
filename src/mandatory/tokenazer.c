@@ -6,7 +6,7 @@
 /*   By: ishenriq <ishenriq@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/12 18:18:14 by ishenriq          #+#    #+#             */
-/*   Updated: 2024/05/16 19:47:14 by ishenriq         ###   ########.fr       */
+/*   Updated: 2024/05/17 19:12:40 by ishenriq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ static char	*ft_token_before(int n)
 {
 	char	**token_before;
 
-	token_before = malloc(8 * sizeof(char **));
+	token_before = malloc(10 * sizeof(char **));
 	if (!token_before)
 		return (char *)0;
 	token_before[1] = "<";
@@ -26,6 +26,8 @@ static char	*ft_token_before(int n)
 	token_before[5] = "||";
 	token_before[6] = "&&";
 	token_before[7] = "|";
+	token_before[8] = "(";
+	token_before[9] = ")";
 
 	return (token_before[n]);
 }
@@ -35,7 +37,7 @@ int	ft_set_token(char *str)
 	int	n;
 	char	*token_before;
 
-	n = 7;
+	n = 9;
 	while (n > 0)
 	{
 		token_before = ft_token_before(n);

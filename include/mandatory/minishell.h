@@ -6,7 +6,7 @@
 /*   By: ishenriq <ishenriq@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/22 18:25:14 by ishenriq          #+#    #+#             */
-/*   Updated: 2024/05/16 20:57:55 by ishenriq         ###   ########.fr       */
+/*   Updated: 2024/05/17 19:22:12 by ishenriq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,9 @@ typedef enum e_token
 	PIPE = 1 << 6,
 	ALLEXRED = 112,
 	ALLEXHEREDOC = 121,
-	ALL = 127
+	ALL = 127,
+	OPEN_BRACKET = 1 << 7,
+	CLOSE_BRACKET = 1 << 8
 } t_token;
 
 typedef struct s_word
@@ -109,5 +111,6 @@ int	ft_power(int nb, int power);
 
 int	ft_get_token(t_phrase *phrase, int pos);
 int	ft_token_equal(t_phrase *phrase, int pos, int flag);
+int	ft_count_token(t_phrase *phrase, int token);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: ishenriq <ishenriq@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/15 18:38:12 by ishenriq          #+#    #+#             */
-/*   Updated: 2024/05/16 21:05:19 by ishenriq         ###   ########.fr       */
+/*   Updated: 2024/05/17 19:27:02 by ishenriq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,13 @@ static int	ft_metacharacter_edges(t_phrase *phrase, int pos)
 	return (0);
 }
 
+static int	ft_open_closed_brackets(t_phrase *phrase)
+{
+	if (ft_count_token(phrase, OPEN_BRACKET) == ft_count_token(phrase, CLOSE_BRACKET))
+		return (0);
+	return (1);
+}
+
 void	ft_grammar_rules(t_phrase *phrase)
 {
 	int	n;
@@ -44,17 +51,11 @@ void	ft_grammar_rules(t_phrase *phrase)
 	while (i < n)
 	{
 		if (ft_metacharacter_edges(phrase, i))
-			ft_printf("metacharacter at edges\n");
+	  		ft_printf("Error\n");
 		if (ft_metacharacter_following(phrase, i))
-	  			ft_printf("Not allowed\n");
-		/*if (ft_token_equal(phrase, i, REDIRECTS) && ft_token_equal(phrase, (i + 1), REDOUT))
-	  			ft_printf("Not allowed\n");
-		else if (ft_token_equal(phrase, i, REDOUT) && ft_token_equal(phrase, i + 1, REDIN))
-	  			ft_printf("Not allowed\n");
-		else if (ft_token_equal(phrase, i, REDIN) && ft_token_equal(phrase, i + 1, REDIN))
-	  			ft_printf("Not allowed\n");
-		else if (ft_token_equal(phrase, i, REDOUT) && ft_token_equal(phrase, i + 1, REDOUT))
-	  			ft_printf("Not allowed\n");*/
+	  		ft_printf("Error\n");
 		i++;
 	}
+	if (ft_open_closed_brackets(phrase))
+	 	ft_printf("Error\n");
 }
