@@ -6,7 +6,7 @@
 /*   By: ishenriq <ishenriq@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/22 18:25:14 by ishenriq          #+#    #+#             */
-/*   Updated: 2024/05/16 20:42:11 by ishenriq         ###   ########.fr       */
+/*   Updated: 2024/05/16 20:57:55 by ishenriq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,7 @@ typedef enum e_token
 	OR = 1 << 4,
 	AND = 1 << 5,
 	PIPE = 1 << 6,
+	ALLEXRED = 112,
 	ALLEXHEREDOC = 121,
 	ALL = 127
 } t_token;
