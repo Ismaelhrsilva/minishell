@@ -6,7 +6,7 @@
 /*   By: ishenriq <ishenriq@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/15 18:38:12 by ishenriq          #+#    #+#             */
-/*   Updated: 2024/05/17 19:27:02 by ishenriq         ###   ########.fr       */
+/*   Updated: 2024/05/17 21:04:57 by ishenriq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,11 +51,11 @@ void	ft_grammar_rules(t_phrase *phrase)
 	while (i < n)
 	{
 		if (ft_metacharacter_edges(phrase, i))
-	  		ft_printf("Error\n");
+	  		ft_printf("Error_1\n");
 		if (ft_metacharacter_following(phrase, i))
-	  		ft_printf("Error\n");
+	  		ft_printf("Error_2\n");
 		i++;
 	}
 	if (ft_open_closed_brackets(phrase))
-	 	ft_printf("Error\n");
+	 	ft_printf("Error_3\n");
 }

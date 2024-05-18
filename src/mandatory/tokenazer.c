@@ -6,12 +6,12 @@
 /*   By: ishenriq <ishenriq@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/12 18:18:14 by ishenriq          #+#    #+#             */
-/*   Updated: 2024/05/17 19:12:40 by ishenriq         ###   ########.fr       */
+/*   Updated: 2024/05/17 21:06:40 by ishenriq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "mandatory/minishell.h"
-
+/*
 static char	*ft_token_before(int n)
 {
 	char	**token_before;
@@ -46,4 +46,20 @@ int	ft_set_token(char *str)
 		n--;
 	}
 	return (n);
+}
+*/
+
+int	ft_set_token(char *str)
+{
+	int	n;
+	const char	*tokens[10] = {"<", ">", "<<", ">>", "||", "&&", "|", "(", ")", 0};
+
+	n = 0;
+	while (tokens[n])
+	{
+		if (ft_strlen(str) <= 2 && ft_strncmp(str, tokens[n], 3) == 0)
+			return (ft_power(2, (n)));
+		n++;
+	}
+	return (0);
 }
