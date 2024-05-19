@@ -1,53 +1,46 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   utils.c                                            :+:      :+:    :+:   */
+/*   cmd_order.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ishenriq <ishenriq@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/05/15 19:57:08 by ishenriq          #+#    #+#             */
-/*   Updated: 2024/05/19 13:27:26 by ishenriq         ###   ########.fr       */
+/*   Created: 2024/05/19 13:52:51 by ishenriq          #+#    #+#             */
+/*   Updated: 2024/05/19 15:48:08 by ishenriq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "mandatory/minishell.h"
 
-int	ft_power(int nb, int power)
+t_word	*ft_pop_phrase(t_phrase *phrase)
 {
-	int	result;
+	t_list	*aux;
+	t_word	*word;
 
-	result = 1;
-	if (nb > 0 && power > 0)
-		while (power-- > 0)
-			result *= nb;
-	return (result);
+	if (!phrase->size)
+		return ((t_word *)0);
+	aux = phrase->words;
+	word = aux->content;
+	phrase->words = phrase->words->next;
+	phrase->size--;
+	return (word);
 }
 
-int	ft_count_matrix(char **str)
+void	*ft_see_top_phrase(t_phrase *phrase)
+{
+	if (!phrase->size)
+		return (NULL);
+	return (phrase->words->content);
+}
+
+/*void	ft_cmd_order(t_phrase *phrase)
 {
 	int	i;
 
 	i = 0;
-	while (str[i])
-		i++;
-	return (i);
-}
-
-void	ft_change_sub_space(char **split)
-{
-	int		j;
-	int		m;
-
-	m = 0;
-	j = 0;
-	while (split[m])
+	while (i < phrase->size)
 	{
-		while (split[m][j])
-		{
-			if (split[m][j] == 0x1A)
-				split[m][j] = ' ';
-			j++;
-		}
-		m++;
+		if ()
+
 	}
-}
+}*/

@@ -6,7 +6,7 @@
 /*   By: ishenriq <ishenriq@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/13 20:17:19 by ishenriq          #+#    #+#             */
-/*   Updated: 2024/05/15 21:14:20 by ishenriq         ###   ########.fr       */
+/*   Updated: 2024/05/19 13:48:17 by ishenriq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,11 +24,12 @@ static t_word	*ft_construct_word(char *str, int n)
 	return (word);
 }
 
-t_phrase	*ft_construct_phrase(char **split, int m)
+t_phrase	*ft_construct_phrase(char **split)
 {
 	t_phrase *phrase;
 	t_word	*token;
 	int	i;
+	int	m;
 
 	phrase = malloc(sizeof(t_phrase));
 	if (!phrase)
@@ -36,6 +37,7 @@ t_phrase	*ft_construct_phrase(char **split, int m)
 	phrase->words = NULL;
 	phrase->size = 0;
 	i = 0;
+	m = ft_count_matrix(split);
 	while (i < m)
 	{
 		token = ft_construct_word(split[i], ft_set_token(split[i]));

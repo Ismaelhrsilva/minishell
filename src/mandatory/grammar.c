@@ -6,7 +6,7 @@
 /*   By: ishenriq <ishenriq@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/15 18:38:12 by ishenriq          #+#    #+#             */
-/*   Updated: 2024/05/17 21:04:57 by ishenriq         ###   ########.fr       */
+/*   Updated: 2024/05/17 22:03:38 by ishenriq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,13 +17,24 @@ static int	ft_metacharacter_following(t_phrase *phrase, int pos)
 	if (pos < phrase->size - 1)
 		if (ft_get_token(phrase, pos) & REDALL)
 			if (ft_get_token(phrase, pos + 1) & ALLEXRED)
-			return (1);
+				return (1);
 	if (pos < phrase->size - 1)
 		if (ft_get_token(phrase, pos) & ALLEXRED)
 			if (ft_get_token(phrase, pos + 1) & ALLEXRED)
-			return (1);
+				return (1);
 	return (0);
 }
+
+/*static int	ft_redirect_following(t_phrase *phrase, int pos)
+{
+	if (pos < phrase->size - 1)
+		if (ft_get_token(phrase, pos) & REDALL)
+			if (ft_get_token(phrase, pos + 1) == WORD)
+				return (0);
+	if (ft_get_token(phrase, pos) == WORD)
+		return (0);
+	return (1);
+}*/
 
 static int	ft_metacharacter_edges(t_phrase *phrase, int pos)
 {
@@ -54,8 +65,10 @@ void	ft_grammar_rules(t_phrase *phrase)
 	  		ft_printf("Error_1\n");
 		if (ft_metacharacter_following(phrase, i))
 	  		ft_printf("Error_2\n");
+		//if (ft_redirect_following(phrase, i))
+	  	//	ft_printf("Error_3\n");
 		i++;
 	}
 	if (ft_open_closed_brackets(phrase))
-	 	ft_printf("Error_3\n");
+	 	ft_printf("Error_4\n");
 }

@@ -6,7 +6,7 @@
 /*   By: ishenriq <ishenriq@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/22 18:25:14 by ishenriq          #+#    #+#             */
-/*   Updated: 2024/05/17 19:22:12 by ishenriq         ###   ########.fr       */
+/*   Updated: 2024/05/19 15:47:47 by ishenriq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,6 +79,14 @@ typedef struct s_parse
 	t_phrase *phrase;
 } t_parse;
 
+typedef struct s_node
+{
+	char	*str;
+	int		type;
+	struct s_node	*left;
+	struct s_node	*right;
+} t_node;
+
 typedef struct s_shell
 {
 	char	**prompt_splitted;
@@ -89,6 +97,9 @@ void	read_line(t_shell *shell);
 
 //File Parse
 char	**ft_parser(t_parse *parse);
+
+
+//File Parse Utils
 void ft_parse_quotes(t_parse *parse, char *prompt);
 int ft_aux_parse_char(char *ch, t_parse *parse, char *prompt);
 int ft_parse_char(t_parse *parse, char *prompt);
@@ -98,19 +109,27 @@ void	ft_arranging_prompt(t_parse *parse);
 int	ft_set_token(char *str);
 
 //File	Phrase 
-t_phrase	*ft_construct_phrase(char **split, int m);
+t_phrase	*ft_construct_phrase(char **split);
 
 //File Grammar
 void	ft_grammar_rules(t_phrase *phrase);
 
 //File Utils
 int	ft_power(int nb, int power);
-
+int	ft_count_matrix(char **str);
+void	ft_change_sub_space(char **split);
 
 //File grammar utils
 
 int	ft_get_token(t_phrase *phrase, int pos);
 int	ft_token_equal(t_phrase *phrase, int pos, int flag);
 int	ft_count_token(t_phrase *phrase, int token);
+
+//File cmd order
+t_word	*ft_pop_phrase(t_phrase *phrase);
+void	*ft_see_top_phrase(t_phrase *phrase);
+
+//File AST
+void	ft_ast(t_phrase	*phrase);
 
 #endif
