@@ -6,7 +6,7 @@
 /*   By: ishenriq <ishenriq@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/05 14:42:53 by ishenriq          #+#    #+#             */
-/*   Updated: 2024/05/19 13:33:58 by ishenriq         ###   ########.fr       */
+/*   Updated: 2024/05/30 15:13:55 by ishenriq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,7 +96,7 @@ void	ft_arranging_prompt(t_parse *parse)
 	parse->idx->j = 0;
 	while (parse->prompt[parse->idx->i] != '\0')
 	{
-		if (ft_strchr("\'\"", parse->prompt[parse->idx->i]))
+		//if (ft_strchr("\'\"", parse->prompt[parse->idx->i]))
 			ft_parse_quotes(parse, prompt_arranged);
 		if (!ft_parse_char(parse, prompt_arranged))
 			prompt_arranged[parse->idx->j] = parse->prompt[parse->idx->i];

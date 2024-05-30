@@ -6,7 +6,7 @@
 /*   By: ishenriq <ishenriq@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/15 18:38:12 by ishenriq          #+#    #+#             */
-/*   Updated: 2024/05/17 19:25:35 by ishenriq         ###   ########.fr       */
+/*   Updated: 2024/05/26 18:35:16 by ishenriq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,9 +44,46 @@ int	ft_count_token(t_phrase *phrase, int token)
 	return (count);
 }
 
-int	ft_token_equal(t_phrase *phrase, int pos, int flag)
+/*int	ft_token_equal(t_phrase *phrase, int pos, int flag)
 {
 	if (ft_get_token(phrase, pos) & flag)
 		return (1);
 	return (0);
+}*/
+
+int	ft_pos_token(t_phrase *phrase, int start, int end, int token)
+{
+	int	token_pos;
+	t_list *aux;
+	int	pos;
+	int	size;
+
+	aux = phrase->words;
+	pos = 0;
+	while (aux)
+	{
+		token_pos = ((t_word *)aux->content)->token;
+		if (pos >= start && pos < end)
+			if (token_pos & token)
+				return (pos);
+		aux = aux->next;
+		pos++;
+	}
+	return (-1);
+}
+
+int	ft_pos_token_back(t_phrase *phrase, int start, int end, int token)
+{
+	int	token_pos;
+	int	pos;
+
+	pos = phrase->size;
+	while (pos--)
+	{
+		token_pos = ft_get_token(phrase, pos);
+		if (pos >= start && pos < end)
+			if (token_pos & token)
+				return (pos);
+	}
+	return (-1);
 }

@@ -6,7 +6,7 @@
 /*   By: ishenriq <ishenriq@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/22 18:25:14 by ishenriq          #+#    #+#             */
-/*   Updated: 2024/05/19 15:47:47 by ishenriq         ###   ########.fr       */
+/*   Updated: 2024/05/30 15:09:34 by ishenriq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,7 @@ typedef enum e_token
 	REDALL = 15,
 	OR = 1 << 4,
 	AND = 1 << 5,
+	OR_AND = 48,
 	PIPE = 1 << 6,
 	ALLEXRED = 112,
 	ALLEXHEREDOC = 121,
@@ -51,6 +52,12 @@ typedef enum e_token
 	OPEN_BRACKET = 1 << 7,
 	CLOSE_BRACKET = 1 << 8
 } t_token;
+
+typedef enum e_side
+{
+	LEFT = 0,
+	RIGHT = 1
+} t_size;
 
 typedef struct s_word
 {
@@ -90,6 +97,7 @@ typedef struct s_node
 typedef struct s_shell
 {
 	char	**prompt_splitted;
+	t_node	*root;
 }	t_shell;
 
 //File: Read_inputs
@@ -122,14 +130,17 @@ void	ft_change_sub_space(char **split);
 //File grammar utils
 
 int	ft_get_token(t_phrase *phrase, int pos);
-int	ft_token_equal(t_phrase *phrase, int pos, int flag);
+//int	ft_token_equal(t_phrase *phrase, int pos, int flag);
 int	ft_count_token(t_phrase *phrase, int token);
+int	ft_pos_token(t_phrase *phrase, int start, int end, int token);
+int	ft_pos_token_back(t_phrase *phrase, int start, int end, int token);
 
 //File cmd order
 t_word	*ft_pop_phrase(t_phrase *phrase);
+t_word	*ft_pop_pos_phrase(t_phrase *phrase, int pos);
 void	*ft_see_top_phrase(t_phrase *phrase);
 
 //File AST
-void	ft_ast(t_phrase	*phrase);
+void	ft_ast(t_phrase	*phrase, t_shell *shell);
 
 #endif

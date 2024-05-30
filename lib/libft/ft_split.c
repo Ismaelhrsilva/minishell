@@ -6,7 +6,7 @@
 /*   By: ishenriq <ishenriq@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/16 19:29:07 by ishenriq          #+#    #+#             */
-/*   Updated: 2023/10/28 21:14:13 by ishenriq         ###   ########.org.br   */
+/*   Updated: 2024/05/30 13:11:22 by ishenriq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,12 +15,10 @@
 static int	ft_n_blocks_array(const char *s, char c)
 {
 	int	i;
-	int	j;
 	int	count;
 	int	len;
 
 	i = 0;
-	j = 0;
 	count = 0;
 	len = ft_strlen(s);
 	while (i < len)
