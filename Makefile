@@ -6,7 +6,7 @@
 #    By: ishenriq <ishenriq@student.42sp.org.br>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/12/11 20:08:54 by ishenriq          #+#    #+#              #
-#    Updated: 2024/05/14 19:55:58 by ishenriq         ###   ########.fr        #
+#    Updated: 2024/05/30 17:43:01 by ishenriq         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -26,31 +26,31 @@ LIBS 	:= -lm $(LIBFT)libft.a \
 
 LDFLAGS	:= $(HEADERS) $(LIBS)
 
-SRC = $(wildcard ./src/mandatory/*.c)
-SRC_BONUS = $(wildcard ./src/bonus/*.c)
+SRC_DIR := ./src/
+SRCS := \
+	ast/ast.c \
+	ast/ast_utils.c \
+	grammar/grammar.c \
+	grammar/grammar_utils.c \
+	parser/parser.c \
+	parser/parser_utils.c \
+	tokenizer/phrase.c \
+	tokenizer/tokenizer.c \
+	principal/read_inputs.c \
+	principal/utils.c \
+	principal/main.c \
+
+SRC := $(addprefix $(SRC_DIR)/, $(SRCS))
 
 OBJS	+=  $(SRC:%.c=$(BUILD_DIR)%.o)
-OBJS_BONUS      += $(SRC_BONUS:%.c=$(BUILD_DIR)%.o)
-
-DELETE  = $(OBJS_BONUS)
-
-ifdef   WITH_BONUS
-		DELETE := $(OBJS)
-        OBJS = $(OBJS_BONUS)
-endif
 
 define create_dir
 	$(MKDIR) $(dir $@)
 endef
 
-define bonus
-    $(MAKE) WITH_BONUS=TRUE
-endef
-
 all: libft printf $(NAME)
 
 $(BUILD_DIR)%.o: %.c
-	@rm -rf $(DELETE)
 	$(call create_dir)
 	@$(CC) $(CFLAGS) -o $@ -c $< $(HEADERS) && printf "Compiling: $(notdir $<)"
 
@@ -63,9 +63,6 @@ printf:
 $(NAME): $(OBJS)
 	@$(CC) $(OBJS) $(LDFLAGS) -o $(NAME)
 
-bonus:
-	$(call bonus)
-
 clean:
 	@rm -rf $(BUILD_DIR)
 	@make -C $(LIBFT) clean
@@ -77,8 +74,6 @@ fclean: clean
 	@make -C $(PRINTF) fclean
 
 re: clean all
-
-re_bonus: clean bonus
 
 norm:
 	norminette -R CheckForbiddenSourceHeader $(SRC) ./include
