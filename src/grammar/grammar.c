@@ -6,7 +6,7 @@
 /*   By: ishenriq <ishenriq@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/15 18:38:12 by ishenriq          #+#    #+#             */
-/*   Updated: 2024/06/01 13:35:10 by ishenriq         ###   ########.fr       */
+/*   Updated: 2024/06/01 15:16:27 by ishenriq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,21 +15,21 @@
 static int	ft_metacharacter_following(t_vector *phrase, int pos)
 {
 	if (pos < ft_vector_size(phrase) - 1)
-		if (ft_get_token(phrase, pos) & REDALL)
-			if (ft_get_token(phrase, pos + 1) & ALLEXRED)
+		if (ft_value_int(phrase, pos, 1) & REDALL)
+			if (ft_value_int(phrase, pos + 1, 1) & ALLEXRED)
 				return (1);
 	if (pos < ft_vector_size(phrase) - 1)
-		if (ft_get_token(phrase, pos) & ALLEXRED)
-			if (ft_get_token(phrase, pos + 1) & ALLEXRED)
+		if (ft_value_int(phrase, pos, 1) & ALLEXRED)
+			if (ft_value_int(phrase, pos + 1, 1) & ALLEXRED)
 				return (1);
 	return (0);
 }
 
 static int	ft_metacharacter_edges(t_vector *phrase, int pos)
 {
-	if ((ft_get_token(phrase, 0) & ALLEXRED) && pos == 0)
+	if ((ft_value_int(phrase, 0, 1) & ALLEXRED) && pos == 0)
 		return (1);
-	if ((ft_get_token(phrase, ft_vector_size(phrase) - 1) & ALL)
+	if ((ft_value_int(phrase, ft_vector_size(phrase) - 1, 1) & ALL)
 		&& pos == ft_vector_size(phrase) - 1)
 		return (1);
 	return (0);

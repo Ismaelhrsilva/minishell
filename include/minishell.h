@@ -6,7 +6,7 @@
 /*   By: ishenriq <ishenriq@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/22 18:25:14 by ishenriq          #+#    #+#             */
-/*   Updated: 2024/06/01 13:45:45 by ishenriq         ###   ########.fr       */
+/*   Updated: 2024/06/01 15:17:45 by ishenriq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -123,9 +123,6 @@ int					ft_count_matrix(char **str);
 void				ft_change_sub_space(char **split);
 
 // File grammar utils
-
-int					ft_get_token(t_vector *phrase, int pos);
-// int	ft_token_equal(t_phrase *phrase, int pos, int flag);
 int					ft_count_token(t_vector *phrase, int token);
 int					ft_pos_token(t_vector *phrase, int start, int end,
 						int token);
@@ -143,7 +140,9 @@ void				ft_vector_pop_front(t_vector *vector);
 unsigned long		ft_vector_insert(t_vector *vector, unsigned long position,
 						void *value);
 void				ft_vector_erase(t_vector *vector, unsigned long position);
-long				ft_vector_at(const t_vector *vector, unsigned long index);
+void				*ft_vector_at(const t_vector *vector, unsigned long index);
+void				*ft_value(const t_vector *vector, unsigned long i, unsigned long j);
+int					ft_value_int(const t_vector *vector, unsigned long i, unsigned long j);
 bool				ft_vector_empty(const t_vector *vector);
 unsigned long		ft_vector_size(const t_vector *vector);
 unsigned long		ft_vector_capacity(const t_vector *vector);

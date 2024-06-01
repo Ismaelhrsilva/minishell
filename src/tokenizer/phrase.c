@@ -6,23 +6,17 @@
 /*   By: ishenriq <ishenriq@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/13 20:17:19 by ishenriq          #+#    #+#             */
-/*   Updated: 2024/06/01 14:26:27 by ishenriq         ###   ########.fr       */
+/*   Updated: 2024/06/01 15:05:36 by ishenriq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-
-void	*vector_value(t_vector *vector, unsigned long index)
-{
-	return (vector->values[index]);
-}
 
 t_vector	*ft_construct_phrase(char **split)
 {
 	t_vector	*phrase;
 	int			i;
 	t_vector	*word;
-	t_vector	*words;
 
 	phrase = ft_vector_create();
 	if (!phrase)
@@ -44,12 +38,9 @@ t_vector	*ft_construct_phrase(char **split)
 	
 	while (i < ft_vector_size(phrase))
 	{
-		t_vector *word;
-		//word = vector_value(phrase, i); 
-		word = phrase->values[i];
 		ft_printf("----------------------------------------------\n");
-		ft_printf("word: %s\n", word->values[0]);
-		ft_printf("token: %d\n", word->values[1]);
+		ft_printf("token: %s\n", ft_value(phrase, i, 0));
+		ft_printf("token: %d\n", ft_value(phrase, i, 1));
 		ft_printf("----------------------------------------------\n");
 		i++;
 	}
@@ -71,5 +62,4 @@ void	ft_free_phrase(t_vector *phrase)
 		i++;
 	}
 	ft_vector_free(phrase);
-	//free(phrase);
 }

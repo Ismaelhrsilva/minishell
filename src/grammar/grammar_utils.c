@@ -6,25 +6,14 @@
 /*   By: ishenriq <ishenriq@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/15 18:38:12 by ishenriq          #+#    #+#             */
-/*   Updated: 2024/06/01 14:28:57 by ishenriq         ###   ########.fr       */
+/*   Updated: 2024/06/01 15:26:54 by ishenriq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int	ft_get_token(t_vector *phrase, int pos)
-{
-	t_vector	*word;
-
-	if (pos < 0 || pos >= ft_vector_size(phrase))
-		return (-1);
-	word = phrase->values[pos];
-	return (word->values[1]);
-}
-
 int	ft_count_token(t_vector *phrase, int token)
 {
-	t_vector		*word;
 	int				count;
 	unsigned long	i;
 
@@ -32,8 +21,7 @@ int	ft_count_token(t_vector *phrase, int token)
 	count = 0;
 	while (i < ft_vector_size(phrase))
 	{
-		word = phrase->values[i];
-		if (word->values[1] == token)
+		if (ft_value_int(phrase, i, 1) == token)
 			count++;
 		i++;
 	}
