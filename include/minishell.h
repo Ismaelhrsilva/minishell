@@ -6,7 +6,7 @@
 /*   By: ishenriq <ishenriq@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/22 18:25:14 by ishenriq          #+#    #+#             */
-/*   Updated: 2024/06/01 15:17:45 by ishenriq         ###   ########.fr       */
+/*   Updated: 2024/06/01 19:32:23 by ishenriq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,8 @@ typedef enum e_token
 	ALLEXHEREDOC = 121,
 	ALL = 127,
 	OPEN_BRACKET = 1 << 7,
-	CLOSE_BRACKET = 1 << 8
+	CLOSE_BRACKET = 1 << 8,
+	EXEC	= 1 << 9
 }					t_token;
 
 typedef struct s_vector
@@ -126,8 +127,10 @@ void				ft_change_sub_space(char **split);
 int					ft_count_token(t_vector *phrase, int token);
 int					ft_pos_token(t_vector *phrase, int start, int end,
 						int token);
-int					ft_pos_token_back(t_vector *phrase, int start, int end,
-						int token);
+int					ft_pos_token_back(t_vector *phrase, int token);
+//File AST
+t_node 	*ft_ast(t_vector *phrase);
+
 // File Vector
 bool				ft_vector_resize(t_vector *vector,
 						unsigned long new_capacity);
@@ -150,4 +153,7 @@ void				ft_vector_reserve(t_vector *vector,
 						unsigned long new_capacity);
 void				ft_vector_init(t_vector *vector);
 void	*ft_realloc(void *ptr, size_t original_size, size_t new_size);
+t_vector	*ft_vector_slice_left(t_vector *vector, unsigned long pos);
+t_vector	*ft_vector_slice_right(t_vector *vector, unsigned long pos);
+
 #endif

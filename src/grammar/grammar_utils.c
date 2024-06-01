@@ -6,7 +6,7 @@
 /*   By: ishenriq <ishenriq@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/15 18:38:12 by ishenriq          #+#    #+#             */
-/*   Updated: 2024/06/01 15:26:54 by ishenriq         ###   ########.fr       */
+/*   Updated: 2024/06/01 19:14:11 by ishenriq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ int	ft_count_token(t_vector *phrase, int token)
 	return (count);
 }
 
-int	ft_pos_token(t_vector *phrase, int start, int end, int token)
+/*int	ft_pos_token(t_vector *phrase, int start, int end, int token)
 {
 	t_vector	*word;
 	int			pos;
@@ -42,18 +42,30 @@ int	ft_pos_token(t_vector *phrase, int start, int end, int token)
 		pos++;
 	}
 	return (-1);
-}
+}*/
 
-int	ft_pos_token_back(t_vector *phrase, int start, int end, int token)
+int	ft_pos_token(t_vector *phrase, int start, int end, int token)
 {
 	int			pos;
-	t_vector	*word;
 
-	pos = end - 1;
-	while (pos >= start)
+	pos = start;
+	while (pos < end)
 	{
-		word = phrase->values[pos];
-		if (*(int *)word->values[1] & token)
+		if (ft_value_int(phrase, pos, 1) & token)
+			return (pos);
+		pos++;
+	}
+	return (-1);
+}
+
+int	ft_pos_token_back(t_vector *phrase, int token)
+{
+	int	pos;
+
+	pos = phrase->size - 1;
+	while (pos >= 0)
+	{
+		if (ft_value_int(phrase, pos, 1) & token)
 			return (pos);
 		pos--;
 	}
