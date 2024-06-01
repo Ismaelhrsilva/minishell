@@ -6,7 +6,7 @@
 /*   By: ishenriq <ishenriq@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/15 19:57:08 by ishenriq          #+#    #+#             */
-/*   Updated: 2024/05/30 17:10:43 by ishenriq         ###   ########.fr       */
+/*   Updated: 2024/06/01 11:50:09 by ishenriq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,9 +39,9 @@ void	ft_change_sub_space(char **split)
 	int		m;
 
 	m = 0;
-	j = 0;
 	while (split[m])
 	{
+		j = 0;
 		while (split[m][j])
 		{
 			if (split[m][j] == 0x1A)

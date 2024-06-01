@@ -6,7 +6,7 @@
 #    By: ishenriq <ishenriq@student.42sp.org.br>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/12/11 20:08:54 by ishenriq          #+#    #+#              #
-#    Updated: 2024/05/30 17:43:01 by ishenriq         ###   ########.fr        #
+#    Updated: 2024/06/01 13:00:40 by phraranha        ###   ########.org.br    #
 #                                                                              #
 # **************************************************************************** #
 
@@ -28,8 +28,6 @@ LDFLAGS	:= $(HEADERS) $(LIBS)
 
 SRC_DIR := ./src/
 SRCS := \
-	ast/ast.c \
-	ast/ast_utils.c \
 	grammar/grammar.c \
 	grammar/grammar_utils.c \
 	parser/parser.c \
@@ -39,6 +37,10 @@ SRCS := \
 	principal/read_inputs.c \
 	principal/utils.c \
 	principal/main.c \
+	vector/vector_add.c \
+	vector/vector_remove.c \
+	vector/vector_return.c \
+	vector/vector_create.c \
 
 SRC := $(addprefix $(SRC_DIR)/, $(SRCS))
 

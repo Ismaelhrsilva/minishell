@@ -6,55 +6,70 @@
 /*   By: ishenriq <ishenriq@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/13 20:17:19 by ishenriq          #+#    #+#             */
-/*   Updated: 2024/05/30 17:10:53 by ishenriq         ###   ########.fr       */
+/*   Updated: 2024/06/01 14:26:27 by ishenriq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-static t_word	*ft_construct_word(char *str, int n)
+void	*vector_value(t_vector *vector, unsigned long index)
 {
-	t_word	*word;
-
-	word = malloc(sizeof(t_word));
-	if (!word)
-		return ((t_word *)0);
-	word->word = str;
-	word->token = n;
-	return (word);
+	return (vector->values[index]);
 }
 
-t_phrase	*ft_construct_phrase(char **split)
+t_vector	*ft_construct_phrase(char **split)
 {
-	t_phrase *phrase;
-	t_word	*token;
-	int	i;
-	int	m;
+	t_vector	*phrase;
+	int			i;
+	t_vector	*word;
+	t_vector	*words;
 
-	phrase = malloc(sizeof(t_phrase));
+	phrase = ft_vector_create();
 	if (!phrase)
-		return ((t_phrase *) 0);
-	phrase->words = NULL;
-	phrase->size = 0;
+		return (NULL);
 	i = 0;
-	m = ft_count_matrix(split);
-	while (i < m)
+	while (split[i])
 	{
-		token = ft_construct_word(split[i], ft_set_token(split[i]));
-		if (i == 0)
-			phrase->words = ft_lstnew(token);
-		else
-			ft_lstadd_back(&phrase->words, ft_lstnew(token));
-		phrase->size++;
+		word = ft_vector_create();
+		if (!word)
+		{
+			return (NULL);
+		}
+		ft_vector_push_back(word, split[i]);
+		ft_vector_push_back(word, ft_set_token(split[i]));
+		ft_vector_push_back(phrase, word);
 		i++;
 	}
-	/*while (phrase->words)
+	i = 0;
+	
+	while (i < ft_vector_size(phrase))
 	{
+		t_vector *word;
+		//word = vector_value(phrase, i); 
+		word = phrase->values[i];
 		ft_printf("----------------------------------------------\n");
-		ft_printf("word: %s\n", ((t_word *)phrase->words->content)->word);
-		ft_printf("token: %d\n", ((t_word *)phrase->words->content)->token);
+		ft_printf("word: %s\n", word->values[0]);
+		ft_printf("token: %d\n", word->values[1]);
 		ft_printf("----------------------------------------------\n");
-		phrase->words = phrase->words->next;
-	}*/
+		i++;
+	}
 	return (phrase);
+}
+
+void	ft_free_phrase(t_vector *phrase)
+{
+	unsigned long	i;
+	t_vector		*word;
+
+	i = 0;
+	if (!phrase)
+		return ;
+	while (i < ft_vector_size(phrase))
+	{
+		word = phrase->values[i];
+		free(word);
+		i++;
+	}
+	ft_vector_free(phrase);
+	//free(phrase);
 }

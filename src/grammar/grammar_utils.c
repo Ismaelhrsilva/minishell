@@ -6,84 +6,68 @@
 /*   By: ishenriq <ishenriq@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/15 18:38:12 by ishenriq          #+#    #+#             */
-/*   Updated: 2024/05/30 17:09:39 by ishenriq         ###   ########.fr       */
+/*   Updated: 2024/06/01 14:28:57 by ishenriq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int	ft_get_token(t_phrase *phrase, int pos)
+int	ft_get_token(t_vector *phrase, int pos)
 {
-	int	token;
-	t_list *aux;
+	t_vector	*word;
 
-	aux = phrase->words;
-	while (aux && pos >= 0)
-	{
-		if (pos == 0)
-			token = ((t_word *)aux->content)->token;
-		aux = aux->next;
-		pos--;
-	}
-	return (token);
+	if (pos < 0 || pos >= ft_vector_size(phrase))
+		return (-1);
+	word = phrase->values[pos];
+	return (word->values[1]);
 }
 
-int	ft_count_token(t_phrase *phrase, int token)
+int	ft_count_token(t_vector *phrase, int token)
 {
-	int	count;
-	t_list *aux;
+	t_vector		*word;
+	int				count;
+	unsigned long	i;
 
+	i = 0;
 	count = 0;
-	aux = phrase->words;
-	while (aux)
+	while (i < ft_vector_size(phrase))
 	{
-		if (token == ((t_word *)aux->content)->token)
+		word = phrase->values[i];
+		if (word->values[1] == token)
 			count++;
-		aux = aux->next;
+		i++;
 	}
 	return (count);
 }
 
-/*int	ft_token_equal(t_phrase *phrase, int pos, int flag)
+int	ft_pos_token(t_vector *phrase, int start, int end, int token)
 {
-	if (ft_get_token(phrase, pos) & flag)
-		return (1);
-	return (0);
-}*/
+	t_vector	*word;
+	int			pos;
 
-int	ft_pos_token(t_phrase *phrase, int start, int end, int token)
-{
-	int	token_pos;
-	t_list *aux;
-	int	pos;
-	int	size;
-
-	aux = phrase->words;
-	pos = 0;
-	while (aux)
+	pos = start;
+	while (pos < end)
 	{
-		token_pos = ((t_word *)aux->content)->token;
-		if (pos >= start && pos < end)
-			if (token_pos & token)
-				return (pos);
-		aux = aux->next;
+		word = phrase->values[pos];
+		if (*(int *)word->values[1] & token)
+			return (pos);
 		pos++;
 	}
 	return (-1);
 }
 
-int	ft_pos_token_back(t_phrase *phrase, int start, int end, int token)
+int	ft_pos_token_back(t_vector *phrase, int start, int end, int token)
 {
-	int	token_pos;
-	int	pos;
+	int			pos;
+	t_vector	*word;
 
-	pos = phrase->size;
-	while (pos--)
+	pos = end - 1;
+	while (pos >= start)
 	{
-		token_pos = ft_get_token(phrase, pos);
-		if (pos >= start && pos < end)
-			if (token_pos & token)
-				return (pos);
+		word = phrase->values[pos];
+		if (*(int *)word->values[1] & token)
+			return (pos);
+		pos--;
 	}
 	return (-1);
 }
