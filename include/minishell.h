@@ -6,7 +6,7 @@
 /*   By: ishenriq <ishenriq@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/22 18:25:14 by ishenriq          #+#    #+#             */
-/*   Updated: 2024/06/01 19:32:23 by ishenriq         ###   ########.fr       */
+/*   Updated: 2024/06/01 21:23:02 by ishenriq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -156,4 +156,6 @@ void	*ft_realloc(void *ptr, size_t original_size, size_t new_size);
 t_vector	*ft_vector_slice_left(t_vector *vector, unsigned long pos);
 t_vector	*ft_vector_slice_right(t_vector *vector, unsigned long pos);
 
+//remove at end
+void	ft_print_ast(t_node	*root, char *branch);
 #endif
