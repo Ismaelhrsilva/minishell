@@ -6,7 +6,7 @@
 /*   By: ishenriq <ishenriq@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/19 14:31:38 by ishenriq          #+#    #+#             */
-/*   Updated: 2024/06/01 21:23:22 by ishenriq         ###   ########.fr       */
+/*   Updated: 2024/06/02 14:53:14 by ishenriq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ static int	ft_branch(t_vector *phrase, int pos, t_node *root)
 	t_vector *right;
 	int 	i;
 
-	if (!phrase || pos < 0 || pos > phrase->size)
+	if (!phrase || pos < 0 || pos > phrase->size || !root)
 		return (0);
 	right = ft_vector_slice_right(phrase, pos);
 	root->type = ft_value_int(phrase, pos, 1);
@@ -57,8 +57,8 @@ static int	ft_branch(t_vector *phrase, int pos, t_node *root)
 	ft_vector_erase(phrase, pos);
 	root->left = ft_ast(phrase);
 	root->right = ft_ast(right);
-	/*i = 0;
-	while (i < phrase->size)
+	i = 0;
+	/*while (i < phrase->size)
 	{
 		ft_printf("%s\n", ft_value(phrase, i, 0));
 		i++;
@@ -70,14 +70,16 @@ static int	ft_branch(t_vector *phrase, int pos, t_node *root)
 		ft_printf("%s\n", ft_value(right, i, 0));
 		i++;
 	}
-	ft_printf("metacharacter - %d\n", root->type);*/
+	//ft_printf("metacharacter - %d\n", root->type);*/
 	return (1);
 }
 
 static	void	ft_ast_aux(t_vector *phrase, t_node *root)
 {
 	int i;
-	if (ft_branch(phrase, ft_pos_token_back(phrase, OR_AND), root))
+	i = ft_pos_token_back(phrase, OR_AND);
+	//if (ft_branch(phrase, ft_pos_token_back(phrase, OR_AND), root))
+	if (ft_branch(phrase, i, root)) 
 		return ;
 	if (ft_branch(phrase, ft_pos_token_back(phrase, PIPE), root))
 		return ;
@@ -101,6 +103,5 @@ t_node	*ft_ast(t_vector *phrase)
 	if (!root)
 		return ((t_node *)0);
 	ft_ast_aux(phrase, root);
-	//ft_print_ast(root, "root");
 	return (root);
 }

@@ -6,7 +6,7 @@
 /*   By: ishenriq <ishenriq@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/05 14:42:53 by ishenriq          #+#    #+#             */
-/*   Updated: 2024/06/01 21:22:09 by ishenriq         ###   ########.fr       */
+/*   Updated: 2024/06/02 14:36:47 by ishenriq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,9 @@ void	read_line(t_shell *shell)
 			ft_grammar_rules(parse->phrase);
 			shell->root = ft_ast(parse->phrase);
 			ft_print_ast(shell->root, "root");
+			free(shell->root);
+			parse->phrase = NULL;
+			shell->root = NULL;
 			if (!ft_strncmp(parse->prompt, "exit", 4))
 				break ;
 			ft_free_phrase(parse->phrase);
