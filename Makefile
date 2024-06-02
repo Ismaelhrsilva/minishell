@@ -6,7 +6,7 @@
 #    By: ishenriq <ishenriq@student.42sp.org.br>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/12/11 20:08:54 by ishenriq          #+#    #+#              #
-#    Updated: 2024/06/01 19:03:16 by ishenriq         ###   ########.fr        #
+#    Updated: 2024/06/02 18:16:28 by ishenriq         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -43,6 +43,7 @@ SRCS := \
 	vector/vector_create.c \
 	vector/vector_split.c \
 	ast/ast.c \
+	envp/envp.c \
 
 SRC := $(addprefix $(SRC_DIR)/, $(SRCS))
 

@@ -6,7 +6,7 @@
 /*   By: ishenriq <ishenriq@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/05 14:42:53 by ishenriq          #+#    #+#             */
-/*   Updated: 2024/06/01 13:11:43 by phraranha        ###   ########.org.br   */
+/*   Updated: 2024/06/02 18:56:21 by ishenriq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,32 +109,3 @@ void	ft_arranging_prompt(t_parse *parse)
 	prompt_arranged[parse->idx->j] = '\0';
 	parse->prompt_arranged = prompt_arranged;
 }
-
-//void	ft_arranging_prompt(t_parse *parse)
-//{
-//	int	size;
-//	char	*prompt_arranged;
-//
-//	if (parse->prompt)
-//		size = ft_strlen(parse->prompt);
-//	if (!prompt_arranged)
-//	//prompt_arranged = malloc((size * 2) * sizeof(char *));
-//	prompt_arranged = malloc((size * 2) * sizeof(char *) + 1);
-//		return ;
-//	parse->idx = malloc(sizeof(t_index));
-//	if (!parse->idx)
-//		return ;
-//	parse->idx->i = 0;
-//	parse->idx->j = 0;
-//	while (parse->prompt[parse->idx->i] != '\0')
-//	{
-//		//if (ft_strchr("\'\"", parse->prompt[parse->idx->i]))
-//			ft_parse_quotes(parse, prompt_arranged);
-//		if (!ft_parse_char(parse, prompt_arranged))
-//			prompt_arranged[parse->idx->j] = parse->prompt[parse->idx->i];
-//		parse->idx->i++;
-//		parse->idx->j++;
-//	}
-//	prompt_arranged[parse->idx->j] = '\0';
-//	parse->prompt_arranged = prompt_arranged;
-//}

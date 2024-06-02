@@ -6,7 +6,7 @@
 /*   By: ishenriq <ishenriq@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/22 18:25:14 by ishenriq          #+#    #+#             */
-/*   Updated: 2024/06/01 21:23:02 by ishenriq         ###   ########.fr       */
+/*   Updated: 2024/06/02 20:02:33 by ishenriq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,7 +93,11 @@ typedef struct s_node
 typedef struct s_shell
 {
 	char			**prompt_splitted;
+	char			**envp;
+	t_vector		*envp_dict;
 	t_node			*root;
+	char 			*path;
+	char			**path_splitted;
 }					t_shell;
 
 // File: Read_inputs
@@ -122,6 +126,8 @@ void				ft_grammar_rules(t_vector *phrase);
 int					ft_power(int nb, int power);
 int					ft_count_matrix(char **str);
 void				ft_change_sub_space(char **split);
+int					ft_count_chr(char *str, char ch);
+void 				ft_replace_char_between_signal(char *str, char signal, char old, char new_ch);
 
 // File grammar utils
 int					ft_count_token(t_vector *phrase, int token);
@@ -155,6 +161,9 @@ void				ft_vector_init(t_vector *vector);
 void	*ft_realloc(void *ptr, size_t original_size, size_t new_size);
 t_vector	*ft_vector_slice_left(t_vector *vector, unsigned long pos);
 t_vector	*ft_vector_slice_right(t_vector *vector, unsigned long pos);
+
+//File Envp
+void	ft_envp(t_shell *shell);
 
 //remove at end
 void	ft_print_ast(t_node	*root, char *branch);

@@ -6,7 +6,7 @@
 /*   By: ishenriq <ishenriq@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/15 19:57:08 by ishenriq          #+#    #+#             */
-/*   Updated: 2024/06/01 11:50:09 by ishenriq         ###   ########.fr       */
+/*   Updated: 2024/06/02 20:19:30 by ishenriq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,5 +49,46 @@ void	ft_change_sub_space(char **split)
 			j++;
 		}
 		m++;
+	}
+}
+
+int	ft_count_chr(char *str, char ch)
+{
+	int	count;
+
+	count = 0;
+	if (!str)
+		return (0);
+	while (count < ft_strlen(str))
+	{
+		if (*str == ch)
+			count++;
+		str++;
+	}
+	return (count);
+}
+
+void ft_replace_char_between_signal(char *str, char signal, char old_ch, char new_ch)
+{
+	char	*start;
+	char	*end;
+	char	*p;
+
+	if (ft_count_chr(str, signal) < 2)
+		return ;
+	start = ft_strchr(str, signal);
+	while (start)
+	{
+		end = ft_strchr(start + 1, signal);
+		if (!end)
+			break ;
+		p = start + 1;
+		while (p < end)
+		{
+			if (*p == old_ch)
+				*p = new_ch;
+			p++;
+		}
+		start = ft_strchr(end + 1, signal);
 	}
 }
