@@ -1,26 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   export.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ishenriq <ishenriq@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/05/05 14:42:53 by ishenriq          #+#    #+#             */
-/*   Updated: 2024/06/02 20:36:18 by ishenriq         ###   ########.fr       */
+/*   Created: 2024/06/02 20:29:29 by ishenriq          #+#    #+#             */
+/*   Updated: 2024/06/02 20:32:03 by ishenriq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int	main(int argc, char **argv, char **envp)
+/*void	ft_export(t_vector *vec)
 {
-	t_shell	*shell;
-
-	shell = malloc(sizeof(t_shell));
-	if (shell == NULL)
-		return (EXIT_FAILURE);
-	shell->envp = envp;
-	ft_envp(shell);
-	read_line(shell);
-	return (0);
-}
+	
+}*/

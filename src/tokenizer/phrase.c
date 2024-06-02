@@ -6,7 +6,7 @@
 /*   By: ishenriq <ishenriq@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/13 20:17:19 by ishenriq          #+#    #+#             */
-/*   Updated: 2024/06/01 19:44:24 by ishenriq         ###   ########.fr       */
+/*   Updated: 2024/06/02 20:45:28 by ishenriq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ t_vector	*ft_construct_phrase(char **split)
 		ft_vector_push_back(phrase, word);
 		i++;
 	}
-	/*i = 0;
+	i = 0;
 	while (i < ft_vector_size(phrase))
 	{
 		ft_printf("----------------------------------------------\n");
@@ -42,7 +42,7 @@ t_vector	*ft_construct_phrase(char **split)
 		ft_printf("token: %d\n", ft_value(phrase, i, 1));
 		ft_printf("----------------------------------------------\n");
 		i++;
-	}*/
+	}
 	return (phrase);
 }
 

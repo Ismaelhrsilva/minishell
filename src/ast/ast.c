@@ -6,7 +6,7 @@
 /*   By: ishenriq <ishenriq@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/19 14:31:38 by ishenriq          #+#    #+#             */
-/*   Updated: 2024/06/02 14:53:14 by ishenriq         ###   ########.fr       */
+/*   Updated: 2024/06/02 20:49:06 by ishenriq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@ static	t_node	*ft_build_node(t_vector *word)
 	node->type = ft_value_int(word, 0, 1);
 	node->left = NULL;
 	node->right = NULL;
+	node->phrase = NULL;
 	return (node);
 }
 
@@ -93,6 +94,7 @@ static	void	ft_ast_aux(t_vector *phrase, t_node *root)
 	}*/
 	root->type = EXEC;
 	root->str = ft_value(phrase, 0, 0);
+	root->phrase = phrase;
 }
 
 t_node	*ft_ast(t_vector *phrase)

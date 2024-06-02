@@ -6,7 +6,7 @@
 /*   By: ishenriq <ishenriq@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/22 18:25:14 by ishenriq          #+#    #+#             */
-/*   Updated: 2024/06/02 20:02:33 by ishenriq         ###   ########.fr       */
+/*   Updated: 2024/06/02 20:47:08 by ishenriq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,6 +88,7 @@ typedef struct s_node
 	int				type;
 	struct s_node	*left;
 	struct s_node	*right;
+	t_vector		*phrase;
 }					t_node;
 
 typedef struct s_shell

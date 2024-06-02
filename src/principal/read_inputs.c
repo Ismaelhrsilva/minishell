@@ -6,7 +6,7 @@
 /*   By: ishenriq <ishenriq@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/05 14:42:53 by ishenriq          #+#    #+#             */
-/*   Updated: 2024/06/02 16:50:10 by ishenriq         ###   ########.fr       */
+/*   Updated: 2024/06/02 20:44:51 by ishenriq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,24 @@ void	read_line(t_shell *shell)
 		if (parse->prompt != NULL)
 		{
 			add_history(parse->prompt);
+			/*if (ft_strncmp(parse->prompt, "export", 6) == 0)
+			{
+				int	i;
+				int	j;
+				char **ev;
+				i = 0;
+				while (i < shell->envp_dict->size)
+				{
+					ft_printf("%s=", ft_value(shell->envp_dict, i, 0));
+					j = 0;
+					ev = ft_value(shell->envp_dict, i, 1);
+					while (j < ft_count_matrix(ev))
+						ft_printf("%s:", ev[j++]);
+					i++;
+					ft_printf("\n");
+				}
+				continue ;
+			}*/
 			shell->prompt_splitted = ft_parser(parse);
 			if (!shell->prompt_splitted)
 				break ;
