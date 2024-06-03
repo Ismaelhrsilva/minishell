@@ -6,7 +6,7 @@
 /*   By: ishenriq <ishenriq@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/19 14:31:38 by ishenriq          #+#    #+#             */
-/*   Updated: 2024/06/02 20:49:06 by ishenriq         ###   ########.fr       */
+/*   Updated: 2024/06/03 17:58:45 by ishenriq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,10 +77,7 @@ static int	ft_branch(t_vector *phrase, int pos, t_node *root)
 
 static	void	ft_ast_aux(t_vector *phrase, t_node *root)
 {
-	int i;
-	i = ft_pos_token_back(phrase, OR_AND);
-	//if (ft_branch(phrase, ft_pos_token_back(phrase, OR_AND), root))
-	if (ft_branch(phrase, i, root)) 
+	if (ft_branch(phrase, ft_pos_token_back(phrase, OR_AND), root))
 		return ;
 	if (ft_branch(phrase, ft_pos_token_back(phrase, PIPE), root))
 		return ;
