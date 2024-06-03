@@ -6,7 +6,7 @@
 /*   By: ishenriq <ishenriq@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/15 19:57:08 by ishenriq          #+#    #+#             */
-/*   Updated: 2024/06/02 20:19:30 by ishenriq         ###   ########.fr       */
+/*   Updated: 2024/06/03 18:36:53 by ishenriq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,4 +91,14 @@ void ft_replace_char_between_signal(char *str, char signal, char old_ch, char ne
 		}
 		start = ft_strchr(end + 1, signal);
 	}
+}
+
+void	ft_free_matrix(char **matrix)
+{
+	int	i;
+	
+	i = 0;
+	while (matrix[i] != NULL)
+		free(matrix[i++]);
+	free(matrix);
 }

@@ -6,7 +6,7 @@
 /*   By: ishenriq <ishenriq@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/22 18:25:14 by ishenriq          #+#    #+#             */
-/*   Updated: 2024/06/02 20:47:08 by ishenriq         ###   ########.fr       */
+/*   Updated: 2024/06/03 20:20:21 by ishenriq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -129,6 +129,7 @@ int					ft_count_matrix(char **str);
 void				ft_change_sub_space(char **split);
 int					ft_count_chr(char *str, char ch);
 void 				ft_replace_char_between_signal(char *str, char signal, char old, char new_ch);
+void	ft_free_matrix(char **matrix);
 
 // File grammar utils
 int					ft_count_token(t_vector *phrase, int token);
@@ -165,6 +166,14 @@ t_vector	*ft_vector_slice_right(t_vector *vector, unsigned long pos);
 
 //File Envp
 void	ft_envp(t_shell *shell);
+//File Pathname
+char	*ft_get_pathname(char **matrix, char *str);
+
+//File execution
+void	ft_execution(t_node *root, t_shell *shell);
+
+//File exec_utils.c
+int	ft_status(int status_int);
 
 //remove at end
 void	ft_print_ast(t_node	*root, char *branch);
