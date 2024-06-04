@@ -6,7 +6,7 @@
 /*   By: ishenriq <ishenriq@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/22 18:25:14 by ishenriq          #+#    #+#             */
-/*   Updated: 2024/06/03 20:20:21 by ishenriq         ###   ########.fr       */
+/*   Updated: 2024/06/04 19:15:48 by ishenriq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -177,4 +177,6 @@ int	ft_status(int status_int);
 
 //remove at end
 void	ft_print_ast(t_node	*root, char *branch);
+void	ft_print_vector_content(t_vector *phrase);
+
 #endif

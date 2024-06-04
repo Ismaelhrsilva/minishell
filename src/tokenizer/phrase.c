@@ -6,7 +6,7 @@
 /*   By: ishenriq <ishenriq@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/13 20:17:19 by ishenriq          #+#    #+#             */
-/*   Updated: 2024/06/03 20:27:26 by ishenriq         ###   ########.fr       */
+/*   Updated: 2024/06/04 19:07:52 by ishenriq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@ t_vector	*ft_construct_phrase(char **split)
 {
 	t_vector	*phrase;
 	int			i;
+	int			*token;
 	t_vector	*word;
 
 	phrase = ft_vector_create();
@@ -26,23 +27,16 @@ t_vector	*ft_construct_phrase(char **split)
 	{
 		word = ft_vector_create();
 		if (!word)
-		{
 			return (NULL);
-		}
 		ft_vector_push_back(word, split[i]);
-		ft_vector_push_back(word, ft_set_token(split[i]));
+		token = malloc(sizeof(int));
+		if (!token)
+			return (NULL);
+		*token = ft_set_token(split[i]);
+		ft_vector_push_back(word, token); 
 		ft_vector_push_back(phrase, word);
 		i++;
 	}
-	/*i = 0;
-	while (i < ft_vector_size(phrase))
-	{
-		ft_printf("----------------------------------------------\n");
-		ft_printf("token: %s\n", ft_value(phrase, i, 0));
-		ft_printf("token: %d\n", ft_value(phrase, i, 1));
-		ft_printf("----------------------------------------------\n");
-		i++;
-	}*/
 	return (phrase);
 }
 

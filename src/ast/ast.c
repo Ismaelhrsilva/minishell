@@ -6,7 +6,7 @@
 /*   By: ishenriq <ishenriq@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/19 14:31:38 by ishenriq          #+#    #+#             */
-/*   Updated: 2024/06/03 18:45:51 by ishenriq         ###   ########.fr       */
+/*   Updated: 2024/06/04 19:18:18 by ishenriq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,26 +29,9 @@ static	t_node	*ft_build_node(t_vector *word)
 	return (node);
 }
 
-void	ft_print_ast(t_node	*root, char *branch)
-{
-	if (root)
-	{
-		if (root->left)
-		{
-			ft_print_ast(root->left, "left");
-		}
-		if (root->right)
-		{
-			ft_print_ast(root->right, "right");
-		}
-		ft_printf("%s ---> %s\n", branch, root->str);
-	}
-}
-
 static int	ft_branch(t_vector *phrase, int pos, t_node *root)
 {
 	t_vector *right;
-	int 	i;
 
 	if (!phrase || pos < 0 || pos > phrase->size || !root)
 		return (0);
@@ -58,20 +41,7 @@ static int	ft_branch(t_vector *phrase, int pos, t_node *root)
 	ft_vector_erase(phrase, pos);
 	root->left = ft_ast(phrase);
 	root->right = ft_ast(right);
-	i = 0;
-	/*while (i < phrase->size)
-	{
-		ft_printf("%s\n", ft_value(phrase, i, 0));
-		i++;
-	}
-	ft_printf("-----------------------------------------\n");
-	i = 0;
-	while (i < right->size)
-	{
-		ft_printf("%s\n", ft_value(right, i, 0));
-		i++;
-	}
-	//ft_printf("metacharacter - %d\n", root->type);*/
+	//ft_print_vector_content(phrase);
 	return (1);
 }
 
@@ -83,12 +53,6 @@ static	void	ft_ast_aux(t_vector *phrase, t_node *root)
 		return ;
 	if (ft_branch(phrase, ft_pos_token_back(phrase, REDALL), root))
 		return ;
-	//i = phrase->size;
-	/*while (i >= 0)
-	{
-		ft_printf("%s\n", ft_value(phrase, i, 0));
-		i--;
-	}*/
 	root->type = EXEC;
 	root->str = ft_value(phrase, 0, 0);
 	root->phrase = phrase;

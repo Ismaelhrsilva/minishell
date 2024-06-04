@@ -6,7 +6,7 @@
 /*   By: phraranha <marvin@42.fr>                   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/01 12:46:52 by phraranha         #+#    #+#             */
-/*   Updated: 2024/06/02 16:32:27 by ishenriq         ###   ########.fr       */
+/*   Updated: 2024/06/04 19:12:24 by ishenriq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,6 @@ void	ft_vector_pop_back(t_vector *vector)
 		return ;
 	if (ft_vector_empty(vector))
 		return ;
-	//vector->size--;
 	ft_vector_erase(vector, vector->size - 1);
 }
 

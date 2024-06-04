@@ -6,7 +6,7 @@
 #    By: ishenriq <ishenriq@student.42sp.org.br>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/12/11 20:08:54 by ishenriq          #+#    #+#              #
-#    Updated: 2024/06/03 20:21:08 by ishenriq         ###   ########.fr        #
+#    Updated: 2024/06/04 19:16:15 by ishenriq         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -48,6 +48,7 @@ SRCS := \
 	builtins/export.c \
 	exec/execution.c \
 	exec/exec_utils.c \
+	debug/print_debug.c \
 
 SRC := $(addprefix $(SRC_DIR)/, $(SRCS))
 

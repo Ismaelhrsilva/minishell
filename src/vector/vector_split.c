@@ -6,7 +6,7 @@
 /*   By: ishenriq <ishenriq@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/01 18:58:39 by ishenriq          #+#    #+#             */
-/*   Updated: 2024/06/02 16:36:38 by ishenriq         ###   ########.fr       */
+/*   Updated: 2024/06/04 19:12:13 by ishenriq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,8 +53,6 @@ t_vector	*ft_vector_slice_right(t_vector *vector, unsigned long pos)
 	while (pos < i)
 	{
 		ft_vector_push_back(sliced, vector->values[pos]);
-		//ft_vector_erase(vector, pos);
-		//ft_vector_pop_back(vector);
 		pos++;
 		j++;
 	}

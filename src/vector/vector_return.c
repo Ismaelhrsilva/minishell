@@ -6,7 +6,7 @@
 /*   By: phraranha <marvin@42.fr>                   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/01 12:47:33 by phraranha         #+#    #+#             */
-/*   Updated: 2024/06/01 15:23:22 by ishenriq         ###   ########.fr       */
+/*   Updated: 2024/06/04 18:57:23 by ishenriq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ void	*ft_value(const t_vector *vector, unsigned long i, unsigned long j)
 
 int	ft_value_int(const t_vector *vector, unsigned long i, unsigned long j)
 {
-	return (ft_value(vector, i, j));
+	return (*(int *)ft_value(vector, i, j));
 }
 
 unsigned long	ft_vector_size(const t_vector *vector)
