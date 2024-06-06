@@ -6,7 +6,7 @@
 #    By: ishenriq <ishenriq@student.42sp.org.br>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/12/11 20:08:54 by ishenriq          #+#    #+#              #
-#    Updated: 2024/06/04 19:16:15 by ishenriq         ###   ########.fr        #
+#    Updated: 2024/06/05 20:42:03 by ishenriq         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -47,6 +47,7 @@ SRCS := \
 	envp/pathname.c \
 	builtins/export.c \
 	exec/execution.c \
+	exec/exec_pipe.c \
 	exec/exec_utils.c \
 	debug/print_debug.c \
 

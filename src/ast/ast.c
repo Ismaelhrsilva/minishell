@@ -6,7 +6,7 @@
 /*   By: ishenriq <ishenriq@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/19 14:31:38 by ishenriq          #+#    #+#             */
-/*   Updated: 2024/06/04 19:18:18 by ishenriq         ###   ########.fr       */
+/*   Updated: 2024/06/05 19:47:33 by ishenriq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,8 @@ static int	ft_branch(t_vector *phrase, int pos, t_node *root)
 	root->left = ft_ast(phrase);
 	root->right = ft_ast(right);
 	//ft_print_vector_content(phrase);
+	//printf("------------------------\n");
+	//ft_print_vector_content(right);
 	return (1);
 }
 

@@ -6,11 +6,13 @@
 /*   By: ishenriq <ishenriq@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/05 14:42:53 by ishenriq          #+#    #+#             */
-/*   Updated: 2024/06/03 19:13:20 by ishenriq         ###   ########.fr       */
+/*   Updated: 2024/06/05 20:26:05 by ishenriq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+volatile sig_atomic_t	g_status = 0;
 
 int	main(int argc, char **argv, char **envp)
 {

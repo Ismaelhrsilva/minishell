@@ -6,7 +6,7 @@
 /*   By: ishenriq <ishenriq@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/22 18:25:14 by ishenriq          #+#    #+#             */
-/*   Updated: 2024/06/04 19:15:48 by ishenriq         ###   ########.fr       */
+/*   Updated: 2024/06/05 20:40:36 by ishenriq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -163,6 +163,7 @@ void				ft_vector_init(t_vector *vector);
 void	*ft_realloc(void *ptr, size_t original_size, size_t new_size);
 t_vector	*ft_vector_slice_left(t_vector *vector, unsigned long pos);
 t_vector	*ft_vector_slice_right(t_vector *vector, unsigned long pos);
+void	ft_vector_swap(t_vector *vector, int a, int b);
 
 //File Envp
 void	ft_envp(t_shell *shell);
@@ -171,9 +172,10 @@ char	*ft_get_pathname(char **matrix, char *str);
 
 //File execution
 void	ft_execution(t_node *root, t_shell *shell);
+void	ft_pipe(t_node *root, t_shell *shell);
 
 //File exec_utils.c
-int	ft_status(int status_int);
+void	close_fd(int *fd);
 
 //remove at end
 void	ft_print_ast(t_node	*root, char *branch);
