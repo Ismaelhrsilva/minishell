@@ -6,7 +6,7 @@
 /*   By: ishenriq <ishenriq@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/03 19:15:25 by ishenriq          #+#    #+#             */
-/*   Updated: 2024/06/05 21:03:24 by ishenriq         ###   ########.fr       */
+/*   Updated: 2024/06/06 21:21:09 by ishenriq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,6 +93,8 @@ void	ft_execution(t_node *root, t_shell *shell)
 		ft_or_and(root, shell);
 	else if (root->type & PIPE)
 		ft_pipe(root, shell);
+	else if (root->type & REDALL)
+		ft_exec_redirects(root, shell);
 	else if (root->left)
 		ft_execution(root->left, shell);
 	else if (root->right)

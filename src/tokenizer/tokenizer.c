@@ -6,7 +6,7 @@
 /*   By: ishenriq <ishenriq@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/12 18:18:14 by ishenriq          #+#    #+#             */
-/*   Updated: 2024/06/05 19:35:32 by ishenriq         ###   ########.fr       */
+/*   Updated: 2024/06/06 20:03:53 by ishenriq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ int	ft_set_token(char *str)
 	n = 0;
 	while (tokens[n])
 	{
-		if (ft_strlen(str) <= 2 && ft_strncmp(str, tokens[n], 3) == 0)
+		if (ft_strlen(str) <= 2 && !ft_strncmp(str, tokens[n], 3))
 			return (1 << n);
 			//return (ft_power(2, (n)));
 		n++;

@@ -6,13 +6,13 @@
 #    By: ishenriq <ishenriq@student.42sp.org.br>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/12/11 20:08:54 by ishenriq          #+#    #+#              #
-#    Updated: 2024/06/05 20:42:03 by ishenriq         ###   ########.fr        #
+#    Updated: 2024/06/06 22:15:21 by ishenriq         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME	= minishell
 #CFLAGS	:= -Wextra -Wall -Werror -Wunreachable-code -Ofast -g3 -O3
-CFLAGS	:=  -Ofast -g3 -O0
+CFLAGS	:=  -Ofast -g3 -O0 -MD -MP
 CC	:= cc
 PRINTF	:= lib/printf/
 LIBFT	:= lib/libft/
@@ -48,6 +48,7 @@ SRCS := \
 	builtins/export.c \
 	exec/execution.c \
 	exec/exec_pipe.c \
+	exec/exec_red.c \
 	exec/exec_utils.c \
 	debug/print_debug.c \
 

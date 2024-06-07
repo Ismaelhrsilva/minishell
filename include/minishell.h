@@ -6,7 +6,7 @@
 /*   By: ishenriq <ishenriq@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/22 18:25:14 by ishenriq          #+#    #+#             */
-/*   Updated: 2024/06/05 20:40:36 by ishenriq         ###   ########.fr       */
+/*   Updated: 2024/06/06 22:22:16 by ishenriq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,6 +89,7 @@ typedef struct s_node
 	struct s_node	*left;
 	struct s_node	*right;
 	t_vector		*phrase;
+	int				fd;
 }					t_node;
 
 typedef struct s_shell
@@ -173,6 +174,7 @@ char	*ft_get_pathname(char **matrix, char *str);
 //File execution
 void	ft_execution(t_node *root, t_shell *shell);
 void	ft_pipe(t_node *root, t_shell *shell);
+void	ft_exec_redirects(t_node *root, t_shell *shell);
 
 //File exec_utils.c
 void	close_fd(int *fd);

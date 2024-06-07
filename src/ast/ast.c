@@ -6,7 +6,7 @@
 /*   By: ishenriq <ishenriq@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/19 14:31:38 by ishenriq          #+#    #+#             */
-/*   Updated: 2024/06/05 19:47:33 by ishenriq         ###   ########.fr       */
+/*   Updated: 2024/06/06 21:52:34 by ishenriq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,7 @@ static int	ft_branch(t_vector *phrase, int pos, t_node *root)
 	right = ft_vector_slice_right(phrase, pos);
 	root->type = ft_value_int(phrase, pos, 1);
 	root->str = ft_value(phrase, pos, 0);
+	root->fd = 0;
 	ft_vector_erase(phrase, pos);
 	root->left = ft_ast(phrase);
 	root->right = ft_ast(right);
