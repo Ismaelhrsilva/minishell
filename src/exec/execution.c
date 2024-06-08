@@ -6,7 +6,7 @@
 /*   By: ishenriq <ishenriq@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/03 19:15:25 by ishenriq          #+#    #+#             */
-/*   Updated: 2024/06/06 21:21:09 by ishenriq         ###   ########.fr       */
+/*   Updated: 2024/06/08 18:52:19 by ishenriq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,7 +83,6 @@ static void	ft_or_and(t_node *root, t_shell *shell)
 			ft_execution(root->right, shell);
 	}
 }
-
 
 void	ft_execution(t_node *root, t_shell *shell)
 {
