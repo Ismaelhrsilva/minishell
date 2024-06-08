@@ -6,7 +6,7 @@
 /*   By: ishenriq <ishenriq@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/01 18:58:39 by ishenriq          #+#    #+#             */
-/*   Updated: 2024/06/05 19:39:33 by ishenriq         ###   ########.fr       */
+/*   Updated: 2024/06/07 18:58:19 by ishenriq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,7 @@ void	ft_vector_swap(t_vector *vector, int a, int b)
 {
 	void *temp;
 
-	if (a > vector->size || b > vector->size)
+	if (a > vector->size || b > vector->size || a < 0 || b < 0)
 		return ;
 	temp = vector->values[a];
 	vector->values[a] = vector->values[b];

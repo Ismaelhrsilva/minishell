@@ -6,7 +6,7 @@
 #    By: ishenriq <ishenriq@student.42sp.org.br>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/12/11 20:08:54 by ishenriq          #+#    #+#              #
-#    Updated: 2024/06/06 22:15:21 by ishenriq         ###   ########.fr        #
+#    Updated: 2024/06/07 20:19:24 by ishenriq         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -29,6 +29,7 @@ LDFLAGS	:= $(HEADERS) $(LIBS)
 SRC_DIR := ./src/
 SRCS := \
 	grammar/grammar.c \
+	grammar/order.c \
 	grammar/grammar_utils.c \
 	parser/parser.c \
 	parser/parser_utils.c \

@@ -6,7 +6,7 @@
 /*   By: ishenriq <ishenriq@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/22 18:25:14 by ishenriq          #+#    #+#             */
-/*   Updated: 2024/06/06 22:22:16 by ishenriq         ###   ########.fr       */
+/*   Updated: 2024/06/07 20:17:56 by ishenriq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,7 @@ typedef enum e_token
 	ALL = 127,
 	OPEN_BRACKET = 1 << 7,
 	CLOSE_BRACKET = 1 << 8,
+	ALL_W_BRACKET = 1023,
 	EXEC	= 1 << 9
 }					t_token;
 
@@ -123,6 +124,7 @@ void				ft_free_phrase(t_vector *phrase);
 
 // File Grammar
 void				ft_grammar_rules(t_vector *phrase);
+void				ft_order_redall(t_vector *vector);
 
 // File Utils
 int					ft_power(int nb, int power);
@@ -165,6 +167,7 @@ void	*ft_realloc(void *ptr, size_t original_size, size_t new_size);
 t_vector	*ft_vector_slice_left(t_vector *vector, unsigned long pos);
 t_vector	*ft_vector_slice_right(t_vector *vector, unsigned long pos);
 void	ft_vector_swap(t_vector *vector, int a, int b);
+t_vector *vector_clone(t_vector *vector);
 
 //File Envp
 void	ft_envp(t_shell *shell);
