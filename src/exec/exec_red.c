@@ -6,7 +6,7 @@
 /*   By: ishenriq <ishenriq@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/06 20:44:17 by ishenriq          #+#    #+#             */
-/*   Updated: 2024/06/08 15:31:32 by ishenriq         ###   ########.fr       */
+/*   Updated: 2024/06/08 18:21:05 by ishenriq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,14 @@ static void ft_close_fd_tmp(const int *fd)
 	dup2(fd[1], STDIN_FILENO);
 	close(fd[0]);
 	close(fd[1]);
+}
+
+static void ft_dup_right_flag(t_node *root)
+{
+	if (root->type & (REDOUT | APPEND))
+		ft_change_fds(root->fd, STDOUT_FILENO);
+	if (root->type & (REDIN | HEREDOC))
+		ft_change_fds(root->fd, STDIN_FILENO);
 }
 
 static void	ft_which_red(t_node *root, int flag)
@@ -38,21 +46,13 @@ static void	ft_redirects(t_node *root, t_shell *shell)
 
 	if (root->left->type & REDALL)
 		ft_redirects(root->left, shell);
+	flag = 0;
 	flag |= root->type;
-	if (root->type & (REDOUT | APPEND) &&
+	if (root->type & (REDALL) &&
 		(root->left->fd != -1 || g_status == 0))
 	{
 		ft_which_red(root, flag);
-		//ft_which_red(root, flag);
-		ft_change_fds(root->fd, STDOUT_FILENO);
-	}
-	else if (root->type & (REDIN | HEREDOC) &&
-		(root->left->fd != -1 || g_status == 0))
-	{
-		flag = 0;
-		flag |= root->type;
-		ft_which_red(root, flag);
-		ft_change_fds(root->fd, STDIN_FILENO);
+		ft_dup_right_flag(root);
 	}
 	else if (root->left->fd == -1)
 		root->fd = -1;

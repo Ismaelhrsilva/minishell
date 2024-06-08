@@ -6,7 +6,7 @@
 /*   By: ishenriq <ishenriq@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/15 18:38:12 by ishenriq          #+#    #+#             */
-/*   Updated: 2024/06/01 15:16:27 by ishenriq         ###   ########.fr       */
+/*   Updated: 2024/06/08 17:01:47 by ishenriq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,29 @@ static int	ft_metacharacter_edges(t_vector *phrase, int pos)
 	return (0);
 }
 
+static int	ft_valid_brackets(t_vector *phrase)
+{
+	int	count;
+	int	i;
+
+	i = 0;
+	count = 0;
+	while (i < phrase->size)
+	{
+		if (ft_value_int(phrase, i, 1) & OPEN_BRACKET)
+			count++;
+		if (ft_value_int(phrase, i, 1) & CLOSE_BRACKET)
+			count--;
+		if (count < 0)
+			return (1);
+		i++;
+	}
+	if (count == 0)
+		return (0);
+	else
+		return (1);
+}
+
 static int	ft_open_closed_brackets(t_vector *phrase)
 {
 	if (ft_count_token(phrase, OPEN_BRACKET) == ft_count_token(phrase, CLOSE_BRACKET))
@@ -56,5 +79,7 @@ void	ft_grammar_rules(t_vector *phrase)
 		i++;
 	}
 	if (ft_open_closed_brackets(phrase))
+		ft_printf("Error: Mismatched brackets\n");
+	if (ft_valid_brackets(phrase))
 		ft_printf("Error: Mismatched brackets\n");
 }

@@ -6,7 +6,7 @@
 /*   By: ishenriq <ishenriq@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/05 14:42:53 by ishenriq          #+#    #+#             */
-/*   Updated: 2024/06/07 22:44:53 by ishenriq         ###   ########.fr       */
+/*   Updated: 2024/06/08 16:47:36 by ishenriq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,11 +33,11 @@ void	read_line(t_shell *shell)
 			parse->phrase = ft_construct_phrase(shell->prompt_splitted);
 			ft_grammar_rules(parse->phrase);
 			ft_order_redall(parse->phrase);
-			//ft_print_vector_content(parse->phrase);
+			ft_print_vector_content(parse->phrase);
 			shell->root = ft_ast(parse->phrase);
 			ft_open_heredoc(shell->root);
-			ft_execution(shell->root, shell);
-			//ft_print_ast(shell->root, "root");
+			//ft_execution(shell->root, shell);
+			ft_print_ast(shell->root, "root");
 			free(shell->root);
 			parse->phrase = NULL;
 			shell->root = NULL;
