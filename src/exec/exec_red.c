@@ -6,7 +6,7 @@
 /*   By: ishenriq <ishenriq@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/06 20:44:17 by ishenriq          #+#    #+#             */
-/*   Updated: 2024/06/07 18:04:19 by ishenriq         ###   ########.fr       */
+/*   Updated: 2024/06/07 23:01:21 by ishenriq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,15 +20,6 @@ static void ft_close_fd_tmp(const int *fd)
 	dup2(fd[1], STDIN_FILENO);
 	close(fd[0]);
 	close(fd[1]);
-}
-
-static void	ft_change_fds(int fd, int new)
-{
-	if (fd != -1)
-	{
-		dup2(fd, new);
-		close(fd);
-	}
 }
 
 static void	ft_which_red(t_node *root, int flag)

@@ -6,7 +6,7 @@
 /*   By: ishenriq <ishenriq@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/07 19:25:12 by ishenriq          #+#    #+#             */
-/*   Updated: 2024/06/07 21:10:25 by ishenriq         ###   ########.fr       */
+/*   Updated: 2024/06/07 21:26:41 by ishenriq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,8 +41,6 @@ static void ft_order_aux(t_vector *vector, int i)
 		{
 			ft_vector_insert(vector, i, vector->values[i + 2]);
 			ft_vector_erase(vector, i + 3);
-			ft_print_vector_content(vector);
-			printf("######################\n");
 			if (ft_not_ordered_redall(vector))
 				ft_order_aux(vector, 0);
 		}
@@ -56,6 +54,5 @@ static void ft_order_aux(t_vector *vector, int i)
 void	ft_order_redall(t_vector *vector)
 {
 	ft_order_aux(vector, 0);
-	//ft_print_vector_content(vector);
 }
 

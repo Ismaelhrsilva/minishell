@@ -6,7 +6,7 @@
 /*   By: ishenriq <ishenriq@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/03 19:26:34 by ishenriq          #+#    #+#             */
-/*   Updated: 2024/06/05 20:40:06 by ishenriq         ###   ########.fr       */
+/*   Updated: 2024/06/07 22:59:24 by ishenriq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,3 +23,13 @@ void	close_fd(int *fd)
 	if (fd[1] > -1)
 		close(fd[1]);
 }
+
+void	ft_change_fds(int fd, int new)
+{
+	if (fd != -1)
+	{
+		dup2(fd, new);
+		close(fd);
+	}
+}
+

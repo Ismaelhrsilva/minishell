@@ -6,7 +6,7 @@
 #    By: ishenriq <ishenriq@student.42sp.org.br>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/12/11 20:08:54 by ishenriq          #+#    #+#              #
-#    Updated: 2024/06/07 20:19:24 by ishenriq         ###   ########.fr        #
+#    Updated: 2024/06/07 22:46:51 by ishenriq         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -51,6 +51,7 @@ SRCS := \
 	exec/exec_pipe.c \
 	exec/exec_red.c \
 	exec/exec_utils.c \
+	heredoc/heredoc.c \
 	debug/print_debug.c \
 
 SRC := $(addprefix $(SRC_DIR)/, $(SRCS))

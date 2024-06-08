@@ -6,7 +6,7 @@
 /*   By: ishenriq <ishenriq@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/22 18:25:14 by ishenriq          #+#    #+#             */
-/*   Updated: 2024/06/07 20:17:56 by ishenriq         ###   ########.fr       */
+/*   Updated: 2024/06/07 22:59:37 by ishenriq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,8 @@
 # include <termios.h>   // isatty, ttyname, tcsetattr, tcgetattr
 # include <unistd.h>    // access, close, fork, execve, dup, dup2, pipe, getcwd, chdir
 
-# define FT_VECTOR_INITIAL_CAPACITY 16
+#	define FT_VECTOR_INITIAL_CAPACITY 16
+#	define TEMP "/tmp/heredoc"
 
 typedef enum e_token
 {
@@ -179,8 +180,13 @@ void	ft_execution(t_node *root, t_shell *shell);
 void	ft_pipe(t_node *root, t_shell *shell);
 void	ft_exec_redirects(t_node *root, t_shell *shell);
 
+//File Heredoc
+char    *ft_heredoc(char *delimiter);
+void	ft_open_heredoc(t_node *root);
+
 //File exec_utils.c
 void	close_fd(int *fd);
+void	ft_change_fds(int fd, int new);
 
 //remove at end
 void	ft_print_ast(t_node	*root, char *branch);
