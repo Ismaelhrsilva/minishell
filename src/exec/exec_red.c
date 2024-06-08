@@ -6,7 +6,7 @@
 /*   By: ishenriq <ishenriq@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/06 20:44:17 by ishenriq          #+#    #+#             */
-/*   Updated: 2024/06/07 23:01:21 by ishenriq         ###   ########.fr       */
+/*   Updated: 2024/06/08 15:31:32 by ishenriq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,14 +43,16 @@ static void	ft_redirects(t_node *root, t_shell *shell)
 		(root->left->fd != -1 || g_status == 0))
 	{
 		ft_which_red(root, flag);
-		ft_which_red(root, flag);
+		//ft_which_red(root, flag);
 		ft_change_fds(root->fd, STDOUT_FILENO);
 	}
 	else if (root->type & (REDIN | HEREDOC) &&
 		(root->left->fd != -1 || g_status == 0))
 	{
+		flag = 0;
+		flag |= root->type;
 		ft_which_red(root, flag);
-		ft_change_fds(root->fd, STDOUT_FILENO);
+		ft_change_fds(root->fd, STDIN_FILENO);
 	}
 	else if (root->left->fd == -1)
 		root->fd = -1;

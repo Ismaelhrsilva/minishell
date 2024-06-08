@@ -6,7 +6,7 @@
 /*   By: ishenriq <ishenriq@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/07 22:17:01 by ishenriq          #+#    #+#             */
-/*   Updated: 2024/06/07 23:03:41 by ishenriq         ###   ########.fr       */
+/*   Updated: 2024/06/08 15:32:59 by ishenriq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,6 @@ char    *ft_heredoc(char *delimiter)
     int		infile;
 	char	*temp_n;
 
-
 	temp_n = ft_strjoin(TEMP, ft_itoa(ft_count()));
     infile = open(temp_n, O_CREAT | O_WRONLY | O_TRUNC, 0644);
     if (infile < 0)
@@ -45,6 +44,7 @@ char    *ft_heredoc(char *delimiter)
         size = ft_strlen(delimiter);
         if (gnl && ft_strncmp(gnl, delimiter, size) == 0 && size == size_gnl)
             break ;
+		gnl = ft_strjoin(gnl, "\n");
         ft_putstr_fd(gnl, infile);
         free(gnl);
     }
