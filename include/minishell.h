@@ -6,7 +6,7 @@
 /*   By: ishenriq <ishenriq@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/22 18:25:14 by ishenriq          #+#    #+#             */
-/*   Updated: 2024/06/07 22:59:37 by ishenriq         ###   ########.fr       */
+/*   Updated: 2024/06/08 19:57:53 by ishenriq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -142,6 +142,7 @@ int					ft_pos_token(t_vector *phrase, int start, int end,
 int					ft_pos_token_back(t_vector *phrase, int token);
 //File AST
 t_node 	*ft_ast(t_vector *phrase);
+void	ft_eliminate_brackets(char *str);
 
 // File Vector
 bool				ft_vector_resize(t_vector *vector,

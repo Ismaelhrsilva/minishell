@@ -6,7 +6,7 @@
 #    By: ishenriq <ishenriq@student.42sp.org.br>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/12/11 20:08:54 by ishenriq          #+#    #+#              #
-#    Updated: 2024/06/07 22:46:51 by ishenriq         ###   ########.fr        #
+#    Updated: 2024/06/08 19:59:37 by ishenriq         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -44,6 +44,7 @@ SRCS := \
 	vector/vector_create.c \
 	vector/vector_split.c \
 	ast/ast.c \
+	ast/ast_utils.c \
 	envp/envp.c \
 	envp/pathname.c \
 	builtins/export.c \

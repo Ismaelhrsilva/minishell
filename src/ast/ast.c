@@ -6,7 +6,7 @@
 /*   By: ishenriq <ishenriq@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/19 14:31:38 by ishenriq          #+#    #+#             */
-/*   Updated: 2024/06/06 21:52:34 by ishenriq         ###   ########.fr       */
+/*   Updated: 2024/06/08 20:02:27 by ishenriq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,8 +56,12 @@ static	void	ft_ast_aux(t_vector *phrase, t_node *root)
 		return ;
 	if (ft_branch(phrase, ft_pos_token_back(phrase, REDALL), root))
 		return ;
-	root->type = EXEC;
 	root->str = ft_value(phrase, 0, 0);
+	if (root->str && root->str[0] == '(')
+	{
+		ft_eliminate_brackets(root->str);
+	}
+	root->type = EXEC;
 	root->phrase = phrase;
 }
 
