@@ -6,7 +6,7 @@
 #    By: ishenriq <ishenriq@student.42sp.org.br>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/12/11 20:08:54 by ishenriq          #+#    #+#              #
-#    Updated: 2024/06/08 19:59:37 by ishenriq         ###   ########.fr        #
+#    Updated: 2024/06/08 22:38:44 by ishenriq         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -52,6 +52,7 @@ SRCS := \
 	exec/exec_pipe.c \
 	exec/exec_red.c \
 	exec/exec_utils.c \
+	exec/exec_brackets.c \
 	heredoc/heredoc.c \
 	debug/print_debug.c \
 

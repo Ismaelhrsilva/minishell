@@ -6,7 +6,7 @@
 /*   By: ishenriq <ishenriq@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/04 19:07:15 by ishenriq          #+#    #+#             */
-/*   Updated: 2024/06/08 19:42:26 by ishenriq         ###   ########.fr       */
+/*   Updated: 2024/06/08 21:28:02 by ishenriq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,6 @@ void	ft_print_ast(t_node	*root, char *branch)
 			ft_print_ast(root->right, "right");
 		}
 		ft_printf("%s ---> %s\n", branch, root->str);
-		ft_printf("%s ---> %d\n", branch, root->type);
+		//ft_printf("%s ---> %d\n", branch, root->type);
 	}
 }

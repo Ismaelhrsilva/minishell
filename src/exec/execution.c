@@ -6,25 +6,13 @@
 /*   By: ishenriq <ishenriq@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/03 19:15:25 by ishenriq          #+#    #+#             */
-/*   Updated: 2024/06/08 18:52:19 by ishenriq         ###   ########.fr       */
+/*   Updated: 2024/06/08 22:36:56 by ishenriq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
 extern volatile sig_atomic_t	g_status;
-
-static void	ft_pid_status(pid_t pid)
-{
-	int	status;
-
-	waitpid(pid, &status, 0);
-	if (WIFEXITED(status))
-		status = WEXITSTATUS(status);
-	if (status == 139)
-		status = 1;
-	g_status = status;
-}
 
 static	char **ft_build_argv_exec(t_vector *phrase)
 {
@@ -100,6 +88,11 @@ void	ft_execution(t_node *root, t_shell *shell)
 		ft_execution(root->right, shell);
 	else if (root->type == EXEC && root->phrase)
 	{
+		if (root->str && root->str[0] == '(')
+		{
+			ft_eliminate_brackets(root->str);
+			ft_exec_brackets(root, shell);
+		}
 		ft_do(root->phrase, shell);
 	}
 }

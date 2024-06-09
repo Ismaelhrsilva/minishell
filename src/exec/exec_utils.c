@@ -6,7 +6,7 @@
 /*   By: ishenriq <ishenriq@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/03 19:26:34 by ishenriq          #+#    #+#             */
-/*   Updated: 2024/06/07 22:59:24 by ishenriq         ###   ########.fr       */
+/*   Updated: 2024/06/08 22:34:53 by ishenriq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,4 +32,14 @@ void	ft_change_fds(int fd, int new)
 		close(fd);
 	}
 }
+void	ft_pid_status(pid_t pid)
+{
+	int	status;
 
+	waitpid(pid, &status, 0);
+	if (WIFEXITED(status))
+		status = WEXITSTATUS(status);
+	if (status == 139)
+		status = 1;
+	g_status = status;
+}

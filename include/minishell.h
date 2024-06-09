@@ -6,7 +6,7 @@
 /*   By: ishenriq <ishenriq@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/22 18:25:14 by ishenriq          #+#    #+#             */
-/*   Updated: 2024/06/08 19:57:53 by ishenriq         ###   ########.fr       */
+/*   Updated: 2024/06/08 22:36:34 by ishenriq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,7 +105,8 @@ typedef struct s_shell
 }					t_shell;
 
 // File: Read_inputs
-void				read_line(t_shell *shell);
+char				*read_line(void);
+void				ft_to_execute(char *str, t_shell *shell);
 
 // File Parse
 char				**ft_parser(t_parse *parse);
@@ -133,7 +134,7 @@ int					ft_count_matrix(char **str);
 void				ft_change_sub_space(char **split);
 int					ft_count_chr(char *str, char ch);
 void 				ft_replace_char_between_signal(char *str, char signal, char old, char new_ch);
-void	ft_free_matrix(char **matrix);
+void				ft_free_matrix(char **matrix);
 
 // File grammar utils
 int					ft_count_token(t_vector *phrase, int token);
@@ -180,14 +181,17 @@ char	*ft_get_pathname(char **matrix, char *str);
 void	ft_execution(t_node *root, t_shell *shell);
 void	ft_pipe(t_node *root, t_shell *shell);
 void	ft_exec_redirects(t_node *root, t_shell *shell);
+void	ft_exec_brackets(t_node *root, t_shell *shell);
+
+//File exec_utils.c
+void	close_fd(int *fd);
+void	ft_change_fds(int fd, int new);
+void	ft_pid_status(pid_t pid);
 
 //File Heredoc
 char    *ft_heredoc(char *delimiter);
 void	ft_open_heredoc(t_node *root);
 
-//File exec_utils.c
-void	close_fd(int *fd);
-void	ft_change_fds(int fd, int new);
 
 //remove at end
 void	ft_print_ast(t_node	*root, char *branch);

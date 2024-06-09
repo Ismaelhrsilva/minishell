@@ -1,29 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   exec_brackets.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ishenriq <ishenriq@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/05/05 14:42:53 by ishenriq          #+#    #+#             */
-/*   Updated: 2024/06/08 22:26:57 by ishenriq         ###   ########.fr       */
+/*   Created: 2024/06/08 22:28:52 by ishenriq          #+#    #+#             */
+/*   Updated: 2024/06/08 22:39:27 by ishenriq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-volatile sig_atomic_t	g_status = 0;
+extern volatile sig_atomic_t	g_status;
 
-int	main(int argc, char **argv, char **envp)
+void	ft_exec_brackets(t_node *root, t_shell *shell)
 {
-	t_shell	*shell;
+	pid_t	pid;
 
-	shell = malloc(sizeof(t_shell));
-	if (shell == NULL)
-		return (EXIT_FAILURE);
-	shell->envp = envp;
-	ft_envp(shell);
-	while (true)
-		ft_to_execute(read_line(), shell);
-	return (0);
+	pid = fork();
+	if (pid < 0)
+		printf("error\n");
+	if (!pid)
+	{
+		ft_to_execute(root->str, shell);
+		exit(g_status);
+	}
+	ft_pid_status(pid);
 }
