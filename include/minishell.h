@@ -6,7 +6,7 @@
 /*   By: ishenriq <ishenriq@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/22 18:25:14 by ishenriq          #+#    #+#             */
-/*   Updated: 2024/06/08 22:36:34 by ishenriq         ###   ########.fr       */
+/*   Updated: 2024/06/11 19:15:54 by ishenriq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,8 @@
 
 #	define FT_VECTOR_INITIAL_CAPACITY 16
 #	define TEMP "/tmp/heredoc"
+#	define HERE_DOC 0
+#	define FORK	1
 
 typedef enum e_token
 {
@@ -55,6 +57,12 @@ typedef enum e_token
 	ALL_W_BRACKET = 1023,
 	EXEC	= 1 << 9
 }					t_token;
+
+typedef struct s_status
+{
+	int	_heredoc;
+	int	_fork;
+}	t_status;
 
 typedef struct s_vector
 {
@@ -129,12 +137,12 @@ void				ft_grammar_rules(t_vector *phrase);
 void				ft_order_redall(t_vector *vector);
 
 // File Utils
-int					ft_power(int nb, int power);
 int					ft_count_matrix(char **str);
 void				ft_change_sub_space(char **split);
 int					ft_count_chr(char *str, char ch);
 void 				ft_replace_char_between_signal(char *str, char signal, char old, char new_ch);
 void				ft_free_matrix(char **matrix);
+int					status_here(int where, int st);
 
 // File grammar utils
 int					ft_count_token(t_vector *phrase, int token);
@@ -192,6 +200,8 @@ void	ft_pid_status(pid_t pid);
 char    *ft_heredoc(char *delimiter);
 void	ft_open_heredoc(t_node *root);
 
+//File Signal
+void	ft_init_signal(void);
 
 //remove at end
 void	ft_print_ast(t_node	*root, char *branch);

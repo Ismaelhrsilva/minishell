@@ -6,22 +6,11 @@
 /*   By: ishenriq <ishenriq@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/15 19:57:08 by ishenriq          #+#    #+#             */
-/*   Updated: 2024/06/03 18:36:53 by ishenriq         ###   ########.fr       */
+/*   Updated: 2024/06/11 19:00:35 by ishenriq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-
-int	ft_power(int nb, int power)
-{
-	int	result;
-
-	result = 1;
-	if (nb > 0 && power > 0)
-		while (power-- > 0)
-			result *= nb;
-	return (result);
-}
 
 int	ft_count_matrix(char **str)
 {

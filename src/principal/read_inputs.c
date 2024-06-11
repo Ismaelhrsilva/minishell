@@ -6,7 +6,7 @@
 /*   By: ishenriq <ishenriq@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/05 14:42:53 by ishenriq          #+#    #+#             */
-/*   Updated: 2024/06/08 22:40:07 by ishenriq         ###   ########.fr       */
+/*   Updated: 2024/06/11 19:28:03 by ishenriq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,9 +44,9 @@ char	*read_line(void)
 
 	prompt = readline("minishell>$ ");
 	if (!prompt)
-		return (NULL);
+		exit (255);
 	add_history(prompt);
-	if (ft_strncmp(prompt, "exit", 4) ==  0)
-		return (NULL);
+	//if (ft_strncmp(prompt, "exit", 4) ==  0)
+	//	return (NULL);
 	return (prompt);
 }
