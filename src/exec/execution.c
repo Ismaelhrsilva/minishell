@@ -6,7 +6,7 @@
 /*   By: ishenriq <ishenriq@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/03 19:15:25 by ishenriq          #+#    #+#             */
-/*   Updated: 2024/06/10 21:39:32 by ishenriq         ###   ########.fr       */
+/*   Updated: 2024/06/11 18:13:16 by ishenriq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,6 +93,7 @@ void	ft_execution(t_node *root, t_shell *shell)
 			ft_eliminate_brackets(root->str);
 			ft_exec_brackets(root, shell);
 		}
-		ft_do(root->phrase, shell);
+		else
+			ft_do(root->phrase, shell);
 	}
 }
