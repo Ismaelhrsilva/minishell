@@ -6,7 +6,7 @@
 /*   By: ishenriq <ishenriq@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/22 18:25:14 by ishenriq          #+#    #+#             */
-/*   Updated: 2024/06/11 19:15:54 by ishenriq         ###   ########.fr       */
+/*   Updated: 2024/06/11 20:15:12 by ishenriq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,7 @@
 #	define TEMP "/tmp/heredoc"
 #	define HERE_DOC 0
 #	define FORK	1
+#	define PROMPT	2
 
 typedef enum e_token
 {
@@ -62,6 +63,7 @@ typedef struct s_status
 {
 	int	_heredoc;
 	int	_fork;
+	int _prompt;
 }	t_status;
 
 typedef struct s_vector

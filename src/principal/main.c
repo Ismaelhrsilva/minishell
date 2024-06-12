@@ -6,7 +6,7 @@
 /*   By: ishenriq <ishenriq@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/05 14:42:53 by ishenriq          #+#    #+#             */
-/*   Updated: 2024/06/11 19:13:28 by ishenriq         ###   ########.fr       */
+/*   Updated: 2024/06/11 20:14:52 by ishenriq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,11 @@ int	status_here(int where, int st)
 			status->_fork = st;
 		else
 			return (status->_fork);
+	else if (where == 2)
+		if (status->_prompt != -1)
+			status->_prompt = st;
+		else
+			return (status->_prompt);
 }
 
 int	main(int argc, char **argv, char **envp)
