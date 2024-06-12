@@ -6,7 +6,7 @@
 /*   By: ishenriq <ishenriq@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/07 22:17:01 by ishenriq          #+#    #+#             */
-/*   Updated: 2024/06/11 20:10:00 by ishenriq         ###   ########.fr       */
+/*   Updated: 2024/06/12 19:19:12 by ishenriq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,11 @@ char    *ft_heredoc(char *delimiter)
         gnl = readline("> ");
 		status_here(HERE_DOC, 0);
 		if (g_status == SIGINT)
-			dup2(std ,STDIN_FILENO);
+		{
+			dup2(std , STDIN_FILENO);
+			if (gnl)
+				gnl = NULL;
+		}
         if (gnl)
             size_gnl = ft_strlen(gnl);
         else
