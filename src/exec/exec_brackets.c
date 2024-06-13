@@ -6,7 +6,7 @@
 /*   By: ishenriq <ishenriq@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/08 22:28:52 by ishenriq          #+#    #+#             */
-/*   Updated: 2024/06/08 22:46:46 by ishenriq         ###   ########.fr       */
+/*   Updated: 2024/06/12 20:20:38 by ishenriq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@ void	ft_exec_brackets(t_node *root, t_shell *shell)
 		printf("error\n");
 	if (!pid)
 	{
+		status_here(FORK, 1);
 		ft_to_execute(root->str, shell);
 		exit(g_status);
 	}

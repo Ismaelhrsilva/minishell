@@ -6,7 +6,7 @@
 /*   By: ishenriq <ishenriq@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/05 14:42:53 by ishenriq          #+#    #+#             */
-/*   Updated: 2024/06/11 20:14:52 by ishenriq         ###   ########.fr       */
+/*   Updated: 2024/06/12 21:17:46 by ishenriq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,33 +27,40 @@ int	status_here(int where, int st)
 
 	status = ft_init_status();
 	if (where == 0)
-		if (status->_heredoc != -1)
+	{
+		if (st != -1)
 			status->_heredoc = st;
-		else
-			return (status->_heredoc);
+		return (status->_heredoc);
+	}
 	else if (where == 1)
-		if (status->_fork != -1)
+	{
+		if (st == 1)
 			status->_fork = st;
-		else
-			return (status->_fork);
+		rl_clear_history();
+		return (status->_fork);
+	}
 	else if (where == 2)
-		if (status->_prompt != -1)
+	{
+		if (st != -1)
 			status->_prompt = st;
-		else
-			return (status->_prompt);
+		return (status->_prompt);
+	}
 }
 
 int	main(int argc, char **argv, char **envp)
 {
 	t_shell	*shell;
 
-	ft_init_signal();
 	shell = malloc(sizeof(t_shell));
 	if (shell == NULL)
 		return (EXIT_FAILURE);
 	shell->envp = envp;
+	ft_init_signal();
 	ft_envp(shell);
 	while (true)
+	{
+		ft_sigquit();
 		ft_to_execute(read_line(), shell);
+	}
 	return (0);
 }

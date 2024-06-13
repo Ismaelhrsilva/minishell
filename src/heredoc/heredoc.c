@@ -6,7 +6,7 @@
 /*   By: ishenriq <ishenriq@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/07 22:17:01 by ishenriq          #+#    #+#             */
-/*   Updated: 2024/06/12 19:19:12 by ishenriq         ###   ########.fr       */
+/*   Updated: 2024/06/12 20:37:57 by ishenriq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ static long	ft_count()
 
 static void	ft_end_heredoc(void)
 {
-	if (g_status != SIGINT)
+	if (g_status != SIGINT && g_status != 130)
 		ft_putstr_fd("bash: warning: here-document delimited by end-of-file\n", 2);
 }
 

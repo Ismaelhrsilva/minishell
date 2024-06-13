@@ -6,7 +6,7 @@
 /*   By: ishenriq <ishenriq@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/22 18:25:14 by ishenriq          #+#    #+#             */
-/*   Updated: 2024/06/11 20:15:12 by ishenriq         ###   ########.fr       */
+/*   Updated: 2024/06/12 21:11:19 by ishenriq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -204,6 +204,7 @@ void	ft_open_heredoc(t_node *root);
 
 //File Signal
 void	ft_init_signal(void);
+void	ft_sigquit(void);
 
 //remove at end
 void	ft_print_ast(t_node	*root, char *branch);
