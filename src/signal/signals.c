@@ -6,7 +6,7 @@
 /*   By: ishenriq <ishenriq@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/11 18:26:39 by ishenriq          #+#    #+#             */
-/*   Updated: 2024/06/13 17:12:00 by ishenriq         ###   ########.fr       */
+/*   Updated: 2024/06/13 17:18:36 by ishenriq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,6 @@ extern volatile sig_atomic_t	g_status;
 static void	ft_handle_sigint(int signal)
 {
 	g_status = signal;
-	//ft_printf("sinal\n");
 	if (status_here(FORK, -1))
 	{
 		close(STDIN_FILENO);
@@ -41,7 +40,7 @@ static void	ft_handle_sigint(int signal)
 	rl_replace_line("", 0);
 	if (!status_here(PROMPT, -1))
 		rl_redisplay();
-	//g_status = 130;
+	g_status = 130;
 }
 
 static t_status	*ft_init_status(void)

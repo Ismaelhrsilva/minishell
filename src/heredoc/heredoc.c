@@ -6,7 +6,7 @@
 /*   By: ishenriq <ishenriq@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/07 22:17:01 by ishenriq          #+#    #+#             */
-/*   Updated: 2024/06/12 20:37:57 by ishenriq         ###   ########.fr       */
+/*   Updated: 2024/06/13 17:39:33 by ishenriq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,10 +21,14 @@ static long	ft_count()
 	return(count++);
 }
 
-static void	ft_end_heredoc(void)
+static void	ft_end_heredoc(int infile, const int std, char *gnl)
 {
-	if (g_status != SIGINT && g_status != 130)
+	if (gnl)
+		free (gnl);
+	else if (g_status != SIGINT)
 		ft_putstr_fd("bash: warning: here-document delimited by end-of-file\n", 2);
+	close(infile);
+	close(std);
 }
 
 char    *ft_heredoc(char *delimiter)
@@ -52,7 +56,10 @@ char    *ft_heredoc(char *delimiter)
 		{
 			dup2(std , STDIN_FILENO);
 			if (gnl)
+			{
+				free(gnl);
 				gnl = NULL;
+			}
 		}
         if (gnl)
             size_gnl = ft_strlen(gnl);
@@ -65,8 +72,10 @@ char    *ft_heredoc(char *delimiter)
         ft_putstr_fd(gnl, infile);
         free(gnl);
     }
-    free(gnl);
-	close(infile);
+    //free(gnl);
+	ft_end_heredoc(infile, std, gnl);
+	//close(infile);
+	//close(std);
     return (temp_n);
 }
 
@@ -78,9 +87,12 @@ void	ft_open_heredoc(t_node *root)
 	{
 		root->right->str = ft_heredoc(root->right->str);
 		root->type = REDIN;
-		ft_end_heredoc();
 		if (g_status == SIGINT)
+		{
+			unlink(root->right->str);
+			free(root->right->str);
 			return ;
+		}
 	}
 	ft_open_heredoc(root->left);
 	ft_open_heredoc(root->right);
