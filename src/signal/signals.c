@@ -6,7 +6,7 @@
 /*   By: ishenriq <ishenriq@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/11 18:26:39 by ishenriq          #+#    #+#             */
-/*   Updated: 2024/06/13 17:42:23 by ishenriq         ###   ########.fr       */
+/*   Updated: 2024/06/13 17:51:11 by ishenriq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,18 +23,8 @@ static void	ft_handle_sigint(int signal)
 		close(STDOUT_FILENO);
 		close(STDERR_FILENO);
 	}
-	/*printf("%d\n", status_here(HERE_DOC, 1));
-	printf("%d\n", status_here(HERE_DOC, 30));
-	printf("%d\n", status_here(HERE_DOC, -1));
-	printf("%d\n", status_here(HERE_DOC, 0));
-	printf("%d\n", status_here(HERE_DOC, -1));
-	printf("%d\n", status_here(HERE_DOC, -1));
-	printf("%d\n", status_here(HERE_DOC, -1));
-	printf("%d\n", status_here(HERE_DOC, -1));*/
 	if (status_here(HERE_DOC, -1))
-	{
 		close(STDIN_FILENO);
-	}
 	ft_putstr_fd("\n", 1);
 	rl_on_new_line();
 	rl_replace_line("", 0);
