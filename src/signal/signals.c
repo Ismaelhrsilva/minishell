@@ -6,7 +6,7 @@
 /*   By: ishenriq <ishenriq@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/11 18:26:39 by ishenriq          #+#    #+#             */
-/*   Updated: 2024/06/12 21:11:06 by ishenriq         ###   ########.fr       */
+/*   Updated: 2024/06/13 17:12:00 by ishenriq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,40 @@ static void	ft_handle_sigint(int signal)
 		rl_redisplay();
 	//g_status = 130;
 }
+
+static t_status	*ft_init_status(void)
+{
+	static t_status	status;
+	
+	return (&status);
+}
+
+int	status_here(int where, int st)
+{
+	t_status *status;
+
+	status = ft_init_status();
+	if (where == 0)
+	{
+		if (st != -1)
+			status->_heredoc = st;
+		return (status->_heredoc);
+	}
+	else if (where == 1)
+	{
+		if (st == 1)
+			status->_fork = st;
+		rl_clear_history();
+		return (status->_fork);
+	}
+	else if (where == 2)
+	{
+		if (st != -1)
+			status->_prompt = st;
+		return (status->_prompt);
+	}
+}
+
 
 void	ft_sigquit(void)
 {
