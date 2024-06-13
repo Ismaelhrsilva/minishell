@@ -6,7 +6,7 @@
 /*   By: ishenriq <ishenriq@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/05 14:42:53 by ishenriq          #+#    #+#             */
-/*   Updated: 2024/06/13 17:10:00 by ishenriq         ###   ########.fr       */
+/*   Updated: 2024/06/13 17:46:45 by ishenriq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@ int	main(int argc, char **argv, char **envp)
 	while (true)
 	{
 		ft_sigquit();
+		g_status = 0;
 		ft_to_execute(read_line(), shell);
 	}
 	return (0);
