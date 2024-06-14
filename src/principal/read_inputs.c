@@ -6,7 +6,7 @@
 /*   By: ishenriq <ishenriq@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/05 14:42:53 by ishenriq          #+#    #+#             */
-/*   Updated: 2024/06/12 19:15:17 by ishenriq         ###   ########.fr       */
+/*   Updated: 2024/06/13 21:03:43 by ishenriq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,15 +23,14 @@ void	ft_to_execute(char *str, t_shell *shell)
 		return ;
 	parse->prompt = str;
 	prompt_splitted = ft_parser(parse);
-	parse->phrase = ft_construct_phrase(prompt_splitted);
+	parse->phrase = ft_construct_phrase(prompt_splitted, shell);
 	ft_grammar_rules(parse->phrase);
 	ft_order_redall(parse->phrase);
-	//ft_print_vector_content(parse->phrase);
+	ft_print_vector_content(parse->phrase);
 	root = ft_ast(parse->phrase);
-	//shell->root = ft_ast(ft_to_phrase(prompt));
-	ft_open_heredoc(root);
-	ft_execution(root, shell);
-	//ft_print_ast(shell->root, "root");
+	//ft_open_heredoc(root);
+	//ft_execution(root, shell);
+	ft_print_ast(root, "root");
 	free(root);
 	parse->phrase = NULL;
 	root = NULL;

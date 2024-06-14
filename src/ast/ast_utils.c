@@ -6,13 +6,13 @@
 /*   By: ishenriq <ishenriq@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/08 19:50:09 by ishenriq          #+#    #+#             */
-/*   Updated: 2024/06/08 20:01:33 by ishenriq         ###   ########.fr       */
+/*   Updated: 2024/06/13 21:12:54 by ishenriq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	ft_eliminate_brackets(char *str)
+void	ft_eliminate_ch_corner(char *str)
 {
 	int	size;
 	int	i;

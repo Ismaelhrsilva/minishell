@@ -6,7 +6,7 @@
 /*   By: ishenriq <ishenriq@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/03 19:15:25 by ishenriq          #+#    #+#             */
-/*   Updated: 2024/06/12 21:19:12 by ishenriq         ###   ########.fr       */
+/*   Updated: 2024/06/13 21:13:49 by ishenriq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,16 +37,6 @@ static void	ft_do(t_vector *phrase, t_shell *shell)
 	pid = fork();
 	if (!pid)
 	{
-		/*int i;
-		char ** matrix;
-		i = 0;
-		matrix = ft_build_argv_exec(phrase);
-		while (matrix[i])
-		{
-			ft_putstr_fd(matrix[i], 2);
-			ft_putstr_fd("\n", 2);
-			i++;
-		}*/
 		signal(SIGQUIT, SIG_DFL);
 		status_here(FORK, 1);
 		if (execve(ft_get_pathname(shell->path_splitted, ft_value(phrase, 0, 0)),
@@ -92,7 +82,7 @@ void	ft_execution(t_node *root, t_shell *shell)
 	{
 		if (root->str && root->str[0] == '(')
 		{
-			ft_eliminate_brackets(root->str);
+			ft_eliminate_ch_corner(root->str);
 			ft_exec_brackets(root, shell);
 		}
 		else

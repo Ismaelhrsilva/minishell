@@ -6,7 +6,7 @@
 /*   By: ishenriq <ishenriq@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/05 14:42:53 by ishenriq          #+#    #+#             */
-/*   Updated: 2024/06/13 17:46:45 by ishenriq         ###   ########.fr       */
+/*   Updated: 2024/06/13 20:46:13 by ishenriq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,8 @@ volatile sig_atomic_t	g_status = 0;
 
 int	main(int argc, char **argv, char **envp)
 {
-	t_shell	*shell;
+	t_shell		*shell;
+	extern char	**environ;
 
 	shell = malloc(sizeof(t_shell));
 	if (shell == NULL)

@@ -6,7 +6,7 @@
 /*   By: ishenriq <ishenriq@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/22 18:25:14 by ishenriq          #+#    #+#             */
-/*   Updated: 2024/06/12 21:11:19 by ishenriq         ###   ########.fr       */
+/*   Updated: 2024/06/13 21:11:35 by ishenriq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -129,10 +129,9 @@ void				ft_arranging_prompt(t_parse *parse);
 
 // File Tokenazer
 int					ft_set_token(char *str);
-
-// File	Phrase
-t_vector			*ft_construct_phrase(char **split);
+t_vector			*ft_construct_phrase(char **split, t_shell *shell);
 void				ft_free_phrase(t_vector *phrase);
+char				*ft_expand(char *str, t_shell *shell);
 
 // File Grammar
 void				ft_grammar_rules(t_vector *phrase);
@@ -152,8 +151,8 @@ int					ft_pos_token(t_vector *phrase, int start, int end,
 						int token);
 int					ft_pos_token_back(t_vector *phrase, int token);
 //File AST
-t_node 	*ft_ast(t_vector *phrase);
-void	ft_eliminate_brackets(char *str);
+t_node 				*ft_ast(t_vector *phrase);
+void				ft_eliminate_ch_corner(char *str);
 
 // File Vector
 bool				ft_vector_resize(t_vector *vector,
@@ -184,6 +183,8 @@ t_vector *vector_clone(t_vector *vector);
 
 //File Envp
 void	ft_envp(t_shell *shell);
+t_vector	*ft_envp_dict(char **envp);
+
 //File Pathname
 char	*ft_get_pathname(char **matrix, char *str);
 
