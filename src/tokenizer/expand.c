@@ -6,7 +6,7 @@
 /*   By: ishenriq <ishenriq@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/13 19:12:24 by ishenriq          #+#    #+#             */
-/*   Updated: 2024/06/14 21:19:38 by ishenriq         ###   ########.fr       */
+/*   Updated: 2024/06/14 22:36:44 by ishenriq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,17 +15,29 @@
 int	ft_count_str_splitted(char *str)
 {
 	int	i;
-	int	count;
+	int	j;
+	int count;
 
-	i = 0;
 	count = 0;
+	i = 0;
+	j = 0;
 	while (str[i] != '\0')
 	{
-		if (ft_isalnum(str[i]) == 8 || str[i] == '_' || str[i] == '$')
-			count = count ;
-		else
+		while ((ft_isalnum(str[j]) == 8 || str[j] == '_' || str[j] == '$')
+			&&  str[j] != '\0')
+		{
+			if (j == i)
+				count++;
+			j++;
+		}
+		i = j;
+		while ((ft_isalnum(str[j]) == 0 && str[j] != '_' && str[j] != '$')
+			&&  str[j] != '\0')
+		{
 			count++;
-		i++;
+			j++;
+		}
+		i = j;
 	}
 	return (count);
 }
@@ -40,13 +52,21 @@ char	**ft_split_expand(char *str)
 	i = 0;
 	j = 0;
 	m = 0;
-	split = ft_calloc(ft_count_str_splitted(str) * 2, sizeof(char **));
+	split = ft_calloc(ft_count_str_splitted(str) + 1, sizeof(char **));
 	while (str[i] != '\0')
 	{
 		while ((ft_isalnum(str[j]) == 8 || str[j] == '_' || str[j] == '$')
 			&&  str[j] != '\0')
 			j++;	
-		split[m++] = ft_substr(str, i, j - i);
+		if (str[i] != '\0')
+			split[m++] = ft_substr(str, i, j - i);
+		i = j;
+		while ((ft_isalnum(str[j]) == 0 && str[j] != '_' && str[j] != '$')
+			&&  str[j] != '\0')
+			j++;	
+		if (str[i] != '\0')
+			split[m++] = ft_substr(str, i, j - i);
+		//j++;
 		i = j;
 	}
 	return (split);
@@ -73,7 +93,6 @@ char	*ft_expand(char *str, t_shell *shell)
 {
 	if (!str)
 		return (NULL);
-	//printf("%d\n", ft_count_str_splitted(str));
 	if (str[0] == '$' && ft_strlen(&str[1]))
 		if (ft_find_expand(&str[1], shell) != NULL)
 			return (ft_find_expand(&str[1], shell));
