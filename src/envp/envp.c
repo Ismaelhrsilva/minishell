@@ -6,7 +6,7 @@
 /*   By: ishenriq <ishenriq@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/02 16:46:44 by ishenriq          #+#    #+#             */
-/*   Updated: 2024/06/13 20:41:54 by ishenriq         ###   ########.fr       */
+/*   Updated: 2024/06/14 19:29:52 by ishenriq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,11 +33,12 @@ static t_vector	*ft_build_line_envp(char *str)
 	if (!line_dict)
 		return ((t_vector *)0);
 	split = ft_split(str, '=');
-	ft_vector_push_back(line_dict, split[0]);
+	ft_vector_push_back(line_dict, ft_strdup(split[0]));
 	ft_vector_push_back(line_dict, ft_strdup(split[1]));
 	ft_replace_char_between_signal(split[1], '\'', ':', 0x1A);
 	ft_vector_push_back(line_dict, ft_split(split[1], ':'));
 	ft_matrixreplace(line_dict->values[2], '\'', 0x1A, ':');
+	ft_vector_push_back(line_dict, ft_strdup(str));
 	return (line_dict);
 }
 

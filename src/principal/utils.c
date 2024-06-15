@@ -6,7 +6,7 @@
 /*   By: ishenriq <ishenriq@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/15 19:57:08 by ishenriq          #+#    #+#             */
-/*   Updated: 2024/06/11 19:00:35 by ishenriq         ###   ########.fr       */
+/*   Updated: 2024/06/14 21:17:13 by ishenriq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ int	ft_count_matrix(char **str)
 	int	i;
 
 	i = 0;
-	while (str[i])
+	while (str[i] != NULL)
 		i++;
 	return (i);
 }
