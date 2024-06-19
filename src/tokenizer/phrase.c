@@ -6,7 +6,7 @@
 /*   By: ishenriq <ishenriq@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/13 20:17:19 by ishenriq          #+#    #+#             */
-/*   Updated: 2024/06/19 18:43:11 by ishenriq         ###   ########.fr       */
+/*   Updated: 2024/06/19 19:29:45 by ishenriq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,13 +28,15 @@ t_vector	*ft_construct_phrase(char **split, t_shell *shell)
 		word = ft_vector_create();
 		if (!word)
 			return (NULL);
-		split[i] = ft_parse_expand(split[i], shell);
-		ft_vector_push_back(word, split[i]);
+		//split[i] = ft_parse_expand(split[i], shell);
+		//ft_vector_push_back(word, split[i]);
+		ft_vector_push_back(word, ft_parse_expand(split[i], shell));
 		token = malloc(sizeof(int));
 		if (!token)
 			return (NULL);
 		*token = ft_set_token(split[i]);
 		ft_vector_push_back(word, token); 
+		ft_vector_push_back(word, split[i]);
 		ft_vector_push_back(phrase, word);
 		i++;
 	}

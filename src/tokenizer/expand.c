@@ -6,7 +6,7 @@
 /*   By: ishenriq <ishenriq@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/13 19:12:24 by ishenriq          #+#    #+#             */
-/*   Updated: 2024/06/19 18:42:34 by ishenriq         ###   ########.fr       */
+/*   Updated: 2024/06/19 19:51:29 by ishenriq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,12 +28,17 @@ t_vector	*ft_split_expand(char *str)
 		if (str[i] != '\0' && j != i)
 			ft_vector_push_back(split, ft_substr(str, i, j - i));
 		i = j;
-		while ((ft_isalnum(str[j]) == 8 || str[j] == '_' || str[j] == '$')
-			&&  str[j] != '\0')
-			j++;	
-		if (str[i] != '\0' && j != i)
-			ft_vector_push_back(split, ft_substr(str, i, j - i));
-		i = j;
+		if (str[j] == '$')
+		{
+			j++;
+			//while ((ft_isalnum(str[j]) == 8 || str[j] == '_' || str[j] == '$')
+			while ((ft_isalnum(str[j]) == 8 || str[j] == '_')
+				&&  str[j] != '\0')
+				j++;	
+			if (str[i] != '\0' && j != i)
+				ft_vector_push_back(split, ft_substr(str, i, j - i));
+			i = j;
+		}
 		if ((ft_isalnum(str[j]) == 0 && str[j] != '_' && str[j] != '$')
 			&&  str[j] != '\0')
 			j++;	
@@ -113,6 +118,28 @@ char	*ft_parse_expand(char *str, t_shell *shell)
 			split = (char *)ft_vector_at(vector, i);
 		}
 		signal = '\0';
+	}
+	return (final_str);
+}
+
+char	*ft_parse_expand_heredoc(char *str, t_shell *shell)
+{
+	int		i;
+	char	*new_str;
+	char	*final_str;
+	t_vector	*vector;
+	char	*split;
+
+	i = 0;
+	vector = ft_split_expand(str);
+	final_str = "";
+	while (i < vector->size)
+	{
+		split = (char *)ft_vector_at(vector, i);
+		new_str = ft_expand(split, shell);
+		final_str = ft_strjoin(final_str, new_str);
+		//free(new_str);
+		i++;
 	}
 	return (final_str);
 }

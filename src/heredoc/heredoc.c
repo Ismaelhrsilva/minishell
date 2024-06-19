@@ -6,7 +6,7 @@
 /*   By: ishenriq <ishenriq@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/07 22:17:01 by ishenriq          #+#    #+#             */
-/*   Updated: 2024/06/13 17:39:33 by ishenriq         ###   ########.fr       */
+/*   Updated: 2024/06/19 19:41:56 by ishenriq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,15 +31,18 @@ static void	ft_end_heredoc(int infile, const int std, char *gnl)
 	close(std);
 }
 
-char    *ft_heredoc(char *delimiter)
+//char    *ft_heredoc(char *delimiter, t_shell *shell)
+char    *ft_heredoc(t_node *root, t_shell *shell)
 {
  	char   	*gnl;
     int		size;
     int		size_gnl;
     int		infile;
 	char	*temp_n;
+	char	*delimiter;
 	const int	std = dup(STDIN_FILENO);
 
+	delimiter = root->str;
 	temp_n = ft_strjoin(TEMP, ft_itoa(ft_count()));
     infile = open(temp_n, O_CREAT | O_WRONLY | O_TRUNC, 0644);
     if (infile < 0)
@@ -68,6 +71,8 @@ char    *ft_heredoc(char *delimiter)
         size = ft_strlen(delimiter);
         if (gnl && ft_strncmp(gnl, delimiter, size) == 0 && size == size_gnl)
             break ;
+		if (!ft_strchr("\'\"", root->str_not_expanded[0]))
+			gnl = ft_parse_expand_heredoc(gnl, shell);
 		gnl = ft_strjoin(gnl, "\n");
         ft_putstr_fd(gnl, infile);
         free(gnl);
@@ -79,13 +84,14 @@ char    *ft_heredoc(char *delimiter)
     return (temp_n);
 }
 
-void	ft_open_heredoc(t_node *root)
+void	ft_open_heredoc(t_node *root, t_shell *shell)
 {
 	if (!root)
 		return ;
 	if (root->type & HEREDOC)
 	{
-		root->right->str = ft_heredoc(root->right->str);
+		//root->right->str = ft_heredoc(root->right->str, shell);
+		root->right->str = ft_heredoc(root->right, shell);
 		root->type = REDIN;
 		if (g_status == SIGINT)
 		{
@@ -94,6 +100,6 @@ void	ft_open_heredoc(t_node *root)
 			return ;
 		}
 	}
-	ft_open_heredoc(root->left);
-	ft_open_heredoc(root->right);
+	ft_open_heredoc(root->left, shell);
+	ft_open_heredoc(root->right, shell);
 }

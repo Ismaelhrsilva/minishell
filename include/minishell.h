@@ -6,7 +6,7 @@
 /*   By: ishenriq <ishenriq@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/22 18:25:14 by ishenriq          #+#    #+#             */
-/*   Updated: 2024/06/14 21:08:33 by ishenriq         ###   ########.fr       */
+/*   Updated: 2024/06/19 19:44:55 by ishenriq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,6 +97,7 @@ typedef struct s_parse
 typedef struct s_node
 {
 	char			*str;
+	char			*str_not_expanded;
 	int				type;
 	struct s_node	*left;
 	struct s_node	*right;
@@ -133,6 +134,7 @@ t_vector			*ft_construct_phrase(char **split, t_shell *shell);
 void				ft_free_phrase(t_vector *phrase);
 char				*ft_expand(char *str, t_shell *shell);
 char				*ft_parse_expand(char *str, t_shell *shell);
+char				*ft_parse_expand_heredoc(char *str, t_shell *shell);
 
 // File Grammar
 void				ft_grammar_rules(t_vector *phrase);
@@ -201,8 +203,9 @@ void	ft_change_fds(int fd, int new);
 void	ft_pid_status(pid_t pid);
 
 //File Heredoc
-char    *ft_heredoc(char *delimiter);
-void	ft_open_heredoc(t_node *root);
+void	ft_open_heredoc(t_node *root, t_shell *shell);
+//char    *ft_heredoc(char *delimiter, t_shell *shell);
+char    *ft_heredoc(t_node *root, t_shell *shell);
 
 //File Signal
 void	ft_init_signal(void);
