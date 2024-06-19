@@ -6,7 +6,7 @@
 /*   By: ishenriq <ishenriq@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/05 14:42:53 by ishenriq          #+#    #+#             */
-/*   Updated: 2024/06/17 19:25:10 by ishenriq         ###   ########.fr       */
+/*   Updated: 2024/06/19 18:42:52 by ishenriq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ void	ft_to_execute(char *str, t_shell *shell)
 	//ft_print_vector_content(parse->phrase);
 	root = ft_ast(parse->phrase);
 	//ft_open_heredoc(root);
-	//ft_execution(root, shell);
+	ft_execution(root, shell);
 	//ft_print_ast(root, "root");
 	free(root);
 	parse->phrase = NULL;

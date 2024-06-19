@@ -6,7 +6,7 @@
 /*   By: ishenriq <ishenriq@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/13 19:12:24 by ishenriq          #+#    #+#             */
-/*   Updated: 2024/06/19 18:08:34 by ishenriq         ###   ########.fr       */
+/*   Updated: 2024/06/19 18:42:34 by ishenriq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,14 +84,6 @@ char	*ft_parse_expand(char *str, t_shell *shell)
 	signal = '\0';
 	vector = ft_split_expand(str);
 	final_str = "";
-	
-	printf("%lu\n", vector->size);
-	while (i < vector->size)
-	{
-		printf("%s\n", (char *)ft_vector_at(vector, i));
-		i++;
-	}
-	i = 0;
 	while (i < vector->size)
 	{
 		if (i == 0)
@@ -105,7 +97,9 @@ char	*ft_parse_expand(char *str, t_shell *shell)
 			i++;
 			split = (char *)ft_vector_at(vector, i);
 		}
-		while ((i < vector->size && (signal == '\0' || (split && signal != split[0]))))
+		while ((i < vector->size) &&
+       (signal != '\0' || !ft_strchr("\'\"", split[0])) &&
+       (split == NULL || signal != split[0]))
 		{
 			if (signal == '\'')
 				final_str = ft_strjoin(final_str, ft_strdup(split));
@@ -122,24 +116,3 @@ char	*ft_parse_expand(char *str, t_shell *shell)
 	}
 	return (final_str);
 }
-
-
-/*char	*ft_parse_expand(char *str, t_shell *shell)
-{
-	int	i;
-	char	*new_str;
-	char	**split;
-
-	i = 0;
-	split = ft_split_expand(str);
-	while (i < ft_count_matrix(split))
-	{
-		if (i == 0)
-			new_str = ft_expand(split[i], shell);
-		else
-			new_str = ft_strjoin(new_str, ft_expand(split[i], shell));
-		printf("%s\n", split[i]);
-		i++;
-	}
-	return (new_str);
-}*/
