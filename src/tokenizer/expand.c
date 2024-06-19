@@ -6,67 +6,39 @@
 /*   By: ishenriq <ishenriq@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/13 19:12:24 by ishenriq          #+#    #+#             */
-/*   Updated: 2024/06/14 22:36:44 by ishenriq         ###   ########.fr       */
+/*   Updated: 2024/06/19 18:08:34 by ishenriq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int	ft_count_str_splitted(char *str)
+t_vector	*ft_split_expand(char *str)
 {
+	t_vector	*split;
 	int	i;
 	int	j;
-	int count;
-
-	count = 0;
-	i = 0;
-	j = 0;
-	while (str[i] != '\0')
-	{
-		while ((ft_isalnum(str[j]) == 8 || str[j] == '_' || str[j] == '$')
-			&&  str[j] != '\0')
-		{
-			if (j == i)
-				count++;
-			j++;
-		}
-		i = j;
-		while ((ft_isalnum(str[j]) == 0 && str[j] != '_' && str[j] != '$')
-			&&  str[j] != '\0')
-		{
-			count++;
-			j++;
-		}
-		i = j;
-	}
-	return (count);
-}
-
-char	**ft_split_expand(char *str)
-{
-	char	**split;
-	int	i;
-	int	j;
-	int	m;
 
 	i = 0;
 	j = 0;
-	m = 0;
-	split = ft_calloc(ft_count_str_splitted(str) + 1, sizeof(char **));
+	split = ft_vector_create();
 	while (str[i] != '\0')
 	{
+		while ((ft_isalnum(str[j]) == 8) &&  str[j] != '\0')
+			j++;	
+		if (str[i] != '\0' && j != i)
+			ft_vector_push_back(split, ft_substr(str, i, j - i));
+		i = j;
 		while ((ft_isalnum(str[j]) == 8 || str[j] == '_' || str[j] == '$')
 			&&  str[j] != '\0')
 			j++;	
-		if (str[i] != '\0')
-			split[m++] = ft_substr(str, i, j - i);
+		if (str[i] != '\0' && j != i)
+			ft_vector_push_back(split, ft_substr(str, i, j - i));
 		i = j;
-		while ((ft_isalnum(str[j]) == 0 && str[j] != '_' && str[j] != '$')
+		if ((ft_isalnum(str[j]) == 0 && str[j] != '_' && str[j] != '$')
 			&&  str[j] != '\0')
 			j++;	
-		if (str[i] != '\0')
-			split[m++] = ft_substr(str, i, j - i);
-		//j++;
+		if (str[i] != '\0' && j != i)
+			ft_vector_push_back(split, ft_substr(str, i, j - i));
 		i = j;
 	}
 	return (split);
@@ -101,6 +73,59 @@ char	*ft_expand(char *str, t_shell *shell)
 
 char	*ft_parse_expand(char *str, t_shell *shell)
 {
+	int		i;
+	char	signal;
+	char	*new_str;
+	char	*final_str;
+	t_vector	*vector;
+	char	*split;
+
+	i = 0;
+	signal = '\0';
+	vector = ft_split_expand(str);
+	final_str = "";
+	
+	printf("%lu\n", vector->size);
+	while (i < vector->size)
+	{
+		printf("%s\n", (char *)ft_vector_at(vector, i));
+		i++;
+	}
+	i = 0;
+	while (i < vector->size)
+	{
+		if (i == 0)
+			split = (char *)ft_vector_at(vector, i);
+		if (ft_strchr("\'\"", split[0]))
+		{
+			if (ft_strchr(split, '\"'))
+				signal = '\"';
+			else
+				signal = '\'';
+			i++;
+			split = (char *)ft_vector_at(vector, i);
+		}
+		while ((i < vector->size && (signal == '\0' || (split && signal != split[0]))))
+		{
+			if (signal == '\'')
+				final_str = ft_strjoin(final_str, ft_strdup(split));
+			else
+			{
+				new_str = ft_expand(split, shell);
+				final_str = ft_strjoin(final_str, new_str);
+				//free(new_str);
+			}
+			i++;
+			split = (char *)ft_vector_at(vector, i);
+		}
+		signal = '\0';
+	}
+	return (final_str);
+}
+
+
+/*char	*ft_parse_expand(char *str, t_shell *shell)
+{
 	int	i;
 	char	*new_str;
 	char	**split;
@@ -113,7 +138,8 @@ char	*ft_parse_expand(char *str, t_shell *shell)
 			new_str = ft_expand(split[i], shell);
 		else
 			new_str = ft_strjoin(new_str, ft_expand(split[i], shell));
+		printf("%s\n", split[i]);
 		i++;
 	}
 	return (new_str);
-}
+}*/
