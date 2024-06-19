@@ -6,7 +6,7 @@
 /*   By: ishenriq <ishenriq@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/13 19:12:24 by ishenriq          #+#    #+#             */
-/*   Updated: 2024/06/19 19:51:29 by ishenriq         ###   ########.fr       */
+/*   Updated: 2024/06/19 19:54:20 by ishenriq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,6 @@ t_vector	*ft_split_expand(char *str)
 		if (str[j] == '$')
 		{
 			j++;
-			//while ((ft_isalnum(str[j]) == 8 || str[j] == '_' || str[j] == '$')
 			while ((ft_isalnum(str[j]) == 8 || str[j] == '_')
 				&&  str[j] != '\0')
 				j++;	

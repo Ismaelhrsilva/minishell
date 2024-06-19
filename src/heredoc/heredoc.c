@@ -6,7 +6,7 @@
 /*   By: ishenriq <ishenriq@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/07 22:17:01 by ishenriq          #+#    #+#             */
-/*   Updated: 2024/06/19 19:41:56 by ishenriq         ###   ########.fr       */
+/*   Updated: 2024/06/19 19:56:21 by ishenriq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,6 @@ static void	ft_end_heredoc(int infile, const int std, char *gnl)
 	close(std);
 }
 
-//char    *ft_heredoc(char *delimiter, t_shell *shell)
 char    *ft_heredoc(t_node *root, t_shell *shell)
 {
  	char   	*gnl;
@@ -77,10 +76,7 @@ char    *ft_heredoc(t_node *root, t_shell *shell)
         ft_putstr_fd(gnl, infile);
         free(gnl);
     }
-    //free(gnl);
 	ft_end_heredoc(infile, std, gnl);
-	//close(infile);
-	//close(std);
     return (temp_n);
 }
 
@@ -90,7 +86,6 @@ void	ft_open_heredoc(t_node *root, t_shell *shell)
 		return ;
 	if (root->type & HEREDOC)
 	{
-		//root->right->str = ft_heredoc(root->right->str, shell);
 		root->right->str = ft_heredoc(root->right, shell);
 		root->type = REDIN;
 		if (g_status == SIGINT)

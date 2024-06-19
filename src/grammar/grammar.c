@@ -6,11 +6,13 @@
 /*   By: ishenriq <ishenriq@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/15 18:38:12 by ishenriq          #+#    #+#             */
-/*   Updated: 2024/06/08 17:01:47 by ishenriq         ###   ########.fr       */
+/*   Updated: 2024/06/19 20:20:43 by ishenriq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+extern  volatile sig_atomic_t	g_status;
 
 static int	ft_metacharacter_following(t_vector *phrase, int pos)
 {
@@ -73,13 +75,25 @@ void	ft_grammar_rules(t_vector *phrase)
 	while (i < ft_vector_size(phrase))
 	{
 		if (ft_metacharacter_edges(phrase, i))
-			ft_printf("Error: Metacharacter at edges\n");
+		{
+			g_status = 2;
+			return ;
+		}
 		if (ft_metacharacter_following(phrase, i))
-			ft_printf("Error: Metacharacters following each other\n");
+		{
+			g_status = 2;
+			return ;
+		}
 		i++;
 	}
 	if (ft_open_closed_brackets(phrase))
-		ft_printf("Error: Mismatched brackets\n");
+	{
+		g_status = 2;
+		return ;
+	}
 	if (ft_valid_brackets(phrase))
-		ft_printf("Error: Mismatched brackets\n");
+	{
+		g_status = 2;
+		return ;
+	}
 }

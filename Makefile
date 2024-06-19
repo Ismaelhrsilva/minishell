@@ -6,7 +6,7 @@
 #    By: ishenriq <ishenriq@student.42sp.org.br>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/12/11 20:08:54 by ishenriq          #+#    #+#              #
-#    Updated: 2024/06/13 19:13:03 by ishenriq         ###   ########.fr        #
+#    Updated: 2024/06/19 20:10:33 by ishenriq         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -57,6 +57,7 @@ SRCS := \
 	heredoc/heredoc.c \
 	signal/signals.c \
 	debug/print_debug.c \
+	error/error.c \
 
 SRC := $(addprefix $(SRC_DIR)/, $(SRCS))
 
