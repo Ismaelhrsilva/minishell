@@ -6,7 +6,7 @@
 /*   By: ishenriq <ishenriq@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/22 18:25:14 by ishenriq          #+#    #+#             */
-/*   Updated: 2024/06/19 19:44:55 by ishenriq         ###   ########.fr       */
+/*   Updated: 2024/06/20 19:06:17 by ishenriq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,6 +113,7 @@ typedef struct s_shell
 	t_node			*root;
 	char 			*path;
 	char			**path_splitted;
+	int				status;
 }					t_shell;
 
 // File: Read_inputs
@@ -153,6 +154,8 @@ int					ft_count_token(t_vector *phrase, int token);
 int					ft_pos_token(t_vector *phrase, int start, int end,
 						int token);
 int					ft_pos_token_back(t_vector *phrase, int token);
+int					error(int status);
+
 //File AST
 t_node 				*ft_ast(t_vector *phrase);
 void				ft_eliminate_ch_corner(char *str);
@@ -196,6 +199,7 @@ void	ft_execution(t_node *root, t_shell *shell);
 void	ft_pipe(t_node *root, t_shell *shell);
 void	ft_exec_redirects(t_node *root, t_shell *shell);
 void	ft_exec_brackets(t_node *root, t_shell *shell);
+int		ft_status(int st);
 
 //File exec_utils.c
 void	close_fd(int *fd);
@@ -210,6 +214,10 @@ char    *ft_heredoc(t_node *root, t_shell *shell);
 //File Signal
 void	ft_init_signal(void);
 void	ft_sigquit(void);
+
+// File Error
+void	ft_error(char *msg, int g_status);
+
 
 //remove at end
 void	ft_print_ast(t_node	*root, char *branch);

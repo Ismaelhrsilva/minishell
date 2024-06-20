@@ -6,11 +6,13 @@
 /*   By: ishenriq <ishenriq@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/05 14:42:53 by ishenriq          #+#    #+#             */
-/*   Updated: 2024/06/19 19:19:06 by ishenriq         ###   ########.fr       */
+/*   Updated: 2024/06/20 19:13:32 by ishenriq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+extern volatile sig_atomic_t	g_status;
 
 void	ft_to_execute(char *str, t_shell *shell)
 {
@@ -25,6 +27,9 @@ void	ft_to_execute(char *str, t_shell *shell)
 	prompt_splitted = ft_parser(parse);
 	parse->phrase = ft_construct_phrase(prompt_splitted, shell);
 	ft_grammar_rules(parse->phrase);
+	//if (g_status == 2)
+	//if (ft_status(-1))
+	//	return ;
 	ft_order_redall(parse->phrase);
 	//ft_print_vector_content(parse->phrase);
 	root = ft_ast(parse->phrase);

@@ -6,7 +6,7 @@
 /*   By: ishenriq <ishenriq@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/15 18:38:12 by ishenriq          #+#    #+#             */
-/*   Updated: 2024/06/19 20:20:43 by ishenriq         ###   ########.fr       */
+/*   Updated: 2024/06/20 18:24:24 by ishenriq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,8 +74,25 @@ void	ft_grammar_rules(t_vector *phrase)
 	i = 0;
 	while (i < ft_vector_size(phrase))
 	{
+		if (error(ft_metacharacter_edges(phrase, i)
+		 || error(ft_metacharacter_following(phrase, i))))
+			return ;
+		i++;
+	}
+	if (error(ft_open_closed_brackets(phrase)) || ft_valid_brackets(phrase))
+		return ;
+}
+
+/*void	ft_grammar_rules(t_vector *phrase)
+{
+	unsigned long	i;
+
+	i = 0;
+	while (i < ft_vector_size(phrase))
+	{
 		if (ft_metacharacter_edges(phrase, i))
 		{
+			error(int status)
 			g_status = 2;
 			return ;
 		}
@@ -96,4 +113,4 @@ void	ft_grammar_rules(t_vector *phrase)
 		g_status = 2;
 		return ;
 	}
-}
+}*/

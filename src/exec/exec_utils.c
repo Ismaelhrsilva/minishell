@@ -6,13 +6,23 @@
 /*   By: ishenriq <ishenriq@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/03 19:26:34 by ishenriq          #+#    #+#             */
-/*   Updated: 2024/06/08 22:34:53 by ishenriq         ###   ########.fr       */
+/*   Updated: 2024/06/20 19:15:21 by ishenriq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
 extern volatile sig_atomic_t	g_status;
+
+int	ft_status(int st)
+{
+	static int	status;
+
+	if (st != -1)
+		status = st;
+	return (status);
+}
+
 
 void	close_fd(int *fd)
 {
@@ -42,4 +52,5 @@ void	ft_pid_status(pid_t pid)
 	if (status == 139)
 		status = 1;
 	g_status = status;
+	ft_status(g_status);
 }

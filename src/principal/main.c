@@ -6,7 +6,7 @@
 /*   By: ishenriq <ishenriq@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/05 14:42:53 by ishenriq          #+#    #+#             */
-/*   Updated: 2024/06/13 20:46:13 by ishenriq         ###   ########.fr       */
+/*   Updated: 2024/06/20 19:09:05 by ishenriq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,10 +25,11 @@ int	main(int argc, char **argv, char **envp)
 	shell->envp = envp;
 	ft_init_signal();
 	ft_envp(shell);
+	ft_status(0);
 	while (true)
 	{
 		ft_sigquit();
-		g_status = 0;
+		//g_status = 0;
 		ft_to_execute(read_line(), shell);
 	}
 	return (0);

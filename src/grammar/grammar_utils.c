@@ -6,11 +6,13 @@
 /*   By: ishenriq <ishenriq@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/15 18:38:12 by ishenriq          #+#    #+#             */
-/*   Updated: 2024/06/01 19:14:11 by ishenriq         ###   ########.fr       */
+/*   Updated: 2024/06/20 19:08:59 by ishenriq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+extern  volatile sig_atomic_t	g_status;
 
 int	ft_count_token(t_vector *phrase, int token)
 {
@@ -27,22 +29,6 @@ int	ft_count_token(t_vector *phrase, int token)
 	}
 	return (count);
 }
-
-/*int	ft_pos_token(t_vector *phrase, int start, int end, int token)
-{
-	t_vector	*word;
-	int			pos;
-
-	pos = start;
-	while (pos < end)
-	{
-		word = phrase->values[pos];
-		if (*(int *)word->values[1] & token)
-			return (pos);
-		pos++;
-	}
-	return (-1);
-}*/
 
 int	ft_pos_token(t_vector *phrase, int start, int end, int token)
 {
@@ -70,4 +56,16 @@ int	ft_pos_token_back(t_vector *phrase, int token)
 		pos--;
 	}
 	return (-1);
+}
+
+int	error(int status)
+{
+	if (status)
+	{
+		ft_putendl_fd("minishell: syntax error", STDERR_FILENO);
+		//g_status = 2;
+		ft_status(2);
+		return (true);
+	}
+	return (false);
 }
