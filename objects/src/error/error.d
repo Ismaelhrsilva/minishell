@@ -119,7 +119,8 @@ objects/./src//error/error.o: src//error/error.c include/minishell.h \
   /usr/include/x86_64-linux-gnu/bits/termios-c_cflag.h \
   /usr/include/x86_64-linux-gnu/bits/termios-c_lflag.h \
   /usr/include/x86_64-linux-gnu/bits/termios-tcflow.h \
-  /usr/include/x86_64-linux-gnu/bits/termios-misc.h
+  /usr/include/x86_64-linux-gnu/bits/termios-misc.h \
+  /usr/include/x86_64-linux-gnu/sys/stat.h
 
 include/minishell.h:
 
@@ -406,3 +407,5 @@ include/../lib/printf/ft_printf.h:
 /usr/include/x86_64-linux-gnu/bits/termios-tcflow.h:
 
 /usr/include/x86_64-linux-gnu/bits/termios-misc.h:
+
+/usr/include/x86_64-linux-gnu/sys/stat.h:

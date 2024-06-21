@@ -6,7 +6,7 @@
 /*   By: ishenriq <ishenriq@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/03 19:15:25 by ishenriq          #+#    #+#             */
-/*   Updated: 2024/06/20 21:11:40 by ishenriq         ###   ########.fr       */
+/*   Updated: 2024/06/21 18:59:48 by ishenriq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,30 +37,25 @@ static void	ft_do(t_vector *phrase, t_shell *shell)
 	char	*cmd;
 
 	cmd = ft_get_pathname(shell->path_splitted, ft_value(phrase, 0, 0));
-	//printf("%s\n", cmd);
-	/*if (phrase->values[0] && 
-		(cmd[0] == '/' ||
-		ft_strncmp(ft_value(phrase, 0, 0), "./", 2) == 0))*/
-	if (cmd && 
-		(cmd[0] == '/' ||
-		ft_strncmp(cmd, "./", 2) == 0))
+	if (cmd && (cmd[0] == '/' || ft_strncmp(cmd, "./", 2) == 0))
 	{
 		pid = fork();
 		if (!pid)
 		{
 			signal(SIGQUIT, SIG_DFL);
 			status_here(FORK, 1);
-			if (execve(ft_get_pathname(shell->path_splitted, ft_value(phrase, 0, 0)),
+			if (access(cmd, F_OK) < 0)
+				ft_error(cmd, NULL, "No such file or directory", ENOENT);
+			else if (access(cmd, X_OK) < 0)
+				ft_error(cmd, NULL, "Permission denied", EACCES);
+			else if (execve(ft_get_pathname(shell->path_splitted, cmd),
 			ft_build_argv_exec(phrase), shell->envp) < 0)
-			{
-				g_status = errno;
-				ft_status(g_status);
-			}
+				ft_error(cmd, NULL, strerror(errno), errno);
 		}
 		ft_pid_status(pid);
 	}
 	else
-		ft_error(ft_value(phrase, 0, 0), NULL, "command not found", ENOENT);
+		ft_error(cmd, NULL, "command not found", ENOENT);
 }
 
 
