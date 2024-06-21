@@ -6,7 +6,7 @@
 /*   By: ishenriq <ishenriq@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/22 18:25:14 by ishenriq          #+#    #+#             */
-/*   Updated: 2024/06/20 19:06:17 by ishenriq         ###   ########.fr       */
+/*   Updated: 2024/06/20 20:54:37 by ishenriq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -216,7 +216,7 @@ void	ft_init_signal(void);
 void	ft_sigquit(void);
 
 // File Error
-void	ft_error(char *msg, int g_status);
+void	ft_error(char *cmd, char *flag, char *msg, int status);
 
 
 //remove at end

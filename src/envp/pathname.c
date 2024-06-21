@@ -6,7 +6,7 @@
 /*   By: ishenriq <ishenriq@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/03 17:31:31 by ishenriq          #+#    #+#             */
-/*   Updated: 2024/06/03 18:49:58 by ishenriq         ###   ########.fr       */
+/*   Updated: 2024/06/20 21:14:17 by ishenriq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@ char	*ft_get_pathname(char **matrix, char *str)
 	char	*pathname;
 	int	i;
 
+	i = 0;
 	if (ft_is_cmd(str))
 		return (str);
 	while (matrix[i] != NULL)

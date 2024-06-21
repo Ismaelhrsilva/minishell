@@ -6,7 +6,7 @@
 /*   By: ishenriq <ishenriq@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/03 19:15:25 by ishenriq          #+#    #+#             */
-/*   Updated: 2024/06/20 19:07:47 by ishenriq         ###   ########.fr       */
+/*   Updated: 2024/06/20 21:11:40 by ishenriq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,23 +30,37 @@ static	char **ft_build_argv_exec(t_vector *phrase)
 	return (argv_exec);
 }
 
+
 static void	ft_do(t_vector *phrase, t_shell *shell)
 {
 	pid_t	pid;
+	char	*cmd;
 
-	pid = fork();
-	if (!pid)
+	cmd = ft_get_pathname(shell->path_splitted, ft_value(phrase, 0, 0));
+	//printf("%s\n", cmd);
+	/*if (phrase->values[0] && 
+		(cmd[0] == '/' ||
+		ft_strncmp(ft_value(phrase, 0, 0), "./", 2) == 0))*/
+	if (cmd && 
+		(cmd[0] == '/' ||
+		ft_strncmp(cmd, "./", 2) == 0))
 	{
-		signal(SIGQUIT, SIG_DFL);
-		status_here(FORK, 1);
-		if (execve(ft_get_pathname(shell->path_splitted, ft_value(phrase, 0, 0)),
-		ft_build_argv_exec(phrase), shell->envp) < 0)
+		pid = fork();
+		if (!pid)
 		{
-			g_status = errno;
-			ft_status(g_status);
+			signal(SIGQUIT, SIG_DFL);
+			status_here(FORK, 1);
+			if (execve(ft_get_pathname(shell->path_splitted, ft_value(phrase, 0, 0)),
+			ft_build_argv_exec(phrase), shell->envp) < 0)
+			{
+				g_status = errno;
+				ft_status(g_status);
+			}
 		}
+		ft_pid_status(pid);
 	}
-	ft_pid_status(pid);
+	else
+		ft_error(ft_value(phrase, 0, 0), NULL, "command not found", ENOENT);
 }
 
 
