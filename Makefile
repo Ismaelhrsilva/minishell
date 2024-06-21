@@ -6,22 +6,23 @@
 #    By: ishenriq <ishenriq@student.42sp.org.br>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/12/11 20:08:54 by ishenriq          #+#    #+#              #
-#    Updated: 2024/06/19 20:10:33 by ishenriq         ###   ########.fr        #
+#    Updated: 2024/06/21 20:22:48 by ishenriq         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME	= minishell
 #CFLAGS	:= -Wextra -Wall -Werror -Wunreachable-code -Ofast -g3 -O3
-CFLAGS	:=  -Ofast -g3 -O0 -MD -MP
+#CFLAGS	:=  -Ofast -g3 -O0 -MD -MP
+CFLAGS	:=  -g3
 CC	:= cc
 PRINTF	:= lib/printf/
 LIBFT	:= lib/libft/
 BUILD_DIR = objects/
 MKDIR  := mkdir -p
 
-HEADERS	:= -I ./include -I $(LIBFT) -I $(PRINTF) $(LIBS) -lreadline
+HEADERS	:= -I ./include -I $(LIBFT) -I $(PRINTF) $(LIBS) 
 
-LIBS 	:= -lm $(LIBFT)libft.a \
+LIBS 	:= -lm $(LIBFT)libft.a -lreadline \
 	-lm $(PRINTF)libftprintf.a
 
 LDFLAGS	:= $(HEADERS) $(LIBS)

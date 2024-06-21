@@ -6,7 +6,7 @@
 /*   By: ishenriq <ishenriq@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/03 17:31:31 by ishenriq          #+#    #+#             */
-/*   Updated: 2024/06/20 21:14:17 by ishenriq         ###   ########.fr       */
+/*   Updated: 2024/06/21 20:21:31 by ishenriq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,5 +45,6 @@ char	*ft_get_pathname(char **matrix, char *str)
 		}
 		i++;
 	}
+	return (str);
 }
 

@@ -6,7 +6,7 @@
 /*   By: phraranha <marvin@42.fr>                   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/01 12:49:24 by phraranha         #+#    #+#             */
-/*   Updated: 2024/06/07 20:25:43 by ishenriq         ###   ########.fr       */
+/*   Updated: 2024/06/21 20:19:02 by ishenriq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,20 +108,4 @@ void	ft_vector_reserve(t_vector *vector, unsigned long new_capacity)
 		if (!ft_vector_resize(vector, new_capacity))
 			return ;
 	}
-}
-
-t_vector *vector_clone(t_vector *vector)
-{
-    t_vector	*clone;
-	int			i;
-
-	i = 0;
-	clone = ft_vector_create();
-    if (!clone)
-        return NULL;
-    ft_vector_resize(clone, vector->capacity);
-	while (i < vector->size)
-        clone->values[i] = vector->values[i++];
-    clone->size = vector->size;
-    return clone;
 }

@@ -6,7 +6,7 @@
 /*   By: ishenriq <ishenriq@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/22 18:25:14 by ishenriq          #+#    #+#             */
-/*   Updated: 2024/06/21 20:02:47 by ishenriq         ###   ########.fr       */
+/*   Updated: 2024/06/21 20:18:57 by ishenriq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@
 # include <string.h>    // strerror
 # include <sys/ioctl.h> // ioctl
 # include <sys/types.h> // wait, waitpid, wait3, wait4, signal, stat, lstat, fstat, unlink
+# include <sys/wait.h>
 # include <termios.h>   // isatty, ttyname, tcsetattr, tcgetattr
 # include <unistd.h>    // access, close, fork, execve, dup, dup2, pipe, getcwd, chdir
 
@@ -186,7 +187,6 @@ void	*ft_realloc(void *ptr, size_t original_size, size_t new_size);
 t_vector	*ft_vector_slice_left(t_vector *vector, unsigned long pos);
 t_vector	*ft_vector_slice_right(t_vector *vector, unsigned long pos);
 void	ft_vector_swap(t_vector *vector, int a, int b);
-t_vector *vector_clone(t_vector *vector);
 
 //File Envp
 void	ft_envp(t_shell *shell);
