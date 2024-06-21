@@ -6,7 +6,7 @@
 /*   By: ishenriq <ishenriq@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/19 20:10:42 by ishenriq          #+#    #+#             */
-/*   Updated: 2024/06/21 19:12:36 by ishenriq         ###   ########.fr       */
+/*   Updated: 2024/06/21 20:06:22 by ishenriq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,3 +42,28 @@ void	ft_error(char *cmd, char *flag, char *msg, int status)
 		g_status = status;
 	ft_status(g_status);
 }
+
+/*
+void	close_open_fds(void)
+{
+	struct dirent	*file;
+	DIR				*root;
+	int				fd;
+
+	root = opendir("/proc/self/fd/");
+	while (1)
+	{
+		file = readdir(root);
+		if (!file)
+			break ;
+		fd = ft_atoi(file->d_name);
+		if (fd > -1 && fd < 1024)
+			close(ft_atoi(file->d_name));
+	}
+	closedir(root);
+}
+
+void	ft_clear(t_shell *shell, t_vector *t_vector)
+{
+	close_open_fds();
+}*/

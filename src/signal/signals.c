@@ -6,7 +6,7 @@
 /*   By: ishenriq <ishenriq@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/11 18:26:39 by ishenriq          #+#    #+#             */
-/*   Updated: 2024/06/21 19:54:31 by ishenriq         ###   ########.fr       */
+/*   Updated: 2024/06/21 19:59:38 by ishenriq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ int	status_here(int where, int st)
 	{
 		if (st == 1)
 			status->_fork = st;
-		rl_clear_history();
+		//rl_clear_history();
 		return (status->_fork);
 	}
 	else if (where == 2)

@@ -6,7 +6,7 @@
 /*   By: ishenriq <ishenriq@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/03 19:15:25 by ishenriq          #+#    #+#             */
-/*   Updated: 2024/06/21 18:59:48 by ishenriq         ###   ########.fr       */
+/*   Updated: 2024/06/21 20:01:58 by ishenriq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,9 @@ static void	ft_do(t_vector *phrase, t_shell *shell)
 		if (!pid)
 		{
 			signal(SIGQUIT, SIG_DFL);
+			signal(SIGINT, SIG_DFL);
 			status_here(FORK, 1);
+			rl_clear_history();
 			if (access(cmd, F_OK) < 0)
 				ft_error(cmd, NULL, "No such file or directory", ENOENT);
 			else if (access(cmd, X_OK) < 0)

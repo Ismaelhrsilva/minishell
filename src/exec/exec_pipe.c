@@ -6,7 +6,7 @@
 /*   By: ishenriq <ishenriq@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/04 20:34:11 by ishenriq          #+#    #+#             */
-/*   Updated: 2024/06/13 17:11:56 by ishenriq         ###   ########.fr       */
+/*   Updated: 2024/06/21 20:01:18 by ishenriq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ static void	ft_pipe_aux(t_node *root, t_shell *shell, int *fd, int side)
 	if (pid == 0)
 	{
 		status_here(FORK, 1);
-		//rl_clear_history();
+		rl_clear_history();
 		dup_aux(fd, side);
 		close_fd(fd);
 		ft_execution_side(root, shell, side);
