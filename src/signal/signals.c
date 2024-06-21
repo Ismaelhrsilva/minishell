@@ -6,7 +6,7 @@
 /*   By: ishenriq <ishenriq@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/11 18:26:39 by ishenriq          #+#    #+#             */
-/*   Updated: 2024/06/13 17:51:11 by ishenriq         ###   ########.fr       */
+/*   Updated: 2024/06/21 19:54:31 by ishenriq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,9 @@ void	ft_sigquit(void)
 	if (g_status == 131)
 	{
 		ft_putendl_fd("Quit (core dumped)", STDERR_FILENO);
+		ft_return_terminal(1);
 	}
+	ft_return_terminal(0);
 }
 
 void	ft_init_signal(void)
