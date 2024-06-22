@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   vector_add.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: phraranha <marvin@42.fr>                   +#+  +:+       +#+        */
+/*   By: ishenriq <ishenriq@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/01 12:45:54 by phraranha         #+#    #+#             */
-/*   Updated: 2024/06/01 12:52:23 by phraranha        ###   ########.org.br   */
+/*   Updated: 2024/06/21 21:00:21 by ishenriq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,4 +76,15 @@ unsigned long	ft_vector_insert(t_vector *vector, unsigned long position,
 	vector->values[position] = value;
 	vector->size++;
 	return (position);
+}
+
+void	ft_vector_reserve(t_vector *vector, unsigned long new_capacity)
+{
+	if (vector == NULL)
+		return ;
+	if (new_capacity > vector->capacity)
+	{
+		if (!ft_vector_resize(vector, new_capacity))
+			return ;
+	}
 }

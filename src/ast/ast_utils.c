@@ -6,7 +6,7 @@
 /*   By: ishenriq <ishenriq@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/08 19:50:09 by ishenriq          #+#    #+#             */
-/*   Updated: 2024/06/13 21:12:54 by ishenriq         ###   ########.fr       */
+/*   Updated: 2024/06/21 20:33:45 by ishenriq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ void	ft_eliminate_ch_corner(char *str)
 
 	size = ft_strlen(str);
 	i = 0;
-	while(i < size)
+	while (i < size)
 	{
 		str[i] = str[i + 1];
 		i++;

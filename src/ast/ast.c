@@ -6,7 +6,7 @@
 /*   By: ishenriq <ishenriq@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/19 14:31:38 by ishenriq          #+#    #+#             */
-/*   Updated: 2024/06/19 19:38:56 by ishenriq         ###   ########.fr       */
+/*   Updated: 2024/06/21 20:33:37 by ishenriq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ static	t_node	*ft_build_node(t_vector *word)
 
 static int	ft_branch(t_vector *phrase, int pos, t_node *root)
 {
-	t_vector *right;
+	t_vector	*right;
 
 	if (!phrase || pos < 0 || pos > phrase->size || !root)
 		return (0);

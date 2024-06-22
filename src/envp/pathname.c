@@ -6,7 +6,7 @@
 /*   By: ishenriq <ishenriq@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/03 17:31:31 by ishenriq          #+#    #+#             */
-/*   Updated: 2024/06/21 20:21:31 by ishenriq         ###   ########.fr       */
+/*   Updated: 2024/06/21 20:35:30 by ishenriq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ static int	ft_is_cmd(char *str)
 {
 	if (str && ft_strncmp(str, "/", 1) == 0)
 		if (access(str, F_OK | X_OK) == 0)
-		return (1);
+			return (1);
 	return (0);
 }
 
@@ -24,7 +24,7 @@ char	*ft_get_pathname(char **matrix, char *str)
 {
 	char	*bar;
 	char	*pathname;
-	int	i;
+	int		i;
 
 	i = 0;
 	if (ft_is_cmd(str))
@@ -38,7 +38,7 @@ char	*ft_get_pathname(char **matrix, char *str)
 			free(bar);
 			return (pathname);
 		}
-		else 
+		else
 		{
 			free(bar);
 			free (pathname);
@@ -47,4 +47,3 @@ char	*ft_get_pathname(char **matrix, char *str)
 	}
 	return (str);
 }
-

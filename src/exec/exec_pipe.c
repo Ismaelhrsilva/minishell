@@ -6,7 +6,7 @@
 /*   By: ishenriq <ishenriq@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/04 20:34:11 by ishenriq          #+#    #+#             */
-/*   Updated: 2024/06/21 20:01:18 by ishenriq         ###   ########.fr       */
+/*   Updated: 2024/06/21 20:38:09 by ishenriq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ static void	dup_aux(int *fd, int side)
 		dup2(fd[0], STDIN_FILENO);
 }
 
-static void ft_execution_side(t_node *root, t_shell *shell, int side)
+static void	ft_execution_side(t_node *root, t_shell *shell, int side)
 {
 	if (side == LEFT)
 		ft_execution(root->left, shell);
@@ -43,7 +43,7 @@ static void ft_execution_side(t_node *root, t_shell *shell, int side)
 static void	ft_pipe_aux(t_node *root, t_shell *shell, int *fd, int side)
 {
 	pid_t	pid;
-	int	status;
+	int		status;
 
 	status = 0;
 	pid = fork();

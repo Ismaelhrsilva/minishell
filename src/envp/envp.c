@@ -6,7 +6,7 @@
 /*   By: ishenriq <ishenriq@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/02 16:46:44 by ishenriq          #+#    #+#             */
-/*   Updated: 2024/06/14 19:29:52 by ishenriq         ###   ########.fr       */
+/*   Updated: 2024/06/21 20:35:01 by ishenriq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ static void	ft_matrixreplace(char **s, char signal, char old_ch, char new_ch)
 static t_vector	*ft_build_line_envp(char *str)
 {
 	t_vector	*line_dict;
-	char **split;
+	char		**split;
 
 	line_dict = ft_vector_create();
 	if (!line_dict)
@@ -42,24 +42,23 @@ static t_vector	*ft_build_line_envp(char *str)
 	return (line_dict);
 }
 
-
 t_vector	*ft_envp_dict(char **envp)
 {
-	t_vector *envp_dict;
-	int	i;
+	t_vector	*envp_dict;
+	int			i;
 
 	i = 0;
 	envp_dict = ft_vector_create();
 	while (envp[i] != NULL)
 		ft_vector_push_back(envp_dict, ft_build_line_envp(envp[i++]));
-	return(envp_dict);
+	return (envp_dict);
 }
 
 void	ft_envp(t_shell *shell)
 {
-	t_vector *envp_dict;
-	char **split;
-	int	i;
+	t_vector	*envp_dict;
+	char		**split;
+	int			i;
 
 	i = 0;
 	while (shell->envp[i] != NULL)
@@ -71,24 +70,3 @@ void	ft_envp(t_shell *shell)
 	shell->path_splitted = ft_split(shell->path, ':');
 	shell->envp_dict = ft_envp_dict(shell->envp);
 }
-
-/*void	ft_envp(t_shell *shell)
-{
-	t_vector *envp_dict;
-	char **split;
-	int	i;
-
-	i = 0;
-	envp_dict = ft_vector_create();
-	if (!envp_dict)
-		return ;
-	while (shell->envp[i] != NULL)
-	{
-		if (ft_strncmp(shell->envp[i], "PATH=", 5) == 0)
-			shell->path = shell->envp[i];
-		ft_vector_push_back(envp_dict, ft_build_line_envp(shell->envp[i]));
-		i++;
-	}
-	shell->path_splitted = ft_split(shell->path, ':');
-	shell->envp_dict = envp_dict;
-}*/

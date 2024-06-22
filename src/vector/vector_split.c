@@ -6,7 +6,7 @@
 /*   By: ishenriq <ishenriq@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/01 18:58:39 by ishenriq          #+#    #+#             */
-/*   Updated: 2024/06/07 18:58:19 by ishenriq         ###   ########.fr       */
+/*   Updated: 2024/06/21 21:06:43 by ishenriq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,15 +15,15 @@
 t_vector	*ft_vector_slice_left(t_vector *vector, unsigned long pos)
 {
 	unsigned long	i;
-	t_vector	*sliced;
+	t_vector		*sliced;
 
 	if (vector == NULL)
-		return((t_vector*)0) ;
+		return ((t_vector *)0);
 	if (pos >= vector->size)
-		return((t_vector*)0) ;
+		return ((t_vector *)0);
 	sliced = ft_vector_create();
 	if (!sliced)
-		return ((t_vector*)0) ;
+		return ((t_vector *)0);
 	i = 0;
 	while (i < pos)
 	{
@@ -37,16 +37,12 @@ t_vector	*ft_vector_slice_left(t_vector *vector, unsigned long pos)
 t_vector	*ft_vector_slice_right(t_vector *vector, unsigned long pos)
 {
 	unsigned long	i;
-	int	j;
-	t_vector	*sliced;
+	int				j;
+	t_vector		*sliced;
 
-	if (vector == NULL)
-		return((t_vector*)0) ;
-	if (pos >= vector->size)
-		return((t_vector*)0) ;
+	if (vector == NULL || pos >= vector->size)
+		return ((t_vector *)0);
 	sliced = ft_vector_create();
-	if (!sliced)
-		return ((t_vector*)0) ;
 	i = vector->size;
 	pos++;
 	j = 0;
@@ -67,7 +63,7 @@ t_vector	*ft_vector_slice_right(t_vector *vector, unsigned long pos)
 
 void	ft_vector_swap(t_vector *vector, int a, int b)
 {
-	void *temp;
+	void	*temp;
 
 	if (a > vector->size || b > vector->size || a < 0 || b < 0)
 		return ;

@@ -6,7 +6,7 @@
 /*   By: ishenriq <ishenriq@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/15 19:57:08 by ishenriq          #+#    #+#             */
-/*   Updated: 2024/06/18 21:04:01 by ishenriq         ###   ########.fr       */
+/*   Updated: 2024/06/21 20:45:58 by ishenriq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,8 @@ int	ft_count_chr(char *str, char ch)
 	return (count);
 }
 
-void ft_replace_char_between_signal(char *str, char signal, char old_ch, char new_ch)
+void	ft_replace_char_between_signal(char *str,
+			char signal, char old_ch, char new_ch)
 {
 	char	*start;
 	char	*end;
@@ -85,7 +86,7 @@ void ft_replace_char_between_signal(char *str, char signal, char old_ch, char ne
 void	ft_free_matrix(char **matrix)
 {
 	int	i;
-	
+
 	i = 0;
 	while (matrix[i] != NULL)
 		free(matrix[i++]);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   vector_return.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: phraranha <marvin@42.fr>                   +#+  +:+       +#+        */
+/*   By: ishenriq <ishenriq@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/01 12:47:33 by phraranha         #+#    #+#             */
-/*   Updated: 2024/06/04 18:57:23 by ishenriq         ###   ########.fr       */
+/*   Updated: 2024/06/21 20:59:31 by ishenriq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,8 @@ void	*ft_vector_at(const t_vector *vector, unsigned long index)
 
 void	*ft_value(const t_vector *vector, unsigned long i, unsigned long j)
 {
-	t_vector *inner_vector;
-	
+	t_vector	*inner_vector;
+
 	if (vector == NULL)
 		return (0);
 	if (i >= vector->size)
@@ -40,13 +40,6 @@ void	*ft_value(const t_vector *vector, unsigned long i, unsigned long j)
 int	ft_value_int(const t_vector *vector, unsigned long i, unsigned long j)
 {
 	return (*(int *)ft_value(vector, i, j));
-}
-
-unsigned long	ft_vector_size(const t_vector *vector)
-{
-	if (vector == NULL)
-		return (-1);
-	return (vector->size);
 }
 
 unsigned long	ft_vector_capacity(const t_vector *vector)

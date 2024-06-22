@@ -6,7 +6,7 @@
 /*   By: ishenriq <ishenriq@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/03 19:15:25 by ishenriq          #+#    #+#             */
-/*   Updated: 2024/06/21 20:01:58 by ishenriq         ###   ########.fr       */
+/*   Updated: 2024/06/21 20:40:43 by ishenriq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 extern volatile sig_atomic_t	g_status;
 
-static	char **ft_build_argv_exec(t_vector *phrase)
+static char	**ft_build_argv_exec(t_vector *phrase)
 {
 	char	**argv_exec;
 	int		i;
@@ -29,7 +29,6 @@ static	char **ft_build_argv_exec(t_vector *phrase)
 	argv_exec[i] = NULL;
 	return (argv_exec);
 }
-
 
 static void	ft_do(t_vector *phrase, t_shell *shell)
 {
@@ -51,7 +50,7 @@ static void	ft_do(t_vector *phrase, t_shell *shell)
 			else if (access(cmd, X_OK) < 0)
 				ft_error(cmd, NULL, "Permission denied", EACCES);
 			else if (execve(ft_get_pathname(shell->path_splitted, cmd),
-			ft_build_argv_exec(phrase), shell->envp) < 0)
+					ft_build_argv_exec(phrase), shell->envp) < 0)
 				ft_error(cmd, NULL, strerror(errno), errno);
 		}
 		ft_pid_status(pid);
@@ -59,7 +58,6 @@ static void	ft_do(t_vector *phrase, t_shell *shell)
 	else
 		ft_error(cmd, NULL, "command not found", ENOENT);
 }
-
 
 static void	ft_or_and(t_node *root, t_shell *shell)
 {

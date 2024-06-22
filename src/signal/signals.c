@@ -6,7 +6,7 @@
 /*   By: ishenriq <ishenriq@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/11 18:26:39 by ishenriq          #+#    #+#             */
-/*   Updated: 2024/06/21 20:20:20 by ishenriq         ###   ########.fr       */
+/*   Updated: 2024/06/21 20:47:19 by ishenriq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,19 +30,18 @@ static void	ft_handle_sigint(int signal)
 	rl_replace_line("", 0);
 	if (!status_here(PROMPT, -1))
 		rl_redisplay();
-	//g_status = 130;
 }
 
 static t_status	*ft_init_status(void)
 {
 	static t_status	status;
-	
+
 	return (&status);
 }
 
 int	status_here(int where, int st)
 {
-	t_status *status;
+	t_status	*status;
 
 	status = ft_init_status();
 	if (where == 0)
@@ -55,7 +54,6 @@ int	status_here(int where, int st)
 	{
 		if (st == 1)
 			status->_fork = st;
-		//rl_clear_history();
 		return (status->_fork);
 	}
 	else if (where == 2)
@@ -67,7 +65,6 @@ int	status_here(int where, int st)
 	else
 		return (-2);
 }
-
 
 void	ft_sigquit(void)
 {
@@ -81,7 +78,7 @@ void	ft_sigquit(void)
 
 void	ft_init_signal(void)
 {
-	if (signal(SIGINT, ft_handle_sigint) || 
-	signal(SIGQUIT, SIG_IGN) )
+	if (signal(SIGINT, ft_handle_sigint)
+		|| signal(SIGQUIT, SIG_IGN))
 		exit (0);
 }

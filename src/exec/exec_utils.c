@@ -6,7 +6,7 @@
 /*   By: ishenriq <ishenriq@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/03 19:26:34 by ishenriq          #+#    #+#             */
-/*   Updated: 2024/06/20 19:15:21 by ishenriq         ###   ########.fr       */
+/*   Updated: 2024/06/21 20:39:38 by ishenriq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,6 @@ int	ft_status(int st)
 		status = st;
 	return (status);
 }
-
 
 void	close_fd(int *fd)
 {
@@ -42,6 +41,7 @@ void	ft_change_fds(int fd, int new)
 		close(fd);
 	}
 }
+
 void	ft_pid_status(pid_t pid)
 {
 	int	status;

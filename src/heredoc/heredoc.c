@@ -6,7 +6,7 @@
 /*   By: ishenriq <ishenriq@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/07 22:17:01 by ishenriq          #+#    #+#             */
-/*   Updated: 2024/06/19 19:56:21 by ishenriq         ###   ########.fr       */
+/*   Updated: 2024/06/21 21:14:15 by ishenriq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,11 @@
 
 extern volatile sig_atomic_t	g_status;
 
-static long	ft_count()
+static long	ft_count(void)
 {
-	static long count;
-	
-	return(count++);
+	static long	count;
+
+	return (count++);
 }
 
 static void	ft_end_heredoc(int infile, const int std, char *gnl)
@@ -31,53 +31,53 @@ static void	ft_end_heredoc(int infile, const int std, char *gnl)
 	close(std);
 }
 
-char    *ft_heredoc(t_node *root, t_shell *shell)
+char	*ft_heredoc(t_node *root, t_shell *shell)
 {
- 	char   	*gnl;
-    int		size;
-    int		size_gnl;
-    int		infile;
-	char	*temp_n;
-	char	*delimiter;
+	char		*gnl;
+	int			size;
+	int			size_gnl;
+	int			infile;
+	char		*temp_n;
+	char		*delimiter;
 	const int	std = dup(STDIN_FILENO);
 
 	delimiter = root->str;
 	temp_n = ft_strjoin(TEMP, ft_itoa(ft_count()));
-    infile = open(temp_n, O_CREAT | O_WRONLY | O_TRUNC, 0644);
-    if (infile < 0)
-    {
+	infile = open(temp_n, O_CREAT | O_WRONLY | O_TRUNC, 0644);
+	if (infile < 0)
+	{
 		printf("Errror in infile");
-        return (NULL);
-    }
-    while (1)
-    {
+		return (NULL);
+	}
+	while (1)
+	{
 		status_here(HERE_DOC, 1);
-        gnl = readline("> ");
+		gnl = readline("> ");
 		status_here(HERE_DOC, 0);
 		if (g_status == SIGINT)
 		{
-			dup2(std , STDIN_FILENO);
+			dup2(std, STDIN_FILENO);
 			if (gnl)
 			{
 				free(gnl);
 				gnl = NULL;
 			}
 		}
-        if (gnl)
-            size_gnl = ft_strlen(gnl);
-        else
-            break ;
-        size = ft_strlen(delimiter);
-        if (gnl && ft_strncmp(gnl, delimiter, size) == 0 && size == size_gnl)
-            break ;
+		if (gnl)
+			size_gnl = ft_strlen(gnl);
+		else
+			break ;
+		size = ft_strlen(delimiter);
+		if (gnl && ft_strncmp(gnl, delimiter, size) == 0 && size == size_gnl)
+			break ;
 		if (!ft_strchr("\'\"", root->str_not_expanded[0]))
 			gnl = ft_parse_expand_heredoc(gnl, shell);
 		gnl = ft_strjoin(gnl, "\n");
-        ft_putstr_fd(gnl, infile);
-        free(gnl);
-    }
+		ft_putstr_fd(gnl, infile);
+		free(gnl);
+	}
 	ft_end_heredoc(infile, std, gnl);
-    return (temp_n);
+	return (temp_n);
 }
 
 void	ft_open_heredoc(t_node *root, t_shell *shell)

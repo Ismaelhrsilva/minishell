@@ -6,7 +6,7 @@
 /*   By: ishenriq <ishenriq@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/22 18:25:14 by ishenriq          #+#    #+#             */
-/*   Updated: 2024/06/21 20:18:57 by ishenriq         ###   ########.fr       */
+/*   Updated: 2024/06/21 21:17:15 by ishenriq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,16 +27,16 @@
 # include <stdlib.h>    // malloc, free
 # include <string.h>    // strerror
 # include <sys/ioctl.h> // ioctl
-# include <sys/types.h> // wait, waitpid, wait3, wait4, signal, stat, lstat, fstat, unlink
+# include <sys/types.h> // wait, waitpid,signal, stat, lstat, fstat, unlink
 # include <sys/wait.h>
 # include <termios.h>   // isatty, ttyname, tcsetattr, tcgetattr
-# include <unistd.h>    // access, close, fork, execve, dup, dup2, pipe, getcwd, chdir
+# include <unistd.h>
 
-#	define FT_VECTOR_INITIAL_CAPACITY 16
-#	define TEMP "/tmp/heredoc"
-#	define HERE_DOC 0
-#	define FORK	1
-#	define PROMPT	2
+# define FT_VECTOR_INITIAL_CAPACITY 16
+# define TEMP "/tmp/heredoc"
+# define HERE_DOC 0
+# define FORK	1
+# define PROMPT	2
 
 typedef enum e_token
 {
@@ -64,7 +64,7 @@ typedef struct s_status
 {
 	int	_heredoc;
 	int	_fork;
-	int _prompt;
+	int	_prompt;
 }	t_status;
 
 typedef struct s_vector
@@ -112,7 +112,7 @@ typedef struct s_shell
 	char			**envp;
 	t_vector		*envp_dict;
 	t_node			*root;
-	char 			*path;
+	char			*path;
 	char			**path_splitted;
 	int				status;
 }					t_shell;
@@ -124,6 +124,12 @@ void				ft_return_terminal(int ret);
 
 // File Parse
 char				**ft_parser(t_parse *parse);
+void				ft_arranging_prompt(t_parse *parse);
+int					ft_parse_char(t_parse *parse, char *prompt);
+int					ft_aux_parse_char(char *ch, t_parse *parse, char *prompt);
+void				ft_parse_brackets(t_parse *parse, char *prompt);
+int					ft_valid_brackets_str(char *str);
+void				ft_parse_quotes(t_parse *parse, char *prompt);
 
 // File Parse Utils
 void				ft_parse_quotes(t_parse *parse, char *prompt);
@@ -147,7 +153,8 @@ void				ft_order_redall(t_vector *vector);
 int					ft_count_matrix(char **str);
 void				ft_change_sub_space(char **split);
 int					ft_count_chr(char *str, char ch);
-void 				ft_replace_char_between_signal(char *str, char signal, char old, char new_ch);
+void				ft_replace_char_between_signal(char *str,
+						char signal, char old, char new_ch);
 void				ft_free_matrix(char **matrix);
 int					status_here(int where, int st);
 
@@ -159,7 +166,7 @@ int					ft_pos_token_back(t_vector *phrase, int token);
 int					error(int status);
 
 //File AST
-t_node 				*ft_ast(t_vector *phrase);
+t_node				*ft_ast(t_vector *phrase);
 void				ft_eliminate_ch_corner(char *str);
 
 // File Vector
@@ -175,53 +182,56 @@ unsigned long		ft_vector_insert(t_vector *vector, unsigned long position,
 						void *value);
 void				ft_vector_erase(t_vector *vector, unsigned long position);
 void				*ft_vector_at(const t_vector *vector, unsigned long index);
-void				*ft_value(const t_vector *vector, unsigned long i, unsigned long j);
-int					ft_value_int(const t_vector *vector, unsigned long i, unsigned long j);
+void				*ft_value(const t_vector *vector,
+						unsigned long i, unsigned long j);
+int					ft_value_int(const t_vector *vector,
+						unsigned long i, unsigned long j);
 bool				ft_vector_empty(const t_vector *vector);
-unsigned long		ft_vector_size(const t_vector *vector);
 unsigned long		ft_vector_capacity(const t_vector *vector);
 void				ft_vector_reserve(t_vector *vector,
 						unsigned long new_capacity);
 void				ft_vector_init(t_vector *vector);
-void	*ft_realloc(void *ptr, size_t original_size, size_t new_size);
-t_vector	*ft_vector_slice_left(t_vector *vector, unsigned long pos);
-t_vector	*ft_vector_slice_right(t_vector *vector, unsigned long pos);
-void	ft_vector_swap(t_vector *vector, int a, int b);
+void				*ft_realloc(void *ptr,
+						size_t original_size, size_t new_size);
+t_vector			*ft_vector_slice_left(t_vector *vector, unsigned long pos);
+t_vector			*ft_vector_slice_right(t_vector *vector, unsigned long pos);
+void				ft_vector_swap(t_vector *vector, int a, int b);
 
 //File Envp
-void	ft_envp(t_shell *shell);
-t_vector	*ft_envp_dict(char **envp);
+void				ft_envp(t_shell *shell);
+t_vector			*ft_envp_dict(char **envp);
 
 //File Pathname
-char	*ft_get_pathname(char **matrix, char *str);
+char				*ft_get_pathname(char **matrix, char *str);
 
 //File execution
-void	ft_execution(t_node *root, t_shell *shell);
-void	ft_pipe(t_node *root, t_shell *shell);
-void	ft_exec_redirects(t_node *root, t_shell *shell);
-void	ft_exec_brackets(t_node *root, t_shell *shell);
-int		ft_status(int st);
+extern volatile sig_atomic_t	g_status;
+void				ft_execution(t_node *root, t_shell *shell);
+void				ft_pipe(t_node *root, t_shell *shell);
+void				ft_exec_redirects(t_node *root, t_shell *shell);
+void				ft_exec_brackets(t_node *root, t_shell *shell);
+int					ft_status(int st);
 
 //File exec_utils.c
-void	close_fd(int *fd);
-void	ft_change_fds(int fd, int new);
-void	ft_pid_status(pid_t pid);
+void				close_fd(int *fd);
+void				ft_change_fds(int fd, int new);
+void				ft_pid_status(pid_t pid);
 
 //File Heredoc
-void	ft_open_heredoc(t_node *root, t_shell *shell);
+void				ft_open_heredoc(t_node *root, t_shell *shell);
+
 //char    *ft_heredoc(char *delimiter, t_shell *shell);
-char    *ft_heredoc(t_node *root, t_shell *shell);
+char				*ft_heredoc(t_node *root, t_shell *shell);
 
 //File Signal
-void	ft_init_signal(void);
-void	ft_sigquit(void);
+void				ft_init_signal(void);
+void				ft_sigquit(void);
 
 // File Error
-void	ft_error(char *cmd, char *flag, char *msg, int status);
-
+void				ft_error(char *cmd, char *flag, char *msg, int status);
 
 //remove at end
-void	ft_print_ast(t_node	*root, char *branch);
-void	ft_print_vector_content(t_vector *phrase);
+void				ft_print_ast(t_node	*root, char *branch);
+void				ft_print_vector_content(t_vector *phrase);
 
 #endif

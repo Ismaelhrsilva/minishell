@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   vector_create.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: phraranha <marvin@42.fr>                   +#+  +:+       +#+        */
+/*   By: ishenriq <ishenriq@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/01 12:49:24 by phraranha         #+#    #+#             */
-/*   Updated: 2024/06/21 20:19:02 by ishenriq         ###   ########.fr       */
+/*   Updated: 2024/06/21 21:00:16 by ishenriq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,15 +97,4 @@ void	ft_vector_free(t_vector *vector)
 		return ;
 	free(vector->values);
 	free(vector);
-}
-
-void	ft_vector_reserve(t_vector *vector, unsigned long new_capacity)
-{
-	if (vector == NULL)
-		return ;
-	if (new_capacity > vector->capacity)
-	{
-		if (!ft_vector_resize(vector, new_capacity))
-			return ;
-	}
 }

@@ -6,7 +6,7 @@
 /*   By: ishenriq <ishenriq@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/05 14:42:53 by ishenriq          #+#    #+#             */
-/*   Updated: 2024/06/21 19:55:56 by ishenriq         ###   ########.fr       */
+/*   Updated: 2024/06/21 20:44:55 by ishenriq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,6 @@ void	ft_return_terminal(int ret)
 		tcsetattr(STDIN_FILENO, TCSANOW, &term);
 }
 
-
 int	main(int argc, char **argv, char **envp)
 {
 	t_shell		*shell;
@@ -41,7 +40,6 @@ int	main(int argc, char **argv, char **envp)
 	while (true)
 	{
 		ft_sigquit();
-		//g_status = 0;
 		ft_to_execute(read_line(), shell);
 	}
 	return (0);
