@@ -6,21 +6,14 @@
 /*   By: ishenriq <ishenriq@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/13 19:12:24 by ishenriq          #+#    #+#             */
-/*   Updated: 2024/06/23 18:48:40 by ishenriq         ###   ########.fr       */
+/*   Updated: 2024/06/23 19:20:19 by ishenriq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-t_vector	*ft_split_expand(char *str)
+void	ft_split_expand(char *str, t_vector *split, int i, int j)
 {
-	t_vector	*split;
-	int			i;
-	int			j;
-
-	i = 0;
-	j = 0;
-	split = ft_vector_create();
 	while (str[i] != '\0')
 	{
 		while ((ft_isalnum(str[j]) == 8) && str[j] != '\0')
@@ -45,7 +38,6 @@ t_vector	*ft_split_expand(char *str)
 			ft_vector_push_back(split, ft_substr(str, i, j - i));
 		i = j;
 	}
-	return (split);
 }
 
 char	ft_signal(t_vector *vector, int *i, char signal)
@@ -93,7 +85,8 @@ char	*ft_parse_expand(char *str, t_shell *shell)
 
 	i = 0;
 	signal = '\0';
-	vector = ft_split_expand(str);
+	vector = ft_vector_create();
+	ft_split_expand(str, vector, 0, 0);
 	return (ft_expand_aux(shell, vector, i, signal));
 }
 

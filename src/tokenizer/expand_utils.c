@@ -6,7 +6,7 @@
 /*   By: ishenriq <ishenriq@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/13 19:12:24 by ishenriq          #+#    #+#             */
-/*   Updated: 2024/06/23 17:23:28 by ishenriq         ###   ########.fr       */
+/*   Updated: 2024/06/23 19:20:11 by ishenriq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,8 @@ char	*ft_parse_expand_heredoc(char *str, t_shell *shell)
 	char		*split;
 
 	i = 0;
-	vector = ft_split_expand(str);
+	vector = ft_vector_create();
+	ft_split_expand(str, vector, 0, 0);
 	final_str = "";
 	while (i < vector->size)
 	{
