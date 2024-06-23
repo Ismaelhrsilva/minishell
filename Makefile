@@ -6,7 +6,7 @@
 #    By: ishenriq <ishenriq@student.42sp.org.br>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/12/11 20:08:54 by ishenriq          #+#    #+#              #
-#    Updated: 2024/06/21 20:22:48 by ishenriq         ###   ########.fr        #
+#    Updated: 2024/06/23 17:24:31 by ishenriq         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,7 +20,7 @@ LIBFT	:= lib/libft/
 BUILD_DIR = objects/
 MKDIR  := mkdir -p
 
-HEADERS	:= -I ./include -I $(LIBFT) -I $(PRINTF) $(LIBS) 
+HEADERS	:= -I ./include -I $(LIBFT) -I $(PRINTF) $(LIBS)
 
 LIBS 	:= -lm $(LIBFT)libft.a -lreadline \
 	-lm $(PRINTF)libftprintf.a
@@ -37,6 +37,7 @@ SRCS := \
 	tokenizer/phrase.c \
 	tokenizer/tokenizer.c \
 	tokenizer/expand.c \
+	tokenizer/expand_utils.c \
 	principal/read_inputs.c \
 	principal/utils.c \
 	principal/main.c \

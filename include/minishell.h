@@ -6,7 +6,7 @@
 /*   By: ishenriq <ishenriq@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/22 18:25:14 by ishenriq          #+#    #+#             */
-/*   Updated: 2024/06/23 17:06:15 by ishenriq         ###   ########.fr       */
+/*   Updated: 2024/06/23 17:25:20 by ishenriq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -138,6 +138,7 @@ void				ft_free_phrase(t_vector *phrase);
 char				*ft_expand(char *str, t_shell *shell);
 char				*ft_parse_expand(char *str, t_shell *shell);
 char				*ft_parse_expand_heredoc(char *str, t_shell *shell);
+t_vector			*ft_split_expand(char *str);
 
 // File Grammar
 void				ft_grammar_rules(t_vector *phrase);

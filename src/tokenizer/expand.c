@@ -6,7 +6,7 @@
 /*   By: ishenriq <ishenriq@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/13 19:12:24 by ishenriq          #+#    #+#             */
-/*   Updated: 2024/06/21 20:50:04 by ishenriq         ###   ########.fr       */
+/*   Updated: 2024/06/23 18:48:40 by ishenriq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,51 +48,67 @@ t_vector	*ft_split_expand(char *str)
 	return (split);
 }
 
-char	*ft_find_expand(char *str, t_shell *shell)
+char	ft_signal(t_vector *vector, int *i, char signal)
 {
-	int		i;
-	char	*key;
-
-	i = 0;
-	while (i < shell->envp_dict->size)
+	if (ft_strchr("\'\"", ((char *)ft_vector_at(vector, *i))[0]))
 	{
-		key = ft_value(shell->envp_dict, i, 0);
-		if (ft_strncmp(key, str, ft_strlen(key)) == 0
-			&& ft_strlen(key) == ft_strlen(str))
-			return (ft_value(shell->envp_dict, i, 1));
-		i++;
+		if (ft_strchr((char *)ft_vector_at(vector, (*i)++), '\"'))
+			signal = '\"';
+		else
+			signal = '\'';
 	}
-	return (NULL);
+	return (signal);
 }
 
-char	*ft_expand(char *str, t_shell *shell)
+char	*ft_expand_aux(t_shell *shell, t_vector *vector, int i, char signal)
 {
-	if (!str)
-		return (NULL);
-	if (str[0] == '$' && ft_strlen(&str[1]))
-		if (ft_find_expand(&str[1], shell) != NULL)
-			return (ft_find_expand(&str[1], shell));
-	return (str);
+	char	*final_str;
+	char	*s;
+
+	final_str = "";
+	while (i < vector->size)
+	{
+		signal = ft_signal(vector, &i, signal);
+		s = (char *)ft_vector_at(vector, i);
+		while ((i < vector->size) && (signal != '\0' || !ft_strchr("\'\"",
+					s[0])) && (s == NULL || signal != s[0]))
+		{
+			if (signal == '\'')
+				final_str = ft_strjoin(final_str, ft_strdup(s));
+			else
+				final_str = ft_strjoin(final_str, ft_expand(s, shell));
+			i++;
+			s = (char *)ft_vector_at(vector, i);
+		}
+		signal = '\0';
+	}
+	return (final_str);
 }
 
 char	*ft_parse_expand(char *str, t_shell *shell)
 {
-	int			i;
-	char		signal;
-	char		*new_str;
-	char		*final_str;
-	t_vector	*vector;
-	char		*split;
+	unsigned long int			i;
+	char						signal;
+	t_vector					*vector;
 
 	i = 0;
 	signal = '\0';
 	vector = ft_split_expand(str);
+	return (ft_expand_aux(shell, vector, i, signal));
+}
+
+/*char	*ft_expand_aux(t_shell *shell, t_vector *vector, int i, char signal)
+{
+	char		*final_str;
+	char		*split;
+
 	final_str = "";
 	while (i < vector->size)
 	{
 		if (i == 0)
 			split = (char *)ft_vector_at(vector, i);
 		if (ft_strchr("\'\"", split[0]))
+		if (ft_strchr("\'\"", ((char *)ft_vector_at(vector, i))[0]))
 		{
 			if (ft_strchr(split, '\"'))
 				signal = '\"';
@@ -108,35 +124,11 @@ char	*ft_parse_expand(char *str, t_shell *shell)
 			if (signal == '\'')
 				final_str = ft_strjoin(final_str, ft_strdup(split));
 			else
-			{
-				new_str = ft_expand(split, shell);
-				final_str = ft_strjoin(final_str, new_str);
-			}
+				final_str = ft_strjoin(final_str, ft_expand(split, shell));
 			i++;
 			split = (char *)ft_vector_at(vector, i);
 		}
 		signal = '\0';
 	}
 	return (final_str);
-}
-
-char	*ft_parse_expand_heredoc(char *str, t_shell *shell)
-{
-	int			i;
-	char		*new_str;
-	char		*final_str;
-	t_vector	*vector;
-	char		*split;
-
-	i = 0;
-	vector = ft_split_expand(str);
-	final_str = "";
-	while (i < vector->size)
-	{
-		split = (char *)ft_vector_at(vector, i);
-		new_str = ft_expand(split, shell);
-		final_str = ft_strjoin(final_str, new_str);
-		i++;
-	}
-	return (final_str);
-}
+}*/
