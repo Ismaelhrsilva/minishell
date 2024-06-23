@@ -6,43 +6,38 @@
 /*   By: ishenriq <ishenriq@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/05 14:42:53 by ishenriq          #+#    #+#             */
-/*   Updated: 2024/06/21 21:16:23 by ishenriq         ###   ########.fr       */
+/*   Updated: 2024/06/23 17:04:22 by ishenriq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	ft_parse_quotes(t_parse *parse, char *prompt)
+void	ft_parse_quotes(t_parse *parse, char *prompt, char *signal)
 {
-	char	*signal;
-
 	signal = "";
-	if (ft_strchr("\'\"", parse->prompt[parse->idx->i]))
+	if (ft_strchr("\"", parse->prompt[parse->idx->i]))
 	{
-		if (ft_strchr("\"", parse->prompt[parse->idx->i]))
+		prompt[parse->idx->j++] = '\"';
+		signal = "\"";
+	}
+	else
+	{
+		prompt[parse->idx->j++] = '\'';
+		signal = "\'";
+	}
+	parse->idx->i++;
+	while (!ft_strchr(signal, parse->prompt[parse->idx->i]))
+	{
+		if (parse->prompt[parse->idx->i] == ' ')
 		{
-			prompt[parse->idx->j++] = '\"';
-			signal = "\"";
+			prompt[parse->idx->j++] = 0x1A;
+			parse->idx->i++;
 		}
 		else
-		{
-			prompt[parse->idx->j++] = '\'';
-			signal = "\'";
-		}
-		parse->idx->i++;
-		while (!ft_strchr(signal, parse->prompt[parse->idx->i]))
-		{
-			if (parse->prompt[parse->idx->i] == ' ')
-			{
-				prompt[parse->idx->j++] = 0x1A;
-				parse->idx->i++;
-			}
-			else
-				prompt[parse->idx->j++] = parse->prompt[parse->idx->i++];
-		}
-		if ((ft_strlen(&parse->prompt[parse->idx->i]) == 0))
-			ft_printf("Erro\n");
+			prompt[parse->idx->j++] = parse->prompt[parse->idx->i++];
 	}
+	if ((ft_strlen(&parse->prompt[parse->idx->i]) == 0))
+		ft_printf("Erro\n");
 }
 
 int	ft_valid_brackets_str(char *str)

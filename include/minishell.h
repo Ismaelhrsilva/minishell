@@ -6,7 +6,7 @@
 /*   By: ishenriq <ishenriq@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/22 18:25:14 by ishenriq          #+#    #+#             */
-/*   Updated: 2024/06/21 21:17:15 by ishenriq         ###   ########.fr       */
+/*   Updated: 2024/06/23 17:06:15 by ishenriq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -129,13 +129,7 @@ int					ft_parse_char(t_parse *parse, char *prompt);
 int					ft_aux_parse_char(char *ch, t_parse *parse, char *prompt);
 void				ft_parse_brackets(t_parse *parse, char *prompt);
 int					ft_valid_brackets_str(char *str);
-void				ft_parse_quotes(t_parse *parse, char *prompt);
-
-// File Parse Utils
-void				ft_parse_quotes(t_parse *parse, char *prompt);
-int					ft_aux_parse_char(char *ch, t_parse *parse, char *prompt);
-int					ft_parse_char(t_parse *parse, char *prompt);
-void				ft_arranging_prompt(t_parse *parse);
+void				ft_parse_quotes(t_parse *parse, char *prompt, char *signal);
 
 // File Tokenazer
 int					ft_set_token(char *str);
