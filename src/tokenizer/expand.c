@@ -6,7 +6,7 @@
 /*   By: ishenriq <ishenriq@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/13 19:12:24 by ishenriq          #+#    #+#             */
-/*   Updated: 2024/06/23 19:52:40 by ishenriq         ###   ########.fr       */
+/*   Updated: 2024/06/24 19:38:40 by ishenriq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,10 @@ void	ft_split_expand(char *str, t_vector *split, int i, int j)
 				ft_vector_push_back(split, ft_substr(str, i, j - i));
 			i = j;
 		}
-		if ((ft_isalnum(str[j]) == 0 && str[j] != '_' && str[j] != '$')
+		/*if ((ft_isalnum(str[j]) == 0 && str[j] != '_' && str[j] != '$')
+			&& str[j] != '\0')
+			j++;*/
+		if ((ft_isalnum(str[j]) == 0 && str[j] != '$')
 			&& str[j] != '\0')
 			j++;
 		if (str[i] != '\0' && j != i)

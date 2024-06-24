@@ -6,7 +6,7 @@
 /*   By: paranha <paranha@student.42sp.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/23 20:12:49 by paranha           #+#    #+#             */
-/*   Updated: 2024/06/24 19:03:23 by ishenriq         ###   ########.fr       */
+/*   Updated: 2024/06/24 19:47:16 by ishenriq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -183,7 +183,6 @@ void	builtin_export(t_shell *shell, t_vector *cmd)
 {
 	char		**vars;
 	int			i;
-	t_vector	*word;
 	char		*arg;
 
 	g_status = EXIT_SUCCESS;
@@ -191,13 +190,11 @@ void	builtin_export(t_shell *shell, t_vector *cmd)
 	while (i < cmd->size)
 	{
 		arg = ft_value(cmd, i, 0);
-		printf("Processing argument: %s\n", arg);
 		export_arg(shell->envp_dict, arg);
 		i++;
 	}
 	if (i == 1)
 	{
-		printf("No arguments provided to export, displaying env variables\n");
 		vars = env_export(shell->envp_dict);
 		sort_vars(vars, 0);
 		i = 0;
