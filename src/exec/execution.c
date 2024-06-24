@@ -6,7 +6,7 @@
 /*   By: ishenriq <ishenriq@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/03 19:15:25 by ishenriq          #+#    #+#             */
-/*   Updated: 2024/06/24 19:05:44 by ishenriq         ###   ########.fr       */
+/*   Updated: 2024/06/24 20:51:26 by ishenriq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,6 +96,21 @@ int	ft_builtins(t_node *root, t_shell *shell)
 		return (1);
 }
 
+void	ft_expand_before_exec(t_node *root, t_shell *shell)
+{
+	int			i;
+	char		*str;
+
+	i = 0;
+	while (i < root->phrase->size)
+	{
+		str = ft_value(root->phrase, i, 0);
+		((t_vector * )root->phrase->values[i])->values[0]
+			= ft_parse_expand(str, shell);
+		i++;
+	}
+}
+
 void	ft_execution(t_node *root, t_shell *shell)
 {
 	if (!root)
@@ -112,6 +127,7 @@ void	ft_execution(t_node *root, t_shell *shell)
 		ft_execution(root->right, shell);
 	else if (root->type == EXEC && root->phrase)
 	{
+		ft_expand_before_exec(root, shell);
 		if	(ft_builtins(root, shell))
 			return ;
 		if (root->str && root->str[0] == '(')
