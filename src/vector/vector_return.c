@@ -6,7 +6,7 @@
 /*   By: ishenriq <ishenriq@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/01 12:47:33 by phraranha         #+#    #+#             */
-/*   Updated: 2024/06/21 20:59:31 by ishenriq         ###   ########.fr       */
+/*   Updated: 2024/06/23 20:54:02 by ishenriq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,4 +54,11 @@ bool	ft_vector_empty(const t_vector *vector)
 	if (vector == NULL)
 		return (true);
 	return (vector->size == 0);
+}
+
+unsigned long	ft_vector_size(const t_vector *vector)
+{
+	if (vector == NULL)
+		return (-1);
+	return (vector->size);
 }

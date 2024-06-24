@@ -6,7 +6,7 @@
 /*   By: ishenriq <ishenriq@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/02 16:46:44 by ishenriq          #+#    #+#             */
-/*   Updated: 2024/06/21 20:35:01 by ishenriq         ###   ########.fr       */
+/*   Updated: 2024/06/23 20:21:53 by paranha          ###   ########.org.br   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ static void	ft_matrixreplace(char **s, char signal, char old_ch, char new_ch)
 	}
 }
 
-static t_vector	*ft_build_line_envp(char *str)
+t_vector	*ft_build_line_envp(char *str)
 {
 	t_vector	*line_dict;
 	char		**split;
@@ -34,11 +34,20 @@ static t_vector	*ft_build_line_envp(char *str)
 		return ((t_vector *)0);
 	split = ft_split(str, '=');
 	ft_vector_push_back(line_dict, ft_strdup(split[0]));
-	ft_vector_push_back(line_dict, ft_strdup(split[1]));
-	ft_replace_char_between_signal(split[1], '\'', ':', 0x1A);
-	ft_vector_push_back(line_dict, ft_split(split[1], ':'));
-	ft_matrixreplace(line_dict->values[2], '\'', 0x1A, ':');
+	if (split[1])
+	{
+		ft_vector_push_back(line_dict, ft_strdup(split[1]));
+		ft_replace_char_between_signal(split[1], '\'', ':', 0x1A);
+		ft_vector_push_back(line_dict, ft_split(split[1], ':'));
+		ft_matrixreplace(line_dict->values[2], '\'', 0x1A, ':');
+	}
+	else
+	{
+		ft_vector_push_back(line_dict, ft_strdup(""));
+		ft_vector_push_back(line_dict, NULL);
+	}
 	ft_vector_push_back(line_dict, ft_strdup(str));
+	ft_freesplit(split);
 	return (line_dict);
 }
 

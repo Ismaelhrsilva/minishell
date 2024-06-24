@@ -6,7 +6,7 @@
 /*   By: ishenriq <ishenriq@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/03 19:15:25 by ishenriq          #+#    #+#             */
-/*   Updated: 2024/06/23 20:21:20 by ishenriq         ###   ########.fr       */
+/*   Updated: 2024/06/23 20:50:59 by ishenriq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,6 +75,27 @@ static void	ft_or_and(t_node *root, t_shell *shell)
 	}
 }
 
+int	ft_builtins(t_node *root, t_shell *shell)
+{
+		if (root->str && ft_strcmp(root->str, "export") == 0)
+			builtin_export(shell, root->phrase);
+		else if (root->str && ft_strcmp(root->str, "env") == 0)
+			ft_env_builtin(shell, root->phrase);
+		else if (root->str && ft_strcmp(root->str, "pwd") == 0)
+			builtin_pwd(shell, root->phrase);
+		else if (root->str && ft_strcmp(root->str, "unset") == 0)
+			builtin_unset(shell, root->phrase);
+		else if (root->str && ft_strcmp(root->str, "exit") == 0)
+			builtin_exit(shell, root->phrase);
+		else if (root->str && ft_strcmp(root->str, "echo") == 0)
+			builtin_echo(shell, root->phrase);
+		else if (root->str && ft_strcmp(root->str, "cd") == 0)
+			builtin_cd(shell, root->phrase);
+		else
+			return (0);
+		return (1);
+}
+
 void	ft_execution(t_node *root, t_shell *shell)
 {
 	if (!root)
@@ -91,6 +112,8 @@ void	ft_execution(t_node *root, t_shell *shell)
 		ft_execution(root->right, shell);
 	else if (root->type == EXEC && root->phrase)
 	{
+		if	(ft_builtins(root, shell))
+			return ;
 		if (root->str && root->str[0] == '(')
 		{
 			ft_eliminate_ch_corner(root->str);

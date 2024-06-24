@@ -6,7 +6,7 @@
 #    By: ishenriq <ishenriq@student.42sp.org.br>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/12/11 20:08:54 by ishenriq          #+#    #+#              #
-#    Updated: 2024/06/23 17:24:31 by ishenriq         ###   ########.fr        #
+#    Updated: 2024/06/23 20:57:25 by ishenriq         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -50,7 +50,13 @@ SRCS := \
 	ast/ast_utils.c \
 	envp/envp.c \
 	envp/pathname.c \
+	builtins/cd.c \
+	builtins/echo.c \
+	builtins/env.c \
+	builtins/exit.c \
 	builtins/export.c \
+	builtins/pwd.c \
+	builtins/unset.c \
 	exec/execution.c \
 	exec/exec_pipe.c \
 	exec/exec_red.c \

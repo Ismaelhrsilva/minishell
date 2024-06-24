@@ -6,7 +6,7 @@
 /*   By: ishenriq <ishenriq@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/22 18:25:14 by ishenriq          #+#    #+#             */
-/*   Updated: 2024/06/23 19:20:26 by ishenriq         ###   ########.fr       */
+/*   Updated: 2024/06/23 21:05:09 by ishenriq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -191,10 +191,12 @@ void				*ft_realloc(void *ptr,
 t_vector			*ft_vector_slice_left(t_vector *vector, unsigned long pos);
 t_vector			*ft_vector_slice_right(t_vector *vector, unsigned long pos);
 void				ft_vector_swap(t_vector *vector, int a, int b);
+unsigned long		ft_vector_size(const t_vector *vector);
 
 //File Envp
 void				ft_envp(t_shell *shell);
 t_vector			*ft_envp_dict(char **envp);
+t_vector			*ft_build_line_envp(char *str);
 
 //File Pathname
 char				*ft_get_pathname(char **matrix, char *str);
@@ -224,6 +226,27 @@ void				ft_sigquit(void);
 
 // File Error
 void				ft_error(char *cmd, char *flag, char *msg, int status);
+
+//File builtins
+void				builtin_export(t_shell *shell, t_vector *cmd);
+void				ft_env_builtin(t_shell *shell, t_vector *phrase);
+void				ft_env_delete(t_vector *vars, char *name);
+void				ft_freesplit(char **arr);
+void				builtin_cd(t_shell *shell, t_vector *cmd);
+void				ft_env_add(t_vector *vars, char *name, char *data);
+void				builtin_exit(t_shell *shell, t_vector *cmd);
+void				builtin_pwd(t_shell *shell, t_vector *cmd);
+void				builtin_unset(t_shell *shell, t_vector *cmd);
+void				builtin_echo(t_shell *shell, t_vector *cmd);
+void				builtin_pwd(t_shell *shell, t_vector *cmd);
+void				ft_env_delete(t_vector *vars, char *name);
+void				ft_env_add(t_vector *vars, char *name, char *data);
+
+//Utils
+int					ft_strcmp(char *s1, char *s2);
+void				ft_freesplit(char **arr);
+char				*ft_getenv(t_vector *env, const char *name);
+
 
 //remove at end
 void				ft_print_ast(t_node	*root, char *branch);
