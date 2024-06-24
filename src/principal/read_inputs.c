@@ -6,7 +6,7 @@
 /*   By: ishenriq <ishenriq@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/05 14:42:53 by ishenriq          #+#    #+#             */
-/*   Updated: 2024/06/23 20:05:30 by ishenriq         ###   ########.fr       */
+/*   Updated: 2024/06/24 18:48:55 by ishenriq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,8 @@ void	ft_to_execute(char *str, t_shell *shell)
 
 	parse = malloc(sizeof(t_parse));
 	if (!parse)
+		return ;
+	if (!str)
 		return ;
 	parse->prompt = str;
 	prompt_splitted = ft_parser(parse);

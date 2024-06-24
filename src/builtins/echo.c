@@ -6,7 +6,7 @@
 /*   By: paranha <paranha@student.42sp.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/23 20:12:04 by paranha           #+#    #+#             */
-/*   Updated: 2024/06/24 18:45:16 by ishenriq         ###   ########.fr       */
+/*   Updated: 2024/06/24 18:49:41 by ishenriq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ void	builtin_echo(t_shell *shell, t_vector *cmd)
 		if (i > 1)
 			ft_putchar_fd(' ', STDOUT_FILENO);
 		if (ft_strcmp(ft_value(cmd, i + no_newline, 0), "$?") == 0)
-			printf("%d", ft_status(-1));
+			ft_putstr_fd(ft_itoa(ft_status(-1)), STDOUT_FILENO);
 		else
 			ft_putstr_fd(ft_value(cmd, i + no_newline, 0), STDOUT_FILENO);
 		i++;
