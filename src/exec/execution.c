@@ -6,7 +6,7 @@
 /*   By: ishenriq <ishenriq@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/03 19:15:25 by ishenriq          #+#    #+#             */
-/*   Updated: 2024/06/23 20:50:59 by ishenriq         ###   ########.fr       */
+/*   Updated: 2024/06/24 18:28:00 by ishenriq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -119,8 +119,8 @@ void	ft_execution(t_node *root, t_shell *shell)
 			ft_eliminate_ch_corner(root->str);
 			ft_exec_brackets(root, shell);
 		}
-		if (ft_strncmp(root->str, "$?", 2) == 0)
-			printf("%d\n", ft_status(-1));
+		/*if (ft_strncmp(root->str, "$?", 2) == 0)
+			printf("%d\n", ft_status(-1));*/
 		else
 			ft_do(root->phrase, shell);
 	}
