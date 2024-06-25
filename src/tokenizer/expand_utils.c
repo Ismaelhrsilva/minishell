@@ -6,7 +6,7 @@
 /*   By: ishenriq <ishenriq@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/13 19:12:24 by ishenriq          #+#    #+#             */
-/*   Updated: 2024/06/23 19:20:11 by ishenriq         ###   ########.fr       */
+/*   Updated: 2024/06/25 18:02:44 by ishenriq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,10 +34,26 @@ char	*ft_expand(char *str, t_shell *shell)
 	if (!str)
 		return (NULL);
 	if (str[0] == '$' && ft_strlen(&str[1]))
+	{
+		if (str[1] == '?' && ft_strlen(str) == 2)
+			return (ft_itoa(ft_status(-1)));
+		else if (ft_find_expand(&str[1], shell) != NULL)
+			return (ft_find_expand(&str[1], shell));
+	}
+	return (str);
+}
+/*
+char	*ft_expand(char *str, t_shell *shell)
+{
+	if (!str)
+		return (NULL);
+	if (ft_strcmp(ft_value(cmd, i + no_newline, 0), "$?") == 0)
+		ft_putstr_fd(ft_itoa(ft_status(-1)), STDOUT_FILENO);
+	if (str[0] == '$' && ft_strlen(&str[1]))
 		if (ft_find_expand(&str[1], shell) != NULL)
 			return (ft_find_expand(&str[1], shell));
 	return (str);
-}
+}*/
 
 char	*ft_parse_expand_heredoc(char *str, t_shell *shell)
 {
