@@ -6,7 +6,7 @@
 /*   By: paranha <paranha@student.42sp.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/23 20:11:58 by paranha           #+#    #+#             */
-/*   Updated: 2024/06/25 18:47:34 by ishenriq         ###   ########.fr       */
+/*   Updated: 2024/06/26 17:56:34 by paranha          ###   ########.org.br   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,12 +80,12 @@ static int	change_directory(t_vector *env, const char *path)
 void	builtin_cd(t_shell *shell, t_vector *cmd)
 {
 	const char	*dir;
-	dir = NULL;
 	int			lflag;
 	int			i;
 	char		*arg;
 
 	lflag = 0;
+	dir = NULL;
 	i = 1;
 	if (cmd->size > 2)
 	{
@@ -94,7 +94,7 @@ void	builtin_cd(t_shell *shell, t_vector *cmd)
 		//g_status = EXIT_FAILURE;
 		return ;
 	}
-	if (cmd->values[i])
+	if (ft_value(cmd, 1, 0))
 	{
 		arg = ft_value(cmd, i, 0);
 		//printf("Processing argument: %s\n", arg);
