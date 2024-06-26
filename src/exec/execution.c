@@ -6,7 +6,7 @@
 /*   By: ishenriq <ishenriq@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/03 19:15:25 by ishenriq          #+#    #+#             */
-/*   Updated: 2024/06/24 20:51:26 by ishenriq         ###   ########.fr       */
+/*   Updated: 2024/06/26 18:33:33 by ishenriq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,7 @@ static void	ft_do(t_vector *phrase, t_shell *shell)
 			else if (execve(ft_get_pathname(shell->path_splitted, cmd),
 					ft_build_argv_exec(phrase), shell->envp) < 0)
 				ft_error(cmd, NULL, strerror(errno), errno);
+			close(g_status);
 		}
 		ft_pid_status(pid);
 	}
@@ -135,7 +136,7 @@ void	ft_execution(t_node *root, t_shell *shell)
 			ft_eliminate_ch_corner(root->str);
 			ft_exec_brackets(root, shell);
 		}
-		else if (root->str)
+		else if (root->str && root->fd != -1)
 			ft_do(root->phrase, shell);
 	}
 }

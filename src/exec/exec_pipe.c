@@ -6,7 +6,7 @@
 /*   By: ishenriq <ishenriq@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/04 20:34:11 by ishenriq          #+#    #+#             */
-/*   Updated: 2024/06/21 20:38:09 by ishenriq         ###   ########.fr       */
+/*   Updated: 2024/06/26 18:43:13 by ishenriq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,12 +16,16 @@ extern volatile sig_atomic_t	g_status;
 
 static void	ending_call_pipe(int side, pid_t pid, int status, int *fd)
 {
-	if (side == RIGHT)
+	/*if (side == RIGHT)
 	{
 		close_fd(fd);
 		waitpid(pid, &status, WUNTRACED);
 		g_status = WEXITSTATUS(status);
-	}
+		ft_status(g_status);
+		ft_pid_status(pid);
+	}*/
+	close_fd(fd);
+	ft_pid_status(pid);
 }
 
 static void	dup_aux(int *fd, int side)
