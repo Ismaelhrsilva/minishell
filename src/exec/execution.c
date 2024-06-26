@@ -6,13 +6,11 @@
 /*   By: ishenriq <ishenriq@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/03 19:15:25 by ishenriq          #+#    #+#             */
-/*   Updated: 2024/06/26 18:33:33 by ishenriq         ###   ########.fr       */
+/*   Updated: 2024/06/26 18:57:19 by ishenriq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-
-extern volatile sig_atomic_t	g_status;
 
 static char	**ft_build_argv_exec(t_vector *phrase)
 {
@@ -78,36 +76,36 @@ static void	ft_or_and(t_node *root, t_shell *shell)
 
 int	ft_builtins(t_node *root, t_shell *shell)
 {
-		if (root->str && ft_strcmp(root->str, "export") == 0)
-			builtin_export(shell, root->phrase);
-		else if (root->str && ft_strcmp(root->str, "env") == 0)
-			ft_env_builtin(shell, root->phrase);
-		else if (root->str && ft_strcmp(root->str, "pwd") == 0)
-			builtin_pwd(shell, root->phrase);
-		else if (root->str && ft_strcmp(root->str, "unset") == 0)
-			builtin_unset(shell, root->phrase);
-		else if (root->str && ft_strcmp(root->str, "exit") == 0)
-			builtin_exit(shell, root->phrase);
-		else if (root->str && ft_strcmp(root->str, "echo") == 0)
-			builtin_echo(shell, root->phrase);
-		else if (root->str && ft_strcmp(root->str, "cd") == 0)
-			builtin_cd(shell, root->phrase);
-		else
-			return (0);
-		return (1);
+	if (root->str && ft_strcmp(root->str, "export") == 0)
+		builtin_export(shell, root->phrase);
+	else if (root->str && ft_strcmp(root->str, "env") == 0)
+		ft_env_builtin(shell, root->phrase);
+	else if (root->str && ft_strcmp(root->str, "pwd") == 0)
+		builtin_pwd(shell, root->phrase);
+	else if (root->str && ft_strcmp(root->str, "unset") == 0)
+		builtin_unset(shell, root->phrase);
+	else if (root->str && ft_strcmp(root->str, "exit") == 0)
+		builtin_exit(shell, root->phrase);
+	else if (root->str && ft_strcmp(root->str, "echo") == 0)
+		builtin_echo(shell, root->phrase);
+	else if (root->str && ft_strcmp(root->str, "cd") == 0)
+		builtin_cd(shell, root->phrase);
+	else
+		return (0);
+	return (1);
 }
 
 void	ft_expand_before_exec(t_node *root, t_shell *shell)
 {
-	int			i;
-	char		*str;
+	int		i;
+	char	*str;
 
 	i = 0;
 	while (i < root->phrase->size)
 	{
 		str = ft_value(root->phrase, i, 0);
-		((t_vector * )root->phrase->values[i])->values[0]
-			= ft_parse_expand(str, shell);
+		((t_vector *)root->phrase->values[i])->values[0] = ft_parse_expand(str,
+				shell);
 		i++;
 	}
 }
@@ -129,7 +127,7 @@ void	ft_execution(t_node *root, t_shell *shell)
 	else if (root->type == EXEC && root->phrase)
 	{
 		ft_expand_before_exec(root, shell);
-		if	(ft_builtins(root, shell))
+		if (ft_builtins(root, shell))
 			return ;
 		if (root->str && root->str[0] == '(')
 		{

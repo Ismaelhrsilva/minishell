@@ -6,7 +6,7 @@
 /*   By: ishenriq <ishenriq@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/22 18:25:14 by ishenriq          #+#    #+#             */
-/*   Updated: 2024/06/25 19:43:45 by ishenriq         ###   ########.fr       */
+/*   Updated: 2024/06/26 18:39:23 by paranha          ###   ########.org.br   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -246,8 +246,7 @@ void				ft_env_add(t_vector *vars, char *name, char *data);
 //Utils
 int					ft_strcmp(char *s1, char *s2);
 void				ft_freesplit(char **arr);
-char				*ft_getenv(t_vector *env, const char *name);
-
+char				*ft_getenv(t_vector *env, char *name);
 
 //remove at end
 void				ft_print_ast(t_node	*root, char *branch);
