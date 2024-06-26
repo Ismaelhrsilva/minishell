@@ -6,15 +6,13 @@
 /*   By: paranha <paranha@student.42sp.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/23 20:11:58 by paranha           #+#    #+#             */
-/*   Updated: 2024/06/26 17:56:34 by paranha          ###   ########.org.br   */
+/*   Updated: 2024/06/26 18:39:52 by paranha          ###   ########.org.br   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-extern volatile sig_atomic_t	g_status;
-
-char	*ft_strcpy(char *dest, const char *src)
+char	*ft_strcpy(char *dest, char *src)
 {
 	int	i;
 
@@ -28,12 +26,12 @@ char	*ft_strcpy(char *dest, const char *src)
 	return (dest);
 }
 
-char	*ft_getenv(t_vector *env, const char *name)
+char	*ft_getenv(t_vector *env, char *name)
 {
 	unsigned long	i;
 	t_vector		*line;
-	const char		*identifier;
-	const char		*value;
+	char			*identifier;
+	char			*value;
 
 	i = 0;
 	if (!env || !name)
@@ -55,7 +53,7 @@ char	*ft_getenv(t_vector *env, const char *name)
 	return (NULL);
 }
 
-static void	update_pwd(t_vector *env, const char *new_pwd)
+static void	update_pwd(t_vector *env, char *new_pwd)
 {
 	char	*old_pwd;
 
@@ -65,7 +63,7 @@ static void	update_pwd(t_vector *env, const char *new_pwd)
 	ft_env_add(env, "PWD", new_pwd);
 }
 
-static int	change_directory(t_vector *env, const char *path)
+static int	change_directory(t_vector *env, char *path)
 {
 	char	new_pwd[PATH_MAX];
 
@@ -79,10 +77,10 @@ static int	change_directory(t_vector *env, const char *path)
 
 void	builtin_cd(t_shell *shell, t_vector *cmd)
 {
-	const char	*dir;
-	int			lflag;
-	int			i;
-	char		*arg;
+	char	*dir;
+	int		lflag;
+	int		i;
+	char	*arg;
 
 	lflag = 0;
 	dir = NULL;
@@ -91,13 +89,13 @@ void	builtin_cd(t_shell *shell, t_vector *cmd)
 	{
 		fprintf(stderr, "cd: too many arguments\n");
 		ft_status(1);
-		//g_status = EXIT_FAILURE;
+		// g_status = EXIT_FAILURE;
 		return ;
 	}
 	if (ft_value(cmd, 1, 0))
 	{
 		arg = ft_value(cmd, i, 0);
-		//printf("Processing argument: %s\n", arg);
+		// printf("Processing argument: %s\n", arg);
 		if (ft_strcmp(arg, "-") == 0)
 		{
 			dir = ft_getenv(shell->envp_dict, "OLDPWD");
@@ -105,7 +103,7 @@ void	builtin_cd(t_shell *shell, t_vector *cmd)
 			{
 				fprintf(stderr, "cd: OLDPWD not set\n");
 				ft_status(1);
-				//g_status = EXIT_FAILURE;
+				// g_status = EXIT_FAILURE;
 				return ;
 			}
 			lflag = 1;
@@ -123,12 +121,12 @@ void	builtin_cd(t_shell *shell, t_vector *cmd)
 			return ;
 		}
 	}
-	//printf("Attempting to change directory to: %s\n", dir);
+	// printf("Attempting to change directory to: %s\n", dir);
 	if (change_directory(shell->envp_dict, dir) != 0)
 	{
 		perror("cd");
 		ft_status(1);
-		//g_status = EXIT_FAILURE;
+		// g_status = EXIT_FAILURE;
 		return ;
 	}
 	if (lflag)

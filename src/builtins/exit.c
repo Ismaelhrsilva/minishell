@@ -6,13 +6,11 @@
 /*   By: paranha <paranha@student.42sp.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/23 20:12:42 by paranha           #+#    #+#             */
-/*   Updated: 2024/06/26 17:33:31 by paranha          ###   ########.org.br   */
+/*   Updated: 2024/06/26 18:39:59 by paranha          ###   ########.org.br   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-
-extern volatile sig_atomic_t	g_status;
 
 static int	check_arg(const char *arg)
 {
@@ -29,7 +27,6 @@ static int	check_arg(const char *arg)
 		return (0);
 	return (1);
 }
-
 
 void	builtin_exit(t_shell *shell, t_vector *cmd)
 {

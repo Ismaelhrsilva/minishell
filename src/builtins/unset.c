@@ -6,13 +6,11 @@
 /*   By: paranha <paranha@student.42sp.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/23 20:13:00 by paranha           #+#    #+#             */
-/*   Updated: 2024/06/26 18:03:30 by paranha          ###   ########.org.br   */
+/*   Updated: 2024/06/26 18:40:09 by paranha          ###   ########.org.br   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-
-extern volatile sig_atomic_t	g_status;
 
 void	builtin_unset(t_shell *shell, t_vector *cmd)
 {
