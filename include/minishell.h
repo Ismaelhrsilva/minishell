@@ -6,7 +6,7 @@
 /*   By: ishenriq <ishenriq@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/22 18:25:14 by ishenriq          #+#    #+#             */
-/*   Updated: 2024/06/23 21:05:09 by ishenriq         ###   ########.fr       */
+/*   Updated: 2024/06/25 19:43:45 by ishenriq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -230,6 +230,7 @@ void				ft_error(char *cmd, char *flag, char *msg, int status);
 //File builtins
 void				builtin_export(t_shell *shell, t_vector *cmd);
 void				ft_env_builtin(t_shell *shell, t_vector *phrase);
+char				**env_export(const t_vector *vars);
 void				ft_env_delete(t_vector *vars, char *name);
 void				ft_freesplit(char **arr);
 void				builtin_cd(t_shell *shell, t_vector *cmd);

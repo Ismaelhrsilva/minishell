@@ -6,7 +6,7 @@
 /*   By: paranha <paranha@student.42sp.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/23 20:30:18 by paranha           #+#    #+#             */
-/*   Updated: 2024/06/23 20:30:19 by paranha          ###   ########.org.br   */
+/*   Updated: 2024/06/25 20:44:58 by ishenriq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,9 +27,10 @@ void	ft_env_print(t_vector *vars)
 		i++;
 	}
 }
+
 void	ft_env_builtin(t_shell *shell, t_vector *cmd)
 {
-	if (cmd->values[1])
+	if (cmd->size > 1)
 		return ;
 	else
 		ft_env_print(shell->envp_dict);

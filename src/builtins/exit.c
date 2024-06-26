@@ -6,7 +6,7 @@
 /*   By: paranha <paranha@student.42sp.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/23 20:12:42 by paranha           #+#    #+#             */
-/*   Updated: 2024/06/23 20:12:44 by paranha          ###   ########.org.br   */
+/*   Updated: 2024/06/25 18:49:53 by ishenriq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,8 @@ void	builtin_exit(t_shell *shell, t_vector *cmd)
 	else if (cmd->values[1] && cmd->values[2])
 	{
 		ft_putendl_fd("exit: too many arguments", STDERR_FILENO);
-		g_status = EXIT_FAILURE;
+		ft_status(1);
+		//g_status = EXIT_FAILURE;
 		return ;
 	}
 	exit(exit_status);

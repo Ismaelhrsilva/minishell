@@ -6,7 +6,7 @@
 /*   By: paranha <paranha@student.42sp.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/23 20:13:00 by paranha           #+#    #+#             */
-/*   Updated: 2024/06/23 20:13:01 by paranha          ###   ########.org.br   */
+/*   Updated: 2024/06/25 18:43:55 by ishenriq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ void	builtin_unset(t_shell *shell, t_vector *cmd)
 	{
 		word = (t_vector *)cmd->values[i];
 		arg = (char *)word->values[0];
-		printf("Unsetting variable: %s\n", arg);
+		//printf("Unsetting variable: %s\n", arg);
 		ft_env_delete(shell->envp_dict, arg);
 	}
 }

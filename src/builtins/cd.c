@@ -6,7 +6,7 @@
 /*   By: paranha <paranha@student.42sp.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/23 20:11:58 by paranha           #+#    #+#             */
-/*   Updated: 2024/06/23 20:53:16 by ishenriq         ###   ########.fr       */
+/*   Updated: 2024/06/25 18:47:34 by ishenriq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,10 +79,10 @@ static int	change_directory(t_vector *env, const char *path)
 
 void	builtin_cd(t_shell *shell, t_vector *cmd)
 {
-	const char	*dir = NULL;
+	const char	*dir;
+	dir = NULL;
 	int			lflag;
 	int			i;
-	t_vector	*word;
 	char		*arg;
 
 	lflag = 0;
@@ -90,21 +90,22 @@ void	builtin_cd(t_shell *shell, t_vector *cmd)
 	if (cmd->size > 2)
 	{
 		fprintf(stderr, "cd: too many arguments\n");
-		g_status = EXIT_FAILURE;
+		ft_status(1);
+		//g_status = EXIT_FAILURE;
 		return ;
 	}
 	if (cmd->values[i])
 	{
-		word = (t_vector *)cmd->values[i];
-		arg = (char *)word->values[0];
-		printf("Processing argument: %s\n", arg);
+		arg = ft_value(cmd, i, 0);
+		//printf("Processing argument: %s\n", arg);
 		if (ft_strcmp(arg, "-") == 0)
 		{
 			dir = ft_getenv(shell->envp_dict, "OLDPWD");
 			if (!dir)
 			{
 				fprintf(stderr, "cd: OLDPWD not set\n");
-				g_status = EXIT_FAILURE;
+				ft_status(1);
+				//g_status = EXIT_FAILURE;
 				return ;
 			}
 			lflag = 1;
@@ -122,14 +123,16 @@ void	builtin_cd(t_shell *shell, t_vector *cmd)
 			return ;
 		}
 	}
-	printf("Attempting to change directory to: %s\n", dir);
+	//printf("Attempting to change directory to: %s\n", dir);
 	if (change_directory(shell->envp_dict, dir) != 0)
 	{
 		perror("cd");
-		g_status = EXIT_FAILURE;
+		ft_status(1);
+		//g_status = EXIT_FAILURE;
 		return ;
 	}
 	if (lflag)
 		printf("%s\n", ft_getenv(shell->envp_dict, "PWD"));
 	g_status = EXIT_SUCCESS;
+	ft_status(g_status);
 }

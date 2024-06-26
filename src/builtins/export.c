@@ -6,7 +6,7 @@
 /*   By: paranha <paranha@student.42sp.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/23 20:12:49 by paranha           #+#    #+#             */
-/*   Updated: 2024/06/24 19:47:16 by ishenriq         ###   ########.fr       */
+/*   Updated: 2024/06/25 18:42:05 by ishenriq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -157,6 +157,30 @@ void	sort_vars(char **argv, int minor)
 	}
 }
 
+int	is_valid_name(char *name)
+{
+	int	i;
+
+	if (!isalpha(name[0]) && name[0] != '_')
+	{
+		ft_status(1);
+		ft_putendl_fd(" not a valid identifier", 2);
+		return (0);
+	}
+	i = 1;
+	while (name[i] != '\0')
+	{
+		if (!isalnum(name[i]) && name[i] != '_')
+		{
+			ft_status(1);
+			ft_putendl_fd(" not a valid identifier", 2);
+			return (0);
+		}
+		i++;
+	}
+	return (1);
+}
+
 void	export_arg(t_vector *env, char *arg)
 {
 	char	*equal_sign;
@@ -168,22 +192,30 @@ void	export_arg(t_vector *env, char *arg)
 	{
 		name = ft_substr(arg, 0, equal_sign - arg);
 		value = ft_strdup(equal_sign + 1);
-		ft_env_add(env, name, value);
+		if (is_valid_name(name))
+			ft_env_add(env, name, value);
+		else
+			return ;
 		free(name);
 		free(value);
 	}
 	else
 	{
-		if (!ft_getenv(env, arg))
-			ft_env_add(env, arg, NULL);
+		if (is_valid_name(arg))
+		{
+			if (!ft_getenv(env, arg))
+				ft_env_add(env, arg, NULL);
+		}
+		else
+			return ;
 	}
 }
 
 void	builtin_export(t_shell *shell, t_vector *cmd)
 {
-	char		**vars;
-	int			i;
-	char		*arg;
+	char	**vars;
+	int		i;
+	char	*arg;
 
 	g_status = EXIT_SUCCESS;
 	i = 1;
@@ -199,10 +231,7 @@ void	builtin_export(t_shell *shell, t_vector *cmd)
 		sort_vars(vars, 0);
 		i = 0;
 		while (vars[i])
-		{
-			ft_putendl_fd(vars[i], STDOUT_FILENO);
-			i++;
-		}
+			ft_putendl_fd(vars[i++], STDOUT_FILENO);
 		ft_freesplit(vars);
 	}
 }
