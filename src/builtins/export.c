@@ -6,75 +6,11 @@
 /*   By: paranha <paranha@student.42sp.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/23 20:12:49 by paranha           #+#    #+#             */
-/*   Updated: 2024/06/27 17:07:45 by phraranha        ###   ########.org.br   */
+/*   Updated: 2024/06/27 17:17:02 by phraranha        ###   ########.org.br   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-
-void	ft_freesplit(char **arr)
-{
-	int	i;
-
-	i = 0;
-	if (!arr)
-		return ;
-	while (arr[i])
-	{
-		free(arr[i]);
-		i++;
-	}
-	free(arr);
-}
-
-int	ft_strcmp(char *s1, char *s2)
-{
-	int	i;
-
-	i = 0;
-	while (s1[i] && s2[i] && s1[i] == s2[i])
-		i++;
-	return (s1[i] - s2[i]);
-}
-
-char	*strjoinsep(char *s1, char *s2, unsigned int sep)
-{
-	char	*new;
-	size_t	size1;
-	size_t	size2;
-
-	size1 = ft_strlen(s1);
-	size2 = ft_strlen(s2);
-	new = (char *)malloc((size1 + size2 + 2) * sizeof(char));
-	if (!new)
-		return (NULL);
-	ft_strlcpy(new, s1, size1 + 1);
-	new[size1] = sep;
-	ft_strlcpy(new + size1 + 1, s2, size2 + 1);
-	return (new);
-}
-
-void	ft_env_delete(t_vector *vars, char *name)
-{
-	unsigned long	i;
-	t_vector		*line_dict;
-	char			*identifier;
-
-	if (!vars || !name)
-		return ;
-	i = 0;
-	while (i < ft_vector_size(vars))
-	{
-		line_dict = ft_vector_at(vars, i);
-		identifier = ft_vector_at(line_dict, 0);
-		if (identifier && ft_strcmp(identifier, name) == 0)
-		{
-			ft_vector_erase(vars, i);
-			return ;
-		}
-		i++;
-	}
-}
 
 char	**env_export(const t_vector *vars)
 {
@@ -125,58 +61,6 @@ void	ft_env_add(t_vector *vars, char *name, char *data)
 	ft_env_delete(vars, name);
 	ft_vector_push_back(vars, line_dict);
 	free(full_string);
-}
-
-void	sort_vars(char **argv, int minor)
-{
-	char	*tmp;
-	int		i;
-	int		j;
-
-	i = 0;
-	while (argv[i])
-	{
-		minor = i;
-		j = i;
-		while (argv[j])
-		{
-			if (ft_strncmp(argv[j], argv[minor], ft_strchr(argv[j], '=')
-					- argv[j]) < 0)
-				minor = j;
-			j++;
-		}
-		if (i != minor)
-		{
-			tmp = argv[i];
-			argv[i] = argv[minor];
-			argv[minor] = tmp;
-		}
-		i++;
-	}
-}
-
-int	is_valid_name(char *name)
-{
-	int	i;
-
-	if (!isalpha(name[0]) && name[0] != '_')
-	{
-		ft_status(1);
-		ft_putendl_fd(" not a valid identifier", 2);
-		return (0);
-	}
-	i = 1;
-	while (name[i] != '\0')
-	{
-		if (!isalnum(name[i]) && name[i] != '_')
-		{
-			ft_status(1);
-			ft_putendl_fd(" not a valid identifier", 2);
-			return (0);
-		}
-		i++;
-	}
-	return (1);
 }
 
 void	handle_equal_sign(t_vector *env, char *arg, char *equal_sign)

@@ -6,52 +6,11 @@
 /*   By: paranha <paranha@student.42sp.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/23 20:11:58 by paranha           #+#    #+#             */
-/*   Updated: 2024/06/27 16:48:12 by phraranha        ###   ########.org.br   */
+/*   Updated: 2024/06/27 17:19:37 by phraranha        ###   ########.org.br   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-
-char	*ft_strcpy(char *dest, char *src)
-{
-	int	i;
-
-	i = 0;
-	while (src[i] != '\0')
-	{
-		dest[i] = src[i];
-		i++;
-	}
-	dest[i] = '\0';
-	return (dest);
-}
-
-char	*ft_getenv(t_vector *env, char *name)
-{
-	unsigned long	i;
-	t_vector		*line;
-	char			*identifier;
-	char			*value;
-
-	i = 0;
-	if (!env || !name)
-		return (NULL);
-	while (i < ft_vector_size(env))
-	{
-		line = ft_vector_at(env, i);
-		if (!line || ft_vector_size(line) < 2)
-		{
-			i++;
-			continue ;
-		}
-		identifier = ft_vector_at(line, 0);
-		value = ft_vector_at(line, 1);
-		if (identifier && ft_strcmp(identifier, name) == 0)
-			return ((char *)value);
-		i++;
-	}
-	return (NULL);
-}
 
 static void	update_pwd(t_vector *env, char *new_pwd)
 {

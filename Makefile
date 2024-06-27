@@ -6,12 +6,12 @@
 #    By: ishenriq <ishenriq@student.42sp.org.br>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/12/11 20:08:54 by ishenriq          #+#    #+#              #
-#    Updated: 2024/06/23 20:57:25 by ishenriq         ###   ########.fr        #
+#    Updated: 2024/06/27 17:24:33 by phraranha        ###   ########.org.br    #
 #                                                                              #
 # **************************************************************************** #
 
 NAME	= minishell
-#CFLAGS	:= -Wextra -Wall -Werror -Wunreachable-code -Ofast -g3 -O3
+#CFLAGS	:= -Wextra -Wall -Werror -Wunreachable-code -Ofast -g3 -O3 -Wunused-variable
 #CFLAGS	:=  -Ofast -g3 -O0 -MD -MP
 CFLAGS	:=  -g3
 CC	:= cc
@@ -57,6 +57,8 @@ SRCS := \
 	builtins/export.c \
 	builtins/pwd.c \
 	builtins/unset.c \
+	builtins/export_utils.c \
+	builtins/builtins_utils.c \
 	exec/execution.c \
 	exec/exec_pipe.c \
 	exec/exec_red.c \
