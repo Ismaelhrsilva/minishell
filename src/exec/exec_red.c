@@ -6,7 +6,7 @@
 /*   By: ishenriq <ishenriq@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/06 20:44:17 by ishenriq          #+#    #+#             */
-/*   Updated: 2024/06/26 21:27:58 by ishenriq         ###   ########.fr       */
+/*   Updated: 2024/06/27 17:42:38 by ishenriq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,8 +30,9 @@ static void	ft_dup_right_flag(t_node *root)
 		ft_change_fds(root->fd, STDIN_FILENO);
 }
 
-static void	ft_which_red(t_node *root, int flag)
+static void	ft_which_red(t_node *root, int flag, t_shell *shell)
 {
+	root->right->str = ft_parse_expand(root->right->str, shell);
 	if (flag & REDOUT)
 		root->fd = open(root->right->str, O_WRONLY | O_CREAT | O_TRUNC, 0666);
 	else if (flag & APPEND)
@@ -51,7 +52,7 @@ static void	ft_redirects(t_node *root, t_shell *shell)
 	if (root->type & (REDALL)
 		&& (root->left->fd != -1 && g_status == 0))
 	{
-		ft_which_red(root, flag);
+		ft_which_red(root, flag, shell);
 		ft_dup_right_flag(root);
 	}
 	else if (root->left->fd == -1)

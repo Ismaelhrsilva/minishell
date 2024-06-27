@@ -6,7 +6,7 @@
 /*   By: ishenriq <ishenriq@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/03 19:15:25 by ishenriq          #+#    #+#             */
-/*   Updated: 2024/06/26 21:05:23 by ishenriq         ###   ########.fr       */
+/*   Updated: 2024/06/27 17:30:51 by ishenriq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -127,6 +127,8 @@ void	ft_execution(t_node *root, t_shell *shell)
 	else if (root->type == EXEC && root->phrase)
 	{
 		ft_expand_before_exec(root, shell);
+		//ft_print_ast(root, "root");
+		//ft_print_vector_content(root->phrase);
 		if (ft_builtins(root, shell))
 			return ;
 		if (root->str && root->str[0] == '(')
