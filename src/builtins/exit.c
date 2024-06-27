@@ -6,7 +6,7 @@
 /*   By: paranha <paranha@student.42sp.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/23 20:12:42 by paranha           #+#    #+#             */
-/*   Updated: 2024/06/26 18:39:59 by paranha          ###   ########.org.br   */
+/*   Updated: 2024/06/27 16:56:32 by phraranha        ###   ########.org.br   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,14 +28,14 @@ static int	check_arg(const char *arg)
 	return (1);
 }
 
-void	builtin_exit(t_shell *shell, t_vector *cmd)
+unsigned char	parse_exit_arguments(t_vector *cmd)
 {
 	int				i;
-	unsigned char	exit_status;
 	char			*arg;
+	unsigned char	exit_status;
 
-	exit_status = 0;
 	i = 1;
+	exit_status = 0;
 	while (i < cmd->size)
 	{
 		arg = ft_value(cmd, i, 0);
@@ -46,18 +46,24 @@ void	builtin_exit(t_shell *shell, t_vector *cmd)
 		}
 		i++;
 	}
+	return (exit_status);
+}
+
+void	builtin_exit(t_shell *shell, t_vector *cmd)
+{
+	unsigned char	exit_status;
+
+	exit_status = parse_exit_arguments(cmd);
 	ft_putendl_fd("exit", STDOUT_FILENO);
-	if (i > 1 && ft_value(cmd, 1, 0)
-		&& !check_arg(ft_value(cmd, 1, 0)))
+	if (cmd->size > 1 && !check_arg(ft_value(cmd, 1, 0)))
 	{
 		ft_putendl_fd("exit: numeric argument required", STDERR_FILENO);
 		exit(2);
 	}
-	else if (ft_value(cmd, 1, 0) && ft_value(cmd, 2, 0))
+	else if (cmd->size > 2)
 	{
 		ft_putendl_fd("exit: too many arguments", STDERR_FILENO);
 		ft_status(1);
-		//g_status = EXIT_FAILURE;
 		return ;
 	}
 	exit(exit_status);
