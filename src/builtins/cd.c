@@ -6,7 +6,7 @@
 /*   By: paranha <paranha@student.42sp.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/23 20:11:58 by paranha           #+#    #+#             */
-/*   Updated: 2024/06/26 18:39:52 by paranha          ###   ########.org.br   */
+/*   Updated: 2024/06/27 16:48:12 by phraranha        ###   ########.org.br   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,62 +75,60 @@ static int	change_directory(t_vector *env, char *path)
 	return (0);
 }
 
+void	handle_cd_dash(t_shell *shell, char **dir)
+{
+	*dir = ft_getenv(shell->envp_dict, "OLDPWD");
+	if (!*dir)
+	{
+		ft_putstr_fd("cd: OLDPWD not set\n", STDERR_FILENO);
+		ft_status(1);
+	}
+}
+
+void	get_cd_directory(t_shell *shell, t_vector *cmd, char **dir)
+{
+	char	*arg;
+
+	if (ft_value(cmd, 1, 0))
+	{
+		arg = ft_value(cmd, 1, 0);
+		if (ft_strcmp(arg, "-") == 0)
+			handle_cd_dash(shell, dir);
+		else
+			*dir = arg;
+	}
+	if (!*dir)
+	{
+		*dir = ft_getenv(shell->envp_dict, "HOME");
+		if (!*dir)
+		{
+			ft_putstr_fd("cd: HOME not set\n", STDERR_FILENO);
+			ft_status(1);
+		}
+	}
+}
+
 void	builtin_cd(t_shell *shell, t_vector *cmd)
 {
 	char	*dir;
-	int		lflag;
-	int		i;
-	char	*arg;
 
-	lflag = 0;
 	dir = NULL;
-	i = 1;
 	if (cmd->size > 2)
 	{
-		fprintf(stderr, "cd: too many arguments\n");
+		ft_putstr_fd("cd: too many arguments\n", STDERR_FILENO);
 		ft_status(1);
-		// g_status = EXIT_FAILURE;
 		return ;
 	}
-	if (ft_value(cmd, 1, 0))
-	{
-		arg = ft_value(cmd, i, 0);
-		// printf("Processing argument: %s\n", arg);
-		if (ft_strcmp(arg, "-") == 0)
-		{
-			dir = ft_getenv(shell->envp_dict, "OLDPWD");
-			if (!dir)
-			{
-				fprintf(stderr, "cd: OLDPWD not set\n");
-				ft_status(1);
-				// g_status = EXIT_FAILURE;
-				return ;
-			}
-			lflag = 1;
-		}
-		else
-			dir = arg;
-	}
+	get_cd_directory(shell, cmd, &dir);
 	if (!dir)
-	{
-		dir = ft_getenv(shell->envp_dict, "HOME");
-		if (!dir)
-		{
-			fprintf(stderr, "cd: HOME not set\n");
-			g_status = EXIT_FAILURE;
-			return ;
-		}
-	}
-	// printf("Attempting to change directory to: %s\n", dir);
+		return ;
 	if (change_directory(shell->envp_dict, dir) != 0)
 	{
-		perror("cd");
+		ft_putstr_fd("cd: ", STDERR_FILENO);
+		perror(dir);
 		ft_status(1);
-		// g_status = EXIT_FAILURE;
 		return ;
 	}
-	if (lflag)
-		printf("%s\n", ft_getenv(shell->envp_dict, "PWD"));
 	g_status = EXIT_SUCCESS;
 	ft_status(g_status);
 }
