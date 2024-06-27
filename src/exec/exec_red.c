@@ -6,7 +6,7 @@
 /*   By: ishenriq <ishenriq@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/06 20:44:17 by ishenriq          #+#    #+#             */
-/*   Updated: 2024/06/26 18:37:58 by ishenriq         ###   ########.fr       */
+/*   Updated: 2024/06/26 21:27:58 by ishenriq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,9 +64,12 @@ void	ft_exec_redirects(t_node *root, t_shell *shell)
 
 	if (!root->fd)
 		ft_redirects(root, shell);
-	if (g_status > 0 || root->fd == -1)
+	if (root->fd == -1)
 	{
-		perror("fd");
+		//if (errno == EACCES || errno == EACCES)
+		g_status = 1;
+		ft_status(1);
+		perror("minishell");
 		return (ft_close_fd_tmp(fd));
 	}
 	ft_execution(root->left, shell);

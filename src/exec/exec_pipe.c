@@ -6,27 +6,13 @@
 /*   By: ishenriq <ishenriq@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/04 20:34:11 by ishenriq          #+#    #+#             */
-/*   Updated: 2024/06/26 18:43:13 by ishenriq         ###   ########.fr       */
+/*   Updated: 2024/06/26 21:11:50 by ishenriq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
 extern volatile sig_atomic_t	g_status;
-
-static void	ending_call_pipe(int side, pid_t pid, int status, int *fd)
-{
-	/*if (side == RIGHT)
-	{
-		close_fd(fd);
-		waitpid(pid, &status, WUNTRACED);
-		g_status = WEXITSTATUS(status);
-		ft_status(g_status);
-		ft_pid_status(pid);
-	}*/
-	close_fd(fd);
-	ft_pid_status(pid);
-}
 
 static void	dup_aux(int *fd, int side)
 {
@@ -46,31 +32,31 @@ static void	ft_execution_side(t_node *root, t_shell *shell, int side)
 
 static void	ft_pipe_aux(t_node *root, t_shell *shell, int *fd, int side)
 {
-	pid_t	pid;
-	int		status;
-
-	status = 0;
-	pid = fork();
-	if (pid < 0)
-		exit (0);
-	if (pid == 0)
-	{
-		status_here(FORK, 1);
-		rl_clear_history();
-		dup_aux(fd, side);
-		close_fd(fd);
-		ft_execution_side(root, shell, side);
-		exit (0);
-	}
-	ending_call_pipe(side, pid, status, fd);
+	status_here(FORK, 1);
+	rl_clear_history();
+	dup_aux(fd, side);
+	close_fd(fd);
+	ft_execution_side(root, shell, side);
+	exit (0);
 }
 
 void	ft_pipe(t_node *root, t_shell *shell)
 {
 	int	fd[2];
+	pid_t	pid[2];
 
 	if (pipe(fd) < 0)
 		exit (0);
-	ft_pipe_aux(root, shell, fd, LEFT);
-	ft_pipe_aux(root, shell, fd, RIGHT);
+	pid[0] = fork();
+	if (pid[0] == 0)
+		ft_pipe_aux(root, shell, fd, LEFT);
+	pid[1] = fork();
+	if (pid[1] == 0)
+		ft_pipe_aux(root, shell, fd, RIGHT);
+	close(fd[0]);
+	close(fd[1]);
+	//ft_pid_status(pid[0]);
+	ft_pid_status_without_flobal(pid[0]);
+	ft_pid_status(pid[1]);
+
 }

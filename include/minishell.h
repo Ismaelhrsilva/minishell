@@ -6,7 +6,7 @@
 /*   By: ishenriq <ishenriq@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/22 18:25:14 by ishenriq          #+#    #+#             */
-/*   Updated: 2024/06/26 18:39:23 by paranha          ###   ########.org.br   */
+/*   Updated: 2024/06/26 21:10:59 by ishenriq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -251,5 +251,6 @@ char				*ft_getenv(t_vector *env, char *name);
 //remove at end
 void				ft_print_ast(t_node	*root, char *branch);
 void				ft_print_vector_content(t_vector *phrase);
+void	ft_pid_status_without_flobal(pid_t pid);
 
 #endif
