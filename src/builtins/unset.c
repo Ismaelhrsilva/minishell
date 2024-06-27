@@ -6,11 +6,13 @@
 /*   By: paranha <paranha@student.42sp.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/23 20:13:00 by paranha           #+#    #+#             */
-/*   Updated: 2024/06/27 17:14:41 by phraranha        ###   ########.org.br   */
+/*   Updated: 2024/06/27 18:00:39 by paranha          ###   ########.org.br   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+extern volatile sig_atomic_t	g_status;
 
 void	ft_env_delete(t_vector *vars, char *name)
 {

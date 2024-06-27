@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   vector_add.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ishenriq <ishenriq@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: paranha <paranha@student.42sp.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/06/01 12:45:54 by phraranha         #+#    #+#             */
-/*   Updated: 2024/06/21 21:00:21 by ishenriq         ###   ########.fr       */
+/*   Created: 2024/06/27 17:56:52 by paranha           #+#    #+#             */
+/*   Updated: 2024/06/27 17:56:54 by paranha          ###   ########.org.br   */
 /*                                                                            */
 /* ************************************************************************** */
 
