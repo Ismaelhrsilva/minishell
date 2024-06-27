@@ -6,77 +6,11 @@
 /*   By: paranha <paranha@student.42sp.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/23 20:12:49 by paranha           #+#    #+#             */
-/*   Updated: 2024/06/25 18:42:05 by ishenriq         ###   ########.fr       */
+/*   Updated: 2024/06/27 17:17:02 by phraranha        ###   ########.org.br   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-
-extern volatile sig_atomic_t	g_status;
-
-void	ft_freesplit(char **arr)
-{
-	int	i;
-
-	i = 0;
-	if (!arr)
-		return ;
-	while (arr[i])
-	{
-		free(arr[i]);
-		i++;
-	}
-	free(arr);
-}
-
-int	ft_strcmp(char *s1, char *s2)
-{
-	int	i;
-
-	i = 0;
-	while (s1[i] && s2[i] && s1[i] == s2[i])
-		i++;
-	return (s1[i] - s2[i]);
-}
-
-char	*strjoinsep(char *s1, char *s2, unsigned int sep)
-{
-	char	*new;
-	size_t	size1;
-	size_t	size2;
-
-	size1 = ft_strlen(s1);
-	size2 = ft_strlen(s2);
-	new = (char *)malloc((size1 + size2 + 2) * sizeof(char));
-	if (!new)
-		return (NULL);
-	ft_strlcpy(new, s1, size1 + 1);
-	new[size1] = sep;
-	ft_strlcpy(new + size1 + 1, s2, size2 + 1);
-	return (new);
-}
-
-void	ft_env_delete(t_vector *vars, char *name)
-{
-	unsigned long	i;
-	t_vector		*line_dict;
-	char			*identifier;
-
-	if (!vars || !name)
-		return ;
-	i = 0;
-	while (i < ft_vector_size(vars))
-	{
-		line_dict = ft_vector_at(vars, i);
-		identifier = ft_vector_at(line_dict, 0);
-		if (identifier && ft_strcmp(identifier, name) == 0)
-		{
-			ft_vector_erase(vars, i);
-			return ;
-		}
-		i++;
-	}
-}
 
 char	**env_export(const t_vector *vars)
 {
@@ -129,85 +63,34 @@ void	ft_env_add(t_vector *vars, char *name, char *data)
 	free(full_string);
 }
 
-void	sort_vars(char **argv, int minor)
+void	handle_equal_sign(t_vector *env, char *arg, char *equal_sign)
 {
-	char	*tmp;
-	int		i;
-	int		j;
+	char	*name;
+	char	*value;
 
-	i = 0;
-	while (argv[i])
+	name = ft_substr(arg, 0, equal_sign - arg);
+	if (is_valid_name(name))
 	{
-		minor = i;
-		j = i;
-		while (argv[j])
-		{
-			if (ft_strncmp(argv[j], argv[minor], ft_strchr(argv[j], '=')
-					- argv[j]) < 0)
-				minor = j;
-			j++;
-		}
-		if (i != minor)
-		{
-			tmp = argv[i];
-			argv[i] = argv[minor];
-			argv[minor] = tmp;
-		}
-		i++;
+		value = ft_strdup(equal_sign + 1);
+		ft_env_add(env, name, value);
+		free(name);
+		free(value);
 	}
-}
-
-int	is_valid_name(char *name)
-{
-	int	i;
-
-	if (!isalpha(name[0]) && name[0] != '_')
-	{
-		ft_status(1);
-		ft_putendl_fd(" not a valid identifier", 2);
-		return (0);
-	}
-	i = 1;
-	while (name[i] != '\0')
-	{
-		if (!isalnum(name[i]) && name[i] != '_')
-		{
-			ft_status(1);
-			ft_putendl_fd(" not a valid identifier", 2);
-			return (0);
-		}
-		i++;
-	}
-	return (1);
+	else
+		free(name);
 }
 
 void	export_arg(t_vector *env, char *arg)
 {
 	char	*equal_sign;
-	char	*name;
-	char	*value;
 
 	equal_sign = ft_strchr(arg, '=');
 	if (equal_sign)
-	{
-		name = ft_substr(arg, 0, equal_sign - arg);
-		value = ft_strdup(equal_sign + 1);
-		if (is_valid_name(name))
-			ft_env_add(env, name, value);
-		else
-			return ;
-		free(name);
-		free(value);
-	}
+		handle_equal_sign(env, arg, equal_sign);
 	else
 	{
-		if (is_valid_name(arg))
-		{
-			if (!ft_getenv(env, arg))
-				ft_env_add(env, arg, NULL);
-		}
-		else
-			return ;
+		if (is_valid_name(arg) && !ft_getenv(env, arg))
+			ft_env_add(env, arg, NULL);
 	}
 }
 
