@@ -6,13 +6,11 @@
 /*   By: paranha <paranha@student.42sp.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/23 20:12:49 by paranha           #+#    #+#             */
-/*   Updated: 2024/06/25 18:42:05 by ishenriq         ###   ########.fr       */
+/*   Updated: 2024/06/27 17:07:45 by phraranha        ###   ########.org.br   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-
-extern volatile sig_atomic_t	g_status;
 
 void	ft_freesplit(char **arr)
 {
@@ -181,33 +179,34 @@ int	is_valid_name(char *name)
 	return (1);
 }
 
-void	export_arg(t_vector *env, char *arg)
+void	handle_equal_sign(t_vector *env, char *arg, char *equal_sign)
 {
-	char	*equal_sign;
 	char	*name;
 	char	*value;
 
-	equal_sign = ft_strchr(arg, '=');
-	if (equal_sign)
+	name = ft_substr(arg, 0, equal_sign - arg);
+	if (is_valid_name(name))
 	{
-		name = ft_substr(arg, 0, equal_sign - arg);
 		value = ft_strdup(equal_sign + 1);
-		if (is_valid_name(name))
-			ft_env_add(env, name, value);
-		else
-			return ;
+		ft_env_add(env, name, value);
 		free(name);
 		free(value);
 	}
 	else
+		free(name);
+}
+
+void	export_arg(t_vector *env, char *arg)
+{
+	char	*equal_sign;
+
+	equal_sign = ft_strchr(arg, '=');
+	if (equal_sign)
+		handle_equal_sign(env, arg, equal_sign);
+	else
 	{
-		if (is_valid_name(arg))
-		{
-			if (!ft_getenv(env, arg))
-				ft_env_add(env, arg, NULL);
-		}
-		else
-			return ;
+		if (is_valid_name(arg) && !ft_getenv(env, arg))
+			ft_env_add(env, arg, NULL);
 	}
 }
 
