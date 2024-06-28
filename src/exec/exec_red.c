@@ -6,7 +6,7 @@
 /*   By: ishenriq <ishenriq@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/06 20:44:17 by ishenriq          #+#    #+#             */
-/*   Updated: 2024/06/27 21:06:37 by ishenriq         ###   ########.fr       */
+/*   Updated: 2024/06/27 21:28:15 by ishenriq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,10 +16,10 @@ extern volatile sig_atomic_t	g_status;
 
 static void	ft_close_fd_tmp(const int *fd)
 {
-	dup2(fd[0], STDOUT_FILENO);
-	dup2(fd[1], STDIN_FILENO);
-	close(fd[0]);
+	dup2(fd[1], STDOUT_FILENO);
+	dup2(fd[0], STDIN_FILENO);
 	close(fd[1]);
+	close(fd[0]);
 }
 
 static void	ft_dup_right_flag(t_node *root)
@@ -50,7 +50,7 @@ static void	ft_redirects(t_node *root, t_shell *shell)
 	flag = 0;
 	flag |= root->type;
 	if (root->type & (REDALL)
-		&& (root->left->fd != -1 && g_status == 0))
+		&& (root->left->fd != -1))
 	{
 		ft_which_red(root, flag, shell);
 		ft_dup_right_flag(root);
@@ -71,8 +71,7 @@ void	ft_exec_redirects(t_node *root, t_shell *shell)
 		g_status = 1;
 		ft_status(1);
 		perror("minishell");
-		//return (ft_close_fd_tmp(fd));
-		return ;
+		return (ft_close_fd_tmp(fd));
 	}
 	ft_execution(root->left, shell);
 	ft_close_fd_tmp(fd);
