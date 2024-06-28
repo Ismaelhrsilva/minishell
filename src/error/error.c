@@ -6,7 +6,7 @@
 /*   By: ishenriq <ishenriq@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/19 20:10:42 by ishenriq          #+#    #+#             */
-/*   Updated: 2024/06/27 17:59:06 by paranha          ###   ########.org.br   */
+/*   Updated: 2024/06/27 20:10:23 by ishenriq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,10 +41,8 @@ void	ft_error(char *cmd, char *flag, char *msg, int status)
 	else
 		g_status = status;
 	ft_status(g_status);
-	//exit (ft_status(-1));
 }
 
-/*
 void	close_open_fds(void)
 {
 	struct dirent	*file;
@@ -64,7 +62,7 @@ void	close_open_fds(void)
 	closedir(root);
 }
 
-void	ft_clear(t_shell *shell, t_vector *t_vector)
+void	ft_clear(t_shell *shell)
 {
 	close_open_fds();
-}*/
+}

@@ -6,7 +6,7 @@
 /*   By: ishenriq <ishenriq@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/06 20:44:17 by ishenriq          #+#    #+#             */
-/*   Updated: 2024/06/27 17:42:38 by ishenriq         ###   ########.fr       */
+/*   Updated: 2024/06/27 21:06:37 by ishenriq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,8 @@ void	ft_exec_redirects(t_node *root, t_shell *shell)
 		g_status = 1;
 		ft_status(1);
 		perror("minishell");
-		return (ft_close_fd_tmp(fd));
+		//return (ft_close_fd_tmp(fd));
+		return ;
 	}
 	ft_execution(root->left, shell);
 	ft_close_fd_tmp(fd);

@@ -6,7 +6,7 @@
 /*   By: paranha <paranha@student.42sp.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/23 20:12:42 by paranha           #+#    #+#             */
-/*   Updated: 2024/06/27 17:56:04 by paranha          ###   ########.org.br   */
+/*   Updated: 2024/06/27 20:15:24 by ishenriq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,5 +66,6 @@ void	builtin_exit(t_shell *shell, t_vector *cmd)
 		ft_status(1);
 		return ;
 	}
+	ft_clear(shell);
 	exit(exit_status);
 }

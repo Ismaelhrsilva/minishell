@@ -6,7 +6,7 @@
 /*   By: ishenriq <ishenriq@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/22 18:25:14 by ishenriq          #+#    #+#             */
-/*   Updated: 2024/06/27 17:21:50 by ishenriq         ###   ########.fr       */
+/*   Updated: 2024/06/27 20:11:16 by ishenriq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -213,6 +213,7 @@ int					ft_status(int st);
 void				close_fd(int *fd);
 void				ft_change_fds(int fd, int new);
 void				ft_pid_status(pid_t pid);
+void				ft_pid_status_without_flobal(pid_t pid);
 
 //File Heredoc
 void				ft_open_heredoc(t_node *root, t_shell *shell);
@@ -226,6 +227,7 @@ void				ft_sigquit(void);
 
 // File Error
 void				ft_error(char *cmd, char *flag, char *msg, int status);
+void				ft_clear(t_shell *shell);
 
 //File builtins
 void				builtin_export(t_shell *shell, t_vector *cmd);
@@ -244,7 +246,7 @@ void				ft_env_delete(t_vector *vars, char *name);
 void				ft_env_add(t_vector *vars, char *name, char *data);
 char				*strjoinsep(char *s1, char *s2, unsigned int sep);
 void				sort_vars(char **argv, int minor);
-int				is_valid_name(char *name);
+int					is_valid_name(char *name);
 
 //Utils
 int					ft_strcmp(char *s1, char *s2);
@@ -254,6 +256,5 @@ char				*ft_getenv(t_vector *env, char *name);
 //remove at end
 void				ft_print_ast(t_node	*root, char *branch);
 void				ft_print_vector_content(t_vector *phrase);
-void	ft_pid_status_without_flobal(pid_t pid);
 
 #endif

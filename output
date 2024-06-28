@@ -1,0 +1,13 @@
+minishell>$ echo <"./test_files/infile_big" | cat <"./test_files/infile"
+minishell>$ echo <"./test_files/infile_big" | cat "./test_files/infile"
+minishell>$ echo <"./test_files/infile_big" | echo <"./test_files/infile"
+
+minishell>$ echo hi | cat <"./test_files/infile"
+hi
+minishell>$ echo hi | cat "./test_files/infile"
+minishell>$ cat <"./test_files/infile" | echo hi
+hi
+
+minishell>$ ^C
+minishell>$ ^C
+minishell>$ 
