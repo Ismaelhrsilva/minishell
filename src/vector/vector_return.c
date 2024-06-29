@@ -6,7 +6,7 @@
 /*   By: paranha <paranha@student.42sp.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/27 17:57:06 by paranha           #+#    #+#             */
-/*   Updated: 2024/06/27 17:57:08 by paranha          ###   ########.org.br   */
+/*   Updated: 2024/06/29 19:29:00 by paranha          ###   ########.org.br   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,13 +40,6 @@ void	*ft_value(const t_vector *vector, unsigned long i, unsigned long j)
 int	ft_value_int(const t_vector *vector, unsigned long i, unsigned long j)
 {
 	return (*(int *)ft_value(vector, i, j));
-}
-
-unsigned long	ft_vector_capacity(const t_vector *vector)
-{
-	if (vector == NULL)
-		return (0);
-	return (vector->capacity);
 }
 
 bool	ft_vector_empty(const t_vector *vector)

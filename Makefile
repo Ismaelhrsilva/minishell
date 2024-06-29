@@ -6,7 +6,7 @@
 #    By: ishenriq <ishenriq@student.42sp.org.br>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/12/11 20:08:54 by ishenriq          #+#    #+#              #
-#    Updated: 2024/06/27 17:54:31 by paranha          ###   ########.org.br    #
+#    Updated: 2024/06/29 20:30:25 by phraranha        ###   ########.org.br    #
 #                                                                              #
 # **************************************************************************** #
 
@@ -29,45 +29,45 @@ LDFLAGS	:= $(HEADERS) $(LIBS)
 
 SRC_DIR := ./src/
 SRCS := \
-	grammar/grammar.c \
-	grammar/order.c \
-	grammar/grammar_utils.c \
-	parser/parser.c \
-	parser/parser_utils.c \
-	tokenizer/phrase.c \
-	tokenizer/tokenizer.c \
-	tokenizer/expand.c \
-	tokenizer/expand_utils.c \
-	principal/read_inputs.c \
-	principal/utils.c \
-	principal/main.c \
-	vector/vector_add.c \
-	vector/vector_remove.c \
-	vector/vector_return.c \
-	vector/vector_create.c \
-	vector/vector_split.c \
 	ast/ast.c \
 	ast/ast_utils.c \
-	envp/envp.c \
-	envp/pathname.c \
+	builtins/builtins_utils.c \
 	builtins/cd.c \
 	builtins/echo.c \
 	builtins/env.c \
 	builtins/exit.c \
 	builtins/export.c \
+	builtins/export_utils.c \
 	builtins/pwd.c \
 	builtins/unset.c \
-	builtins/export_utils.c \
-	builtins/builtins_utils.c \
-	exec/execution.c \
+	debug/print_debug.c \
+	envp/envp.c \
+	envp/pathname.c \
+	error/error.c \
+	exec/exec_brackets.c \
 	exec/exec_pipe.c \
 	exec/exec_red.c \
 	exec/exec_utils.c \
-	exec/exec_brackets.c \
+	exec/execution.c \
+	grammar/grammar.c \
+	grammar/grammar_utils.c \
+	grammar/order.c \
 	heredoc/heredoc.c \
+	parser/parser.c \
+	parser/parser_utils.c \
+	principal/main.c \
+	principal/read_inputs.c \
+	principal/utils.c \
 	signal/signals.c \
-	debug/print_debug.c \
-	error/error.c \
+	tokenizer/expand.c \
+	tokenizer/expand_utils.c \
+	tokenizer/phrase.c \
+	tokenizer/tokenizer.c \
+	vector/vector_add.c \
+	vector/vector_create.c \
+	vector/vector_remove.c \
+	vector/vector_return.c \
+	vector/vector_split.c \
 
 SRC := $(addprefix $(SRC_DIR)/, $(SRCS))
 

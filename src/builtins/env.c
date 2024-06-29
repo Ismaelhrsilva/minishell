@@ -6,7 +6,7 @@
 /*   By: paranha <paranha@student.42sp.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/23 20:30:18 by paranha           #+#    #+#             */
-/*   Updated: 2024/06/25 20:44:58 by ishenriq         ###   ########.fr       */
+/*   Updated: 2024/06/29 19:31:56 by paranha          ###   ########.org.br   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ void	ft_env_print(t_vector *vars)
 	}
 }
 
-void	ft_env_builtin(t_shell *shell, t_vector *cmd)
+void	ft_builtin_env(t_shell *shell, t_vector *cmd)
 {
 	if (cmd->size > 1)
 		return ;

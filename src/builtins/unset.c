@@ -6,7 +6,7 @@
 /*   By: paranha <paranha@student.42sp.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/23 20:13:00 by paranha           #+#    #+#             */
-/*   Updated: 2024/06/27 18:00:39 by paranha          ###   ########.org.br   */
+/*   Updated: 2024/06/29 19:32:30 by paranha          ###   ########.org.br   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ void	ft_env_delete(t_vector *vars, char *name)
 	}
 }
 
-void	builtin_unset(t_shell *shell, t_vector *cmd)
+void	ft_builtin_unset(t_shell *shell, t_vector *cmd)
 {
 	int			i;
 	char		*arg;

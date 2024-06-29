@@ -6,13 +6,13 @@
 /*   By: paranha <paranha@student.42sp.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/23 20:12:42 by paranha           #+#    #+#             */
-/*   Updated: 2024/06/27 20:15:24 by ishenriq         ###   ########.fr       */
+/*   Updated: 2024/06/29 19:33:48 by paranha          ###   ########.org.br   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-static int	check_arg(const char *arg)
+static int	ft_check_arg(const char *arg)
 {
 	int	i;
 
@@ -28,7 +28,7 @@ static int	check_arg(const char *arg)
 	return (1);
 }
 
-unsigned char	parse_exit_arguments(t_vector *cmd)
+unsigned char	ft_parse_exit_arguments(t_vector *cmd)
 {
 	int				i;
 	char			*arg;
@@ -39,7 +39,7 @@ unsigned char	parse_exit_arguments(t_vector *cmd)
 	while (i < cmd->size)
 	{
 		arg = ft_value(cmd, i, 0);
-		if (check_arg(arg))
+		if (ft_check_arg(arg))
 		{
 			exit_status = (unsigned char)ft_atoi(arg);
 			break ;
@@ -49,13 +49,13 @@ unsigned char	parse_exit_arguments(t_vector *cmd)
 	return (exit_status);
 }
 
-void	builtin_exit(t_shell *shell, t_vector *cmd)
+void	ft_builtin_exit(t_shell *shell, t_vector *cmd)
 {
 	unsigned char	exit_status;
 
-	exit_status = parse_exit_arguments(cmd);
+	exit_status = ft_parse_exit_arguments(cmd);
 	ft_putendl_fd("exit", STDOUT_FILENO);
-	if (cmd->size > 1 && !check_arg(ft_value(cmd, 1, 0)))
+	if (cmd->size > 1 && !ft_check_arg(ft_value(cmd, 1, 0)))
 	{
 		ft_putendl_fd("exit: numeric argument required", STDERR_FILENO);
 		exit(2);

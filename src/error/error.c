@@ -6,7 +6,7 @@
 /*   By: ishenriq <ishenriq@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/19 20:10:42 by ishenriq          #+#    #+#             */
-/*   Updated: 2024/06/27 20:10:23 by ishenriq         ###   ########.fr       */
+/*   Updated: 2024/06/29 19:29:50 by paranha          ###   ########.org.br   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ void	ft_error(char *cmd, char *flag, char *msg, int status)
 	}
 	if ((ft_strchr("./", cmd[0]) || cmd[ft_strlen(cmd) - 1] == '/')
 		&& status != ENOENT && path_stat.st_mode & S_IFDIR)
-		ft_putstr_fd("Is a directory", STDERR_FILENO);
+		ft_putstr_fd("Is a directory\n", STDERR_FILENO);
 	else
 		ft_putendl_fd(msg, STDERR_FILENO);
 	if (status == EACCES)

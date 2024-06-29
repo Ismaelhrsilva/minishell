@@ -6,7 +6,7 @@
 /*   By: paranha <paranha@student.42sp.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/23 20:11:58 by paranha           #+#    #+#             */
-/*   Updated: 2024/06/27 17:59:38 by paranha          ###   ########.org.br   */
+/*   Updated: 2024/06/29 19:36:49 by paranha          ###   ########.org.br   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 extern volatile sig_atomic_t	g_status;
 
-static void	update_pwd(t_vector *env, char *new_pwd)
+static void	ft_update_pwd(t_vector *env, char *new_pwd)
 {
 	char	*old_pwd;
 
@@ -24,7 +24,7 @@ static void	update_pwd(t_vector *env, char *new_pwd)
 	ft_env_add(env, "PWD", new_pwd);
 }
 
-static int	change_directory(t_vector *env, char *path)
+static int	ft_change_directory(t_vector *env, char *path)
 {
 	char	new_pwd[PATH_MAX];
 
@@ -32,11 +32,11 @@ static int	change_directory(t_vector *env, char *path)
 		return (-1);
 	if (getcwd(new_pwd, sizeof(new_pwd)) == NULL)
 		return (-1);
-	update_pwd(env, new_pwd);
+	ft_update_pwd(env, new_pwd);
 	return (0);
 }
 
-void	handle_cd_dash(t_shell *shell, char **dir)
+void	ft_handle_cd_dash(t_shell *shell, char **dir)
 {
 	*dir = ft_getenv(shell->envp_dict, "OLDPWD");
 	if (!*dir)
@@ -46,7 +46,7 @@ void	handle_cd_dash(t_shell *shell, char **dir)
 	}
 }
 
-void	get_cd_directory(t_shell *shell, t_vector *cmd, char **dir)
+void	ft_get_cd_directory(t_shell *shell, t_vector *cmd, char **dir)
 {
 	char	*arg;
 
@@ -54,7 +54,7 @@ void	get_cd_directory(t_shell *shell, t_vector *cmd, char **dir)
 	{
 		arg = ft_value(cmd, 1, 0);
 		if (ft_strcmp(arg, "-") == 0)
-			handle_cd_dash(shell, dir);
+			ft_handle_cd_dash(shell, dir);
 		else
 			*dir = arg;
 	}
@@ -69,7 +69,7 @@ void	get_cd_directory(t_shell *shell, t_vector *cmd, char **dir)
 	}
 }
 
-void	builtin_cd(t_shell *shell, t_vector *cmd)
+void	ft_builtin_cd(t_shell *shell, t_vector *cmd)
 {
 	char	*dir;
 
@@ -80,10 +80,10 @@ void	builtin_cd(t_shell *shell, t_vector *cmd)
 		ft_status(1);
 		return ;
 	}
-	get_cd_directory(shell, cmd, &dir);
+	ft_get_cd_directory(shell, cmd, &dir);
 	if (!dir)
 		return ;
-	if (change_directory(shell->envp_dict, dir) != 0)
+	if (ft_change_directory(shell->envp_dict, dir) != 0)
 	{
 		ft_putstr_fd("cd: ", STDERR_FILENO);
 		perror(dir);

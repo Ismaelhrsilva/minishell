@@ -6,7 +6,7 @@
 /*   By: paranha <paranha@student.42sp.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/23 20:12:04 by paranha           #+#    #+#             */
-/*   Updated: 2024/06/26 18:01:00 by paranha          ###   ########.org.br   */
+/*   Updated: 2024/06/29 19:30:06 by paranha          ###   ########.org.br   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 extern volatile sig_atomic_t	g_status;
 
-void	builtin_echo(t_shell *shell, t_vector *cmd)
+void	ft_builtin_echo(t_shell *shell, t_vector *cmd)
 {
 	int	i;
 	int	no_newline;

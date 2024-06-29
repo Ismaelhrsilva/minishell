@@ -6,7 +6,7 @@
 /*   By: ishenriq <ishenriq@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/22 18:25:14 by ishenriq          #+#    #+#             */
-/*   Updated: 2024/06/27 20:11:16 by ishenriq         ###   ########.fr       */
+/*   Updated: 2024/06/29 20:07:43 by paranha          ###   ########.org.br   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -119,25 +119,25 @@ typedef struct s_shell
 
 // File: Read_inputs
 char				*read_line(void);
-void				ft_to_execute(char *str, t_shell *shell);
 void				ft_return_terminal(int ret);
+void				ft_to_execute(char *str, t_shell *shell);
 
 // File Parse
 char				**ft_parser(t_parse *parse);
-void				ft_arranging_prompt(t_parse *parse);
-int					ft_parse_char(t_parse *parse, char *prompt);
 int					ft_aux_parse_char(char *ch, t_parse *parse, char *prompt);
-void				ft_parse_brackets(t_parse *parse, char *prompt);
+int					ft_parse_char(t_parse *parse, char *prompt);
 int					ft_valid_brackets_str(char *str);
+void				ft_arranging_prompt(t_parse *parse);
+void				ft_parse_brackets(t_parse *parse, char *prompt);
 void				ft_parse_quotes(t_parse *parse, char *prompt, char *signal);
 
-// File Tokenazer
-int					ft_set_token(char *str);
-t_vector			*ft_construct_phrase(char **split, t_shell *shell);
-void				ft_free_phrase(t_vector *phrase);
+// File Tokenizer
 char				*ft_expand(char *str, t_shell *shell);
 char				*ft_parse_expand(char *str, t_shell *shell);
 char				*ft_parse_expand_heredoc(char *str, t_shell *shell);
+int					ft_set_token(char *str);
+t_vector			*ft_construct_phrase(char **split, t_shell *shell);
+void				ft_free_phrase(t_vector *phrase);
 void				ft_split_expand(char *str, t_vector *split, int i, int j);
 
 // File Grammar
@@ -145,69 +145,63 @@ void				ft_grammar_rules(t_vector *phrase);
 void				ft_order_redall(t_vector *vector);
 
 // File Utils
-int					ft_count_matrix(char **str);
-void				ft_change_sub_space(char **split);
 int					ft_count_chr(char *str, char ch);
+int					ft_count_matrix(char **str);
+int					status_here(int where, int st);
+void				ft_change_sub_space(char **split);
+void				ft_free_matrix(char **matrix);
 void				ft_replace_char_between_signal(char *str,
 						char signal, char old, char new_ch);
-void				ft_free_matrix(char **matrix);
-int					status_here(int where, int st);
 
 // File grammar utils
+int					error(int status);
 int					ft_count_token(t_vector *phrase, int token);
 int					ft_pos_token(t_vector *phrase, int start, int end,
 						int token);
 int					ft_pos_token_back(t_vector *phrase, int token);
-int					error(int status);
 
 //File AST
 t_node				*ft_ast(t_vector *phrase);
 void				ft_eliminate_ch_corner(char *str);
 
 // File Vector
+bool				ft_vector_empty(const t_vector *vector);
 bool				ft_vector_resize(t_vector *vector,
 						unsigned long new_capacity);
-t_vector			*ft_vector_create(void);
-void				ft_vector_free(t_vector *vector);
-void				ft_vector_push_back(t_vector *vector, void *value);
-void				ft_vector_push_front(t_vector *vector, void *value);
-void				ft_vector_pop_back(t_vector *vector);
-void				ft_vector_pop_front(t_vector *vector);
-unsigned long		ft_vector_insert(t_vector *vector, unsigned long position,
-						void *value);
-void				ft_vector_erase(t_vector *vector, unsigned long position);
-void				*ft_vector_at(const t_vector *vector, unsigned long index);
-void				*ft_value(const t_vector *vector,
-						unsigned long i, unsigned long j);
 int					ft_value_int(const t_vector *vector,
 						unsigned long i, unsigned long j);
-bool				ft_vector_empty(const t_vector *vector);
-unsigned long		ft_vector_capacity(const t_vector *vector);
-void				ft_vector_reserve(t_vector *vector,
-						unsigned long new_capacity);
-void				ft_vector_init(t_vector *vector);
+t_vector			*ft_vector_create(void);
+t_vector			*ft_vector_slice_right(t_vector *vector, unsigned long pos);
+unsigned long		ft_vector_insert(t_vector *vector, unsigned long position,
+						void *value);
+unsigned long		ft_vector_size(const t_vector *vector);
 void				*ft_realloc(void *ptr,
 						size_t original_size, size_t new_size);
-t_vector			*ft_vector_slice_left(t_vector *vector, unsigned long pos);
-t_vector			*ft_vector_slice_right(t_vector *vector, unsigned long pos);
-void				ft_vector_swap(t_vector *vector, int a, int b);
-unsigned long		ft_vector_size(const t_vector *vector);
+void				*ft_value(const t_vector *vector,
+						unsigned long i, unsigned long j);
+void				*ft_vector_at(const t_vector *vector, unsigned long index);
+void				ft_vector_erase(t_vector *vector, unsigned long position);
+void				ft_vector_free(t_vector *vector);
+void				ft_vector_init(t_vector *vector);
+void				ft_vector_pop_back(t_vector *vector);
+void				ft_vector_pop_front(t_vector *vector);
+void				ft_vector_push_back(t_vector *vector, void *value);
 
 //File Envp
-void				ft_envp(t_shell *shell);
-t_vector			*ft_envp_dict(char **envp);
 t_vector			*ft_build_line_envp(char *str);
+t_vector			*ft_envp_dict(char **envp);
+void				ft_envp(t_shell *shell);
 
 //File Pathname
 char				*ft_get_pathname(char **matrix, char *str);
 
 //File execution
 extern volatile sig_atomic_t	g_status;
+int					ft_status(int st);
+void				ft_exec_brackets(t_node *root, t_shell *shell);
+void				ft_exec_redirects(t_node *root, t_shell *shell);
 void				ft_execution(t_node *root, t_shell *shell);
 void				ft_pipe(t_node *root, t_shell *shell);
-void				ft_exec_redirects(t_node *root, t_shell *shell);
-void				ft_exec_brackets(t_node *root, t_shell *shell);
-int					ft_status(int st);
 
 //File exec_utils.c
 void				close_fd(int *fd);
@@ -226,32 +220,28 @@ void				ft_init_signal(void);
 void				ft_sigquit(void);
 
 // File Error
-void				ft_error(char *cmd, char *flag, char *msg, int status);
 void				ft_clear(t_shell *shell);
+void				ft_error(char *cmd, char *flag, char *msg, int status);
 
-//File builtins
-void				builtin_export(t_shell *shell, t_vector *cmd);
-void				ft_env_builtin(t_shell *shell, t_vector *phrase);
-char				**env_export(const t_vector *vars);
-void				ft_env_delete(t_vector *vars, char *name);
-void				ft_freesplit(char **arr);
-void				builtin_cd(t_shell *shell, t_vector *cmd);
+// Builtins
+char				**ft_env_export(const t_vector *vars);
+void				ft_builtin_cd(t_shell *shell, t_vector *cmd);
+void				ft_builtin_echo(t_shell *shell, t_vector *cmd);
+void				ft_builtin_env(t_shell *shell, t_vector *phrase);
+void				ft_builtin_exit(t_shell *shell, t_vector *cmd);
+void				ft_builtin_export(t_shell *shell, t_vector *cmd);
+void				ft_builtin_pwd(t_shell *shell, t_vector *cmd);
+void				ft_builtin_unset(t_shell *shell, t_vector *cmd);
 void				ft_env_add(t_vector *vars, char *name, char *data);
-void				builtin_exit(t_shell *shell, t_vector *cmd);
-void				builtin_pwd(t_shell *shell, t_vector *cmd);
-void				builtin_unset(t_shell *shell, t_vector *cmd);
-void				builtin_echo(t_shell *shell, t_vector *cmd);
-void				builtin_pwd(t_shell *shell, t_vector *cmd);
 void				ft_env_delete(t_vector *vars, char *name);
-void				ft_env_add(t_vector *vars, char *name, char *data);
-char				*strjoinsep(char *s1, char *s2, unsigned int sep);
-void				sort_vars(char **argv, int minor);
-int					is_valid_name(char *name);
 
 //Utils
+char				*ft_strjoinsep(char *s1, char *s2, unsigned int sep);
+char				*ft_getenv(t_vector *env, char *name);
+int					ft_is_valid_name(char *name);
 int					ft_strcmp(char *s1, char *s2);
 void				ft_freesplit(char **arr);
-char				*ft_getenv(t_vector *env, char *name);
+void				ft_sort_vars(char **argv, int minor);
 
 //remove at end
 void				ft_print_ast(t_node	*root, char *branch);

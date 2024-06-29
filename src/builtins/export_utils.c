@@ -6,13 +6,13 @@
 /*   By: paranha <paranha@student.42sp.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/27 17:55:43 by paranha           #+#    #+#             */
-/*   Updated: 2024/06/27 17:55:45 by paranha          ###   ########.org.br   */
+/*   Updated: 2024/06/29 19:31:34 by paranha          ###   ########.org.br   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-char	*strjoinsep(char *s1, char *s2, unsigned int sep)
+char	*ft_strjoinsep(char *s1, char *s2, unsigned int sep)
 {
 	char	*new;
 	size_t	size1;
@@ -29,7 +29,7 @@ char	*strjoinsep(char *s1, char *s2, unsigned int sep)
 	return (new);
 }
 
-void	sort_vars(char **argv, int minor)
+void	ft_sort_vars(char **argv, int minor)
 {
 	char	*tmp;
 	int		i;
@@ -57,7 +57,7 @@ void	sort_vars(char **argv, int minor)
 	}
 }
 
-int	is_valid_name(char *name)
+int	ft_is_valid_name(char *name)
 {
 	int	i;
 
