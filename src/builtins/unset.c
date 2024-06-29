@@ -6,7 +6,7 @@
 /*   By: paranha <paranha@student.42sp.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/23 20:13:00 by paranha           #+#    #+#             */
-/*   Updated: 2024/06/29 19:32:30 by paranha          ###   ########.org.br   */
+/*   Updated: 2024/06/29 20:41:40 by ishenriq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,13 @@ void	ft_builtin_unset(t_shell *shell, t_vector *cmd)
 	while (i < cmd->size)
 	{
 		arg = ft_value(cmd, i, 0);
-		ft_env_delete(shell->envp_dict, arg);
+		if (ft_is_valid_name(arg))
+			ft_env_delete(shell->envp_dict, arg);
+		else
+		{
+			ft_putstr_fd("not a valid identifier", STDOUT_FILENO);
+			ft_status(1);
+		}
 		i++;
 	}
 }
