@@ -6,7 +6,7 @@
 /*   By: ishenriq <ishenriq@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/13 19:12:24 by ishenriq          #+#    #+#             */
-/*   Updated: 2024/06/25 18:14:36 by ishenriq         ###   ########.fr       */
+/*   Updated: 2024/06/29 19:43:32 by ishenriq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,7 @@ char	*ft_expand_aux(t_shell *shell, t_vector *vector, int i, char signal)
 		{
 			if (signal == '\'')
 				final_str = ft_strjoin(final_str, ft_strdup(s));
-			else
+			else if (ft_strncmp(ft_expand(s, shell), "0x1A", 4) != 0)
 				final_str = ft_strjoin(final_str, ft_expand(s, shell));
 			i++;
 			s = (char *)ft_vector_at(vector, i);
