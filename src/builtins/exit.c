@@ -5,14 +5,14 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: paranha <paranha@student.42sp.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/06/23 20:12:42 by paranha           #+#    #+#             */
-/*   Updated: 2024/06/29 19:33:48 by paranha          ###   ########.org.br   */
+/*   Created: 2024/06/30 18:34:50 by paranha           #+#    #+#             */
+/*   Updated: 2024/06/30 20:41:51 by paranha          ###   ########.org.br   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-static int	ft_check_arg(const char *arg)
+static int	ft_check_arg(char *arg)
 {
 	int	i;
 
@@ -28,6 +28,29 @@ static int	ft_check_arg(const char *arg)
 	return (1);
 }
 
+static int	ft_is_number(char *str)
+{
+	const size_t	exit_limit = ft_strlen(MAX_EXIT);
+	int				i;
+	size_t			len;
+
+	if (!ft_check_arg(str))
+		return (0);
+	i = 0;
+	if (str[i] == '-' || str[i] == '+')
+		i++;
+	while (str[i] == '0')
+		i++;
+	len = ft_strlen(&str[i]);
+	if (len < exit_limit)
+		return (1);
+	if (len > exit_limit)
+		return (0);
+	if (str[0] == '-')
+		return (ft_strcmp(&MIN_EXIT[1], &str[i]) >= 0);
+	return (ft_strcmp(&str[i], MAX_EXIT) <= 0);
+}
+
 unsigned char	ft_parse_exit_arguments(t_vector *cmd)
 {
 	int				i;
@@ -39,7 +62,7 @@ unsigned char	ft_parse_exit_arguments(t_vector *cmd)
 	while (i < cmd->size)
 	{
 		arg = ft_value(cmd, i, 0);
-		if (ft_check_arg(arg))
+		if (ft_is_number(arg))
 		{
 			exit_status = (unsigned char)ft_atoi(arg);
 			break ;
@@ -53,9 +76,8 @@ void	ft_builtin_exit(t_shell *shell, t_vector *cmd)
 {
 	unsigned char	exit_status;
 
-	exit_status = ft_parse_exit_arguments(cmd);
 	ft_putendl_fd("exit", STDOUT_FILENO);
-	if (cmd->size > 1 && !ft_check_arg(ft_value(cmd, 1, 0)))
+	if (cmd->size > 1 && !ft_is_number(ft_value(cmd, 1, 0)))
 	{
 		ft_putendl_fd("exit: numeric argument required", STDERR_FILENO);
 		exit(2);
@@ -66,6 +88,7 @@ void	ft_builtin_exit(t_shell *shell, t_vector *cmd)
 		ft_status(1);
 		return ;
 	}
+	exit_status = ft_parse_exit_arguments(cmd);
 	ft_clear(shell);
 	exit(exit_status);
 }

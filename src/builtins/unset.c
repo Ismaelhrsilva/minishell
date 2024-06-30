@@ -6,7 +6,7 @@
 /*   By: paranha <paranha@student.42sp.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/23 20:13:00 by paranha           #+#    #+#             */
-/*   Updated: 2024/06/29 20:41:40 by ishenriq         ###   ########.fr       */
+/*   Updated: 2024/06/30 20:32:28 by paranha          ###   ########.org.br   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,28 @@ void	ft_env_delete(t_vector *vars, char *name)
 	}
 }
 
+int	ft_is_valid_unset(char *name)
+{
+	int	i;
+
+	if (!isalpha(name[0]) && name[0] != '_')
+	{
+		ft_status(1);
+		return (0);
+	}
+	i = 1;
+	while (name[i] != '\0')
+	{
+		if (!isalnum(name[i]) && name[i] != '_')
+		{
+			ft_status(1);
+			return (0);
+		}
+		i++;
+	}
+	return (1);
+}
+
 void	ft_builtin_unset(t_shell *shell, t_vector *cmd)
 {
 	int			i;
@@ -46,13 +68,10 @@ void	ft_builtin_unset(t_shell *shell, t_vector *cmd)
 	while (i < cmd->size)
 	{
 		arg = ft_value(cmd, i, 0);
-		if (ft_is_valid_name(arg))
+		if (ft_is_valid_unset(arg))
 			ft_env_delete(shell->envp_dict, arg);
 		else
-		{
-			ft_putstr_fd("not a valid identifier", STDOUT_FILENO);
-			ft_status(1);
-		}
+			ft_status(0);
 		i++;
 	}
 }

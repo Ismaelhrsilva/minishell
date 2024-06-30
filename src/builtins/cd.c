@@ -6,7 +6,7 @@
 /*   By: paranha <paranha@student.42sp.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/23 20:11:58 by paranha           #+#    #+#             */
-/*   Updated: 2024/06/29 19:36:49 by paranha          ###   ########.org.br   */
+/*   Updated: 2024/06/30 20:29:48 by paranha          ###   ########.org.br   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,16 @@ void	ft_handle_cd_dash(t_shell *shell, char **dir)
 	{
 		ft_putstr_fd("cd: OLDPWD not set\n", STDERR_FILENO);
 		ft_status(1);
+	}
+	else
+	{
+		ft_putendl_fd(*dir, STDOUT_FILENO);
+		if (ft_change_directory(shell->envp_dict, *dir) != 0)
+		{
+			ft_putstr_fd("cd: ", STDERR_FILENO);
+			perror(*dir);
+			ft_status(1);
+		}
 	}
 }
 
