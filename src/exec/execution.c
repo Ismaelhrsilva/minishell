@@ -6,7 +6,7 @@
 /*   By: ishenriq <ishenriq@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/03 19:15:25 by ishenriq          #+#    #+#             */
-/*   Updated: 2024/06/29 20:13:13 by ishenriq         ###   ########.fr       */
+/*   Updated: 2024/06/29 20:47:29 by ishenriq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,13 +69,13 @@ static void	ft_or_and(t_node *root, t_shell *shell)
 	if (root->type & OR)
 	{
 		ft_execution(root->left, shell);
-		if (g_status > 0)
+		if (ft_status(-1) > 0)
 			ft_execution(root->right, shell);
 	}
 	else
 	{
 		ft_execution(root->left, shell);
-		if (g_status == 0)
+		if (ft_status(-1) == 0)
 			ft_execution(root->right, shell);
 	}
 }
