@@ -6,13 +6,11 @@
 /*   By: paranha <paranha@student.42sp.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/23 20:11:58 by paranha           #+#    #+#             */
-/*   Updated: 2024/06/30 22:02:28 by paranha          ###   ########.org.br   */
+/*   Updated: 2024/07/01 18:08:44 by paranha          ###   ########.org.br   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-
-extern volatile sig_atomic_t	g_status;
 
 static void	ft_update_pwd(t_vector *env, char *new_pwd)
 {
@@ -45,7 +43,7 @@ void	ft_handle_cd_dash(t_shell *shell, char **dir)
 		ft_status(1);
 	}
 	else
-        	ft_putendl_fd(*dir, STDOUT_FILENO);
+		ft_putendl_fd(*dir, STDOUT_FILENO);
 }
 
 void	ft_get_cd_directory(t_shell *shell, t_vector *cmd, char **dir)
@@ -92,6 +90,5 @@ void	ft_builtin_cd(t_shell *shell, t_vector *cmd)
 		ft_status(1);
 		return ;
 	}
-	g_status = EXIT_SUCCESS;
-	ft_status(g_status);
+	ft_status(0);
 }

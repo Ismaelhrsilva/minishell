@@ -6,13 +6,11 @@
 /*   By: paranha <paranha@student.42sp.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/23 20:13:00 by paranha           #+#    #+#             */
-/*   Updated: 2024/07/01 17:41:12 by ishenriq         ###   ########.fr       */
+/*   Updated: 2024/07/01 18:04:07 by paranha          ###   ########.org.br   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-
-extern volatile sig_atomic_t	g_status;
 
 void	ft_env_delete(t_vector *vars, char *name)
 {
@@ -63,7 +61,7 @@ void	ft_builtin_unset(t_shell *shell, t_vector *cmd)
 	int			i;
 	char		*arg;
 
-	g_status = EXIT_SUCCESS;
+	ft_status(0);
 	i = 1;
 	while (i < cmd->size)
 	{
