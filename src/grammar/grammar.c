@@ -6,7 +6,7 @@
 /*   By: ishenriq <ishenriq@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/15 18:38:12 by ishenriq          #+#    #+#             */
-/*   Updated: 2024/06/29 20:21:34 by ishenriq         ###   ########.fr       */
+/*   Updated: 2024/07/01 19:37:54 by paranha          ###   ########.org.br   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 extern volatile sig_atomic_t	g_status;
 
-static int	ft_metacharacter_following(t_vector *phrase, int pos)
+static int	ft_metacharacter_following(t_vector *phrase, size_t pos)
 {
 	if (pos < phrase->size - 1)
 		if (ft_value_int(phrase, pos, 1) & REDALL)
@@ -27,7 +27,7 @@ static int	ft_metacharacter_following(t_vector *phrase, int pos)
 	return (0);
 }
 
-static int	ft_metacharacter_edges(t_vector *phrase, int pos)
+static int	ft_metacharacter_edges(t_vector *phrase, size_t pos)
 {
 	if ((ft_value_int(phrase, 0, 1) & ALLEXRED) && pos == 0)
 		return (1);
@@ -39,8 +39,8 @@ static int	ft_metacharacter_edges(t_vector *phrase, int pos)
 
 static int	ft_valid_brackets(t_vector *phrase)
 {
-	int	count;
-	int	i;
+	size_t	count;
+	size_t	i;
 
 	i = 0;
 	count = 0;
@@ -70,7 +70,7 @@ static int	ft_open_closed_brackets(t_vector *phrase)
 
 int	ft_grammar_rules(t_vector *phrase)
 {
-	unsigned long	i;
+	size_t	i;
 
 	i = 0;
 	while (i < phrase->size)

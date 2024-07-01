@@ -6,7 +6,7 @@
 /*   By: ishenriq <ishenriq@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/13 19:12:24 by ishenriq          #+#    #+#             */
-/*   Updated: 2024/06/29 19:42:57 by ishenriq         ###   ########.fr       */
+/*   Updated: 2024/07/01 19:40:54 by paranha          ###   ########.org.br   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 char	*ft_find_expand(char *str, t_shell *shell)
 {
-	int		i;
+	size_t		i;
 	char	*key;
 
 	i = 0;
@@ -47,7 +47,7 @@ char	*ft_expand(char *str, t_shell *shell)
 
 char	*ft_parse_expand_heredoc(char *str, t_shell *shell)
 {
-	int			i;
+	size_t			i;
 	char		*new_str;
 	char		*final_str;
 	t_vector	*vector;

@@ -6,13 +6,13 @@
 /*   By: ishenriq <ishenriq@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/19 14:31:38 by ishenriq          #+#    #+#             */
-/*   Updated: 2024/07/01 19:15:15 by paranha          ###   ########.org.br   */
+/*   Updated: 2024/07/01 19:34:32 by paranha          ###   ########.org.br   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-static int	ft_branch(t_vector *phrase, int pos, t_node *root)
+static int	ft_branch(t_vector *phrase, size_t pos, t_node *root)
 {
 	t_vector	*right;
 

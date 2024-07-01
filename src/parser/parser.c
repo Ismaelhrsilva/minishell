@@ -6,7 +6,7 @@
 /*   By: ishenriq <ishenriq@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/05 14:42:53 by ishenriq          #+#    #+#             */
-/*   Updated: 2024/07/01 19:12:28 by paranha          ###   ########.org.br   */
+/*   Updated: 2024/07/01 19:25:17 by paranha          ###   ########.org.br   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,8 @@ void	ft_arranging_prompt(t_parse *parse)
 	char	*prompt_arranged;
 	char	*signal;
 
+	signal = NULL;
+	size = 0;
 	if (parse->prompt)
 		size = ft_strlen(parse->prompt);
 	/*if (ft_valid_brackets_str(parse->prompt))

@@ -6,7 +6,7 @@
 /*   By: paranha <paranha@student.42sp.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/23 20:12:04 by paranha           #+#    #+#             */
-/*   Updated: 2024/07/01 18:03:21 by paranha          ###   ########.org.br   */
+/*   Updated: 2024/07/01 19:34:55 by paranha          ###   ########.org.br   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	ft_builtin_echo(t_shell *shell, t_vector *cmd)
 {
-	int	i;
+	size_t	i;
 	int	no_newline;
 
 	(void)shell;

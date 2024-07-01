@@ -6,7 +6,7 @@
 /*   By: ishenriq <ishenriq@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/07 19:25:12 by ishenriq          #+#    #+#             */
-/*   Updated: 2024/06/21 20:43:07 by ishenriq         ###   ########.fr       */
+/*   Updated: 2024/07/01 19:38:49 by paranha          ###   ########.org.br   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 static int	ft_not_ordered_redall(t_vector *vector)
 {
-	int	i;
+	size_t	i;
 
 	i = 0;
 	while (i < vector->size - 2)
@@ -30,7 +30,7 @@ static int	ft_not_ordered_redall(t_vector *vector)
 	return (0);
 }
 
-static void	ft_order_aux(t_vector *vector, int i)
+static void	ft_order_aux(t_vector *vector, size_t i)
 {
 	if (i > vector->size - 3 || vector->size <= 2)
 		return ;

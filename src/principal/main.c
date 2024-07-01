@@ -6,7 +6,7 @@
 /*   By: ishenriq <ishenriq@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/05 14:42:53 by ishenriq          #+#    #+#             */
-/*   Updated: 2024/06/21 20:44:55 by ishenriq         ###   ########.fr       */
+/*   Updated: 2024/07/01 19:28:15 by paranha          ###   ########.org.br   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ void	ft_return_terminal(int ret)
 		tcsetattr(STDIN_FILENO, TCSANOW, &term);
 }
 
-int	main(int argc, char **argv, char **envp)
+int	main(void)
 {
 	t_shell		*shell;
 	extern char	**environ;
@@ -32,7 +32,7 @@ int	main(int argc, char **argv, char **envp)
 	shell = malloc(sizeof(t_shell));
 	if (shell == NULL)
 		return (EXIT_FAILURE);
-	shell->envp = envp;
+	shell->envp = environ;
 	ft_init_signal();
 	ft_envp(shell);
 	ft_status(0);

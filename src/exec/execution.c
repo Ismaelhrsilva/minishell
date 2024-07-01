@@ -6,7 +6,7 @@
 /*   By: ishenriq <ishenriq@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/03 19:15:25 by ishenriq          #+#    #+#             */
-/*   Updated: 2024/06/29 20:47:29 by ishenriq         ###   ########.fr       */
+/*   Updated: 2024/07/01 19:36:53 by paranha          ###   ########.org.br   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ extern volatile sig_atomic_t	g_status;
 static char	**ft_build_argv_exec(t_vector *phrase)
 {
 	char	**argv_exec;
-	int		i;
+	size_t		i;
 
 	i = 0;
 	argv_exec = ft_calloc(phrase->size + 1, sizeof(char **));
@@ -115,7 +115,7 @@ t_vector	*ft_put_str_token_at_vector(t_vector *phrase, int i, char *str)
 
 void	ft_expand_before_exec(t_node *root, t_shell *shell)
 {
-	int			i;
+	size_t			i;
 	char		*str;
 	t_vector	*vector;
 
