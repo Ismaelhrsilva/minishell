@@ -6,7 +6,7 @@
 /*   By: ishenriq <ishenriq@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/02 16:46:44 by ishenriq          #+#    #+#             */
-/*   Updated: 2024/06/23 20:21:53 by paranha          ###   ########.org.br   */
+/*   Updated: 2024/07/01 19:12:11 by paranha          ###   ########.org.br   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,8 +65,6 @@ t_vector	*ft_envp_dict(char **envp)
 
 void	ft_envp(t_shell *shell)
 {
-	t_vector	*envp_dict;
-	char		**split;
 	int			i;
 
 	i = 0;

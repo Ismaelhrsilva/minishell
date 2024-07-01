@@ -6,7 +6,7 @@
 /*   By: ishenriq <ishenriq@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/05 14:42:53 by ishenriq          #+#    #+#             */
-/*   Updated: 2024/06/25 18:21:52 by ishenriq         ###   ########.fr       */
+/*   Updated: 2024/07/01 19:12:28 by paranha          ###   ########.org.br   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,6 @@ char	**ft_parser(t_parse *parse)
 {
 	char	**split;
 	int		i;
-	int		m;
 
 	i = 0;
 	ft_arranging_prompt(parse);

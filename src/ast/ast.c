@@ -6,28 +6,11 @@
 /*   By: ishenriq <ishenriq@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/19 14:31:38 by ishenriq          #+#    #+#             */
-/*   Updated: 2024/06/21 20:33:37 by ishenriq         ###   ########.fr       */
+/*   Updated: 2024/07/01 19:15:15 by paranha          ###   ########.org.br   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-
-static	t_node	*ft_build_node(t_vector *word)
-{
-	t_node	*node;
-
-	if (!word)
-		return ((t_node *)0);
-	node = malloc(sizeof(t_node));
-	if (!node)
-		return ((t_node *)0);
-	node->str = ft_value(word, 0, 0);
-	node->type = ft_value_int(word, 0, 1);
-	node->left = NULL;
-	node->right = NULL;
-	node->phrase = NULL;
-	return (node);
-}
 
 static int	ft_branch(t_vector *phrase, int pos, t_node *root)
 {

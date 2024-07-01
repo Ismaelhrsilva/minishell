@@ -6,14 +6,13 @@
 #    By: ishenriq <ishenriq@student.42sp.org.br>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/12/11 20:08:54 by ishenriq          #+#    #+#              #
-#    Updated: 2024/06/30 20:40:54 by paranha          ###   ########.org.br    #
+#    Updated: 2024/07/01 19:16:40 by paranha          ###   ########.org.br    #
 #                                                                              #
 # **************************************************************************** #
 
 NAME	= minishell
-#CFLAGS	:= -Wextra -Wall -Werror -Wunreachable-code -Ofast -g3 -O3 -Wunused-variable
+#CFLAGS	= -Wextra -Wall -Werror -Wunreachable-code -Ofast -g3 -O3 -Wunused-variable -O0 -MD -MP
 #CFLAGS	:=  -Ofast -g3 -O0 -MD -MP
-CFLAGS	:=  -g3
 CC	:= cc
 PRINTF	:= lib/printf/
 LIBFT	:= lib/libft/
@@ -90,7 +89,7 @@ printf:
 	@make -C $(PRINTF)
 
 $(NAME): $(OBJS)
-	@$(CC) $(OBJS) $(LDFLAGS) -o $(NAME)
+	@$(CC) $(CFLAGS) $(OBJS) $(LDFLAGS) -o $(NAME)
 
 clean:
 	@rm -rf $(BUILD_DIR)
