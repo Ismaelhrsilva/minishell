@@ -6,7 +6,7 @@
 /*   By: ishenriq <ishenriq@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/05 14:42:53 by ishenriq          #+#    #+#             */
-/*   Updated: 2024/07/01 19:25:17 by paranha          ###   ########.org.br   */
+/*   Updated: 2024/07/01 20:31:26 by paranha          ###   ########.org.br   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,5 +51,6 @@ char	**ft_parser(t_parse *parse)
 	ft_arranging_prompt(parse);
 	split = ft_split(parse->prompt_arranged, ' ');
 	ft_change_sub_space(split);
+	free(parse->prompt_arranged);
 	return (split);
 }
