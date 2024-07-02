@@ -6,7 +6,7 @@
 /*   By: ishenriq <ishenriq@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/22 18:25:14 by ishenriq          #+#    #+#             */
-/*   Updated: 2024/07/01 19:32:54 by paranha          ###   ########.org.br   */
+/*   Updated: 2024/07/02 15:02:47 by paranha          ###   ########.org.br   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,7 @@
 # include <sys/wait.h>
 # include <termios.h>   // isatty, ttyname, tcsetattr, tcgetattr
 # include <unistd.h>
+# include <limits.h> //PATH_MAX
 
 # define FT_VECTOR_INITIAL_CAPACITY 16
 # define TEMP "/tmp/heredoc"
@@ -39,6 +40,7 @@
 # define PROMPT	2
 # define MAX_EXIT "9223372036854775807"
 # define MIN_EXIT "-9223372036854775808"
+# define PATH_MAX 4096 
 
 typedef enum e_token
 {

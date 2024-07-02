@@ -6,13 +6,14 @@
 #    By: ishenriq <ishenriq@student.42sp.org.br>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/12/11 20:08:54 by ishenriq          #+#    #+#              #
-#    Updated: 2024/07/01 19:29:28 by paranha          ###   ########.org.br    #
+#    Updated: 2024/07/02 15:06:31 by paranha          ###   ########.org.br    #
 #                                                                              #
 # **************************************************************************** #
 
 NAME	= minishell
-CFLAGS	= -Wextra -Wall -Werror -Wunreachable-code -Ofast -g3 -O3 -Wunused-variable -O0 -MD -MP
+#CFLAGS	= -Wextra -Wall -Werror -Wunreachable-code -Ofast -g3 -O3 -Wunused-variable -O0 -MD -MP
 #CFLAGS	:=  -Ofast -g3 -O0 -MD -MP
+CFLAGS	:= -g3
 CC	:= cc
 PRINTF	:= lib/printf/
 LIBFT	:= lib/libft/
