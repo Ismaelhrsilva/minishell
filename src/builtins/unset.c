@@ -6,7 +6,7 @@
 /*   By: paranha <paranha@student.42sp.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/23 20:13:00 by paranha           #+#    #+#             */
-/*   Updated: 2024/07/02 15:40:46 by paranha          ###   ########.org.br   */
+/*   Updated: 2024/07/02 17:28:37 by paranha          ###   ########.org.br   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ int	ft_is_valid_unset(char *name)
 
 	if (!isalpha(name[0]) && name[0] != '_')
 	{
-		ft_status(0);
+		ft_status(1);
 		return (0);
 	}
 	i = 1;
@@ -48,7 +48,7 @@ int	ft_is_valid_unset(char *name)
 	{
 		if (!isalnum(name[i]) && name[i] != '_')
 		{
-			ft_status(0);
+			ft_status(1);
 			return (0);
 		}
 		i++;
@@ -68,6 +68,11 @@ void	ft_builtin_unset(t_shell *shell, t_vector *cmd)
 		arg = ft_value(cmd, i, 0);
 		if (ft_is_valid_unset(arg))
 			ft_env_delete(shell->envp_dict, arg);
+		else
+		{
+			ft_putstr_fd(" not a valid identifier\n", STDERR_FILENO);
+			ft_status(1);
+		}
 		i++;
 	}
 }
