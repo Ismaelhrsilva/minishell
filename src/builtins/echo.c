@@ -6,7 +6,7 @@
 /*   By: paranha <paranha@student.42sp.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/23 20:12:04 by paranha           #+#    #+#             */
-/*   Updated: 2024/07/02 15:44:19 by paranha          ###   ########.org.br   */
+/*   Updated: 2024/07/02 15:57:04 by paranha          ###   ########.org.br   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ int	handle_flags(t_vector *cmd, size_t *index, size_t i, size_t j)
 		valid_flag = 1;
 		while (((char *)ft_value(cmd, i, 0))[j])
 		{
-			if (!strchr("n", ((char *)ft_value(cmd, i, 0))[j]))
+			if (!ft_strchr("n", ((char *)ft_value(cmd, i, 0))[j]))
 			{
 				valid_flag = 0;
 				break ;
