@@ -6,7 +6,7 @@
 /*   By: paranha <paranha@student.42sp.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/30 18:34:50 by paranha           #+#    #+#             */
-/*   Updated: 2024/07/01 19:35:25 by paranha          ###   ########.org.br   */
+/*   Updated: 2024/07/02 15:40:31 by paranha          ###   ########.org.br   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ static int	ft_is_number(char *str)
 
 unsigned char	ft_parse_exit_arguments(t_vector *cmd)
 {
-	size_t				i;
+	size_t			i;
 	char			*arg;
 	unsigned char	exit_status;
 
