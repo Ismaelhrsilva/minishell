@@ -6,7 +6,7 @@
 /*   By: ishenriq <ishenriq@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/13 20:17:19 by ishenriq          #+#    #+#             */
-/*   Updated: 2024/06/24 20:33:05 by ishenriq         ###   ########.fr       */
+/*   Updated: 2024/07/01 19:41:18 by paranha          ###   ########.org.br   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@ t_vector	*ft_construct_phrase(char **split, t_shell *shell)
 	int			*token;
 	t_vector	*word;
 
+	(void)shell;
 	phrase = ft_vector_create();
 	if (!phrase)
 		return (NULL);
@@ -44,7 +45,7 @@ t_vector	*ft_construct_phrase(char **split, t_shell *shell)
 
 void	ft_free_phrase(t_vector *phrase)
 {
-	unsigned long	i;
+	size_t	i;
 	t_vector		*word;
 
 	i = 0;

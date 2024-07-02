@@ -6,7 +6,7 @@
 /*   By: ishenriq <ishenriq@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/05 14:42:53 by ishenriq          #+#    #+#             */
-/*   Updated: 2024/07/01 17:55:12 by ishenriq         ###   ########.fr       */
+/*   Updated: 2024/07/01 21:45:29 by ishenriq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,8 @@ void	ft_arranging_prompt(t_parse *parse)
 	char	*prompt_arranged;
 	char	*signal;
 
+	signal = NULL;
+	size = 0;
 	if (parse->prompt)
 		size = ft_strlen(parse->prompt);
 	prompt_arranged = malloc((size * 2) * sizeof(char *) + 1);
@@ -42,7 +44,6 @@ char	**ft_parser(t_parse *parse)
 {
 	char	**split;
 	int		i;
-	int		m;
 
 	i = 0;
 	ft_arranging_prompt(parse);

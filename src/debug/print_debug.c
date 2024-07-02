@@ -6,7 +6,7 @@
 /*   By: ishenriq <ishenriq@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/04 19:07:15 by ishenriq          #+#    #+#             */
-/*   Updated: 2024/06/21 20:58:02 by ishenriq         ###   ########.fr       */
+/*   Updated: 2024/07/01 19:36:24 by paranha          ###   ########.org.br   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	ft_print_vector_content(t_vector *phrase)
 {
-	int	i;
+	size_t	i;
 
 	i = 0;
 	while (i < phrase->size)

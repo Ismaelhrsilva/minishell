@@ -6,7 +6,7 @@
 /*   By: ishenriq <ishenriq@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/13 19:12:24 by ishenriq          #+#    #+#             */
-/*   Updated: 2024/07/01 20:51:53 by ishenriq         ###   ########.fr       */
+/*   Updated: 2024/07/01 21:44:33 by ishenriq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ void	ft_split_expand(char *str, t_vector *split, int i, int j)
 	}
 }
 
-char	ft_signal(t_vector *vector, int *i, char signal)
+char	ft_signal(t_vector *vector, size_t *i, char signal)
 {
 	if (ft_strchr("\'\"", ((char *)ft_vector_at(vector, *i))[0]))
 	{

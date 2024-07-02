@@ -6,7 +6,7 @@
 /*   By: ishenriq <ishenriq@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/15 19:57:08 by ishenriq          #+#    #+#             */
-/*   Updated: 2024/06/21 20:45:58 by ishenriq         ###   ########.fr       */
+/*   Updated: 2024/07/01 19:30:09 by paranha          ###   ########.org.br   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ void	ft_change_sub_space(char **split)
 
 int	ft_count_chr(char *str, char ch)
 {
-	int	count;
+	size_t	count;
 
 	count = 0;
 	if (!str)

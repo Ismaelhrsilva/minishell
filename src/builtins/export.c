@@ -6,13 +6,11 @@
 /*   By: paranha <paranha@student.42sp.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/23 20:12:49 by paranha           #+#    #+#             */
-/*   Updated: 2024/06/29 20:11:29 by paranha          ###   ########.org.br   */
+/*   Updated: 2024/07/01 19:35:46 by paranha          ###   ########.org.br   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-
-extern volatile sig_atomic_t	g_status;
 
 char	**ft_env_export(const t_vector *vars)
 {
@@ -99,10 +97,10 @@ void	ft_export_arg(t_vector *env, char *arg)
 void	ft_builtin_export(t_shell *shell, t_vector *cmd)
 {
 	char	**vars;
-	int		i;
+	size_t		i;
 	char	*arg;
 
-	g_status = EXIT_SUCCESS;
+	ft_status(0);
 	i = 1;
 	while (i < cmd->size)
 	{
