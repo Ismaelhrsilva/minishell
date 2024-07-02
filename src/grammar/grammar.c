@@ -6,7 +6,7 @@
 /*   By: ishenriq <ishenriq@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/15 18:38:12 by ishenriq          #+#    #+#             */
-/*   Updated: 2024/06/29 20:21:34 by ishenriq         ###   ########.fr       */
+/*   Updated: 2024/07/01 18:06:32 by ishenriq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,7 +80,7 @@ int	ft_grammar_rules(t_vector *phrase)
 			return (0);
 		i++;
 	}
-	if (error(ft_open_closed_brackets(phrase)) || ft_valid_brackets(phrase))
+	if (error(ft_open_closed_brackets(phrase)) || error(ft_valid_brackets(phrase)))
 		return (0);
 	return (1);
 }

@@ -6,7 +6,7 @@
 /*   By: ishenriq <ishenriq@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/05 14:42:53 by ishenriq          #+#    #+#             */
-/*   Updated: 2024/06/23 17:04:22 by ishenriq         ###   ########.fr       */
+/*   Updated: 2024/07/01 17:58:29 by ishenriq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,7 @@ void	ft_parse_brackets(t_parse *parse, char *prompt)
 	if (parse->prompt[parse->idx->i] == '(')
 	{
 		prompt[parse->idx->j++] = parse->prompt[parse->idx->i++];
-		while (count != 0)
+		while (count != 0 && parse->prompt[parse->idx->i] != '\0')
 		{
 			if (parse->prompt[parse->idx->i] == ')')
 				count--;

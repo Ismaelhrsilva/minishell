@@ -6,7 +6,7 @@
 /*   By: ishenriq <ishenriq@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/03 19:15:25 by ishenriq          #+#    #+#             */
-/*   Updated: 2024/06/29 20:47:29 by ishenriq         ###   ########.fr       */
+/*   Updated: 2024/07/01 21:25:14 by ishenriq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,8 +58,6 @@ static void	ft_do(t_vector *phrase, t_shell *shell)
 		}
 		ft_pid_status(pid);
 	}
-	else if (ft_strlen(cmd) == 0)
-		return ;
 	else
 		ft_error(cmd, NULL, "command not found", ENOENT);
 }
@@ -125,10 +123,10 @@ void	ft_expand_before_exec(t_node *root, t_shell *shell)
 	while (i < root->phrase->size)
 	{
 		str = ft_parse_expand(ft_value(root->phrase, i, 0), shell);
-		if (ft_strlen(str) != 0)
+		if (ft_strncmp(str, "0x1A", 4) != 0)
 		{
 			ft_vector_push_back(vector,
-				ft_put_str_token_at_vector(root->phrase, i, str));
+					   ft_put_str_token_at_vector(root->phrase, i, str));
 		}
 		i++;
 	}
@@ -171,6 +169,8 @@ void	ft_execution(t_node *root, t_shell *shell)
 	else if (root->type == EXEC && root->phrase)
 	{
 		ft_expand_before_exec(root, shell);
+		if (root->phrase->size == 0)
+			return ;
 		if (ft_builtins(root, shell))
 			return ;
 		if (root->str && root->str[0] == '(')

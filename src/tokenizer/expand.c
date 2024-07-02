@@ -6,7 +6,7 @@
 /*   By: ishenriq <ishenriq@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/13 19:12:24 by ishenriq          #+#    #+#             */
-/*   Updated: 2024/06/29 19:43:32 by ishenriq         ###   ########.fr       */
+/*   Updated: 2024/07/01 20:51:53 by ishenriq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,12 +60,34 @@ char	ft_signal(t_vector *vector, int *i, char signal)
 	return (signal);
 }
 
+
+int	ft_empty_str(t_vector *vector)
+{
+	char	*str;
+	char	*str_1;
+
+	if (vector->size == 2)
+	{
+		str = ft_vector_at(vector, 0);
+		str_1 = ft_vector_at(vector, 1);
+		if (ft_strchr("\"\'", str[0]))
+			if (ft_strchr("\"\'", str_1[0]))
+				return (1);
+	}
+	return (0);
+
+}
+
 char	*ft_expand_aux(t_shell *shell, t_vector *vector, int i, char signal)
 {
 	char	*final_str;
 	char	*s;
+	int		not_expanded;
 
 	final_str = "";
+	not_expanded = 0;
+	if (ft_empty_str(vector))
+		return ("");
 	while (i < vector->size)
 	{
 		signal = ft_signal(vector, &i, signal);
@@ -74,14 +96,22 @@ char	*ft_expand_aux(t_shell *shell, t_vector *vector, int i, char signal)
 					s[0])) && (s == NULL || signal != s[0]))
 		{
 			if (signal == '\'')
+			{
 				final_str = ft_strjoin(final_str, ft_strdup(s));
+				not_expanded++;
+			}
 			else if (ft_strncmp(ft_expand(s, shell), "0x1A", 4) != 0)
+			{
 				final_str = ft_strjoin(final_str, ft_expand(s, shell));
+				not_expanded++;
+			}
 			i++;
 			s = (char *)ft_vector_at(vector, i);
 		}
 		signal = '\0';
 	}
+	if (not_expanded == 0)
+		return ("0x1A");
 	return (final_str);
 }
 
