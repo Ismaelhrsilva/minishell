@@ -6,7 +6,7 @@
 /*   By: paranha <paranha@student.42sp.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/30 18:34:50 by paranha           #+#    #+#             */
-/*   Updated: 2024/07/03 15:43:29 by paranha          ###   ########.org.br   */
+/*   Updated: 2024/07/03 20:26:32 by paranha          ###   ########.org.br   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,9 +75,10 @@ void	ft_clear2(t_shell *shell)
 {
 //	(void)shell;
 	close_open_fds();
-	ft_free_phrase(shell->envp_dict);
-	ft_freesplit(shell->path_splitted);
-	free(shell->path);
+	ft_free_shell(shell);
+	//ft_free_phrase(shell->envp_dict);
+	//ft_freesplit(shell->path_splitted);
+	//free(shell->path);
 }
 
 void	ft_builtin_exit(t_shell *shell, t_vector *cmd)

@@ -6,7 +6,7 @@
 /*   By: ishenriq <ishenriq@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/22 18:25:14 by ishenriq          #+#    #+#             */
-/*   Updated: 2024/07/03 15:42:58 by paranha          ###   ########.org.br   */
+/*   Updated: 2024/07/03 20:31:12 by paranha          ###   ########.org.br   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,7 +113,6 @@ typedef struct s_node
 
 typedef struct s_shell
 {
-	char			**prompt_splitted;
 	char			**envp;
 	t_vector		*envp_dict;
 	t_node			*root;
@@ -227,7 +226,8 @@ void				ft_sigquit(void);
 // File Error
 void				ft_clear(t_shell *shell);
 void				ft_error(char *cmd, char *flag, char *msg, int status);
-void	close_open_fds(void);
+void				close_open_fds(void);
+void				ft_free_shell(t_shell *shell);
 
 // Builtins
 char				**ft_env_export(const t_vector *vars);

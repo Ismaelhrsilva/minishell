@@ -6,72 +6,86 @@
 /*   By: ishenriq <ishenriq@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/16 19:29:07 by ishenriq          #+#    #+#             */
-/*   Updated: 2024/05/30 13:11:22 by ishenriq         ###   ########.fr       */
+/*   Updated: 2024/07/03 15:03:25 by paranha          ###   ########.org.br   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-static int	ft_n_blocks_array(const char *s, char c)
-{
-	int	i;
-	int	count;
-	int	len;
-
-	i = 0;
-	count = 0;
-	len = ft_strlen(s);
-	while (i < len)
-	{
-		if (s[i] != c && (s[i + 1] == c || s[i + 1] == '\0'))
-			count++;
-		i++;
-	}
-	if (count == 0)
-		return (0);
-	return (count);
-}
-
-static char	**create_split(char const *s, char c, char **ret_split)
-{
-	int	i;
-	int	j;
-	int	w;
-
-	i = 0;
-	j = 0;
-	w = 0;
-	while (s[i] != '\0')
-	{
-		if (s[i] != c)
-		{
-			j = i;
-			while (s[j] != c && s[j] != '\0')
-				j++;
-			ret_split[w] = ft_substr(s, i, j - i);
-			w++;
-			i = j;
-		}
-		if (s[i] != '\0')
-			i++;
-	}
-	ret_split[w] = (char *) 0;
-	return (ret_split);
-}
+static size_t	count_words(char const *s, char c);
+static size_t	count_wordlen(char const *s, char c);
+static char		**mem_cleanup(char **lst);
 
 char	**ft_split(char const *s, char c)
 {
-	char	**ret_split;
-	int		count;
+	char	**lst;
+	size_t	wordlen;
+	size_t	i;
 
-	if (ft_strlen(s) == 0)
-		return (ft_calloc(1, sizeof(char *)));
-	count = ft_n_blocks_array(s, c);
-	if (count == 0)
-		return (ft_calloc(1, sizeof(char *)));
-	ret_split = ft_calloc(count + 1, sizeof(char *));
-	if (ret_split == 0)
-		return (ft_calloc(1, sizeof(char *)));
-	ret_split = create_split(s, c, ret_split);
-	return (ret_split);
+	lst = (char **)ft_calloc(count_words(s, c) + 1, sizeof(char *));
+	i = 0;
+	if (!s || !lst)
+		return (NULL);
+	while (*s)
+	{
+		while (*s == c && *s)
+			s++;
+		if (*s)
+		{
+			wordlen = count_wordlen(s, c);
+			lst[i] = ft_substr(s, 0, wordlen);
+			if (!lst[i])
+				return (mem_cleanup(lst));
+			i++;
+			s += wordlen;
+		}
+	}
+	lst[i] = NULL;
+	return (lst);
+}
+
+static size_t	count_words(char const *s, char c)
+{
+	size_t	count;
+	size_t	i;
+
+	count = 0;
+	i = 0;
+	if (!s)
+		return (0);
+	while (s[i])
+	{
+		while (s[i] == c)
+			i++;
+		if (s[i])
+			count++;
+		while (s[i] != c && s[i])
+			i++;
+	}
+	return (count);
+}
+
+static size_t	count_wordlen(char const *s, char c)
+{
+	size_t	wordlen;
+
+	if (!ft_strchr(s, c))
+		wordlen = ft_strlen(s);
+	else
+		wordlen = ft_strchr(s, c) - s;
+	return (wordlen);
+}
+
+static char	**mem_cleanup(char **lst)
+{
+	size_t	i;
+
+	i = 0;
+	while (lst[i])
+	{
+		free(lst[i]);
+		i++;
+	}
+	free(lst);
+	return (NULL);
 }
