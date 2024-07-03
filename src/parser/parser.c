@@ -6,7 +6,7 @@
 /*   By: ishenriq <ishenriq@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/05 14:42:53 by ishenriq          #+#    #+#             */
-/*   Updated: 2024/07/01 21:45:29 by ishenriq         ###   ########.fr       */
+/*   Updated: 2024/07/03 13:02:52 by paranha          ###   ########.org.br   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,11 +43,10 @@ void	ft_arranging_prompt(t_parse *parse)
 char	**ft_parser(t_parse *parse)
 {
 	char	**split;
-	int		i;
 
-	i = 0;
 	ft_arranging_prompt(parse);
 	split = ft_split(parse->prompt_arranged, ' ');
 	ft_change_sub_space(split);
+	free(parse->prompt_arranged);
 	return (split);
 }

@@ -6,7 +6,7 @@
 /*   By: paranha <paranha@student.42sp.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/23 20:12:49 by paranha           #+#    #+#             */
-/*   Updated: 2024/07/01 19:35:46 by paranha          ###   ########.org.br   */
+/*   Updated: 2024/07/02 15:39:38 by paranha          ###   ########.org.br   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,7 +97,7 @@ void	ft_export_arg(t_vector *env, char *arg)
 void	ft_builtin_export(t_shell *shell, t_vector *cmd)
 {
 	char	**vars;
-	size_t		i;
+	size_t	i;
 	char	*arg;
 
 	ft_status(0);

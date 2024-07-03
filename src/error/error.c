@@ -6,7 +6,7 @@
 /*   By: ishenriq <ishenriq@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/19 20:10:42 by ishenriq          #+#    #+#             */
-/*   Updated: 2024/07/01 19:21:50 by paranha          ###   ########.org.br   */
+/*   Updated: 2024/07/01 20:51:46 by paranha          ###   ########.org.br   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,6 +64,8 @@ void	close_open_fds(void)
 
 void	ft_clear(t_shell *shell)
 {
-	(void)shell;
+//	(void)shell;
 	close_open_fds();
+	ft_free_phrase(shell->envp_dict);
+	ft_freesplit(shell->path_splitted);
 }

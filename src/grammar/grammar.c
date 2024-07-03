@@ -6,7 +6,7 @@
 /*   By: ishenriq <ishenriq@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/15 18:38:12 by ishenriq          #+#    #+#             */
-/*   Updated: 2024/07/01 21:45:23 by ishenriq         ###   ########.fr       */
+/*   Updated: 2024/07/03 13:02:43 by paranha          ###   ########.org.br   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,11 +46,11 @@ static int	ft_valid_brackets(t_vector *phrase)
 	count = 0;
 	while (i < phrase->size)
 	{
-		if (ft_value_int(phrase, i, 1) & OPEN_BRACKET)
+		if ((long)ft_value_int(phrase, i, 1) & OPEN_BRACKET)
 			count++;
-		if (ft_value_int(phrase, i, 1) & CLOSE_BRACKET)
+		if ((long)ft_value_int(phrase, i, 1) & CLOSE_BRACKET)
 			count--;
-		if (count < 0)
+		if ((long)count < 0)
 			return (1);
 		i++;
 	}

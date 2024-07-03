@@ -6,7 +6,7 @@
 /*   By: paranha <paranha@student.42sp.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/23 20:13:00 by paranha           #+#    #+#             */
-/*   Updated: 2024/07/01 19:36:04 by paranha          ###   ########.org.br   */
+/*   Updated: 2024/07/02 17:28:37 by paranha          ###   ########.org.br   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ int	ft_is_valid_unset(char *name)
 
 void	ft_builtin_unset(t_shell *shell, t_vector *cmd)
 {
-	size_t			i;
+	size_t		i;
 	char		*arg;
 
 	ft_status(0);
