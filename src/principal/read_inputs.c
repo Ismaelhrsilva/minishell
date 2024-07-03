@@ -6,7 +6,7 @@
 /*   By: ishenriq <ishenriq@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/05 14:42:53 by ishenriq          #+#    #+#             */
-/*   Updated: 2024/07/02 19:34:41 by ishenriq         ###   ########.fr       */
+/*   Updated: 2024/07/03 16:05:16 by paranha          ###   ########.org.br   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,8 @@ void	ft_to_execute(char *str, t_shell *shell)
 		parse->phrase_grammar = NULL;
 		root = NULL;
 	}
+	//ft_free_phrase(parse->phrase);
+	//ft_free_phrase(parse->phrase_grammar);
 	return ;
 }
 

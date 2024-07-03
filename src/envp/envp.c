@@ -6,7 +6,7 @@
 /*   By: ishenriq <ishenriq@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/02 16:46:44 by ishenriq          #+#    #+#             */
-/*   Updated: 2024/07/01 20:53:42 by paranha          ###   ########.org.br   */
+/*   Updated: 2024/07/03 15:53:39 by paranha          ###   ########.org.br   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,17 +63,9 @@ t_vector	*ft_envp_dict(char **envp)
 	return (envp_dict);
 }
 
-void	ft_envp(t_shell *shell)
+void ft_envp(t_shell *shell)
 {
-	int			i;
-
-	i = 0;
-	while (shell->envp[i] != NULL)
-	{
-		if (ft_strncmp(shell->envp[i], "PATH=", 5) == 0)
-			shell->path = shell->envp[i];
-		i++;
-	}
-	shell->path_splitted = ft_split(shell->path, ':');
-	shell->envp_dict = ft_envp_dict(shell->envp);
+    shell->envp_dict = ft_envp_dict(shell->envp);
+    shell->path = ft_getenv(shell->envp_dict, "PATH");
+    shell->path_splitted = ft_split(shell->path, ':');
 }

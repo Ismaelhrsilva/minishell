@@ -6,7 +6,7 @@
 /*   By: ishenriq <ishenriq@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/13 20:17:19 by ishenriq          #+#    #+#             */
-/*   Updated: 2024/07/01 19:41:18 by paranha          ###   ########.org.br   */
+/*   Updated: 2024/07/03 15:52:38 by paranha          ###   ########.org.br   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ t_vector	*ft_construct_phrase(char **split, t_shell *shell)
 		word = ft_vector_create();
 		if (!word)
 			return (NULL);
-		//ft_vector_push_back(word, ft_parse_expand(split[i], shell));
+		// ft_vector_push_back(word, ft_parse_expand(split[i], shell));
 		ft_vector_push_back(word, split[i]);
 		token = malloc(sizeof(int));
 		if (!token)
@@ -43,19 +43,62 @@ t_vector	*ft_construct_phrase(char **split, t_shell *shell)
 	return (phrase);
 }
 
-void	ft_free_phrase(t_vector *phrase)
+int	ft_is_inner_vector(void *ptr)
+{
+	t_vector	*vec;
+
+	if (ptr == NULL)
+		return (0);
+	vec = (t_vector *)ptr;
+	if (vec->size > vec->capacity || vec->capacity > 1000000)
+		return (0);
+	if (vec->values == NULL)
+		return (0);
+	return (1);
+}
+
+void	ft_vector_free_inner(t_vector *vector)
 {
 	size_t	i;
-	t_vector		*word;
 
 	i = 0;
-	if (!phrase)
+	if (vector == NULL)
 		return ;
-	while (i < phrase->size)
+	while (i < vector->size)
 	{
-		word = phrase->values[i];
-		free(word);
+		if (vector->values[i])
+		{
+			if (ft_is_inner_vector(vector->values[i]))
+				ft_vector_free((t_vector *)vector->values[i]);
+			else
+				free(vector->values[i]);
+		}
 		i++;
 	}
-	ft_vector_free(phrase);
+	free(vector->values);
+	free(vector);
 }
+
+void	ft_free_phrase(t_vector *phrase)
+{
+	if (!phrase)
+		return ;
+	ft_vector_free_inner(phrase);
+}
+
+// void	ft_free_phrase(t_vector *phrase)
+//{
+//	size_t	i;
+//	t_vector		*word;
+//
+//	i = 0;
+//	if (!phrase)
+//		return ;
+//	while (i < phrase->size)
+//	{
+//		word = phrase->values[i];
+//		free(word);
+//		i++;
+//	}
+//	ft_vector_free(phrase);
+//}

@@ -6,7 +6,7 @@
 /*   By: ishenriq <ishenriq@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/03 19:15:25 by ishenriq          #+#    #+#             */
-/*   Updated: 2024/07/01 21:45:02 by ishenriq         ###   ########.fr       */
+/*   Updated: 2024/07/03 16:03:16 by paranha          ###   ########.org.br   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -181,4 +181,6 @@ void	ft_execution(t_node *root, t_shell *shell)
 		else if (root->str && root->fd != -1)
 			ft_do(root->phrase, shell);
 	}
+	//ft_free_phrase(root->phrase);
+	//ft_vector_free(root->phrase);
 }

@@ -6,7 +6,7 @@
 /*   By: ishenriq <ishenriq@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/22 18:25:14 by ishenriq          #+#    #+#             */
-/*   Updated: 2024/07/03 13:02:33 by paranha          ###   ########.org.br   */
+/*   Updated: 2024/07/03 15:42:58 by paranha          ###   ########.org.br   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -227,6 +227,7 @@ void				ft_sigquit(void);
 // File Error
 void				ft_clear(t_shell *shell);
 void				ft_error(char *cmd, char *flag, char *msg, int status);
+void	close_open_fds(void);
 
 // Builtins
 char				**ft_env_export(const t_vector *vars);
