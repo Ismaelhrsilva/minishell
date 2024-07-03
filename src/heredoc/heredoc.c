@@ -6,7 +6,7 @@
 /*   By: ishenriq <ishenriq@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/07 22:17:01 by ishenriq          #+#    #+#             */
-/*   Updated: 2024/06/23 19:49:28 by ishenriq         ###   ########.fr       */
+/*   Updated: 2024/07/02 20:00:00 by ishenriq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,20 +62,47 @@ char	*ft_heredoc(t_node *root, t_shell *shell)
 		gnl = readline("> ");
 		status_here(HERE_DOC, 0);
 		ft_heredoc_sigint(gnl, std);
+		if (ft_strchr("\"\'", root->str[0]))
+			ft_eliminate_ch_corner(root->str);
 		if (gnl && ft_strncmp(gnl, root->str, ft_strlen(root->str)) == 0
 			&& ft_strlen(root->str) == ft_strlen(gnl))
 			break ;
 		if (!ft_strchr("\'\"", root->str_not_expanded[0]))
 			gnl = ft_parse_expand_heredoc(gnl, shell);
-		gnl = ft_strjoin(gnl, "\n");
-		ft_putstr_fd(gnl, infile);
-		free(gnl);
+		if (ft_strncmp(gnl, "0x1A", 4) != 0)
+		{
+			gnl = ft_strjoin(gnl, "\n");
+			ft_putstr_fd(gnl, infile);
+			free(gnl);
+		}
 	}
 	ft_end_heredoc(infile, std, gnl);
 	return (temp_n);
 }
 
 void	ft_open_heredoc(t_node *root, t_shell *shell)
+{
+	if (!root)
+		return ;
+	//if (root->left && root->left->type & HEREDOC)
+	if (root->left)
+		ft_open_heredoc(root->left, shell);
+	if (root->right && root->right->str && root->type & HEREDOC)
+	{
+		root->right->str = ft_heredoc(root->right, shell);
+		root->type = REDIN;
+		if (g_status == SIGINT)
+		{
+			unlink(root->right->str);
+			free(root->right->str);
+			return ;
+		}
+	}
+	//ft_open_heredoc(root->left, shell);
+	//ft_open_heredoc(root->right, shell);
+}
+
+/*void	ft_open_heredoc(t_node *root, t_shell *shell)
 {
 	if (!root)
 		return ;
@@ -92,4 +119,4 @@ void	ft_open_heredoc(t_node *root, t_shell *shell)
 	}
 	ft_open_heredoc(root->left, shell);
 	ft_open_heredoc(root->right, shell);
-}
+}*/

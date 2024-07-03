@@ -6,7 +6,7 @@
 /*   By: ishenriq <ishenriq@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/22 18:25:14 by ishenriq          #+#    #+#             */
-/*   Updated: 2024/07/01 19:32:54 by paranha          ###   ########.org.br   */
+/*   Updated: 2024/07/02 19:38:40 by ishenriq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,6 +95,7 @@ typedef struct s_parse
 	char			*prompt_arranged;
 	t_index			*idx;
 	t_vector		*phrase;
+	t_vector		*phrase_grammar;
 }					t_parse;
 
 typedef struct s_node

@@ -6,7 +6,7 @@
 /*   By: ishenriq <ishenriq@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/13 19:12:24 by ishenriq          #+#    #+#             */
-/*   Updated: 2024/07/01 21:44:33 by ishenriq         ###   ########.fr       */
+/*   Updated: 2024/07/02 18:09:39 by ishenriq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,7 +78,7 @@ int	ft_empty_str(t_vector *vector)
 
 }
 
-char	*ft_expand_aux(t_shell *shell, t_vector *vector, int i, char signal)
+char	*ft_expand_aux(t_shell *shell, t_vector *vector, unsigned long int i, char signal)
 {
 	char	*final_str;
 	char	*s;
