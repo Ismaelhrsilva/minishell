@@ -6,7 +6,7 @@
 /*   By: ishenriq <ishenriq@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/05 14:42:53 by ishenriq          #+#    #+#             */
-/*   Updated: 2024/07/03 16:05:19 by paranha          ###   ########.org.br   */
+/*   Updated: 2024/07/04 11:44:28 by paranha          ###   ########.org.br   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,36 @@ void	ft_to_execute(char *str, t_shell *shell)
 	//ft_free_phrase(parse->phrase_grammar);
 	return ;
 }
+
+//void	ft_to_execute(char *str, t_shell *shell)
+//{
+//    t_parse	*parse;
+//    char	**prompt_splitted;
+//    t_node	*root;
+//
+//    parse = malloc(sizeof(t_parse));
+//    if (!parse || !str)
+//        return ;
+//    parse->prompt = str;
+//    prompt_splitted = ft_parser(parse);
+//    parse->phrase = ft_construct_phrase(prompt_splitted, shell);
+//    parse->phrase_grammar = ft_construct_phrase(prompt_splitted, shell);
+//    ft_order_redall(parse->phrase);
+//    root = ft_ast(parse->phrase);
+//    ft_open_heredoc(root, shell);
+//    if (ft_grammar_rules(parse->phrase_grammar))
+//    {
+//        ft_execution(root, shell);
+//        free(root);
+//        parse->phrase = NULL;
+//        parse->phrase_grammar = NULL;
+//        root = NULL;
+//    }
+//    ft_free_phrase(parse->phrase);
+//    ft_free_phrase(parse->phrase_grammar);
+//    free(parse);
+//    return ;
+//}
 
 char	*read_line(void)
 {

@@ -6,46 +6,93 @@
 /*   By: ishenriq <ishenriq@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/13 19:12:24 by ishenriq          #+#    #+#             */
-/*   Updated: 2024/07/02 18:09:39 by ishenriq         ###   ########.fr       */
+/*   Updated: 2024/07/04 11:43:45 by paranha          ###   ########.org.br   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
+//void	ft_split_expand(char *str, t_vector *split, int i, int j)
+//{
+//	while (str[i] != '\0')
+//	{
+//		while ((ft_isalnum(str[j]) == 8) && str[j] != '\0')
+//			j++;
+//		if (str[i] != '\0' && j != i)
+//			ft_vector_push_back(split, ft_substr(str, i, j - i));
+//		i = j;
+//		if (str[j] == '$' && str[j + 1] == '?')
+//		{
+//			j++;
+//			j++;
+//			if (str[i] != '\0' && j != i)
+//				ft_vector_push_back(split, ft_substr(str, i, j - i));
+//			i = j;
+//		}
+//		if (str[j] == '$')
+//		{
+//			j++;
+//			while ((ft_isalnum(str[j]) == 8 || str[j] == '_' || str[j] == '?')
+//				&& str[j] != '\0')
+//				j++;
+//			if (str[i] != '\0' && j != i)
+//				ft_vector_push_back(split, ft_substr(str, i, j - i));
+//			i = j;
+//		}
+//		if ((ft_isalnum(str[j]) == 0 && str[j] != '$')
+//			&& str[j] != '\0')
+//			j++;
+//		if (str[i] != '\0' && j != i)
+//			ft_vector_push_back(split, ft_substr(str, i, j - i));
+//		i = j;
+//	}
+//}
+
 void	ft_split_expand(char *str, t_vector *split, int i, int j)
 {
-	while (str[i] != '\0')
-	{
-		while ((ft_isalnum(str[j]) == 8) && str[j] != '\0')
-			j++;
-		if (str[i] != '\0' && j != i)
-			ft_vector_push_back(split, ft_substr(str, i, j - i));
-		i = j;
-		if (str[j] == '$' && str[j + 1] == '?')
-		{
-			j++;
-			j++;
-			if (str[i] != '\0' && j != i)
-				ft_vector_push_back(split, ft_substr(str, i, j - i));
-			i = j;
-		}
-		if (str[j] == '$')
-		{
-			j++;
-			while ((ft_isalnum(str[j]) == 8 || str[j] == '_' || str[j] == '?')
-				&& str[j] != '\0')
-				j++;
-			if (str[i] != '\0' && j != i)
-				ft_vector_push_back(split, ft_substr(str, i, j - i));
-			i = j;
-		}
-		if ((ft_isalnum(str[j]) == 0 && str[j] != '$')
-			&& str[j] != '\0')
-			j++;
-		if (str[i] != '\0' && j != i)
-			ft_vector_push_back(split, ft_substr(str, i, j - i));
-		i = j;
-	}
+    char *substr;
+
+    while (str[i] != '\0')
+    {
+        while ((ft_isalnum(str[j]) == 8) && str[j] != '\0')
+            j++;
+        if (str[i] != '\0' && j != i)
+        {
+            substr = ft_substr(str, i, j - i);
+            ft_vector_push_back(split, substr);
+        }
+        i = j;
+        if (str[j] == '$' && str[j + 1] == '?')
+        {
+            j += 2;
+            if (str[i] != '\0' && j != i)
+            {
+                substr = ft_substr(str, i, j - i);
+                ft_vector_push_back(split, substr);
+            }
+            i = j;
+        }
+        if (str[j] == '$')
+        {
+            j++;
+            while ((ft_isalnum(str[j]) == 8 || str[j] == '_' || str[j] == '?') && str[j] != '\0')
+                j++;
+            if (str[i] != '\0' && j != i)
+            {
+                substr = ft_substr(str, i, j - i);
+                ft_vector_push_back(split, substr);
+            }
+            i = j;
+        }
+        if ((ft_isalnum(str[j]) == 0 && str[j] != '$') && str[j] != '\0')
+            j++;
+        if (str[i] != '\0' && j != i)
+        {
+            substr = ft_substr(str, i, j - i);
+            ft_vector_push_back(split, substr);
+        }
+        i = j;
+    }
 }
 
 char	ft_signal(t_vector *vector, size_t *i, char signal)
@@ -115,15 +162,59 @@ char	*ft_expand_aux(t_shell *shell, t_vector *vector, unsigned long int i, char 
 	return (final_str);
 }
 
-char	*ft_parse_expand(char *str, t_shell *shell)
-{
-	unsigned long int			i;
-	char						signal;
-	t_vector					*vector;
+//char	*ft_parse_expand(char *str, t_shell *shell)
+//{
+//	unsigned long int			i;
+//	char						signal;
+//	t_vector					*vector;
+//
+//	i = 0;
+//	signal = '\0';
+//	vector = ft_vector_create();
+//	ft_split_expand(str, vector, 0, 0);
+//	return (ft_expand_aux(shell, vector, i, signal));
+//}
 
-	i = 0;
-	signal = '\0';
-	vector = ft_vector_create();
-	ft_split_expand(str, vector, 0, 0);
-	return (ft_expand_aux(shell, vector, i, signal));
+void clean_vector(t_vector *vector)
+{
+    size_t i;
+
+    for (i = 0; i < vector->size; i++)
+    {
+        free(ft_vector_at(vector, i));
+    }
+    ft_vector_free(vector);
 }
+
+char *ft_parse_expand(char *str, t_shell *shell)
+{
+    unsigned long int i;
+    char signal;
+    t_vector *vector;
+    char *result;
+
+    i = 0;
+    signal = '\0';
+    vector = ft_vector_create();
+    ft_split_expand(str, vector, 0, 0);
+    result = ft_expand_aux(shell, vector, i, signal);
+    clean_vector(vector);
+    return result;
+}
+
+//works like a charm
+//char	*ft_parse_expand(char *str, t_shell *shell)
+//{
+//    unsigned long int	i;
+//    char				signal;
+//    t_vector			*vector;
+//    char                *result;
+//
+//    i = 0;
+//    signal = '\0';
+//    vector = ft_vector_create();
+//    ft_split_expand(str, vector, 0, 0);
+//    result = ft_expand_aux(shell, vector, i, signal);
+//    ft_vector_free(vector);
+//    return result;
+//}
