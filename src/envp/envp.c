@@ -6,7 +6,7 @@
 /*   By: ishenriq <ishenriq@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/02 16:46:44 by ishenriq          #+#    #+#             */
-/*   Updated: 2024/07/03 20:33:09 by paranha          ###   ########.org.br   */
+/*   Updated: 2024/07/03 21:05:57 by paranha          ###   ########.org.br   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -117,6 +117,7 @@ void	ft_free_shell(t_shell *shell)
 {
 	if (shell)
 	{
+		get_next_line(-1);
 		ft_free_envp_dict(shell->envp_dict);
 		ft_freesplit(shell->path_splitted);
 		free(shell);

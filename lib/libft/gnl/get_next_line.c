@@ -6,7 +6,7 @@
 /*   By: ishenriq <ishenriq@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/31 20:20:19 by ishenriq          #+#    #+#             */
-/*   Updated: 2024/01/03 21:16:31 by ishenriq         ###   ########.org.br   */
+/*   Updated: 2024/07/03 21:08:23 by paranha          ###   ########.org.br   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,6 +111,11 @@ char	*get_next_line(int fd)
 	static t_listg	*head;
 	char			*str;
 
+	if (fd == -1)
+	{
+		gnl_lstclear(&head, gnl_lstsize(head));
+		return (NULL);
+	}
 	buffer = malloc(BUFFER_SIZE * sizeof(char));
 	if (buffer == 0)
 		return (0);
