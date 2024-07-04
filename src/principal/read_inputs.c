@@ -40,12 +40,12 @@ void	ft_to_execute(char *str, t_shell *shell)
 		parse->phrase_grammar = NULL;
 		root = NULL;
 	}
-	//ft_free_phrase(parse->phrase);
-	//ft_free_phrase(parse->phrase_grammar);
+	// ft_free_phrase(parse->phrase);
+	// ft_free_phrase(parse->phrase_grammar);
 	return ;
 }
 
-//void	ft_to_execute(char *str, t_shell *shell)
+// void	ft_to_execute(char *str, t_shell *shell)
 //{
 //    t_parse	*parse;
 //    char	**prompt_splitted;
@@ -83,7 +83,7 @@ char	*read_line(void)
 	prompt = readline("minishell>$ ");
 	status_here(PROMPT, 1);
 	if (!prompt)
-		exit (255);
+		exit(255);
 	add_history(prompt);
 	return (prompt);
 }

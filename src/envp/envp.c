@@ -63,7 +63,7 @@ void	ft_free_line_envp(t_vector *line_dict)
 			ft_freesplit(line_dict->values[2]);
 		free(line_dict->values[3]);
 		ft_vector_free(line_dict);
-	//	ft_free_phrase(line_dict);
+		//	ft_free_phrase(line_dict);
 	}
 }
 
@@ -118,10 +118,10 @@ void	ft_free_shell(t_shell *shell)
 {
 	if (shell)
 	{
-	//	get_next_line(-1);
+		//	get_next_line(-1);
 		ft_free_envp_dict(shell->envp_dict);
 		ft_freesplit(shell->path_splitted);
-		//free(shell->path);
+		// free(shell->path);
 		free(shell);
 	}
 }
