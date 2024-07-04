@@ -90,6 +90,9 @@ void	ft_builtin_exit(t_shell *shell, t_vector *cmd)
 	{
 		ft_putendl_fd("exit: numeric argument required", STDERR_FILENO);
 		ft_status(2);
+		//exit_status = ft_parse_exit_arguments(cmd);
+		ft_clear2(shell);
+		exit(2);
 	}
 	else if (cmd->size > 2)
 	{
