@@ -6,7 +6,7 @@
 /*   By: ishenriq <ishenriq@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/13 19:12:24 by ishenriq          #+#    #+#             */
-/*   Updated: 2024/07/04 11:43:45 by paranha          ###   ########.org.br   */
+/*   Updated: 2024/07/04 12:31:07 by paranha          ###   ########.org.br   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -179,9 +179,11 @@ void	clean_vector(t_vector *vector)
 {
 	size_t	i;
 
-	for (i = 0; i < vector->size; i++)
+	i = 0;
+	while (i < vector->size)
 	{
 		free(ft_vector_at(vector, i));
+		i++;
 	}
 	ft_vector_free(vector);
 }

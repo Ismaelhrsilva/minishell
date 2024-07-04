@@ -6,11 +6,42 @@
 /*   By: ishenriq <ishenriq@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/13 20:17:19 by ishenriq          #+#    #+#             */
-/*   Updated: 2024/07/03 21:21:03 by paranha          ###   ########.org.br   */
+/*   Updated: 2024/07/04 12:32:17 by paranha          ###   ########.org.br   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+//t_vector	*ft_construct_phrase(char **split, t_shell *shell)
+//{
+//	t_vector	*phrase;
+//	int			i;
+//	int			*token;
+//	t_vector	*word;
+//
+//	(void)shell;
+//	phrase = ft_vector_create();
+//	if (!phrase)
+//		return (NULL);
+//	i = 0;
+//	while (split[i])
+//	{
+//		word = ft_vector_create();
+//		if (!word)
+//			return (NULL);
+//		// ft_vector_push_back(word, ft_parse_expand(split[i], shell));
+//		ft_vector_push_back(word, split[i]);
+//		token = malloc(sizeof(int));
+//		if (!token)
+//			return (NULL);
+//		*token = ft_set_token(split[i]);
+//		ft_vector_push_back(word, token);
+//		ft_vector_push_back(word, split[i]);
+//		ft_vector_push_back(phrase, word);
+//		i++;
+//	}
+//	return (phrase);
+//}
 
 t_vector	*ft_construct_phrase(char **split, t_shell *shell)
 {
@@ -28,12 +59,19 @@ t_vector	*ft_construct_phrase(char **split, t_shell *shell)
 	{
 		word = ft_vector_create();
 		if (!word)
+		{
+			ft_vector_free(phrase);
 			return (NULL);
+		}
 		// ft_vector_push_back(word, ft_parse_expand(split[i], shell));
 		ft_vector_push_back(word, split[i]);
 		token = malloc(sizeof(int));
 		if (!token)
+		{
+			ft_vector_free(word);
+			ft_vector_free(phrase);
 			return (NULL);
+		}
 		*token = ft_set_token(split[i]);
 		ft_vector_push_back(word, token);
 		ft_vector_push_back(word, split[i]);
@@ -41,6 +79,32 @@ t_vector	*ft_construct_phrase(char **split, t_shell *shell)
 		i++;
 	}
 	return (phrase);
+}
+
+void	ft_free_constructed_phrase(t_vector *phrase)
+{
+	size_t	i;
+	t_vector *word;
+//	int		*token;
+
+	if (!phrase)
+		return;
+	i = 0;
+	while (i < phrase->size)
+	{
+		word = (t_vector *)ft_vector_at(phrase, i);
+		if (word)
+		{
+			for (size_t j = 0; j < word->size; j++)
+			{
+				void *elem = ft_vector_at(word, j);
+				free(elem);
+			}
+			ft_vector_free(word);
+		}
+		i++;
+	}
+	ft_vector_free(phrase);
 }
 
 int	ft_is_inner_vector(void *ptr)
