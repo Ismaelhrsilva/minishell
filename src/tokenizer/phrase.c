@@ -6,7 +6,7 @@
 /*   By: ishenriq <ishenriq@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/13 20:17:19 by ishenriq          #+#    #+#             */
-/*   Updated: 2024/07/04 14:29:56 by paranha          ###   ########.org.br   */
+/*   Updated: 2024/07/04 18:50:43 by paranha          ###   ########.org.br   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,35 +43,63 @@
 //	return (phrase);
 //}
 
-void	ft_free_constructed_phrase(t_vector *phrase)
-{
-	size_t		i;
-	t_vector	*word;
-	size_t		j;
-	void		*elem;
+//void	ft_free_constructed_phrase(t_vector *phrase)
+//{
+//	size_t		i;
+//	t_vector	*word;
+//	size_t		j;
+//	void		*elem;
+//
+//	//	int		*token;
+//	if (!phrase)
+//		return ;
+//	i = 0;
+//	while (i < phrase->size)
+//	{
+//		word = (t_vector *)ft_vector_at(phrase, i);
+//		if (word)
+//		{
+//			j = 0;
+//			while (j < word->size)
+//			{
+//				elem = ft_vector_at(word, j);
+//				free(elem);
+//				j++;
+//			}
+//			ft_vector_free(word);
+//		}
+//		i++;
+//	}
+//	ft_vector_free(phrase);
+//}
 
-	//	int		*token;
-	if (!phrase)
-		return ;
-	i = 0;
-	while (i < phrase->size)
-	{
-		word = (t_vector *)ft_vector_at(phrase, i);
-		if (word)
-		{
-			j = 0;
-			while (j < word->size)
-			{
-				elem = ft_vector_at(word, j);
-				free(elem);
-				j++;
-			}
-			ft_vector_free(word);
-		}
-		i++;
-	}
-	ft_vector_free(phrase);
+void ft_free_constructed_phrase(t_vector *phrase)
+{
+    size_t i;
+    t_vector *word;
+    int *token;
+
+    if (phrase)
+    {
+	    i = 0;
+        while (i < phrase->size)
+        {
+            word = phrase->values[i];
+            if (word)
+            {
+                free(word->values[0]);
+                token = word->values[1];
+                if (token)
+                    free(token);
+                free(word->values[2]);
+                ft_vector_free(word);
+            }
+	    i++;
+        }
+        ft_vector_free(phrase);
+    }
 }
+
 t_vector	*ft_construct_phrase(char **split, t_shell *shell)
 {
 	t_vector	*phrase;
