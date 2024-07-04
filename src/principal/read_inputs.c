@@ -6,7 +6,7 @@
 /*   By: ishenriq <ishenriq@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/05 14:42:53 by ishenriq          #+#    #+#             */
-/*   Updated: 2024/07/04 11:44:28 by paranha          ###   ########.org.br   */
+/*   Updated: 2024/07/04 17:02:31 by paranha          ###   ########.org.br   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,15 @@
 
 extern volatile sig_atomic_t	g_status;
 
+
+void	ft_free_parse(t_parse *parse)
+{
+	if (parse->phrase)
+		ft_free_phrase(parse->phrase);
+	if (parse->phrase_grammar)
+		ft_free_phrase(parse->phrase_grammar);
+	free(parse);
+}
 void	ft_to_execute(char *str, t_shell *shell)
 {
 	t_parse	*parse;
@@ -40,6 +49,7 @@ void	ft_to_execute(char *str, t_shell *shell)
 		parse->phrase_grammar = NULL;
 		root = NULL;
 	}
+	ft_free_parse(parse);
 	// ft_free_phrase(parse->phrase);
 	// ft_free_phrase(parse->phrase_grammar);
 	return ;
