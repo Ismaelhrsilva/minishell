@@ -6,7 +6,7 @@
 /*   By: ishenriq <ishenriq@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/05 14:42:53 by ishenriq          #+#    #+#             */
-/*   Updated: 2024/07/04 18:39:09 by paranha          ###   ########.org.br   */
+/*   Updated: 2024/07/04 19:46:28 by paranha          ###   ########.org.br   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,14 +14,6 @@
 
 extern volatile sig_atomic_t	g_status;
 
-void	ft_free_parse(t_parse *parse)
-{
-	if (parse->phrase)
-		ft_free_phrase(parse->phrase);
-	if (parse->phrase_grammar)
-		ft_free_phrase(parse->phrase_grammar);
-	free(parse);
-}
 // void	ft_to_execute(char *str, t_shell *shell)
 //{
 //	t_parse	*parse;
@@ -51,6 +43,26 @@ void	ft_free_parse(t_parse *parse)
 //	ft_free_parse(parse);
 //	return ;
 //}
+
+void	ft_free_root(t_node *root)
+{
+	if (root->left)
+		ft_free_root(root->left);
+	if (root->right)
+		ft_free_root(root->right);
+	if (root->phrase)
+		ft_vector_free(root->phrase);
+	free(root);
+}
+
+void	ft_free_parse(t_parse *parse)
+{
+	if (parse->phrase)
+		ft_free_phrase(parse->phrase);
+	if (parse->phrase_grammar)
+		ft_free_phrase(parse->phrase_grammar);
+	free(parse);
+}
 
 void	ft_to_execute(char *str, t_shell *shell)
 {
@@ -89,6 +101,7 @@ void	ft_to_execute(char *str, t_shell *shell)
 	}
 	free(prompt_splitted);
 	ft_free_parse(parse);
+	return ;
 }
 
 // void	ft_to_execute(char *str, t_shell *shell)
