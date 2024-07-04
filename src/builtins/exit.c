@@ -6,7 +6,7 @@
 /*   By: paranha <paranha@student.42sp.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/30 18:34:50 by paranha           #+#    #+#             */
-/*   Updated: 2024/07/04 11:07:35 by paranha          ###   ########.org.br   */
+/*   Updated: 2024/07/04 16:00:16 by paranha          ###   ########.org.br   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,7 +89,7 @@ void	ft_builtin_exit(t_shell *shell, t_vector *cmd)
 	if (cmd->size > 1 && !ft_is_number(ft_value(cmd, 1, 0)))
 	{
 		ft_putendl_fd("exit: numeric argument required", STDERR_FILENO);
-		exit(2);
+		ft_status(2);
 	}
 	else if (cmd->size > 2)
 	{
