@@ -6,7 +6,7 @@
 /*   By: ishenriq <ishenriq@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/15 18:38:12 by ishenriq          #+#    #+#             */
-/*   Updated: 2024/07/03 13:02:43 by paranha          ###   ########.org.br   */
+/*   Updated: 2024/07/05 14:16:18 by paranha          ###   ########.org.br   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,18 +39,18 @@ static int	ft_metacharacter_edges(t_vector *phrase, size_t pos)
 
 static int	ft_valid_brackets(t_vector *phrase)
 {
-	size_t	count;
-	size_t	i;
+	long	count;
+	long	i;
 
 	i = 0;
 	count = 0;
-	while (i < phrase->size)
+	while (i < (long)phrase->size)
 	{
-		if ((long)ft_value_int(phrase, i, 1) & OPEN_BRACKET)
+		if (ft_value_int(phrase, i, 1) & OPEN_BRACKET)
 			count++;
-		if ((long)ft_value_int(phrase, i, 1) & CLOSE_BRACKET)
+		if (ft_value_int(phrase, i, 1) & CLOSE_BRACKET)
 			count--;
-		if ((long)count < 0)
+		if (count < 0)
 			return (1);
 		i++;
 	}
