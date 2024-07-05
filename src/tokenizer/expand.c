@@ -6,70 +6,27 @@
 /*   By: ishenriq <ishenriq@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/13 19:12:24 by ishenriq          #+#    #+#             */
-/*   Updated: 2024/07/04 12:31:07 by paranha          ###   ########.org.br   */
+/*   Updated: 2024/07/05 14:56:26 by paranha          ###   ########.org.br   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-// void	ft_split_expand(char *str, t_vector *split, int i, int j)
-//{
-//	while (str[i] != '\0')
-//	{
-//		while ((ft_isalnum(str[j]) == 8) && str[j] != '\0')
-//			j++;
-//		if (str[i] != '\0' && j != i)
-//			ft_vector_push_back(split, ft_substr(str, i, j - i));
-//		i = j;
-//		if (str[j] == '$' && str[j + 1] == '?')
-//		{
-//			j++;
-//			j++;
-//			if (str[i] != '\0' && j != i)
-//				ft_vector_push_back(split, ft_substr(str, i, j - i));
-//			i = j;
-//		}
-//		if (str[j] == '$')
-//		{
-//			j++;
-//			while ((ft_isalnum(str[j]) == 8 || str[j] == '_' || str[j] == '?')
-//				&& str[j] != '\0')
-//				j++;
-//			if (str[i] != '\0' && j != i)
-//				ft_vector_push_back(split, ft_substr(str, i, j - i));
-//			i = j;
-//		}
-//		if ((ft_isalnum(str[j]) == 0 && str[j] != '$')
-//			&& str[j] != '\0')
-//			j++;
-//		if (str[i] != '\0' && j != i)
-//			ft_vector_push_back(split, ft_substr(str, i, j - i));
-//		i = j;
-//	}
-//}
-
-void	ft_split_expand(char *str, t_vector *split, int i, int j)
+ void	ft_split_expand(char *str, t_vector *split, int i, int j)
 {
-	char	*substr;
-
 	while (str[i] != '\0')
 	{
 		while ((ft_isalnum(str[j]) == 8) && str[j] != '\0')
 			j++;
 		if (str[i] != '\0' && j != i)
-		{
-			substr = ft_substr(str, i, j - i);
-			ft_vector_push_back(split, substr);
-		}
+			ft_vector_push_back(split, ft_substr(str, i, j - i));
 		i = j;
 		if (str[j] == '$' && str[j + 1] == '?')
 		{
-			j += 2;
+			j++;
+			j++;
 			if (str[i] != '\0' && j != i)
-			{
-				substr = ft_substr(str, i, j - i);
-				ft_vector_push_back(split, substr);
-			}
+				ft_vector_push_back(split, ft_substr(str, i, j - i));
 			i = j;
 		}
 		if (str[j] == '$')
@@ -79,22 +36,65 @@ void	ft_split_expand(char *str, t_vector *split, int i, int j)
 				&& str[j] != '\0')
 				j++;
 			if (str[i] != '\0' && j != i)
-			{
-				substr = ft_substr(str, i, j - i);
-				ft_vector_push_back(split, substr);
-			}
+				ft_vector_push_back(split, ft_substr(str, i, j - i));
 			i = j;
 		}
-		if ((ft_isalnum(str[j]) == 0 && str[j] != '$') && str[j] != '\0')
+		if ((ft_isalnum(str[j]) == 0 && str[j] != '$')
+			&& str[j] != '\0')
 			j++;
 		if (str[i] != '\0' && j != i)
-		{
-			substr = ft_substr(str, i, j - i);
-			ft_vector_push_back(split, substr);
-		}
+			ft_vector_push_back(split, ft_substr(str, i, j - i));
 		i = j;
 	}
 }
+
+//void	ft_split_expand(char *str, t_vector *split, int i, int j)
+//{
+//	char	*substr;
+//
+//	while (str[i] != '\0')
+//	{
+//		while ((ft_isalnum(str[j]) == 8) && str[j] != '\0')
+//			j++;
+//		if (str[i] != '\0' && j != i)
+//		{
+//			substr = ft_substr(str, i, j - i);
+//			ft_vector_push_back(split, substr);
+//		}
+//		i = j;
+//		if (str[j] == '$' && str[j + 1] == '?')
+//		{
+//			j += 2;
+//			if (str[i] != '\0' && j != i)
+//			{
+//				substr = ft_substr(str, i, j - i);
+//				ft_vector_push_back(split, substr);
+//			}
+//			i = j;
+//		}
+//		if (str[j] == '$')
+//		{
+//			j++;
+//			while ((ft_isalnum(str[j]) == 8 || str[j] == '_' || str[j] == '?')
+//				&& str[j] != '\0')
+//				j++;
+//			if (str[i] != '\0' && j != i)
+//			{
+//				substr = ft_substr(str, i, j - i);
+//				ft_vector_push_back(split, substr);
+//			}
+//			i = j;
+//		}
+//		if ((ft_isalnum(str[j]) == 0 && str[j] != '$') && str[j] != '\0')
+//			j++;
+//		if (str[i] != '\0' && j != i)
+//		{
+//			substr = ft_substr(str, i, j - i);
+//			ft_vector_push_back(split, substr);
+//		}
+//		i = j;
+//	}
+//}
 
 char	ft_signal(t_vector *vector, size_t *i, char signal)
 {
