@@ -6,7 +6,7 @@
 /*   By: ishenriq <ishenriq@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/05 14:42:53 by ishenriq          #+#    #+#             */
-/*   Updated: 2024/07/04 19:46:28 by paranha          ###   ########.org.br   */
+/*   Updated: 2024/07/06 15:06:24 by paranha          ###   ########.org.br   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,10 +57,10 @@ void	ft_free_root(t_node *root)
 
 void	ft_free_parse(t_parse *parse)
 {
-	if (parse->phrase)
-		ft_free_phrase(parse->phrase);
-	if (parse->phrase_grammar)
-		ft_free_phrase(parse->phrase_grammar);
+//	if (parse->phrase)
+//		ft_free_phrase(parse->phrase);
+//	if (parse->phrase_grammar)
+//		ft_free_phrase(parse->phrase_grammar);
 	free(parse);
 }
 
