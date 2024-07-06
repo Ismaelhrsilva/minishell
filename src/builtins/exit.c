@@ -6,7 +6,7 @@
 /*   By: paranha <paranha@student.42sp.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/30 18:34:50 by paranha           #+#    #+#             */
-/*   Updated: 2024/07/02 15:40:31 by paranha          ###   ########.org.br   */
+/*   Updated: 2024/07/04 16:00:16 by paranha          ###   ########.org.br   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,6 +71,15 @@ unsigned char	ft_parse_exit_arguments(t_vector *cmd)
 	}
 	return (exit_status);
 }
+void	ft_clear2(t_shell *shell)
+{
+	//	(void)shell;
+	close_open_fds();
+	ft_free_shell(shell);
+	// ft_free_phrase(shell->envp_dict);
+	// ft_freesplit(shell->path_splitted);
+	// free(shell->path);
+}
 
 void	ft_builtin_exit(t_shell *shell, t_vector *cmd)
 {
@@ -80,6 +89,9 @@ void	ft_builtin_exit(t_shell *shell, t_vector *cmd)
 	if (cmd->size > 1 && !ft_is_number(ft_value(cmd, 1, 0)))
 	{
 		ft_putendl_fd("exit: numeric argument required", STDERR_FILENO);
+		ft_status(2);
+		//exit_status = ft_parse_exit_arguments(cmd);
+		ft_clear2(shell);
 		exit(2);
 	}
 	else if (cmd->size > 2)
@@ -89,6 +101,7 @@ void	ft_builtin_exit(t_shell *shell, t_vector *cmd)
 		return ;
 	}
 	exit_status = ft_parse_exit_arguments(cmd);
-	ft_clear(shell);
+	ft_clear2(shell);
+	//	ft_free_phrase(cmd);
 	exit(exit_status);
 }

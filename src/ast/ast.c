@@ -6,17 +6,17 @@
 /*   By: ishenriq <ishenriq@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/19 14:31:38 by ishenriq          #+#    #+#             */
-/*   Updated: 2024/07/03 12:46:48 by paranha          ###   ########.org.br   */
+/*   Updated: 2024/07/05 14:14:44 by paranha          ###   ########.org.br   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-static int	ft_branch(t_vector *phrase, size_t pos, t_node *root)
+static int	ft_branch(t_vector *phrase, long pos, t_node *root)
 {
 	t_vector	*right;
 
-	if (!phrase || (long)pos < 0 || pos > phrase->size || !root)
+	if (!phrase || pos < 0 || pos > (long)phrase->size || !root)
 		return (0);
 	right = ft_vector_slice_right(phrase, pos);
 	root->type = ft_value_int(phrase, pos, 1);

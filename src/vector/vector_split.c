@@ -6,7 +6,7 @@
 /*   By: ishenriq <ishenriq@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/01 18:58:39 by ishenriq          #+#    #+#             */
-/*   Updated: 2024/07/03 12:49:29 by paranha          ###   ########.org.br   */
+/*   Updated: 2024/07/05 14:17:15 by paranha          ###   ########.org.br   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,11 +61,11 @@ t_vector	*ft_vector_slice_right(t_vector *vector, unsigned long pos)
 	return (sliced);
 }
 
-void	ft_vector_swap(t_vector *vector, size_t a, size_t b)
+void	ft_vector_swap(t_vector *vector, long a, long b)
 {
 	void	*temp;
 
-	if (a > vector->size || b > vector->size || (long)a < 0 || (long)b < 0)
+	if (a > (long)vector->size || b > (long)vector->size || a < 0 || b < 0)
 		return ;
 	temp = vector->values[a];
 	vector->values[a] = vector->values[b];

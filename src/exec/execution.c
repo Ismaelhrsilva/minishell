@@ -6,7 +6,7 @@
 /*   By: ishenriq <ishenriq@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/03 19:15:25 by ishenriq          #+#    #+#             */
-/*   Updated: 2024/07/01 21:45:02 by ishenriq         ###   ########.fr       */
+/*   Updated: 2024/07/04 19:16:17 by paranha          ###   ########.org.br   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ extern volatile sig_atomic_t	g_status;
 static char	**ft_build_argv_exec(t_vector *phrase)
 {
 	char	**argv_exec;
-	size_t		i;
+	size_t	i;
 
 	i = 0;
 	argv_exec = ft_calloc(phrase->size + 1, sizeof(char **));
@@ -51,7 +51,7 @@ static void	ft_do(t_vector *phrase, t_shell *shell)
 				ft_error(cmd, NULL, "Permission denied", EACCES);
 			else if (execve(ft_get_pathname(shell->path_splitted, cmd),
 					ft_build_argv_exec(phrase), shell->envp) < 0)
-			ft_error(cmd, NULL, strerror(errno), errno);
+				ft_error(cmd, NULL, strerror(errno), errno);
 			close(g_status);
 			ft_clear(shell);
 			exit(ft_status(-1));
@@ -99,7 +99,6 @@ int	ft_builtins(t_node *root, t_shell *shell)
 	return (1);
 }
 
-
 t_vector	*ft_put_str_token_at_vector(t_vector *phrase, int i, char *str)
 {
 	t_vector	*innervector;
@@ -110,13 +109,11 @@ t_vector	*ft_put_str_token_at_vector(t_vector *phrase, int i, char *str)
 	return (innervector);
 }
 
-
 void	ft_expand_before_exec(t_node *root, t_shell *shell)
 {
-	size_t			i;
+	size_t		i;
 	char		*str;
 	t_vector	*vector;
-
 
 	i = 0;
 	vector = ft_vector_create();
@@ -125,13 +122,36 @@ void	ft_expand_before_exec(t_node *root, t_shell *shell)
 		str = ft_parse_expand(ft_value(root->phrase, i, 0), shell);
 		if (ft_strncmp(str, "0x1A", 4) != 0)
 		{
-			ft_vector_push_back(vector,
-					   ft_put_str_token_at_vector(root->phrase, i, str));
+			ft_vector_push_back(vector, ft_put_str_token_at_vector(root->phrase,
+					i, str));
 		}
 		i++;
 	}
 	root->phrase = vector;
 }
+
+// void	ft_expand_before_exec(t_node *root, t_shell *shell)
+//{
+//    size_t			i;
+//    char			*str;
+//    t_vector		*vector;
+//
+//    i = 0;
+//    vector = ft_vector_create();
+//    while (i < root->phrase->size)
+//    {
+//        str = ft_parse_expand(ft_value(root->phrase, i, 0), shell);
+//        if (ft_strncmp(str, "0x1A", 4) != 0)
+//        {
+//            t_vector *inner_vector = ft_put_str_token_at_vector(root->phrase,
+//		i, str);
+//            ft_vector_push_back(vector, inner_vector);
+//            ft_vector_free(inner_vector);
+//        }
+//        i++;
+//    }
+//    root->phrase = vector;
+//}
 
 /*void	ft_expand_before_exec(t_node *root, t_shell *shell)
 {
@@ -151,6 +171,17 @@ void	ft_expand_before_exec(t_node *root, t_shell *shell)
 		i++;
 	}
 }*/
+
+//void	ft_free_root(t_node *root)
+//{
+//	if (root->left)
+//		ft_free_root(root->left);
+//	if (root->right)
+//		ft_free_root(root->right);
+//	if (root->phrase)
+//		ft_vector_free(root->phrase);
+//	free(root);
+//}
 
 void	ft_execution(t_node *root, t_shell *shell)
 {
@@ -181,4 +212,6 @@ void	ft_execution(t_node *root, t_shell *shell)
 		else if (root->str && root->fd != -1)
 			ft_do(root->phrase, shell);
 	}
+	// ft_free_phrase(root->phrase);
+	// ft_vector_free(root->phrase);
 }

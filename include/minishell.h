@@ -6,7 +6,7 @@
 /*   By: ishenriq <ishenriq@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/22 18:25:14 by ishenriq          #+#    #+#             */
-/*   Updated: 2024/07/06 13:45:18 by ishenriq         ###   ########.fr       */
+/*   Updated: 2024/07/06 14:38:15 by paranha          ###   ########.org.br   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,7 +113,6 @@ typedef struct s_node
 
 typedef struct s_shell
 {
-	char			**prompt_splitted;
 	char			**envp;
 	t_vector		*envp_dict;
 	t_node			*root;
@@ -136,7 +135,6 @@ void				ft_arranging_prompt(t_parse *parse);
 void				ft_parse_brackets(t_parse *parse, char *prompt);
 void				ft_parse_quotes(t_parse *parse, char *prompt, char *signal);
 int					ft_error_brackets(int st);
-
 // File Tokenizer
 char				*ft_expand(char *str, t_shell *shell);
 char				*ft_parse_expand(char *str, t_shell *shell);
@@ -161,7 +159,6 @@ void				ft_free_matrix(char **matrix);
 void				ft_replace_char_between_signal(char *str,
 						char signal, char old, char new_ch);
 char				ft_is_space(char c);
-
 // File grammar utils
 int					error(int status);
 int					ft_count_token(t_vector *phrase, int token);
@@ -231,6 +228,10 @@ void				ft_sigquit(void);
 // File Error
 void				ft_clear(t_shell *shell);
 void				ft_error(char *cmd, char *flag, char *msg, int status);
+void				close_open_fds(void);
+void				ft_free_shell(t_shell *shell);
+void ft_free_constructed_phrase(t_vector *phrase);
+void	clean_vector(t_vector *vector);
 
 // Builtins
 char				**ft_env_export(const t_vector *vars);
