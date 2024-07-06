@@ -6,7 +6,7 @@
 /*   By: ishenriq <ishenriq@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/13 19:12:24 by ishenriq          #+#    #+#             */
-/*   Updated: 2024/07/05 14:56:26 by paranha          ###   ########.org.br   */
+/*   Updated: 2024/07/06 15:39:47 by ishenriq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -137,8 +137,11 @@ char	*ft_expand_aux(t_shell *shell, t_vector *vector, unsigned long int i,
 		return ("");
 	while (i < vector->size)
 	{
-		signal = ft_signal(vector, &i, signal);
-		s = (char *)ft_vector_at(vector, i);
+		if (i == 0)
+		{
+			signal = ft_signal(vector, &i, signal);
+			s = (char *)ft_vector_at(vector, i);
+		}
 		while ((i < vector->size) && (signal != '\0' || !ft_strchr("\'\"",
 					s[0])) && (s == NULL || signal != s[0]))
 		{
@@ -155,7 +158,13 @@ char	*ft_expand_aux(t_shell *shell, t_vector *vector, unsigned long int i,
 			i++;
 			s = (char *)ft_vector_at(vector, i);
 		}
-		signal = '\0';
+		if (s && ft_strchr("\'\"", s[0]))
+		{
+			signal = ft_signal(vector, &i, signal);
+			s = (char *)ft_vector_at(vector, i);
+		}
+		else
+			signal = '\0';
 	}
 	if (not_expanded == 0)
 		return ("0x1A");
