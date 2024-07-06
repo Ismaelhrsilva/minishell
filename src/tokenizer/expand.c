@@ -6,7 +6,7 @@
 /*   By: ishenriq <ishenriq@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/13 19:12:24 by ishenriq          #+#    #+#             */
-/*   Updated: 2024/07/06 15:39:47 by ishenriq         ###   ########.fr       */
+/*   Updated: 2024/07/06 17:23:16 by ishenriq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,6 +105,8 @@ char	ft_signal(t_vector *vector, size_t *i, char signal)
 		else
 			signal = '\'';
 	}
+	else
+		signal = '\0';
 	return (signal);
 }
 
@@ -160,6 +162,8 @@ char	*ft_expand_aux(t_shell *shell, t_vector *vector, unsigned long int i,
 		}
 		if (s && ft_strchr("\'\"", s[0]))
 		{
+			if (i + 1 < vector->size)
+				i++;
 			signal = ft_signal(vector, &i, signal);
 			s = (char *)ft_vector_at(vector, i);
 		}
