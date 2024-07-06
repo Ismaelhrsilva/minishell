@@ -6,7 +6,7 @@
 /*   By: ishenriq <ishenriq@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/05 14:42:53 by ishenriq          #+#    #+#             */
-/*   Updated: 2024/07/01 17:58:29 by ishenriq         ###   ########.fr       */
+/*   Updated: 2024/07/06 14:31:47 by paranha          ###   ########.org.br   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,8 +36,6 @@ void	ft_parse_quotes(t_parse *parse, char *prompt, char *signal)
 		else
 			prompt[parse->idx->j++] = parse->prompt[parse->idx->i++];
 	}
-	if ((ft_strlen(&parse->prompt[parse->idx->i]) == 0))
-		ft_printf("Erro\n");
 }
 
 int	ft_valid_brackets_str(char *str)
@@ -65,6 +63,15 @@ int	ft_valid_brackets_str(char *str)
 		return (1);
 }
 
+int	ft_error_brackets(int st)
+{
+	static int	status;
+
+	if (st != -1)
+		status = st;
+	return (status);
+}
+
 void	ft_parse_brackets(t_parse *parse, char *prompt)
 {
 	int	count;
@@ -72,6 +79,11 @@ void	ft_parse_brackets(t_parse *parse, char *prompt)
 	count = 1;
 	if (parse->prompt[parse->idx->i] == '(')
 	{
+		if (ft_valid_brackets_str(&parse->prompt[parse->idx->i]))
+		{
+			ft_error_brackets(1);
+			ft_status(2);
+		}
 		prompt[parse->idx->j++] = parse->prompt[parse->idx->i++];
 		while (count != 0 && parse->prompt[parse->idx->i] != '\0')
 		{

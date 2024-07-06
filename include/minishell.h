@@ -6,7 +6,7 @@
 /*   By: ishenriq <ishenriq@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/22 18:25:14 by ishenriq          #+#    #+#             */
-/*   Updated: 2024/07/04 18:57:11 by paranha          ###   ########.org.br   */
+/*   Updated: 2024/07/06 14:38:15 by paranha          ###   ########.org.br   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -134,7 +134,7 @@ int					ft_valid_brackets_str(char *str);
 void				ft_arranging_prompt(t_parse *parse);
 void				ft_parse_brackets(t_parse *parse, char *prompt);
 void				ft_parse_quotes(t_parse *parse, char *prompt, char *signal);
-
+int					ft_error_brackets(int st);
 // File Tokenizer
 char				*ft_expand(char *str, t_shell *shell);
 char				*ft_parse_expand(char *str, t_shell *shell);
@@ -143,6 +143,8 @@ int					ft_set_token(char *str);
 t_vector			*ft_construct_phrase(char **split, t_shell *shell);
 void				ft_free_phrase(t_vector *phrase);
 void				ft_split_expand(char *str, t_vector *split, int i, int j);
+char				*ft_eliminate_signal(char *str, t_shell *shell);
+char				ft_signal(t_vector *vector, size_t *i, char signal);
 
 // File Grammar
 int					ft_grammar_rules(t_vector *phrase);
@@ -156,7 +158,7 @@ void				ft_change_sub_space(char **split);
 void				ft_free_matrix(char **matrix);
 void				ft_replace_char_between_signal(char *str,
 						char signal, char old, char new_ch);
-
+char				ft_is_space(char c);
 // File grammar utils
 int					error(int status);
 int					ft_count_token(t_vector *phrase, int token);

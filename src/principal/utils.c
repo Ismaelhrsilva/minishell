@@ -6,7 +6,7 @@
 /*   By: ishenriq <ishenriq@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/15 19:57:08 by ishenriq          #+#    #+#             */
-/*   Updated: 2024/07/01 19:30:09 by paranha          ###   ########.org.br   */
+/*   Updated: 2024/07/06 14:33:23 by paranha          ###   ########.org.br   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,4 +91,10 @@ void	ft_free_matrix(char **matrix)
 	while (matrix[i] != NULL)
 		free(matrix[i++]);
 	free(matrix);
+}
+
+char	ft_is_space(char c)
+{
+	return (c == '\f' || c == '\n' || c == '\r'
+		|| c == '\t' || c == '\v' || c == ' ');
 }

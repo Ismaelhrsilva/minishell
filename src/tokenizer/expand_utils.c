@@ -6,7 +6,7 @@
 /*   By: ishenriq <ishenriq@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/13 19:12:24 by ishenriq          #+#    #+#             */
-/*   Updated: 2024/07/02 19:18:58 by ishenriq         ###   ########.fr       */
+/*   Updated: 2024/07/06 14:36:19 by paranha          ###   ########.org.br   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,5 +72,37 @@ char	*ft_parse_expand_heredoc(char *str, t_shell *shell)
 	}
 	if (not_expanded == 0)
 		return ("0x1A");
+	return (final_str);
+}
+
+char	*ft_eliminate_signal(char *str, t_shell *shell)
+{
+	unsigned long int			i;
+	char						signal;
+	t_vector					*vector;
+	char	*final_str;
+	char	*s;
+
+	i = 0;
+	signal = '\0';
+	vector = ft_vector_create();
+	ft_split_expand(str, vector, 0, 0);
+	final_str = "";
+	while (i < vector->size)
+	{
+		signal = ft_signal(vector, &i, signal);
+		s = (char *)ft_vector_at(vector, i);
+		while ((i < vector->size) && (signal != '\0' || !ft_strchr("\'\"",
+					s[0])) && (s == NULL || signal != s[0]))
+		{
+			if (signal == '\'')
+				final_str = ft_strjoin(final_str, ft_strdup(s));
+			else if (ft_strncmp(ft_expand(s, shell), "0x1A", 4) != 0)
+				final_str = ft_strjoin(final_str, ft_strdup(s));
+			i++;
+			s = (char *)ft_vector_at(vector, i);
+		}
+		signal = '\0';
+	}
 	return (final_str);
 }

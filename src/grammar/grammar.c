@@ -6,7 +6,7 @@
 /*   By: ishenriq <ishenriq@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/15 18:38:12 by ishenriq          #+#    #+#             */
-/*   Updated: 2024/07/05 14:16:18 by paranha          ###   ########.org.br   */
+/*   Updated: 2024/07/06 14:29:43 by paranha          ###   ########.org.br   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,35 +37,59 @@ static int	ft_metacharacter_edges(t_vector *phrase, size_t pos)
 	return (0);
 }
 
-static int	ft_valid_brackets(t_vector *phrase)
+static int	ft_valide_quotes(t_vector *phrase, size_t pos)
 {
-	long	count;
-	long	i;
+	char	*signal;
+	char	*str;
+	int		i;
+	int		s;
 
+	signal = NULL;
 	i = 0;
-	count = 0;
-	while (i < (long)phrase->size)
+	s = 0;
+	str = ft_value(phrase, pos, 0);
+	while (str[i] != '\0')
 	{
-		if (ft_value_int(phrase, i, 1) & OPEN_BRACKET)
-			count++;
-		if (ft_value_int(phrase, i, 1) & CLOSE_BRACKET)
-			count--;
-		if (count < 0)
-			return (1);
+		if (ft_strchr("\"", str[i]))
+		{
+			signal = "\"";
+			s = 1;
+		}
+		else if (ft_strchr("\'", str[i]))
+		{
+			signal = "\'";
+			s = 1;
+		}
 		i++;
+		if (ft_count_chr(signal, '\'') == 1 || ft_count_chr(signal, '\"') == 1)
+		{
+			while (!ft_strchr(signal, str[i]) && str[i] != '\0')
+				i++;
+			if (str[i] == '\'' || str[i] == '\"')
+				s = 0;
+			if (s == 1)
+				return (1);
+			else
+				return (0);
+		}
 	}
-	if (count == 0)
-		return (0);
-	else
-		return (1);
+	return (0);
 }
 
-static int	ft_open_closed_brackets(t_vector *phrase)
+static int	ft_bracks_inside_empty(t_vector *phrase)
 {
-	if (ft_count_token(phrase, OPEN_BRACKET)
-		== ft_count_token(phrase, CLOSE_BRACKET))
-		return (0);
-	return (1);
+	char	*str;
+	size_t	pos;
+
+	pos = 0;
+	while (pos < phrase->size)
+	{
+		str = ft_value(phrase, pos, 0);
+		if (str[0] == '(' && ft_strlen(str) == 2)
+			return (1);
+		pos++;
+	}
+	return (0);
 }
 
 int	ft_grammar_rules(t_vector *phrase)
@@ -75,12 +99,18 @@ int	ft_grammar_rules(t_vector *phrase)
 	i = 0;
 	while (i < phrase->size)
 	{
-		if (error(ft_metacharacter_edges(phrase, i)
-				|| error(ft_metacharacter_following(phrase, i))))
+		if (error(ft_metacharacter_edges(phrase, i))
+				|| error(ft_metacharacter_following(phrase, i))
+				|| error(ft_valide_quotes(phrase, i)))
 			return (0);
 		i++;
 	}
-	if (error(ft_open_closed_brackets(phrase)) || error(ft_valid_brackets(phrase)))
+	if (error(ft_error_brackets(-1)))
+	{
+		ft_error_brackets(0);
+		return (0);
+	}
+	if (error(ft_bracks_inside_empty(phrase)))
 		return (0);
 	return (1);
 }
