@@ -6,7 +6,7 @@
 /*   By: ishenriq <ishenriq@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/22 18:25:14 by ishenriq          #+#    #+#             */
-/*   Updated: 2024/07/06 16:08:12 by ishenriq         ###   ########.fr       */
+/*   Updated: 2024/07/06 17:34:39 by ishenriq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -253,6 +253,7 @@ int					ft_is_valid_name(char *name);
 int					ft_strcmp(char *s1, char *s2);
 void				ft_freesplit(char **arr);
 void				ft_sort_vars(char **argv, int minor);
+void				ft_clear_ast(t_node	*root);
 
 //remove at end
 void				ft_print_ast(t_node	*root, char *branch);

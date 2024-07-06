@@ -6,7 +6,7 @@
 /*   By: ishenriq <ishenriq@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/15 19:57:08 by ishenriq          #+#    #+#             */
-/*   Updated: 2024/07/06 14:33:23 by paranha          ###   ########.org.br   */
+/*   Updated: 2024/07/06 17:32:51 by ishenriq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,4 +97,16 @@ char	ft_is_space(char c)
 {
 	return (c == '\f' || c == '\n' || c == '\r'
 		|| c == '\t' || c == '\v' || c == ' ');
+}
+
+void	ft_clear_ast(t_node	*root)
+{
+	if (root)
+	{
+		if (root->left)
+			ft_clear_ast(root->left);
+		if (root->right)
+			ft_clear_ast(root->right);
+		free(root);
+	}
 }

@@ -6,7 +6,7 @@
 /*   By: ishenriq <ishenriq@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/05 14:42:53 by ishenriq          #+#    #+#             */
-/*   Updated: 2024/07/06 15:06:24 by paranha          ###   ########.org.br   */
+/*   Updated: 2024/07/06 17:52:53 by ishenriq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,11 +93,11 @@ void	ft_to_execute(char *str, t_shell *shell)
 		if (ft_grammar_rules(parse->phrase_grammar))
 		{
 			ft_execution(root, shell);
-			free(root);
 			parse->phrase = NULL;
 			parse->phrase_grammar = NULL;
-			root = NULL;
 		}
+		ft_clear_ast(root);
+		root = NULL;
 	}
 	free(prompt_splitted);
 	ft_free_parse(parse);
@@ -142,7 +142,7 @@ char	*read_line(void)
 	prompt = readline("minishell>$ ");
 	status_here(PROMPT, 1);
 	if (!prompt)
-		exit(255);
+		exit(0);
 	add_history(prompt);
 	return (prompt);
 }
