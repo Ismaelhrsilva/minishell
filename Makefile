@@ -6,7 +6,7 @@
 #    By: ishenriq <ishenriq@student.42sp.org.br>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/12/11 20:08:54 by ishenriq          #+#    #+#              #
-#    Updated: 2024/07/03 12:46:21 by paranha          ###   ########.org.br    #
+#    Updated: 2024/07/06 16:11:01 by ishenriq         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -59,6 +59,7 @@ SRCS := \
 	principal/read_inputs.c \
 	principal/utils.c \
 	signal/signals.c \
+	signal/signals_macros.c \
 	tokenizer/expand.c \
 	tokenizer/expand_utils.c \
 	tokenizer/phrase.c \

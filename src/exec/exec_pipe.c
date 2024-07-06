@@ -6,7 +6,7 @@
 /*   By: ishenriq <ishenriq@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/04 20:34:11 by ishenriq          #+#    #+#             */
-/*   Updated: 2024/06/27 18:06:05 by ishenriq         ###   ########.fr       */
+/*   Updated: 2024/07/06 16:13:40 by ishenriq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,6 @@ void	ft_pipe(t_node *root, t_shell *shell)
 		ft_pipe_aux(root, shell, fd, RIGHT);
 	close(fd[0]);
 	close(fd[1]);
-	//ft_pid_status(pid[0]);
 	ft_pid_status_without_flobal(pid[0]);
 	ft_pid_status(pid[1]);
 

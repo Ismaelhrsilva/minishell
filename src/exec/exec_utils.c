@@ -6,7 +6,7 @@
 /*   By: ishenriq <ishenriq@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/03 19:26:34 by ishenriq          #+#    #+#             */
-/*   Updated: 2024/06/26 21:10:42 by ishenriq         ###   ########.fr       */
+/*   Updated: 2024/07/06 16:10:28 by ishenriq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,7 @@ void	ft_pid_status(pid_t pid)
 	int	status;
 
 	waitpid(pid, &status, WUNTRACED);
+	status = get_return_value(status);
 	if (WIFEXITED(status))
 		status = WEXITSTATUS(status);
 	if (status == 139)

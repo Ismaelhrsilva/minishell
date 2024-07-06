@@ -6,7 +6,7 @@
 /*   By: ishenriq <ishenriq@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/22 18:25:14 by ishenriq          #+#    #+#             */
-/*   Updated: 2024/07/06 14:38:15 by paranha          ###   ########.org.br   */
+/*   Updated: 2024/07/06 16:08:12 by ishenriq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -224,6 +224,7 @@ char				*ft_heredoc(t_node *root, t_shell *shell);
 //File Signal
 void				ft_init_signal(void);
 void				ft_sigquit(void);
+int					get_return_value(int status);
 
 // File Error
 void				ft_clear(t_shell *shell);
