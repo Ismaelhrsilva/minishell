@@ -6,7 +6,7 @@
 /*   By: ishenriq <ishenriq@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/05 14:42:53 by ishenriq          #+#    #+#             */
-/*   Updated: 2024/07/06 14:33:01 by paranha          ###   ########.org.br   */
+/*   Updated: 2024/07/06 15:59:32 by ishenriq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,11 +31,12 @@ void	ft_arranging_prompt(t_parse *parse)
 		if (ft_strchr("\'\"", parse->prompt[parse->idx->i]))
 			ft_parse_quotes(parse, prompt_arranged, signal);
 		ft_parse_brackets(parse, prompt_arranged);
-		if (ft_is_space(parse->prompt[parse->idx->i]))
+		if (parse->idx->i < size && ft_is_space(parse->prompt[parse->idx->i]))
 			parse->prompt[parse->idx->i] = ' ';
 		if (!ft_parse_char(parse, prompt_arranged))
 			prompt_arranged[parse->idx->j] = parse->prompt[parse->idx->i];
-		parse->idx->i++;
+		if (parse->idx->i < size)
+			parse->idx->i++;
 		parse->idx->j++;
 	}
 	prompt_arranged[parse->idx->j] = '\0';
