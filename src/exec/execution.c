@@ -6,7 +6,7 @@
 /*   By: ishenriq <ishenriq@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/03 19:15:25 by ishenriq          #+#    #+#             */
-/*   Updated: 2024/07/04 19:16:17 by paranha          ###   ########.org.br   */
+/*   Updated: 2024/07/06 17:09:05 by ishenriq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,11 @@ static void	ft_do(t_vector *phrase, t_shell *shell)
 {
 	pid_t	pid;
 	char	*cmd;
+	char	**vars;
 
+	vars = ft_env_export(shell->envp_dict);
+	shell->path = ft_getenv(shell->envp_dict, "PATH");
+	shell->path_splitted = ft_split(shell->path, ':');
 	cmd = ft_get_pathname(shell->path_splitted, ft_value(phrase, 0, 0));
 	if (cmd && (cmd[0] == '/' || ft_strncmp(cmd, "./", 2) == 0))
 	{
@@ -50,7 +54,7 @@ static void	ft_do(t_vector *phrase, t_shell *shell)
 			else if (access(cmd, X_OK) < 0)
 				ft_error(cmd, NULL, "Permission denied", EACCES);
 			else if (execve(ft_get_pathname(shell->path_splitted, cmd),
-					ft_build_argv_exec(phrase), shell->envp) < 0)
+					ft_build_argv_exec(phrase), vars) < 0)
 				ft_error(cmd, NULL, strerror(errno), errno);
 			close(g_status);
 			ft_clear(shell);
