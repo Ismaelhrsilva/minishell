@@ -6,7 +6,7 @@
 /*   By: ishenriq <ishenriq@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/03 19:15:25 by ishenriq          #+#    #+#             */
-/*   Updated: 2024/07/06 22:25:50 by paranha          ###   ########.org.br   */
+/*   Updated: 2024/07/07 16:39:25 by paranha          ###   ########.org.br   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,6 +81,36 @@ void	ft_do(t_vector *phrase, t_shell *shell)
 	else
 		ft_error(cmd, NULL, "command not found", ENOENT);
 }
+
+//void	ft_do(t_vector *phrase, t_shell *shell)
+//{
+//	char	*cmd;
+//	char	**vars;
+//
+//	vars = ft_env_export(shell->envp_dict);
+//	shell->path = ft_getenv(shell->envp_dict, "PATH");
+//	shell->path_splitted = ft_split(shell->path, ':');
+//	cmd = ft_value(phrase, 0, 0);
+//	if (cmd[0] == '/' || ft_strncmp(cmd, "./", 2) == 0)
+//	{
+//	//	if (access(cmd, F_OK) == 0)
+//			ft_fork_and_execute(cmd, phrase, vars, shell);
+//	//	else
+//	//		ft_error(cmd, NULL, "command not found", ENOENT);
+//	}
+//	else if (cmd)
+//	{
+//		cmd = ft_get_pathname(shell->path_splitted, cmd, 0);
+//		if (cmd)
+//			ft_fork_and_execute(cmd, phrase, vars, shell);
+//		//else
+//		//	ft_error(cmd, NULL, "command not found", ENOENT);
+//	}
+//	else
+//		ft_error(cmd, NULL, "command not found", ENOENT);
+//}
+
+
 
 // static void	ft_do(t_vector *phrase, t_shell *shell)
 //{

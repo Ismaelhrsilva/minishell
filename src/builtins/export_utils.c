@@ -6,7 +6,7 @@
 /*   By: paranha <paranha@student.42sp.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/27 17:55:43 by paranha           #+#    #+#             */
-/*   Updated: 2024/07/01 18:58:14 by paranha          ###   ########.org.br   */
+/*   Updated: 2024/07/07 17:36:19 by paranha          ###   ########.org.br   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ int	ft_is_valid_name(char *name)
 {
 	int	i;
 
-	if (!isalpha(name[0]) && name[0] != '_')
+	if (!ft_isalpha(name[0]) && name[0] != '_')
 	{
 		ft_status(1);
 		ft_putendl_fd("export: not a valid identifier", 2);
@@ -70,7 +70,7 @@ int	ft_is_valid_name(char *name)
 	i = 1;
 	while (name[i] != '\0')
 	{
-		if (!isalnum(name[i]) && name[i] != '_')
+		if (!ft_isalnum(name[i]) && name[i] != '_')
 		{
 			ft_status(1);
 			ft_putendl_fd("export: not a valid identifier", 2);

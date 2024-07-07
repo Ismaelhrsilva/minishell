@@ -6,7 +6,7 @@
 /*   By: paranha <paranha@student.42sp.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/23 20:13:00 by paranha           #+#    #+#             */
-/*   Updated: 2024/07/02 17:28:37 by paranha          ###   ########.org.br   */
+/*   Updated: 2024/07/07 17:36:39 by paranha          ###   ########.org.br   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ int	ft_is_valid_unset(char *name)
 {
 	int	i;
 
-	if (!isalpha(name[0]) && name[0] != '_')
+	if (!ft_isalpha(name[0]) && name[0] != '_')
 	{
 		ft_status(1);
 		return (0);
@@ -46,7 +46,7 @@ int	ft_is_valid_unset(char *name)
 	i = 1;
 	while (name[i] != '\0')
 	{
-		if (!isalnum(name[i]) && name[i] != '_')
+		if (!ft_isalnum(name[i]) && name[i] != '_')
 		{
 			ft_status(1);
 			return (0);
