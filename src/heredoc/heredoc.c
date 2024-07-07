@@ -6,7 +6,7 @@
 /*   By: ishenriq <ishenriq@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/07 22:17:01 by ishenriq          #+#    #+#             */
-/*   Updated: 2024/07/06 14:30:11 by paranha          ###   ########.org.br   */
+/*   Updated: 2024/07/06 22:03:04 by paranha          ###   ########.org.br   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ static long	ft_count(void)
 static void	ft_end_heredoc(int infile, const int std, char *gnl)
 {
 	if (gnl)
-		free (gnl);
+		free(gnl);
 	else if (g_status != SIGINT)
 	{
 		ft_putstr_fd("bash: warning: ", 2);
@@ -47,6 +47,34 @@ void	ft_heredoc_sigint(char *gnl, const int std)
 	}
 }
 
+void	ft_handle_heredoc_sigint(char *gnl, const int std)
+{
+	ft_heredoc_sigint(gnl, std);
+}
+
+char	*ft_handle_limiter(t_node *root, t_shell *shell)
+{
+	char	*limiter;
+
+	limiter = root->str;
+	if (ft_count_chr(limiter, '\"') != 0 || ft_count_chr(limiter, '\'') != 0)
+		limiter = ft_eliminate_signal(limiter, shell);
+	return (limiter);
+}
+
+void	ft_write_to_infile(char *gnl, int infile, t_shell *shell, t_node *root)
+{
+	if (ft_count_chr(root->str_not_expanded, '\'') == 0
+			&& ft_count_chr(root->str_not_expanded, '\"') == 0)
+		gnl = ft_parse_expand_heredoc(gnl, shell, 0);
+	if (ft_strncmp(gnl, "0x1A", 4) != 0)
+	{
+		gnl = ft_strjoin(gnl, "\n");
+		ft_putstr_fd(gnl, infile);
+		free(gnl);
+	}
+}
+
 char	*ft_heredoc(t_node *root, t_shell *shell)
 {
 	char		*gnl;
@@ -62,38 +90,64 @@ char	*ft_heredoc(t_node *root, t_shell *shell)
 		status_here(HERE_DOC, 1);
 		gnl = readline("> ");
 		status_here(HERE_DOC, 0);
-		ft_heredoc_sigint(gnl, std);
-		limiter = root->str;
-		if (ft_count_chr(limiter, '\"') != 0
-			|| ft_count_chr(limiter, '\'') != 0)
-			limiter = ft_eliminate_signal(limiter, shell);
-		//ft_eliminate_ch_corner(limiter);
+		ft_handle_heredoc_sigint(gnl, std);
+		limiter = ft_handle_limiter(root, shell);
 		if (gnl && ft_strncmp(gnl, limiter, ft_strlen(limiter)) == 0
 			&& ft_strlen(limiter) == ft_strlen(gnl))
 			break ;
-		if (ft_count_chr(root->str_not_expanded, '\'') == 0
-	  		&& ft_count_chr(root->str_not_expanded, '\"') == 0)
-		{
-			printf("%s\n", root->str_not_expanded);
-			printf("%s\n", root->str);
-			gnl = ft_parse_expand_heredoc(gnl, shell);
-		}
-		if (ft_strncmp(gnl, "0x1A", 4) != 0)
-		{
-			gnl = ft_strjoin(gnl, "\n");
-			ft_putstr_fd(gnl, infile);
-			free(gnl);
-		}
+		ft_write_to_infile(gnl, infile, shell, root);
 	}
 	ft_end_heredoc(infile, std, gnl);
 	return (temp_n);
 }
 
+// char	*ft_heredoc(t_node *root, t_shell *shell)
+//{
+//	char		*gnl;
+//	int			infile;
+//	char		*temp_n;
+//	const int	std = dup(STDIN_FILENO);
+//	char		*limiter;
+//
+//	temp_n = ft_strjoin(TEMP, ft_itoa(ft_count()));
+//	infile = open(temp_n, O_CREAT | O_WRONLY | O_TRUNC, 0644);
+//	while (1)
+//	{
+//		status_here(HERE_DOC, 1);
+//		gnl = readline("> ");
+//		status_here(HERE_DOC, 0);
+//		ft_heredoc_sigint(gnl, std);
+//		limiter = root->str;
+//		if (ft_count_chr(limiter, '\"') != 0
+//			|| ft_count_chr(limiter, '\'') != 0)
+//			limiter = ft_eliminate_signal(limiter, shell);
+//		//ft_eliminate_ch_corner(limiter);
+//		if (gnl && ft_strncmp(gnl, limiter, ft_strlen(limiter)) == 0
+//			&& ft_strlen(limiter) == ft_strlen(gnl))
+//			break ;
+//		if (ft_count_chr(root->str_not_expanded, '\'') == 0
+//				&& ft_count_chr(root->str_not_expanded, '\"') == 0)
+//		{
+//			printf("%s\n", root->str_not_expanded);
+//			printf("%s\n", root->str);
+//			gnl = ft_parse_expand_heredoc(gnl, shell, 0);
+//		}
+//		if (ft_strncmp(gnl, "0x1A", 4) != 0)
+//		{
+//			gnl = ft_strjoin(gnl, "\n");
+//			ft_putstr_fd(gnl, infile);
+//			free(gnl);
+//		}
+//	}
+//	ft_end_heredoc(infile, std, gnl);
+//	return (temp_n);
+//}
+
 void	ft_open_heredoc(t_node *root, t_shell *shell)
 {
 	if (!root)
 		return ;
-	//if (root->left && root->left->type & HEREDOC)
+	// if (root->left && root->left->type & HEREDOC)
 	if (root->left)
 		ft_open_heredoc(root->left, shell);
 	if (root->right && root->right->str && root->type & HEREDOC)
@@ -107,8 +161,8 @@ void	ft_open_heredoc(t_node *root, t_shell *shell)
 			return ;
 		}
 	}
-	//ft_open_heredoc(root->left, shell);
-	//ft_open_heredoc(root->right, shell);
+	// ft_open_heredoc(root->left, shell);
+	// ft_open_heredoc(root->right, shell);
 }
 
 /*void	ft_open_heredoc(t_node *root, t_shell *shell)

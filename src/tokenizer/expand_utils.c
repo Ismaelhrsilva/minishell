@@ -6,7 +6,7 @@
 /*   By: ishenriq <ishenriq@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/13 19:12:24 by ishenriq          #+#    #+#             */
-/*   Updated: 2024/07/06 17:46:21 by ishenriq         ###   ########.fr       */
+/*   Updated: 2024/07/06 22:26:48 by paranha          ###   ########.org.br   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 char	*ft_find_expand(char *str, t_shell *shell)
 {
-	size_t		i;
+	size_t	i;
 	char	*key;
 
 	i = 0;
@@ -38,7 +38,7 @@ char	*ft_expand(char *str, t_shell *shell)
 		if (str[1] == '?' && ft_strlen(str) == 2)
 			return (ft_itoa(ft_status(-1)));
 		else if (ft_isdigit(str[1]))
-            return (&str[2]);
+			return (&str[2]);
 		else if (ft_find_expand(&str[1], shell) != NULL)
 			return (ft_find_expand(&str[1], shell));
 		else if (ft_find_expand(&str[1], shell) == NULL)
@@ -47,18 +47,16 @@ char	*ft_expand(char *str, t_shell *shell)
 	return (str);
 }
 
-char	*ft_parse_expand_heredoc(char *str, t_shell *shell)
+char	*ft_parse_expand_heredoc(char *str, t_shell *shell, size_t i)
 {
-	size_t		i;
 	char		*new_str;
 	char		*final_str;
 	t_vector	*vector;
 	char		*split;
 	int			not_expanded;
 
-	i = 0;
 	vector = ft_vector_create();
-	ft_split_expand(str, vector, 0, 0);
+	ft_split_expand(str, vector);
 	final_str = "";
 	not_expanded = 0;
 	while (i < vector->size)
@@ -77,34 +75,75 @@ char	*ft_parse_expand_heredoc(char *str, t_shell *shell)
 	return (final_str);
 }
 
+void	ft_process_signal_loop(t_vector *vector, unsigned long int *i,
+		char *signal, char **final_str)
+{
+	char	*s;
+	t_shell	*shell;
+
+	s = (char *)ft_vector_at(vector, *i);
+	shell = NULL;
+	while ((*i < vector->size) && (*signal != '\0' || !ft_strchr("\'\"", s[0]))
+				&& (s == NULL || *signal != s[0]))
+	{
+		if (*signal == '\'')
+			*final_str = ft_strjoin(*final_str, ft_strdup(s));
+		else if (ft_strncmp(ft_expand(s, shell), "0x1A", 4) != 0)
+			*final_str = ft_strjoin(*final_str, ft_strdup(s));
+		(*i)++;
+		s = (char *)ft_vector_at(vector, *i);
+	}
+	*signal = '\0';
+}
+
 char	*ft_eliminate_signal(char *str, t_shell *shell)
 {
-	unsigned long int			i;
-	char						signal;
-	t_vector					*vector;
-	char	*final_str;
-	char	*s;
+	unsigned long int	i;
+	char				signal;
+	t_vector			*vector;
+	char				*final_str;
 
+	(void)shell;
 	i = 0;
 	signal = '\0';
 	vector = ft_vector_create();
-	ft_split_expand(str, vector, 0, 0);
 	final_str = "";
+	ft_split_expand(str, vector);
 	while (i < vector->size)
 	{
-		signal = ft_signal(vector, &i, signal);
-		s = (char *)ft_vector_at(vector, i);
-		while ((i < vector->size) && (signal != '\0' || !ft_strchr("\'\"",
-					s[0])) && (s == NULL || signal != s[0]))
-		{
-			if (signal == '\'')
-				final_str = ft_strjoin(final_str, ft_strdup(s));
-			else if (ft_strncmp(ft_expand(s, shell), "0x1A", 4) != 0)
-				final_str = ft_strjoin(final_str, ft_strdup(s));
-			i++;
-			s = (char *)ft_vector_at(vector, i);
-		}
-		signal = '\0';
+		ft_process_signal_loop(vector, &i, &signal, &final_str);
 	}
 	return (final_str);
 }
+
+// char	*ft_eliminate_signal(char *str, t_shell *shell)
+//{
+//	unsigned long int			i;
+//	char						signal;
+//	t_vector					*vector;
+//	char	*final_str;
+//	char	*s;
+//
+//	i = 0;
+//	signal = '\0';
+//	vector = ft_vector_create();
+//	ft_split_expand(str, vector);
+//	final_str = "";
+//	while (i < vector->size)
+//	{
+//		signal = ft_signal(vector, &i, signal);
+//		s = (char *)ft_vector_at(vector, i);
+//		while ((i < vector->size) && (signal != '\0' || !ft_strchr("\'\"",
+//					s[0])) && (s == NULL || signal != s[0]))
+//		{
+//			if (signal == '\'')
+//				final_str = ft_strjoin(final_str, ft_strdup(s));
+//			else if (ft_strncmp(ft_expand(s, shell), "0x1A", 4) != 0)
+//				final_str = ft_strjoin(final_str, ft_strdup(s));
+//			i++;
+//			s = (char *)ft_vector_at(vector, i);
+//		}
+//		signal = '\0';
+//	}
+//	return (final_str);
+//}

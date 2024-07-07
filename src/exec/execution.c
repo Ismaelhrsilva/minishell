@@ -6,7 +6,7 @@
 /*   By: ishenriq <ishenriq@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/03 19:15:25 by ishenriq          #+#    #+#             */
-/*   Updated: 2024/07/06 17:09:05 by ishenriq         ###   ########.fr       */
+/*   Updated: 2024/07/06 22:25:50 by paranha          ###   ########.org.br   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,41 +30,93 @@ static char	**ft_build_argv_exec(t_vector *phrase)
 	return (argv_exec);
 }
 
-static void	ft_do(t_vector *phrase, t_shell *shell)
+void	ft_handle_signals(void)
+{
+	signal(SIGQUIT, SIG_DFL);
+	signal(SIGINT, SIG_DFL);
+	status_here(FORK, 1);
+	rl_clear_history();
+}
+
+void	ft_execute_command(char *cmd, t_vector *phrase, char **vars,
+		t_shell *shell)
+{
+	(void)shell;
+	if (access(cmd, F_OK) < 0)
+		ft_error(cmd, NULL, "No such file or directory", ENOENT);
+	else if (access(cmd, X_OK) < 0)
+		ft_error(cmd, NULL, "Permission denied", EACCES);
+	else if (execve(cmd, ft_build_argv_exec(phrase), vars) < 0)
+		ft_error(cmd, NULL, strerror(errno), errno);
+}
+
+void	ft_fork_and_execute(char *cmd, t_vector *phrase, char **vars,
+		t_shell *shell)
 {
 	pid_t	pid;
+
+	pid = fork();
+	if (!pid)
+	{
+		ft_handle_signals();
+		ft_execute_command(cmd, phrase, vars, shell);
+		close(g_status);
+		ft_clear(shell);
+		exit(ft_status(-1));
+	}
+	ft_pid_status(pid);
+}
+
+void	ft_do(t_vector *phrase, t_shell *shell)
+{
 	char	*cmd;
 	char	**vars;
 
 	vars = ft_env_export(shell->envp_dict);
 	shell->path = ft_getenv(shell->envp_dict, "PATH");
 	shell->path_splitted = ft_split(shell->path, ':');
-	cmd = ft_get_pathname(shell->path_splitted, ft_value(phrase, 0, 0));
+	cmd = ft_get_pathname(shell->path_splitted, ft_value(phrase, 0, 0), 0);
 	if (cmd && (cmd[0] == '/' || ft_strncmp(cmd, "./", 2) == 0))
-	{
-		pid = fork();
-		if (!pid)
-		{
-			signal(SIGQUIT, SIG_DFL);
-			signal(SIGINT, SIG_DFL);
-			status_here(FORK, 1);
-			rl_clear_history();
-			if (access(cmd, F_OK) < 0)
-				ft_error(cmd, NULL, "No such file or directory", ENOENT);
-			else if (access(cmd, X_OK) < 0)
-				ft_error(cmd, NULL, "Permission denied", EACCES);
-			else if (execve(ft_get_pathname(shell->path_splitted, cmd),
-					ft_build_argv_exec(phrase), vars) < 0)
-				ft_error(cmd, NULL, strerror(errno), errno);
-			close(g_status);
-			ft_clear(shell);
-			exit(ft_status(-1));
-		}
-		ft_pid_status(pid);
-	}
+		ft_fork_and_execute(cmd, phrase, vars, shell);
 	else
 		ft_error(cmd, NULL, "command not found", ENOENT);
 }
+
+// static void	ft_do(t_vector *phrase, t_shell *shell)
+//{
+//	pid_t	pid;
+//	char	*cmd;
+//	char	**vars;
+//
+//	vars = ft_env_export(shell->envp_dict);
+//	shell->path = ft_getenv(shell->envp_dict, "PATH");
+//	shell->path_splitted = ft_split(shell->path, ':');
+//	cmd = ft_get_pathname(shell->path_splitted, ft_value(phrase, 0, 0), 0);
+//	if (cmd && (cmd[0] == '/' || ft_strncmp(cmd, "./", 2) == 0))
+//	{
+//		pid = fork();
+//		if (!pid)
+//		{
+//			signal(SIGQUIT, SIG_DFL);
+//			signal(SIGINT, SIG_DFL);
+//			status_here(FORK, 1);
+//			rl_clear_history();
+//			if (access(cmd, F_OK) < 0)
+//				ft_error(cmd, NULL, "No such file or directory", ENOENT);
+//			else if (access(cmd, X_OK) < 0)
+//				ft_error(cmd, NULL, "Permission denied", EACCES);
+//			else if (execve(ft_get_pathname(shell->path_splitted, cmd, 0),
+//					ft_build_argv_exec(phrase), vars) < 0)
+//				ft_error(cmd, NULL, strerror(errno), errno);
+//			close(g_status);
+//			ft_clear(shell);
+//			exit(ft_status(-1));
+//		}
+//		ft_pid_status(pid);
+//	}
+//	else
+//		ft_error(cmd, NULL, "command not found", ENOENT);
+//}
 
 static void	ft_or_and(t_node *root, t_shell *shell)
 {
@@ -175,8 +227,7 @@ void	ft_expand_before_exec(t_node *root, t_shell *shell)
 		i++;
 	}
 }*/
-
-//void	ft_free_root(t_node *root)
+// void	ft_free_root(t_node *root)
 //{
 //	if (root->left)
 //		ft_free_root(root->left);
@@ -186,11 +237,8 @@ void	ft_expand_before_exec(t_node *root, t_shell *shell)
 //		ft_vector_free(root->phrase);
 //	free(root);
 //}
-
-void	ft_execution(t_node *root, t_shell *shell)
+void	ft_handle_special_nodes(t_node *root, t_shell *shell)
 {
-	if (!root)
-		return ;
 	if (root->type & OR_AND)
 		ft_or_and(root, shell);
 	else if (root->type & PIPE)
@@ -201,7 +249,14 @@ void	ft_execution(t_node *root, t_shell *shell)
 		ft_execution(root->left, shell);
 	else if (root->right)
 		ft_execution(root->right, shell);
-	else if (root->type == EXEC && root->phrase)
+}
+
+void	ft_execution(t_node *root, t_shell *shell)
+{
+	if (!root)
+		return ;
+	ft_handle_special_nodes(root, shell);
+	if (root->type == EXEC && root->phrase)
 	{
 		ft_expand_before_exec(root, shell);
 		if (root->phrase->size == 0)
@@ -216,6 +271,4 @@ void	ft_execution(t_node *root, t_shell *shell)
 		else if (root->str && root->fd != -1)
 			ft_do(root->phrase, shell);
 	}
-	// ft_free_phrase(root->phrase);
-	// ft_vector_free(root->phrase);
 }

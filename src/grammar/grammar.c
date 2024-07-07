@@ -6,7 +6,7 @@
 /*   By: ishenriq <ishenriq@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/15 18:38:12 by ishenriq          #+#    #+#             */
-/*   Updated: 2024/07/06 14:29:43 by paranha          ###   ########.org.br   */
+/*   Updated: 2024/07/06 20:46:02 by paranha          ###   ########.org.br   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,29 +37,19 @@ static int	ft_metacharacter_edges(t_vector *phrase, size_t pos)
 	return (0);
 }
 
-static int	ft_valide_quotes(t_vector *phrase, size_t pos)
+static int	ft_valide_quotes(t_vector *phrase, size_t pos, int i, int s)
 {
 	char	*signal;
 	char	*str;
-	int		i;
-	int		s;
 
 	signal = NULL;
-	i = 0;
-	s = 0;
 	str = ft_value(phrase, pos, 0);
 	while (str[i] != '\0')
 	{
 		if (ft_strchr("\"", str[i]))
-		{
 			signal = "\"";
-			s = 1;
-		}
 		else if (ft_strchr("\'", str[i]))
-		{
 			signal = "\'";
-			s = 1;
-		}
 		i++;
 		if (ft_count_chr(signal, '\'') == 1 || ft_count_chr(signal, '\"') == 1)
 		{
@@ -101,7 +91,7 @@ int	ft_grammar_rules(t_vector *phrase)
 	{
 		if (error(ft_metacharacter_edges(phrase, i))
 				|| error(ft_metacharacter_following(phrase, i))
-				|| error(ft_valide_quotes(phrase, i)))
+				|| error(ft_valide_quotes(phrase, i, 0, 1)))
 			return (0);
 		i++;
 	}

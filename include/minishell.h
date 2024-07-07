@@ -6,7 +6,7 @@
 /*   By: ishenriq <ishenriq@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/22 18:25:14 by ishenriq          #+#    #+#             */
-/*   Updated: 2024/07/06 17:34:39 by ishenriq         ###   ########.fr       */
+/*   Updated: 2024/07/06 21:53:46 by paranha          ###   ########.org.br   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -132,17 +132,17 @@ int					ft_aux_parse_char(char *ch, t_parse *parse, char *prompt);
 int					ft_parse_char(t_parse *parse, char *prompt);
 int					ft_valid_brackets_str(char *str);
 void				ft_arranging_prompt(t_parse *parse);
-void				ft_parse_brackets(t_parse *parse, char *prompt);
+void				ft_parse_brackets(t_parse *parse, char *prompt, int count);
 void				ft_parse_quotes(t_parse *parse, char *prompt, char *signal);
 int					ft_error_brackets(int st);
 // File Tokenizer
 char				*ft_expand(char *str, t_shell *shell);
 char				*ft_parse_expand(char *str, t_shell *shell);
-char				*ft_parse_expand_heredoc(char *str, t_shell *shell);
+char				*ft_parse_expand_heredoc(char *str, t_shell *shell, size_t i);
 int					ft_set_token(char *str);
 t_vector			*ft_construct_phrase(char **split, t_shell *shell);
 void				ft_free_phrase(t_vector *phrase);
-void				ft_split_expand(char *str, t_vector *split, int i, int j);
+void				ft_split_expand(char *str, t_vector *split);
 char				*ft_eliminate_signal(char *str, t_shell *shell);
 char				ft_signal(t_vector *vector, size_t *i, char signal);
 
@@ -199,7 +199,7 @@ t_vector			*ft_envp_dict(char **envp);
 void				ft_envp(t_shell *shell);
 
 //File Pathname
-char				*ft_get_pathname(char **matrix, char *str);
+char				*ft_get_pathname(char **matrix, char *str, int i);
 
 //File execution
 extern volatile sig_atomic_t	g_status;
