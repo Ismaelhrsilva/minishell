@@ -6,7 +6,7 @@
 /*   By: ishenriq <ishenriq@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/03 19:15:25 by ishenriq          #+#    #+#             */
-/*   Updated: 2024/07/07 19:43:40 by ishenriq         ###   ########.fr       */
+/*   Updated: 2024/07/07 20:00:59 by ishenriq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,7 @@ static void	ft_do(t_vector *phrase, t_shell *shell)
 
 	vars = ft_env_export(shell->envp_dict);
 	shell->path = ft_getenv(shell->envp_dict, "PATH");
+	ft_free_matrix(shell->path_splitted);
 	shell->path_splitted = ft_split(shell->path, ':');
 	cmd = ft_get_pathname(shell->path_splitted, ft_value(phrase, 0, 0));
 	if (cmd && (cmd[0] == '/' || ft_strncmp(cmd, "./", 2) == 0))
@@ -69,6 +70,7 @@ static void	ft_do(t_vector *phrase, t_shell *shell)
 	}
 	else
 		ft_error(cmd, NULL, "command not found", ENOENT);
+	ft_free_matrix(vars);
 }
 
 static void	ft_or_and(t_node *root, t_shell *shell)

@@ -6,7 +6,7 @@
 /*   By: ishenriq <ishenriq@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/08 19:50:09 by ishenriq          #+#    #+#             */
-/*   Updated: 2024/07/07 19:42:04 by ishenriq         ###   ########.fr       */
+/*   Updated: 2024/07/07 19:48:50 by ishenriq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,10 +30,8 @@ void	ft_eliminate_ch_corner(char *str)
 
 void	ft_inside_ast(t_node *root)
 {
-	//free(root->type);
 	free(root->str);
 	free(root->str_not_expanded);
-	//ft_freephrase_2(root->phrase);
 	ft_freephrase(root->phrase);
 }
 

@@ -6,7 +6,7 @@
 /*   By: ishenriq <ishenriq@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/19 20:10:42 by ishenriq          #+#    #+#             */
-/*   Updated: 2024/07/07 14:30:09 by ishenriq         ###   ########.fr       */
+/*   Updated: 2024/07/07 19:51:31 by ishenriq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ void	ft_error(char *cmd, char *flag, char *msg, int status)
 		g_status = 127;
 	else
 		g_status = status;
-	free(cmd);
+	//free(cmd);
 	ft_status(g_status);
 }
 
