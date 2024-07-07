@@ -6,7 +6,7 @@
 /*   By: ishenriq <ishenriq@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/04 20:34:11 by ishenriq          #+#    #+#             */
-/*   Updated: 2024/07/06 18:35:58 by ishenriq         ###   ########.fr       */
+/*   Updated: 2024/07/06 23:53:10 by ishenriq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ static void	ft_pipe_aux(t_node *root, t_shell *shell, int *fd, int side)
 	dup_aux(fd, side);
 	close_fd(fd);
 	ft_execution_side(root, shell, side);
-	ft_clear(shell);
+	//ft_clear_pipe(shell);
 	exit (ft_status(-1));
 }
 

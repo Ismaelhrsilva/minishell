@@ -6,7 +6,7 @@
 /*   By: paranha <paranha@student.42sp.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/30 18:34:50 by paranha           #+#    #+#             */
-/*   Updated: 2024/07/04 16:00:16 by paranha          ###   ########.org.br   */
+/*   Updated: 2024/07/07 18:30:46 by ishenriq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,6 +75,11 @@ void	ft_clear2(t_shell *shell)
 {
 	//	(void)shell;
 	close_open_fds();
+	//if (shell->parse->phrase_grammar)
+	//	ft_freephrase(shell->parse->phrase_grammar);
+	ft_clear_ast(shell->root);
+	ft_free_matrix(shell->parse->prompt_splitted);
+	free(shell->parse);
 	ft_free_shell(shell);
 	// ft_free_phrase(shell->envp_dict);
 	// ft_freesplit(shell->path_splitted);
@@ -101,7 +106,18 @@ void	ft_builtin_exit(t_shell *shell, t_vector *cmd)
 		return ;
 	}
 	exit_status = ft_parse_exit_arguments(cmd);
+	/*size_t	i;
+
+	i = 0;
+	while (i < cmd->size)
+	{
+		free(((t_vector *)cmd->values[i])->values[0]);
+		free(((t_vector *)cmd->values[i])->values);
+		free(cmd->values[i]);
+		i++;
+	}
+	//free(cmd->values);
+	//free(cmd);*/
 	ft_clear2(shell);
-	//	ft_free_phrase(cmd);
 	exit(exit_status);
 }

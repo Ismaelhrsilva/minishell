@@ -6,7 +6,7 @@
 /*   By: ishenriq <ishenriq@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/19 14:31:38 by ishenriq          #+#    #+#             */
-/*   Updated: 2024/07/05 14:14:44 by paranha          ###   ########.org.br   */
+/*   Updated: 2024/07/07 14:21:59 by ishenriq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,10 @@ static int	ft_branch(t_vector *phrase, long pos, t_node *root)
 		return (0);
 	right = ft_vector_slice_right(phrase, pos);
 	root->type = ft_value_int(phrase, pos, 1);
-	root->str = ft_value(phrase, pos, 0);
+	root->str = ft_strdup(ft_value(phrase, pos, 0));
 	root->fd = 0;
+	//free(((t_vector *)phrase->values[pos])->values[0]);
+	//free(((t_vector *)phrase->values[pos])->values);
 	ft_vector_erase(phrase, pos);
 	root->left = ft_ast(phrase);
 	root->right = ft_ast(right);
@@ -36,8 +38,8 @@ static	void	ft_ast_aux(t_vector *phrase, t_node *root)
 		return ;
 	if (ft_branch(phrase, ft_pos_token_back(phrase, REDALL), root))
 		return ;
-	root->str = ft_value(phrase, 0, 0);
-	root->str_not_expanded = ft_value(phrase, 0, 2);
+	root->str = ft_strdup(ft_value(phrase, 0, 0));
+	root->str_not_expanded = ft_strdup(ft_value(phrase, 0, 2));
 	root->type = EXEC;
 	root->phrase = phrase;
 }

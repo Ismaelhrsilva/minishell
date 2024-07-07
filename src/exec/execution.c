@@ -6,7 +6,7 @@
 /*   By: ishenriq <ishenriq@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/03 19:15:25 by ishenriq          #+#    #+#             */
-/*   Updated: 2024/07/06 17:09:05 by ishenriq         ###   ########.fr       */
+/*   Updated: 2024/07/07 18:28:57 by ishenriq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,7 @@ static void	ft_do(t_vector *phrase, t_shell *shell)
 	pid_t	pid;
 	char	*cmd;
 	char	**vars;
+	char	**argv_exec;
 
 	vars = ft_env_export(shell->envp_dict);
 	shell->path = ft_getenv(shell->envp_dict, "PATH");
@@ -49,14 +50,18 @@ static void	ft_do(t_vector *phrase, t_shell *shell)
 			signal(SIGINT, SIG_DFL);
 			status_here(FORK, 1);
 			rl_clear_history();
+			argv_exec = ft_build_argv_exec(phrase);
 			if (access(cmd, F_OK) < 0)
 				ft_error(cmd, NULL, "No such file or directory", ENOENT);
 			else if (access(cmd, X_OK) < 0)
 				ft_error(cmd, NULL, "Permission denied", EACCES);
 			else if (execve(ft_get_pathname(shell->path_splitted, cmd),
-					ft_build_argv_exec(phrase), vars) < 0)
+					argv_exec, vars) < 0)
 				ft_error(cmd, NULL, strerror(errno), errno);
 			close(g_status);
+			ft_free_matrix(argv_exec);
+			ft_free_matrix(vars);
+			free(cmd);
 			ft_clear(shell);
 			exit(ft_status(-1));
 		}
@@ -108,7 +113,7 @@ t_vector	*ft_put_str_token_at_vector(t_vector *phrase, int i, char *str)
 	t_vector	*innervector;
 
 	innervector = ft_vector_create();
-	ft_vector_push_back(innervector, str);
+	ft_vector_push_back(innervector, ft_strdup(str));
 	ft_vector_push_back(innervector, ft_value(phrase, i, 1));
 	return (innervector);
 }
@@ -117,20 +122,26 @@ void	ft_expand_before_exec(t_node *root, t_shell *shell)
 {
 	size_t		i;
 	char		*str;
+	char		*str_temp;
 	t_vector	*vector;
 
 	i = 0;
 	vector = ft_vector_create();
 	while (i < root->phrase->size)
 	{
-		str = ft_parse_expand(ft_value(root->phrase, i, 0), shell);
+		str_temp = ft_parse_expand(ft_value(root->phrase, i, 0), shell);
+		str = ft_strdup(str_temp);
 		if (ft_strncmp(str, "0x1A", 4) != 0)
 		{
-			ft_vector_push_back(vector, ft_put_str_token_at_vector(root->phrase,
-					i, str));
+			ft_vector_push_back(vector, 
+					ft_put_str_token_at_vector(root->phrase, i, str));
 		}
+		free(str_temp);
+		free(str);
 		i++;
 	}
+	if (root->phrase != NULL)
+		ft_freephrase(root->phrase);
 	root->phrase = vector;
 }
 

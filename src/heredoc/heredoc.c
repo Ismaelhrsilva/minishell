@@ -6,7 +6,7 @@
 /*   By: ishenriq <ishenriq@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/07 22:17:01 by ishenriq          #+#    #+#             */
-/*   Updated: 2024/07/06 14:30:11 by paranha          ###   ########.org.br   */
+/*   Updated: 2024/07/06 19:19:29 by ishenriq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,6 @@ char	*ft_heredoc(t_node *root, t_shell *shell)
 		if (ft_count_chr(limiter, '\"') != 0
 			|| ft_count_chr(limiter, '\'') != 0)
 			limiter = ft_eliminate_signal(limiter, shell);
-		//ft_eliminate_ch_corner(limiter);
 		if (gnl && ft_strncmp(gnl, limiter, ft_strlen(limiter)) == 0
 			&& ft_strlen(limiter) == ft_strlen(gnl))
 			break ;

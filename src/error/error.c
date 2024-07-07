@@ -6,7 +6,7 @@
 /*   By: ishenriq <ishenriq@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/19 20:10:42 by ishenriq          #+#    #+#             */
-/*   Updated: 2024/07/06 18:08:39 by ishenriq         ###   ########.fr       */
+/*   Updated: 2024/07/07 14:30:09 by ishenriq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,7 @@ void	ft_error(char *cmd, char *flag, char *msg, int status)
 		g_status = 127;
 	else
 		g_status = status;
+	free(cmd);
 	ft_status(g_status);
 }
 
@@ -64,10 +65,31 @@ void	close_open_fds(void)
 
 void	ft_clear(t_shell *shell)
 {
-//	(void)shell;
 	close_open_fds();
+	if (shell->parse->phrase_grammar)
+		ft_freephrase(shell->parse->phrase_grammar);
+	if (shell->parse->phrase)
+		ft_freephrase(shell->parse->phrase);
+	shell->parse->phrase_grammar = NULL;
+	shell->parse->phrase = NULL;
+	ft_free_matrix(shell->parse->prompt_splitted);
+	ft_clear_ast(shell->root);
+	free(shell->root);
+	free(shell->parse);
 	//ft_free_phrase(shell->envp_dict);
 	//ft_freesplit(shell->path_splitted);
 	//free(shell->path);
 	ft_free_shell(shell);
+}
+
+void	ft_clear_pipe(t_shell *shell)
+{
+	if (shell->parse->phrase_grammar)
+		ft_freephrase(shell->parse->phrase_grammar);
+	if (shell->parse->phrase)
+		ft_freephrase(shell->parse->phrase);
+	shell->parse->phrase_grammar = NULL;
+	shell->parse->phrase = NULL;
+	ft_free_matrix(shell->parse->prompt_splitted);
+	free(shell->parse);
 }

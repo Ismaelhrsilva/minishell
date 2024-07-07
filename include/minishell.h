@@ -6,7 +6,7 @@
 /*   By: ishenriq <ishenriq@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/22 18:25:14 by ishenriq          #+#    #+#             */
-/*   Updated: 2024/07/06 17:34:39 by ishenriq         ###   ########.fr       */
+/*   Updated: 2024/07/07 17:50:55 by ishenriq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@
 # include <unistd.h>
 # include <limits.h> //PATH_MAX
 
-# define FT_VECTOR_INITIAL_CAPACITY 16
+# define FT_VECTOR_INITIAL_CAPACITY	2
 # define TEMP "/tmp/heredoc"
 # define HERE_DOC 0
 # define FORK	1
@@ -98,6 +98,7 @@ typedef struct s_parse
 	t_index			*idx;
 	t_vector		*phrase;
 	t_vector		*phrase_grammar;
+	char			**prompt_splitted;
 }					t_parse;
 
 typedef struct s_node
@@ -113,6 +114,7 @@ typedef struct s_node
 
 typedef struct s_shell
 {
+	t_parse			*parse;
 	char			**envp;
 	t_vector		*envp_dict;
 	t_node			*root;
@@ -192,6 +194,7 @@ void				ft_vector_init(t_vector *vector);
 void				ft_vector_pop_back(t_vector *vector);
 void				ft_vector_pop_front(t_vector *vector);
 void				ft_vector_push_back(t_vector *vector, void *value);
+bool   				ft_vector_shrink_to_fit(t_vector *vector);
 
 //File Envp
 t_vector			*ft_build_line_envp(char *str);
@@ -254,6 +257,12 @@ int					ft_strcmp(char *s1, char *s2);
 void				ft_freesplit(char **arr);
 void				ft_sort_vars(char **argv, int minor);
 void				ft_clear_ast(t_node	*root);
+
+//Clear functions
+void				ft_freephrase(t_vector *vector);
+void				ft_freephrase_2(t_vector *vector);
+void				ft_inside_ast(t_node *root);
+void				ft_clear_pipe(t_shell *shell);
 
 //remove at end
 void				ft_print_ast(t_node	*root, char *branch);

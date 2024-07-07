@@ -6,7 +6,7 @@
 /*   By: paranha <paranha@student.42sp.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/27 17:56:38 by paranha           #+#    #+#             */
-/*   Updated: 2024/06/27 17:56:40 by paranha          ###   ########.org.br   */
+/*   Updated: 2024/07/07 17:40:52 by ishenriq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,4 +97,11 @@ void	ft_vector_free(t_vector *vector)
 		return ;
 	free(vector->values);
 	free(vector);
+}
+
+bool    ft_vector_shrink_to_fit(t_vector *vector)
+{
+    if (vector == NULL)
+        return (false);
+    return (ft_vector_resize(vector, vector->size));
 }

@@ -6,7 +6,7 @@
 /*   By: ishenriq <ishenriq@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/13 20:17:19 by ishenriq          #+#    #+#             */
-/*   Updated: 2024/07/06 14:35:36 by paranha          ###   ########.org.br   */
+/*   Updated: 2024/07/06 22:02:41 by ishenriq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -153,7 +153,7 @@ t_vector	*ft_construct_phrase(char **split, t_shell *shell)
 			return (NULL);
 		}
 		// ft_vector_push_back(word, ft_parse_expand(split[i], shell));
-		ft_vector_push_back(word, split[i]);
+		ft_vector_push_back(word, ft_strdup(split[i]));
 		token = malloc(sizeof(int));
 		if (!token)
 		{

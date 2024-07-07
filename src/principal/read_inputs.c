@@ -6,7 +6,7 @@
 /*   By: ishenriq <ishenriq@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/05 14:42:53 by ishenriq          #+#    #+#             */
-/*   Updated: 2024/07/06 18:46:49 by ishenriq         ###   ########.fr       */
+/*   Updated: 2024/07/07 18:27:44 by ishenriq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,26 +64,101 @@ void	ft_free_parse(t_parse *parse)
 	free(parse);
 }
 
-void	ft_free_phrase_grammar(t_vector *vector)
+/*void	ft_freephrase(t_vector *vector)
 {
 	size_t	i;
 
 	i = 0;
 	while (i < vector->size)
 	{
-		//free(vector->values[0]);
+		free(vector->values[0]);
 		free(vector->values[1]);
 		free(vector->values[2]);
 		i++;
 	}
 	free(vector);
+}*/
+
+/*void	ft_freephrase(t_vector *vector)
+{
+	size_t	i;
+	size_t	j;
+	//t_vector *temp;
+
+	i = 0;
+	while (i < vector->size)
+	{
+
+		j = 0;
+		while (j < 3)
+		{
+			temp = ((t_vector *)vector->values[i])->values[j];
+			if (temp)
+				temp->values = NULL;
+				//free(temp->values);
+			j++;
+		}
+		ft_vector_shrink_to_fit(((t_vector *)vector)->values[i]);
+		free(((t_vector *)vector->values[i])->values[0]);
+		free(((t_vector *)vector->values[i])->values[1]);
+		free(((t_vector *)vector->values[i])->values[2]);
+		i++;
+	}
+	i = 0;
+	ft_vector_shrink_to_fit(vector);
+	while (i < vector->size)
+	{
+		free(((t_vector *)vector->values[i])->values);
+		i++;
+	}
+	i = 0;
+	while (i < vector->size)
+	{
+		free(vector->values[i]);
+		i++;
+	}
+	free(vector->values);
+	free(vector);
+}*/
+
+void	ft_freephrase(t_vector *vector)
+{
+	size_t	i;
+
+	i = 0;
+	while (i < vector->size)
+	{
+		free(((t_vector *)vector->values[i])->values[0]);
+		free(((t_vector *)vector->values[i])->values[1]);
+		free(((t_vector *)vector->values[i])->values[2]);
+		free(((t_vector *)vector->values[i])->values);
+		free(vector->values[i]);
+		i++;
+	}
+	free(vector->values);
+	free(vector);
 }
 
+void	ft_freephrase_2(t_vector *vector)
+{
+	size_t	i;
+
+	i = 0;
+	while (i < vector->size)
+	{
+		free(((t_vector *)vector->values[i])->values[0]);
+		//free(((t_vector *)vector->values[i])->values[1]);
+		free(((t_vector *)vector->values[i])->values);
+		free(vector->values[i]);
+		i++;
+	}
+	free(vector->values);
+	free(vector);
+}
 
 void	ft_to_execute(char *str, t_shell *shell)
 {
 	t_parse	*parse;
-	char	**prompt_splitted;
 	t_node	*root;
 
 	if (!str)
@@ -91,27 +166,27 @@ void	ft_to_execute(char *str, t_shell *shell)
 	parse = malloc(sizeof(t_parse));
 	if (!parse)
 		return ;
+	shell->parse = parse;
 	parse->prompt = str;
-	prompt_splitted = ft_parser(parse);
-	parse->phrase = ft_construct_phrase(prompt_splitted, shell);
-	parse->phrase_grammar = ft_construct_phrase(prompt_splitted, shell);
+	parse->prompt_splitted = ft_parser(parse);
+	parse->phrase = ft_construct_phrase(parse->prompt_splitted, shell);
+	parse->phrase_grammar = ft_construct_phrase(parse->prompt_splitted, shell);
 	if (parse->phrase)
 		ft_order_redall(parse->phrase);
 	root = ft_ast(parse->phrase);
 	if (root)
 	{
 		ft_open_heredoc(root, shell);
+		shell->root = root;
 		if (ft_grammar_rules(parse->phrase_grammar))
 		{
+			ft_freephrase(parse->phrase_grammar);
 			ft_execution(root, shell);
-			parse->phrase = NULL;
-			ft_free_phrase_grammar(parse->phrase_grammar);
-			parse->phrase_grammar = NULL;
 		}
 		ft_clear_ast(root);
 		root = NULL;
 	}
-	//ft_free_matrix(prompt_splitted);
+	ft_free_matrix(shell->parse->prompt_splitted);
 	ft_free_parse(parse);
 	return ;
 }

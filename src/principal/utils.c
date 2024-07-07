@@ -6,7 +6,7 @@
 /*   By: ishenriq <ishenriq@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/15 19:57:08 by ishenriq          #+#    #+#             */
-/*   Updated: 2024/07/06 17:32:51 by ishenriq         ###   ########.fr       */
+/*   Updated: 2024/07/06 22:40:16 by ishenriq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,6 +107,8 @@ void	ft_clear_ast(t_node	*root)
 			ft_clear_ast(root->left);
 		if (root->right)
 			ft_clear_ast(root->right);
-		free(root);
+		ft_inside_ast(root);
+		if (root)
+			free(root);
 	}
 }
