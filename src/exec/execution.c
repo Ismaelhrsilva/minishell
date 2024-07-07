@@ -6,7 +6,7 @@
 /*   By: ishenriq <ishenriq@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/03 19:15:25 by ishenriq          #+#    #+#             */
-/*   Updated: 2024/07/07 18:28:57 by ishenriq         ###   ########.fr       */
+/*   Updated: 2024/07/07 19:43:40 by ishenriq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -141,7 +141,7 @@ void	ft_expand_before_exec(t_node *root, t_shell *shell)
 		i++;
 	}
 	if (root->phrase != NULL)
-		ft_freephrase(root->phrase);
+		ft_freephrase_2(root->phrase);
 	root->phrase = vector;
 }
 
@@ -212,7 +212,8 @@ void	ft_execution(t_node *root, t_shell *shell)
 		ft_execution(root->left, shell);
 	else if (root->right)
 		ft_execution(root->right, shell);
-	else if (root->type == EXEC && root->phrase)
+	//else if (root->type == EXEC && root->phrase)
+	else if (root->type == 0 && root->phrase)
 	{
 		ft_expand_before_exec(root, shell);
 		if (root->phrase->size == 0)

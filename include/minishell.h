@@ -6,7 +6,7 @@
 /*   By: ishenriq <ishenriq@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/22 18:25:14 by ishenriq          #+#    #+#             */
-/*   Updated: 2024/07/07 17:50:55 by ishenriq         ###   ########.fr       */
+/*   Updated: 2024/07/07 18:49:56 by ishenriq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@
 # include <unistd.h>
 # include <limits.h> //PATH_MAX
 
-# define FT_VECTOR_INITIAL_CAPACITY	2
+# define FT_VECTOR_INITIAL_CAPACITY	16
 # define TEMP "/tmp/heredoc"
 # define HERE_DOC 0
 # define FORK	1

@@ -6,7 +6,7 @@
 /*   By: ishenriq <ishenriq@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/19 14:31:38 by ishenriq          #+#    #+#             */
-/*   Updated: 2024/07/07 14:21:59 by ishenriq         ###   ########.fr       */
+/*   Updated: 2024/07/07 19:06:24 by ishenriq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,11 @@ static int	ft_branch(t_vector *phrase, long pos, t_node *root)
 	root->type = ft_value_int(phrase, pos, 1);
 	root->str = ft_strdup(ft_value(phrase, pos, 0));
 	root->fd = 0;
-	//free(((t_vector *)phrase->values[pos])->values[0]);
-	//free(((t_vector *)phrase->values[pos])->values);
+	free(((t_vector *)phrase->values[pos])->values[0]);
+	free(((t_vector *)phrase->values[pos])->values[1]);
+	free(((t_vector *)phrase->values[pos])->values[2]);
+	free(((t_vector *)phrase->values[pos])->values);
+	free(phrase->values[pos]);
 	ft_vector_erase(phrase, pos);
 	root->left = ft_ast(phrase);
 	root->right = ft_ast(right);
@@ -40,7 +43,8 @@ static	void	ft_ast_aux(t_vector *phrase, t_node *root)
 		return ;
 	root->str = ft_strdup(ft_value(phrase, 0, 0));
 	root->str_not_expanded = ft_strdup(ft_value(phrase, 0, 2));
-	root->type = EXEC;
+	root->type = ft_value_int(phrase, 0, 1);
+	//root->type = EXEC;
 	root->phrase = phrase;
 }
 

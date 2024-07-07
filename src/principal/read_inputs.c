@@ -6,7 +6,7 @@
 /*   By: ishenriq <ishenriq@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/05 14:42:53 by ishenriq          #+#    #+#             */
-/*   Updated: 2024/07/07 18:27:44 by ishenriq         ###   ########.fr       */
+/*   Updated: 2024/07/07 19:46:18 by ishenriq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -121,7 +121,7 @@ void	ft_free_parse(t_parse *parse)
 	free(vector);
 }*/
 
-void	ft_freephrase(t_vector *vector)
+/*void	ft_freephrase(t_vector *vector)
 {
 	size_t	i;
 
@@ -137,6 +137,32 @@ void	ft_freephrase(t_vector *vector)
 	}
 	free(vector->values);
 	free(vector);
+}*/
+
+void	ft_freephrase(t_vector *vector)
+{
+	size_t	i;
+	size_t	j;
+	t_vector *innervector;
+
+	i = 0;
+	if (!vector)
+		return ;
+	while (i < vector->size)
+	{
+		j = 0;
+		innervector = ((t_vector *)vector->values[i]);
+		while (j < innervector->size)
+		{
+			free(((t_vector *)vector->values[i])->values[j]);
+			j++;
+		}
+		free(((t_vector *)vector->values[i])->values);
+		free(vector->values[i]);
+		i++;
+	}
+	free(vector->values);
+	free(vector);
 }
 
 void	ft_freephrase_2(t_vector *vector)
@@ -144,10 +170,12 @@ void	ft_freephrase_2(t_vector *vector)
 	size_t	i;
 
 	i = 0;
+	if (!vector)
+		return ;
 	while (i < vector->size)
 	{
 		free(((t_vector *)vector->values[i])->values[0]);
-		//free(((t_vector *)vector->values[i])->values[1]);
+		free(((t_vector *)vector->values[i])->values[2]);
 		free(((t_vector *)vector->values[i])->values);
 		free(vector->values[i]);
 		i++;
