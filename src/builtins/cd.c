@@ -6,7 +6,7 @@
 /*   By: paranha <paranha@student.42sp.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/23 20:11:58 by paranha           #+#    #+#             */
-/*   Updated: 2024/07/01 18:08:44 by paranha          ###   ########.org.br   */
+/*   Updated: 2024/07/06 23:26:32 by paranha          ###   ########.org.br   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,10 +53,19 @@ void	ft_get_cd_directory(t_shell *shell, t_vector *cmd, char **dir)
 	if (ft_value(cmd, 1, 0))
 	{
 		arg = ft_value(cmd, 1, 0);
-		if (ft_strcmp(arg, "-") == 0)
-			ft_handle_cd_dash(shell, dir);
-		else
-			*dir = arg;
+		//if (ft_strcmp(arg, "-") == 0)
+		//	ft_handle_cd_dash(shell, dir);
+		//else if(ft_strcmp(arg, "~") == 0)
+		//{
+		//	*dir = ft_getenv(shell->envp_dict, "HOME");
+		//	if (!*dir)
+		//	{
+		//		ft_putstr_fd("cd: HOME not set\n", STDERR_FILENO);
+		//		ft_status(1);
+		//	}
+		//}
+		//else
+		*dir = arg;
 	}
 	if (!*dir)
 	{
