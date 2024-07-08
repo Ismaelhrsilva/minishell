@@ -6,7 +6,7 @@
 /*   By: ishenriq <ishenriq@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/05 14:42:53 by ishenriq          #+#    #+#             */
-/*   Updated: 2024/07/07 19:46:18 by ishenriq         ###   ########.fr       */
+/*   Updated: 2024/07/07 21:27:34 by ishenriq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -184,12 +184,27 @@ void	ft_freephrase_2(t_vector *vector)
 	free(vector);
 }
 
+int	ft_prompt_only_space(char *str)
+{
+	int	i;
+
+	i = 0;
+	while (str[i] != '\0')
+	{
+		if (ft_is_space(str[i]))
+			i++;
+		else
+			return (0);
+	}
+	return (1);
+}
+
 void	ft_to_execute(char *str, t_shell *shell)
 {
 	t_parse	*parse;
 	t_node	*root;
 
-	if (!str)
+	if (!str || ft_strlen(str) == 0 || ft_prompt_only_space(str))
 		return ;
 	parse = malloc(sizeof(t_parse));
 	if (!parse)

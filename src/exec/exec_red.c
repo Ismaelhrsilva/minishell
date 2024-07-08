@@ -6,7 +6,7 @@
 /*   By: ishenriq <ishenriq@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/06 20:44:17 by ishenriq          #+#    #+#             */
-/*   Updated: 2024/06/27 21:28:15 by ishenriq         ###   ########.fr       */
+/*   Updated: 2024/07/07 21:13:53 by ishenriq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,11 @@ static void	ft_dup_right_flag(t_node *root)
 
 static void	ft_which_red(t_node *root, int flag, t_shell *shell)
 {
+	char	*str;
+
+	str = root->right->str;
 	root->right->str = ft_parse_expand(root->right->str, shell);
+	free(str);
 	if (flag & REDOUT)
 		root->fd = open(root->right->str, O_WRONLY | O_CREAT | O_TRUNC, 0666);
 	else if (flag & APPEND)
@@ -45,17 +49,17 @@ static void	ft_redirects(t_node *root, t_shell *shell)
 {
 	int	flag;
 
-	if (root->left->type & REDALL)
+	if (root->left && root->left->type & REDALL)
 		ft_redirects(root->left, shell);
 	flag = 0;
 	flag |= root->type;
-	if (root->type & (REDALL)
+	if (root->left && root->type & (REDALL)
 		&& (root->left->fd != -1))
 	{
 		ft_which_red(root, flag, shell);
 		ft_dup_right_flag(root);
 	}
-	else if (root->left->fd == -1)
+	else if (root->left && root->left->fd == -1)
 		root->fd = -1;
 }
 
@@ -67,12 +71,13 @@ void	ft_exec_redirects(t_node *root, t_shell *shell)
 		ft_redirects(root, shell);
 	if (root->fd == -1)
 	{
-		//if (errno == EACCES || errno == EACCES)
 		g_status = 1;
 		ft_status(1);
 		perror("minishell");
 		return (ft_close_fd_tmp(fd));
 	}
+	if (!root->left)
+		ft_freephrase(shell->parse->phrase);
 	ft_execution(root->left, shell);
 	ft_close_fd_tmp(fd);
 }

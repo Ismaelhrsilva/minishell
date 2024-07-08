@@ -6,7 +6,7 @@
 /*   By: ishenriq <ishenriq@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/03 19:15:25 by ishenriq          #+#    #+#             */
-/*   Updated: 2024/07/07 20:00:59 by ishenriq         ###   ########.fr       */
+/*   Updated: 2024/07/07 20:10:06 by ishenriq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,6 +71,7 @@ static void	ft_do(t_vector *phrase, t_shell *shell)
 	else
 		ft_error(cmd, NULL, "command not found", ENOENT);
 	ft_free_matrix(vars);
+	free(cmd);
 }
 
 static void	ft_or_and(t_node *root, t_shell *shell)
