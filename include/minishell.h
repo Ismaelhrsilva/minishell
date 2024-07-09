@@ -6,7 +6,7 @@
 /*   By: ishenriq <ishenriq@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/22 18:25:14 by ishenriq          #+#    #+#             */
-/*   Updated: 2024/07/09 15:54:23 by ishenriq         ###   ########.fr       */
+/*   Updated: 2024/07/09 19:43:47 by ishenriq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -264,6 +264,7 @@ void				ft_freephrase(t_vector *vector);
 void				ft_freephrase_2(t_vector *vector);
 void				ft_inside_ast(t_node *root);
 void				ft_clear_pipe(t_shell *shell);
+void				ft_clear_brackets(t_shell *shell);
 
 //remove at end
 void				ft_print_ast(t_node	*root, char *branch);
