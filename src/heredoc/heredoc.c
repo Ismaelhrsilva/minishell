@@ -6,7 +6,7 @@
 /*   By: ishenriq <ishenriq@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/07 22:17:01 by ishenriq          #+#    #+#             */
-/*   Updated: 2024/07/06 19:19:29 by ishenriq         ###   ########.fr       */
+/*   Updated: 2024/07/09 20:47:52 by ishenriq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,8 +54,12 @@ char	*ft_heredoc(t_node *root, t_shell *shell)
 	char		*temp_n;
 	const int	std = dup(STDIN_FILENO);
 	char		*limiter;
+	char		*itoa_count;
+	char		*gnl_temp;
 
-	temp_n = ft_strjoin(TEMP, ft_itoa(ft_count()));
+	itoa_count = ft_itoa(ft_count());
+	temp_n = ft_strjoin(TEMP, itoa_count);
+	free(itoa_count);
 	infile = open(temp_n, O_CREAT | O_WRONLY | O_TRUNC, 0644);
 	while (1)
 	{
@@ -73,18 +77,21 @@ char	*ft_heredoc(t_node *root, t_shell *shell)
 		if (ft_count_chr(root->str_not_expanded, '\'') == 0
 	  		&& ft_count_chr(root->str_not_expanded, '\"') == 0)
 		{
-			printf("%s\n", root->str_not_expanded);
-			printf("%s\n", root->str);
+			gnl_temp = gnl;
 			gnl = ft_parse_expand_heredoc(gnl, shell);
+			free(gnl_temp);
 		}
 		if (ft_strncmp(gnl, "0x1A", 4) != 0)
 		{
+			gnl_temp = gnl;
 			gnl = ft_strjoin(gnl, "\n");
+			free(gnl_temp);
 			ft_putstr_fd(gnl, infile);
 			free(gnl);
 		}
 	}
 	ft_end_heredoc(infile, std, gnl);
+	free(root->str);
 	return (temp_n);
 }
 
@@ -92,7 +99,6 @@ void	ft_open_heredoc(t_node *root, t_shell *shell)
 {
 	if (!root)
 		return ;
-	//if (root->left && root->left->type & HEREDOC)
 	if (root->left)
 		ft_open_heredoc(root->left, shell);
 	if (root->right && root->right->str && root->type & HEREDOC)
@@ -106,25 +112,4 @@ void	ft_open_heredoc(t_node *root, t_shell *shell)
 			return ;
 		}
 	}
-	//ft_open_heredoc(root->left, shell);
-	//ft_open_heredoc(root->right, shell);
 }
-
-/*void	ft_open_heredoc(t_node *root, t_shell *shell)
-{
-	if (!root)
-		return ;
-	if (root->type & HEREDOC)
-	{
-		root->right->str = ft_heredoc(root->right, shell);
-		root->type = REDIN;
-		if (g_status == SIGINT)
-		{
-			unlink(root->right->str);
-			free(root->right->str);
-			return ;
-		}
-	}
-	ft_open_heredoc(root->left, shell);
-	ft_open_heredoc(root->right, shell);
-}*/

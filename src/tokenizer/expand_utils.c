@@ -6,7 +6,7 @@
 /*   By: ishenriq <ishenriq@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/13 19:12:24 by ishenriq          #+#    #+#             */
-/*   Updated: 2024/07/06 17:46:21 by ishenriq         ###   ########.fr       */
+/*   Updated: 2024/07/09 20:56:08 by ishenriq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,7 @@ char	*ft_parse_expand_heredoc(char *str, t_shell *shell)
 	size_t		i;
 	char		*new_str;
 	char		*final_str;
+	char		*temp;
 	t_vector	*vector;
 	char		*split;
 	int			not_expanded;
@@ -67,11 +68,22 @@ char	*ft_parse_expand_heredoc(char *str, t_shell *shell)
 		new_str = ft_expand(split, shell);
 		if (ft_strncmp(new_str, "0x1A", 4) != 0)
 		{
+			if (not_expanded != 0)
+				free(temp);
 			final_str = ft_strjoin(final_str, new_str);
+			temp = final_str;
 			not_expanded++;
 		}
 		i++;
 	}
+	i = 0;
+	while (i < vector->size)
+	{
+		free(vector->values[i]);
+		i++;
+	}
+	free(vector->values);
+	free(vector);
 	if (not_expanded == 0)
 		return ("0x1A");
 	return (final_str);
