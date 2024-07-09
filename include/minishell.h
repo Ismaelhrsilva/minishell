@@ -6,7 +6,7 @@
 /*   By: ishenriq <ishenriq@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/22 18:25:14 by ishenriq          #+#    #+#             */
-/*   Updated: 2024/07/09 19:43:47 by ishenriq         ###   ########.fr       */
+/*   Updated: 2024/07/09 20:00:32 by ishenriq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -121,6 +121,7 @@ typedef struct s_shell
 	char			*path;
 	char			**path_splitted;
 	int				status;
+	char			*str;
 }					t_shell;
 
 // File: Read_inputs

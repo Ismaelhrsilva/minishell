@@ -6,7 +6,7 @@
 /*   By: ishenriq <ishenriq@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/05 14:42:53 by ishenriq          #+#    #+#             */
-/*   Updated: 2024/07/06 18:05:35 by ishenriq         ###   ########.fr       */
+/*   Updated: 2024/07/09 20:08:32 by ishenriq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,7 @@ int	main(void)
 	if (shell == NULL)
 		return (EXIT_FAILURE);
 	shell->envp = environ;
+	shell->str = 0;
 	ft_init_signal();
 	ft_envp(shell);
 	ft_status(0);

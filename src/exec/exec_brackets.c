@@ -6,7 +6,7 @@
 /*   By: ishenriq <ishenriq@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/08 22:28:52 by ishenriq          #+#    #+#             */
-/*   Updated: 2024/07/09 19:39:02 by ishenriq         ###   ########.fr       */
+/*   Updated: 2024/07/09 20:05:46 by ishenriq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,24 +51,24 @@ void	ft_exec_brackets(t_node *root, t_shell *shell)
 {
 	pid_t		pid;
 	t_shell		*shell_b;
-	char		*str;
+	//char		*str;
 
 	shell_b = malloc(sizeof(t_shell));
 	shell_b->envp = ft_duplicate_matrix(shell->envp);
-	str = ft_strdup(root->str);
 	pid = fork();
 	if (!pid)
 	{
 		status_here(FORK, 1);
+		shell_b->str = ft_strdup(root->str);
 		ft_envp(shell_b);
 		ft_free_matrix(shell_b->envp);
 		ft_clear_brackets_before_exec(shell);
-		ft_to_execute(str, shell_b);
-		free(str);
+		ft_to_execute(shell_b->str, shell_b);
+		free(shell_b->str);
 		ft_clear_brackets(shell_b);
 		exit(ft_status(-1));
 	}
-	free(str);
+	//free(str);
 	ft_free_matrix(shell_b->envp);
 	free(shell_b);
 	ft_pid_status(pid);

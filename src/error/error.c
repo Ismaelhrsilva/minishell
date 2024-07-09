@@ -6,7 +6,7 @@
 /*   By: ishenriq <ishenriq@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/19 20:10:42 by ishenriq          #+#    #+#             */
-/*   Updated: 2024/07/09 19:54:57 by ishenriq         ###   ########.fr       */
+/*   Updated: 2024/07/09 20:01:21 by ishenriq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,6 +80,8 @@ void	ft_clear(t_shell *shell)
 
 void	ft_clear_pipe(t_shell *shell)
 {
+	if (shell->str)
+		free(shell->str);
 	ft_free_matrix(shell->parse->prompt_splitted);
 	free(shell->parse);
 	ft_clear_ast(shell->root);
