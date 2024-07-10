@@ -6,7 +6,7 @@
 /*   By: ishenriq <ishenriq@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/15 18:38:12 by ishenriq          #+#    #+#             */
-/*   Updated: 2024/07/10 17:25:56 by ishenriq         ###   ########.fr       */
+/*   Updated: 2024/07/10 19:37:51 by ishenriq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,29 +37,31 @@ static int	ft_metacharacter_edges(t_vector *phrase, size_t pos)
 	return (0);
 }
 
-static int	ft_valide_quotes(t_vector *phrase, size_t pos)
+char	*ft_which_sinal(char str, char *signal, int *s)
+{
+	if (ft_strchr("\"", str))
+	{
+		signal = "\"";
+		*s = 1;
+	}
+	else if (ft_strchr("\'", str))
+	{
+		signal = "\'";
+		*s = 1;
+	}
+	return (signal);
+}
+
+static int	ft_valide_quotes(t_vector *phrase, size_t pos, int i, int s)
 {
 	char	*signal;
 	char	*str;
-	int		i;
-	int		s;
 
 	signal = NULL;
-	i = 0;
-	s = 0;
 	str = ft_value(phrase, pos, 0);
 	while (str[i] != '\0')
 	{
-		if (ft_strchr("\"", str[i]))
-		{
-			signal = "\"";
-			s = 1;
-		}
-		else if (ft_strchr("\'", str[i]))
-		{
-			signal = "\'";
-			s = 1;
-		}
+		signal = ft_which_sinal(str[i], signal, &s);
 		i++;
 		if (ft_count_chr(signal, '\'') == 1 || ft_count_chr(signal, '\"') == 1)
 		{
@@ -76,22 +78,6 @@ static int	ft_valide_quotes(t_vector *phrase, size_t pos)
 	return (0);
 }
 
-static int	ft_bracks_inside_empty(t_vector *phrase)
-{
-	char	*str;
-	size_t	pos;
-
-	pos = 0;
-	while (pos < phrase->size)
-	{
-		str = ft_value(phrase, pos, 0);
-		if (str[0] == '(' && ft_strlen(str) == 2)
-			return (1);
-		pos++;
-	}
-	return (0);
-}
-
 int	ft_grammar_rules(t_vector *phrase)
 {
 	size_t	i;
@@ -101,7 +87,7 @@ int	ft_grammar_rules(t_vector *phrase)
 	{
 		if (error(ft_metacharacter_edges(phrase, i))
 			|| error(ft_metacharacter_following(phrase, i))
-			|| error(ft_valide_quotes(phrase, i)))
+			|| error(ft_valide_quotes(phrase, i, 0, 0)))
 			return (0);
 		i++;
 	}

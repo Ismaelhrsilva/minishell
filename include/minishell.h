@@ -6,7 +6,7 @@
 /*   By: ishenriq <ishenriq@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/22 18:25:14 by ishenriq          #+#    #+#             */
-/*   Updated: 2024/07/10 17:49:23 by ishenriq         ###   ########.fr       */
+/*   Updated: 2024/07/10 20:29:34 by ishenriq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -135,7 +135,7 @@ int					ft_aux_parse_char(char *ch, t_parse *parse, char *prompt);
 int					ft_parse_char(t_parse *parse, char *prompt);
 int					ft_valid_brackets_str(char *str);
 void				ft_arranging_prompt(t_parse *parse);
-void				ft_parse_brackets(t_parse *parse, char *prompt);
+void				ft_parse_brackets(t_parse *parse, char *prompt, int count);
 void				ft_parse_quotes(t_parse *parse, char *prompt, char *signal);
 int					ft_error_brackets(int st);
 int					ft_error_brackets(int st);
@@ -147,13 +147,14 @@ char				*ft_parse_expand_heredoc(char *str, t_shell *shell);
 int					ft_set_token(char *str);
 t_vector			*ft_construct_phrase(char **split, t_shell *shell);
 void				ft_free_phrase(t_vector *phrase);
-void				ft_split_expand(char *str, t_vector *split, int i, int j);
+void				ft_split_expand(char *str, t_vector *split);
 char				*ft_eliminate_signal(char *str, t_shell *shell);
 char				ft_signal(t_vector *vector, size_t *i, char signal);
 
 // File Grammar
 int					ft_grammar_rules(t_vector *phrase);
 void				ft_order_redall(t_vector *vector);
+int					ft_bracks_inside_empty(t_vector *phrase);
 
 // File Utils
 int					ft_count_chr(char *str, char ch);
@@ -221,6 +222,9 @@ void				close_fd(int *fd);
 void				ft_change_fds(int fd, int new);
 void				ft_pid_status(pid_t pid);
 void				ft_pid_status_without_flobal(pid_t pid);
+void				ft_expand_before_exec(t_node *root, t_shell *shell);
+char				**ft_build_argv_exec(t_vector *phrase);
+int					ft_builtins(t_node *root, t_shell *shell);
 
 //File Heredoc
 void				ft_open_heredoc(t_node *root, t_shell *shell);

@@ -6,7 +6,7 @@
 /*   By: ishenriq <ishenriq@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/15 18:38:12 by ishenriq          #+#    #+#             */
-/*   Updated: 2024/07/10 17:26:17 by ishenriq         ###   ########.fr       */
+/*   Updated: 2024/07/10 19:38:06 by ishenriq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,22 @@ int	ft_pos_token_back(t_vector *phrase, int token)
 		pos--;
 	}
 	return (-1);
+}
+
+int	ft_bracks_inside_empty(t_vector *phrase)
+{
+	char	*str;
+	size_t	pos;
+
+	pos = 0;
+	while (pos < phrase->size)
+	{
+		str = ft_value(phrase, pos, 0);
+		if (str[0] == '(' && ft_strlen(str) == 2)
+			return (1);
+		pos++;
+	}
+	return (0);
 }
 
 int	error(int status)

@@ -6,7 +6,7 @@
 /*   By: ishenriq <ishenriq@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/10 19:01:50 by ishenriq          #+#    #+#             */
-/*   Updated: 2024/07/10 19:02:14 by ishenriq         ###   ########.fr       */
+/*   Updated: 2024/07/10 19:06:34 by ishenriq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,4 +38,3 @@ void	clean_vector(t_vector *vector)
 	}
 	ft_vector_free(vector);
 }
-

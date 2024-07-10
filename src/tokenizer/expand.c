@@ -6,47 +6,11 @@
 /*   By: ishenriq <ishenriq@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/13 19:12:24 by ishenriq          #+#    #+#             */
-/*   Updated: 2024/07/10 17:53:40 by ishenriq         ###   ########.fr       */
+/*   Updated: 2024/07/10 20:31:19 by ishenriq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-
-void	ft_split_expand(char *str, t_vector *split, int i, int j)
-{
-	while (str[i] != '\0')
-	{
-		while ((ft_isalnum(str[j]) == 8) && str[j] != '\0')
-			j++;
-		if (str[i] != '\0' && j != i)
-			ft_vector_push_back(split, ft_substr(str, i, j - i));
-		i = j;
-		if (str[j] == '$' && str[j + 1] == '?')
-		{
-			j++;
-			j++;
-			if (str[i] != '\0' && j != i)
-				ft_vector_push_back(split, ft_substr(str, i, j - i));
-			i = j;
-		}
-		if (str[j] == '$')
-		{
-			j++;
-			while ((ft_isalnum(str[j]) == 8 || str[j] == '_' || str[j] == '?')
-				&& str[j] != '\0')
-				j++;
-			if (str[i] != '\0' && j != i)
-				ft_vector_push_back(split, ft_substr(str, i, j - i));
-			i = j;
-		}
-		if ((ft_isalnum(str[j]) == 0 && str[j] != '$')
-			&& str[j] != '\0')
-			j++;
-		if (str[i] != '\0' && j != i)
-			ft_vector_push_back(split, ft_substr(str, i, j - i));
-		i = j;
-	}
-}
 
 char	ft_signal(t_vector *vector, size_t *i, char signal)
 {
@@ -145,7 +109,7 @@ char	*ft_parse_expand(char *str, t_shell *shell)
 	i = 0;
 	signal = '\0';
 	vector = ft_vector_create();
-	ft_split_expand(str, vector, 0, 0);
+	ft_split_expand(str, vector);
 	result = ft_expand_aux(shell, vector, i, signal);
 	clean_vector(vector);
 	return (result);

@@ -6,7 +6,7 @@
 /*   By: ishenriq <ishenriq@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/13 19:12:24 by ishenriq          #+#    #+#             */
-/*   Updated: 2024/07/10 18:19:28 by ishenriq         ###   ########.fr       */
+/*   Updated: 2024/07/10 20:30:08 by ishenriq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ char	*ft_parse_expand_heredoc(char *str, t_shell *shell)
 
 	i = 0;
 	vector = ft_vector_create();
-	ft_split_expand(str, vector, 0, 0);
+	ft_split_expand(str, vector);
 	final_str = "";
 	temp = "";
 	not_expanded = 0;
@@ -103,7 +103,7 @@ char	*ft_eliminate_signal(char *str, t_shell *shell)
 	i = 0;
 	signal = '\0';
 	vector = ft_vector_create();
-	ft_split_expand(str, vector, 0, 0);
+	ft_split_expand(str, vector);
 	final_str = "";
 	temp = "";
 	temp_2 = "";

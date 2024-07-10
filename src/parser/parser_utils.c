@@ -6,7 +6,7 @@
 /*   By: ishenriq <ishenriq@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/05 14:42:53 by ishenriq          #+#    #+#             */
-/*   Updated: 2024/07/10 17:48:41 by ishenriq         ###   ########.fr       */
+/*   Updated: 2024/07/10 19:41:00 by ishenriq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,11 +63,8 @@ int	ft_valid_brackets_str(char *str)
 		return (1);
 }
 
-void	ft_parse_brackets(t_parse *parse, char *prompt)
+void	ft_parse_brackets(t_parse *parse, char *prompt, int count)
 {
-	int	count;
-
-	count = 1;
 	if (parse->prompt[parse->idx->i] == '(')
 	{
 		if (ft_valid_brackets_str(&parse->prompt[parse->idx->i]))

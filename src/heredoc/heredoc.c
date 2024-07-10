@@ -6,7 +6,7 @@
 /*   By: ishenriq <ishenriq@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/07 22:17:01 by ishenriq          #+#    #+#             */
-/*   Updated: 2024/07/10 16:57:57 by ishenriq         ###   ########.fr       */
+/*   Updated: 2024/07/10 19:06:56 by ishenriq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,7 +86,7 @@ char	*ft_heredoc(t_node *root, t_shell *shell)
 		if (pass_through_eliminate_signal)
 			free(limiter);
 		if (ft_count_chr(root->str_not_expanded, '\'') == 0
-	  		&& ft_count_chr(root->str_not_expanded, '\"') == 0)
+			&& ft_count_chr(root->str_not_expanded, '\"') == 0)
 		{
 			gnl_temp = gnl;
 			gnl = ft_parse_expand_heredoc(gnl, shell);

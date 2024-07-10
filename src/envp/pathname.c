@@ -6,7 +6,7 @@
 /*   By: ishenriq <ishenriq@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/03 17:31:31 by ishenriq          #+#    #+#             */
-/*   Updated: 2024/07/07 20:13:49 by ishenriq         ###   ########.fr       */
+/*   Updated: 2024/07/10 19:08:53 by ishenriq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,10 +36,7 @@ char	*ft_get_pathname(char **matrix, char *str)
 		bar = ft_strjoin(matrix[i], "/");
 		pathname = ft_strjoin(bar, str);
 		if (pathname && access(pathname, F_OK | X_OK) == 0)
-		{
-			free(bar);
-			return (pathname);
-		}
+			return (free(bar), pathname);
 		else
 		{
 			free(bar);

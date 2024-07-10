@@ -6,7 +6,7 @@
 /*   By: ishenriq <ishenriq@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/05 14:42:53 by ishenriq          #+#    #+#             */
-/*   Updated: 2024/07/10 17:36:39 by ishenriq         ###   ########.fr       */
+/*   Updated: 2024/07/10 20:32:51 by ishenriq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,20 +37,16 @@ void	ft_to_execute(char *str, t_shell *shell)
 	if (!str || ft_strlen(str) == 0 || ft_prompt_only_space(str))
 		return ;
 	parse = malloc(sizeof(t_parse));
-	if (!parse)
-		return ;
 	shell->parse = parse;
 	parse->prompt = str;
 	parse->prompt_splitted = ft_parser(parse);
 	parse->phrase = ft_construct_phrase(parse->prompt_splitted, shell);
 	parse->phrase_grammar = ft_construct_phrase(parse->prompt_splitted, shell);
-	if (parse->phrase)
-		ft_order_redall(parse->phrase);
-	root = ft_ast(parse->phrase);
-	if (root)
+	ft_order_redall(parse->phrase);
+	shell->root = ft_ast(parse->phrase);
+	if (shell->root)
 	{
 		ft_open_heredoc(root, shell);
-		shell->root = root;
 		if (ft_grammar_rules(parse->phrase_grammar))
 		{
 			ft_freephrase(parse->phrase_grammar);
