@@ -6,7 +6,7 @@
 /*   By: ishenriq <ishenriq@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/13 19:12:24 by ishenriq          #+#    #+#             */
-/*   Updated: 2024/07/10 14:39:04 by ishenriq         ###   ########.fr       */
+/*   Updated: 2024/07/10 15:16:33 by ishenriq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,6 +61,7 @@ char	*ft_parse_expand_heredoc(char *str, t_shell *shell)
 	vector = ft_vector_create();
 	ft_split_expand(str, vector, 0, 0);
 	final_str = "";
+	temp = "";
 	not_expanded = 0;
 	while (i < vector->size)
 	{
@@ -68,9 +69,9 @@ char	*ft_parse_expand_heredoc(char *str, t_shell *shell)
 		new_str = ft_expand(split, shell);
 		if (ft_strncmp(new_str, "0x1A", 4) != 0)
 		{
-			if (not_expanded != 0)
+			final_str = ft_strjoin(temp, new_str);
+			if (ft_strlen(temp) != 0)
 				free(temp);
-			final_str = ft_strjoin(final_str, new_str);
 			temp = final_str;
 			not_expanded++;
 		}
@@ -97,12 +98,16 @@ char	*ft_eliminate_signal(char *str, t_shell *shell)
 	t_vector					*vector;
 	char	*final_str;
 	char	*s;
+	char		*temp;
+	char		*temp_2;
 
 	i = 0;
 	signal = '\0';
 	vector = ft_vector_create();
 	ft_split_expand(str, vector, 0, 0);
 	final_str = "";
+	temp = "";
+	temp_2 = "";
 	while (i < vector->size)
 	{
 		signal = ft_signal(vector, &i, signal);
@@ -111,13 +116,35 @@ char	*ft_eliminate_signal(char *str, t_shell *shell)
 					s[0])) && (s == NULL || signal != s[0]))
 		{
 			if (signal == '\'')
-				final_str = ft_strjoin(final_str, ft_strdup(s));
+			{
+				temp_2 = ft_strdup(s);
+				final_str = ft_strjoin(temp, temp_2); 
+				free(temp_2);
+				if (ft_strlen(temp) != 0)
+					free(temp);
+				temp = final_str;
+			}
 			else if (ft_strncmp(ft_expand(s, shell), "0x1A", 4) != 0)
-				final_str = ft_strjoin(final_str, ft_strdup(s));
+			{
+				temp_2 = ft_strdup(s);
+				final_str = ft_strjoin(temp, temp_2); 
+				free(temp_2);
+				if (ft_strlen(temp) != 0)
+					free(temp);
+				temp = final_str;
+			}
 			i++;
 			s = (char *)ft_vector_at(vector, i);
 		}
 		signal = '\0';
 	}
+	i = 0;
+	while (i < vector->size)
+	{
+		free(vector->values[i]);
+		i++;
+	}
+	free(vector->values);
+	free(vector);
 	return (final_str);
 }

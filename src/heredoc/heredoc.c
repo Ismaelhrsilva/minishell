@@ -6,7 +6,7 @@
 /*   By: ishenriq <ishenriq@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/07 22:17:01 by ishenriq          #+#    #+#             */
-/*   Updated: 2024/07/09 20:47:52 by ishenriq         ###   ########.fr       */
+/*   Updated: 2024/07/10 16:57:57 by ishenriq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,7 @@ char	*ft_heredoc(t_node *root, t_shell *shell)
 	char		*temp_n;
 	const int	std = dup(STDIN_FILENO);
 	char		*limiter;
+	int			pass_through_eliminate_signal;
 	char		*itoa_count;
 	char		*gnl_temp;
 
@@ -61,6 +62,7 @@ char	*ft_heredoc(t_node *root, t_shell *shell)
 	temp_n = ft_strjoin(TEMP, itoa_count);
 	free(itoa_count);
 	infile = open(temp_n, O_CREAT | O_WRONLY | O_TRUNC, 0644);
+	pass_through_eliminate_signal = 0;
 	while (1)
 	{
 		status_here(HERE_DOC, 1);
@@ -70,10 +72,19 @@ char	*ft_heredoc(t_node *root, t_shell *shell)
 		limiter = root->str;
 		if (ft_count_chr(limiter, '\"') != 0
 			|| ft_count_chr(limiter, '\'') != 0)
+		{
 			limiter = ft_eliminate_signal(limiter, shell);
+			pass_through_eliminate_signal = 1;
+		}
 		if (gnl && ft_strncmp(gnl, limiter, ft_strlen(limiter)) == 0
 			&& ft_strlen(limiter) == ft_strlen(gnl))
+		{
+			if (pass_through_eliminate_signal)
+				free(limiter);
 			break ;
+		}
+		if (pass_through_eliminate_signal)
+			free(limiter);
 		if (ft_count_chr(root->str_not_expanded, '\'') == 0
 	  		&& ft_count_chr(root->str_not_expanded, '\"') == 0)
 		{
@@ -89,6 +100,8 @@ char	*ft_heredoc(t_node *root, t_shell *shell)
 			ft_putstr_fd(gnl, infile);
 			free(gnl);
 		}
+		else if (gnl && ft_strncmp(gnl, "0x1A", 4) == 0)
+			free(gnl);
 	}
 	ft_end_heredoc(infile, std, gnl);
 	free(root->str);
