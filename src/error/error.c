@@ -6,7 +6,7 @@
 /*   By: ishenriq <ishenriq@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/19 20:10:42 by ishenriq          #+#    #+#             */
-/*   Updated: 2024/07/10 14:29:50 by ishenriq         ###   ########.fr       */
+/*   Updated: 2024/07/10 17:22:52 by ishenriq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,15 +65,10 @@ void	close_open_fds(void)
 void	ft_clear(t_shell *shell)
 {
 	close_open_fds();
-	/*if (shell->parse->phrase_grammar)
-		ft_freephrase(shell->parse->phrase_grammar);*/
-	/*if (shell->parse->phrase)
-		ft_freephrase(shell->parse->phrase);*/
 	shell->parse->phrase_grammar = NULL;
 	shell->parse->phrase = NULL;
 	ft_free_matrix(shell->parse->prompt_splitted);
 	ft_clear_ast(shell->root);
-	//free(shell->root);
 	free(shell->parse);
 	ft_free_shell(shell);
 }

@@ -6,7 +6,7 @@
 /*   By: ishenriq <ishenriq@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/15 18:38:12 by ishenriq          #+#    #+#             */
-/*   Updated: 2024/07/06 14:29:43 by paranha          ###   ########.org.br   */
+/*   Updated: 2024/07/10 17:25:56 by ishenriq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,8 +100,8 @@ int	ft_grammar_rules(t_vector *phrase)
 	while (i < phrase->size)
 	{
 		if (error(ft_metacharacter_edges(phrase, i))
-				|| error(ft_metacharacter_following(phrase, i))
-				|| error(ft_valide_quotes(phrase, i)))
+			|| error(ft_metacharacter_following(phrase, i))
+			|| error(ft_valide_quotes(phrase, i)))
 			return (0);
 		i++;
 	}

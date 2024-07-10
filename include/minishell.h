@@ -6,7 +6,7 @@
 /*   By: ishenriq <ishenriq@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/22 18:25:14 by ishenriq          #+#    #+#             */
-/*   Updated: 2024/07/09 22:22:02 by ishenriq         ###   ########.fr       */
+/*   Updated: 2024/07/10 17:27:06 by ishenriq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@
 # define PROMPT	2
 # define MAX_EXIT "9223372036854775807"
 # define MIN_EXIT "-9223372036854775808"
-# define PATH_MAX 4096 
+# define PATH_MAX 4096
 
 typedef enum e_token
 {
@@ -195,7 +195,6 @@ void				ft_vector_init(t_vector *vector);
 void				ft_vector_pop_back(t_vector *vector);
 void				ft_vector_pop_front(t_vector *vector);
 void				ft_vector_push_back(t_vector *vector, void *value);
-bool   				ft_vector_shrink_to_fit(t_vector *vector);
 
 //File Envp
 t_vector			*ft_build_line_envp(char *str);
@@ -237,8 +236,8 @@ void				ft_clear(t_shell *shell);
 void				ft_error(char *cmd, char *flag, char *msg, int status);
 void				close_open_fds(void);
 void				ft_free_shell(t_shell *shell);
-void ft_free_constructed_phrase(t_vector *phrase);
-void	clean_vector(t_vector *vector);
+void				ft_free_constructed_phrase(t_vector *phrase);
+void				clean_vector(t_vector *vector);
 
 // Builtins
 char				**ft_env_export(const t_vector *vars);

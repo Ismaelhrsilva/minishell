@@ -6,7 +6,7 @@
 #    By: ishenriq <ishenriq@student.42sp.org.br>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/12/11 20:08:54 by ishenriq          #+#    #+#              #
-#    Updated: 2024/07/06 16:11:01 by ishenriq         ###   ########.fr        #
+#    Updated: 2024/07/10 17:33:46 by ishenriq         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -44,6 +44,7 @@ SRCS := \
 	envp/envp.c \
 	envp/pathname.c \
 	error/error.c \
+	error/clean.c \
 	exec/exec_brackets.c \
 	exec/exec_pipe.c \
 	exec/exec_red.c \

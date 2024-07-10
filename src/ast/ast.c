@@ -6,7 +6,7 @@
 /*   By: ishenriq <ishenriq@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/19 14:31:38 by ishenriq          #+#    #+#             */
-/*   Updated: 2024/07/07 21:54:33 by ishenriq         ###   ########.fr       */
+/*   Updated: 2024/07/10 17:22:19 by ishenriq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,6 @@ static	void	ft_ast_aux(t_vector *phrase, t_node *root)
 	root->str = ft_strdup(ft_value(phrase, 0, 0));
 	root->str_not_expanded = ft_strdup(ft_value(phrase, 0, 2));
 	root->type = ft_value_int(phrase, 0, 1);
-	//root->type = EXEC;
 	root->phrase = phrase;
 }
 

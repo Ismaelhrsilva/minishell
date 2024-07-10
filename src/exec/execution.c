@@ -6,7 +6,7 @@
 /*   By: ishenriq <ishenriq@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/03 19:15:25 by ishenriq          #+#    #+#             */
-/*   Updated: 2024/07/10 14:44:00 by ishenriq         ###   ########.fr       */
+/*   Updated: 2024/07/10 17:24:51 by ishenriq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,8 +56,6 @@ static void	ft_do(t_vector *phrase, t_shell *shell)
 				ft_error(cmd, NULL, "No such file or directory", ENOENT);
 			else if (access(cmd, X_OK) < 0)
 				ft_error(cmd, NULL, "Permission denied", EACCES);
-			/*else if (execve(ft_get_pathname(shell->path_splitted, cmd),
-					argv_exec, vars) < 0)*/
 			else if (execve(cmd, argv_exec, vars) < 0)
 				ft_error(cmd, NULL, strerror(errno), errno);
 			close(g_status);
@@ -137,8 +135,8 @@ void	ft_expand_before_exec(t_node *root, t_shell *shell)
 		str = ft_strdup(str_temp);
 		if (ft_strncmp(str, "0x1A", 4) != 0)
 		{
-			ft_vector_push_back(vector, 
-					ft_put_str_token_at_vector(root->phrase, i, str));
+			ft_vector_push_back(vector,
+				ft_put_str_token_at_vector(root->phrase, i, str));
 		}
 		if (ft_strncmp(str, "0x1A", 4) == 0)
 			free(((t_vector *)root->phrase->values[i])->values[1]);
@@ -150,59 +148,6 @@ void	ft_expand_before_exec(t_node *root, t_shell *shell)
 		ft_freephrase_2(root->phrase);
 	root->phrase = vector;
 }
-
-// void	ft_expand_before_exec(t_node *root, t_shell *shell)
-//{
-//    size_t			i;
-//    char			*str;
-//    t_vector		*vector;
-//
-//    i = 0;
-//    vector = ft_vector_create();
-//    while (i < root->phrase->size)
-//    {
-//        str = ft_parse_expand(ft_value(root->phrase, i, 0), shell);
-//        if (ft_strncmp(str, "0x1A", 4) != 0)
-//        {
-//            t_vector *inner_vector = ft_put_str_token_at_vector(root->phrase,
-//		i, str);
-//            ft_vector_push_back(vector, inner_vector);
-//            ft_vector_free(inner_vector);
-//        }
-//        i++;
-//    }
-//    root->phrase = vector;
-//}
-
-/*void	ft_expand_before_exec(t_node *root, t_shell *shell)
-{
-	int			i;
-	char		*str;
-	t_vector	*vector;
-
-	i = 0;
-	vector = ft_vector_create();
-	while (i < root->phrase->size)
-	{
-		str = ft_value(root->phrase, i, 0);
-		printf("antes %s\n", str);
-		((t_vector *)root->phrase->values[i])->values[0] = ft_parse_expand(str,
-				shell);
-		printf("depois %s\n", (char *)ft_value(root->phrase, i, 0));
-		i++;
-	}
-}*/
-
-//void	ft_free_root(t_node *root)
-//{
-//	if (root->left)
-//		ft_free_root(root->left);
-//	if (root->right)
-//		ft_free_root(root->right);
-//	if (root->phrase)
-//		ft_vector_free(root->phrase);
-//	free(root);
-//}
 
 void	ft_execution(t_node *root, t_shell *shell)
 {
@@ -218,7 +163,6 @@ void	ft_execution(t_node *root, t_shell *shell)
 		ft_execution(root->left, shell);
 	else if (root->right)
 		ft_execution(root->right, shell);
-	//else if (root->type == EXEC && root->phrase)
 	else if (root->type == 0 && root->phrase)
 	{
 		ft_expand_before_exec(root, shell);
@@ -234,6 +178,4 @@ void	ft_execution(t_node *root, t_shell *shell)
 		else if (root->str && root->fd != -1)
 			ft_do(root->phrase, shell);
 	}
-	// ft_free_phrase(root->phrase);
-	// ft_vector_free(root->phrase);
 }

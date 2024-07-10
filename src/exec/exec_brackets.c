@@ -6,7 +6,7 @@
 /*   By: ishenriq <ishenriq@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/08 22:28:52 by ishenriq          #+#    #+#             */
-/*   Updated: 2024/07/09 20:05:46 by ishenriq         ###   ########.fr       */
+/*   Updated: 2024/07/10 17:24:01 by ishenriq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,9 +16,9 @@ extern volatile sig_atomic_t	g_status;
 
 char	**ft_duplicate_matrix(char **matrix)
 {
-	int	i;
-	char **new_matrix;
-	
+	int		i;
+	char	**new_matrix;
+
 	i = 0;
 	new_matrix = malloc((ft_count_matrix(matrix) + 1) * sizeof(char *));
 	while (matrix[i] != NULL)
@@ -51,7 +51,6 @@ void	ft_exec_brackets(t_node *root, t_shell *shell)
 {
 	pid_t		pid;
 	t_shell		*shell_b;
-	//char		*str;
 
 	shell_b = malloc(sizeof(t_shell));
 	shell_b->envp = ft_duplicate_matrix(shell->envp);
@@ -68,7 +67,6 @@ void	ft_exec_brackets(t_node *root, t_shell *shell)
 		ft_clear_brackets(shell_b);
 		exit(ft_status(-1));
 	}
-	//free(str);
 	ft_free_matrix(shell_b->envp);
 	free(shell_b);
 	ft_pid_status(pid);

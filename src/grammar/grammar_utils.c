@@ -6,7 +6,7 @@
 /*   By: ishenriq <ishenriq@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/15 18:38:12 by ishenriq          #+#    #+#             */
-/*   Updated: 2024/07/07 14:38:55 by ishenriq         ###   ########.fr       */
+/*   Updated: 2024/07/10 17:26:17 by ishenriq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ extern volatile sig_atomic_t	g_status;
 
 int	ft_count_token(t_vector *phrase, int token)
 {
-	int				count;
+	int		count;
 	size_t	i;
 
 	i = 0;

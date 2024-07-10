@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exit.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: paranha <paranha@student.42sp.org.br>      +#+  +:+       +#+        */
+/*   By: ishenriq <ishenriq@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/30 18:34:50 by paranha           #+#    #+#             */
-/*   Updated: 2024/07/07 18:30:46 by ishenriq         ###   ########.fr       */
+/*   Updated: 2024/07/10 17:28:16 by ishenriq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,19 +71,14 @@ unsigned char	ft_parse_exit_arguments(t_vector *cmd)
 	}
 	return (exit_status);
 }
+
 void	ft_clear2(t_shell *shell)
 {
-	//	(void)shell;
 	close_open_fds();
-	//if (shell->parse->phrase_grammar)
-	//	ft_freephrase(shell->parse->phrase_grammar);
 	ft_clear_ast(shell->root);
 	ft_free_matrix(shell->parse->prompt_splitted);
 	free(shell->parse);
 	ft_free_shell(shell);
-	// ft_free_phrase(shell->envp_dict);
-	// ft_freesplit(shell->path_splitted);
-	// free(shell->path);
 }
 
 void	ft_builtin_exit(t_shell *shell, t_vector *cmd)
@@ -95,7 +90,6 @@ void	ft_builtin_exit(t_shell *shell, t_vector *cmd)
 	{
 		ft_putendl_fd("exit: numeric argument required", STDERR_FILENO);
 		ft_status(2);
-		//exit_status = ft_parse_exit_arguments(cmd);
 		ft_clear2(shell);
 		exit(2);
 	}
@@ -106,18 +100,6 @@ void	ft_builtin_exit(t_shell *shell, t_vector *cmd)
 		return ;
 	}
 	exit_status = ft_parse_exit_arguments(cmd);
-	/*size_t	i;
-
-	i = 0;
-	while (i < cmd->size)
-	{
-		free(((t_vector *)cmd->values[i])->values[0]);
-		free(((t_vector *)cmd->values[i])->values);
-		free(cmd->values[i]);
-		i++;
-	}
-	//free(cmd->values);
-	//free(cmd);*/
 	ft_clear2(shell);
 	exit(exit_status);
 }
