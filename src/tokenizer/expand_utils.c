@@ -6,7 +6,7 @@
 /*   By: ishenriq <ishenriq@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/13 19:12:24 by ishenriq          #+#    #+#             */
-/*   Updated: 2024/07/09 20:56:08 by ishenriq         ###   ########.fr       */
+/*   Updated: 2024/07/10 14:39:04 by ishenriq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,7 +85,8 @@ char	*ft_parse_expand_heredoc(char *str, t_shell *shell)
 	free(vector->values);
 	free(vector);
 	if (not_expanded == 0)
-		return ("0x1A");
+		return (ft_strdup("0x1A"));
+		//return ("0x1A");
 	return (final_str);
 }
 

@@ -6,7 +6,7 @@
 /*   By: ishenriq <ishenriq@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/13 19:12:24 by ishenriq          #+#    #+#             */
-/*   Updated: 2024/07/06 23:35:02 by ishenriq         ###   ########.fr       */
+/*   Updated: 2024/07/10 14:47:13 by ishenriq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -138,7 +138,7 @@ char	*ft_expand_aux(t_shell *shell, t_vector *vector, unsigned long int i,
 	temp = "";
 	not_expanded = 0;
 	if (ft_empty_str(vector))
-		return ("");
+		return (ft_strdup(""));
 	while (i < vector->size)
 	{
 		if (i == 0)
@@ -179,7 +179,7 @@ char	*ft_expand_aux(t_shell *shell, t_vector *vector, unsigned long int i,
 			signal = '\0';
 	}
 	if (not_expanded == 0)
-		return ("0x1A");
+		return (ft_strdup("0x1A"));
 	return (final_str);
 }
 

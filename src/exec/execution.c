@@ -6,7 +6,7 @@
 /*   By: ishenriq <ishenriq@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/03 19:15:25 by ishenriq          #+#    #+#             */
-/*   Updated: 2024/07/09 18:15:45 by ishenriq         ###   ########.fr       */
+/*   Updated: 2024/07/10 14:44:00 by ishenriq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ static char	**ft_build_argv_exec(t_vector *phrase)
 	argv_exec = ft_calloc(phrase->size + 1, sizeof(char **));
 	while (i < phrase->size)
 	{
-		argv_exec[i] = ft_value(phrase, i, 0);
+		argv_exec[i] = ft_strdup(ft_value(phrase, i, 0));
 		i++;
 	}
 	argv_exec[i] = NULL;
@@ -56,8 +56,9 @@ static void	ft_do(t_vector *phrase, t_shell *shell)
 				ft_error(cmd, NULL, "No such file or directory", ENOENT);
 			else if (access(cmd, X_OK) < 0)
 				ft_error(cmd, NULL, "Permission denied", EACCES);
-			else if (execve(ft_get_pathname(shell->path_splitted, cmd),
-					argv_exec, vars) < 0)
+			/*else if (execve(ft_get_pathname(shell->path_splitted, cmd),
+					argv_exec, vars) < 0)*/
+			else if (execve(cmd, argv_exec, vars) < 0)
 				ft_error(cmd, NULL, strerror(errno), errno);
 			close(g_status);
 			ft_free_matrix(argv_exec);
@@ -139,6 +140,8 @@ void	ft_expand_before_exec(t_node *root, t_shell *shell)
 			ft_vector_push_back(vector, 
 					ft_put_str_token_at_vector(root->phrase, i, str));
 		}
+		if (ft_strncmp(str, "0x1A", 4) == 0)
+			free(((t_vector *)root->phrase->values[i])->values[1]);
 		free(str_temp);
 		free(str);
 		i++;
