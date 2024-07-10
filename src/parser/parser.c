@@ -6,11 +6,20 @@
 /*   By: ishenriq <ishenriq@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/05 14:42:53 by ishenriq          #+#    #+#             */
-/*   Updated: 2024/07/06 15:59:32 by ishenriq         ###   ########.fr       */
+/*   Updated: 2024/07/10 17:48:52 by ishenriq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+int	ft_error_brackets(int st)
+{
+	static int	status;
+
+	if (st != -1)
+		status = st;
+	return (status);
+}
 
 void	ft_arranging_prompt(t_parse *parse)
 {

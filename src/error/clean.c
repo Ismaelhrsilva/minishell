@@ -6,7 +6,7 @@
 /*   By: ishenriq <ishenriq@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/10 17:33:09 by ishenriq          #+#    #+#             */
-/*   Updated: 2024/07/10 17:34:25 by ishenriq         ###   ########.fr       */
+/*   Updated: 2024/07/10 19:02:17 by ishenriq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,3 +57,38 @@ void	ft_freephrase_2(t_vector *vector)
 	free(vector);
 }
 
+void	ft_free_envp_dict(t_vector *envp_dict)
+{
+	size_t	i;
+
+	if (envp_dict)
+	{
+		i = 0;
+		while (i < envp_dict->size)
+		{
+			ft_free_line_envp(envp_dict->values[i]);
+			i++;
+		}
+		ft_vector_free(envp_dict);
+	}
+}
+
+void	ft_free_shell(t_shell *shell)
+{
+	if (shell)
+	{
+		ft_free_envp_dict(shell->envp_dict);
+		ft_freesplit(shell->path_splitted);
+		free(shell);
+	}
+}
+
+void	ft_free_matrix(char **matrix)
+{
+	int	i;
+
+	i = 0;
+	while (matrix[i] != NULL)
+		free(matrix[i++]);
+	free(matrix);
+}

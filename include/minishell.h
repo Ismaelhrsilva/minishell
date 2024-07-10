@@ -6,7 +6,7 @@
 /*   By: ishenriq <ishenriq@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/22 18:25:14 by ishenriq          #+#    #+#             */
-/*   Updated: 2024/07/10 17:27:06 by ishenriq         ###   ########.fr       */
+/*   Updated: 2024/07/10 17:49:23 by ishenriq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -138,6 +138,8 @@ void				ft_arranging_prompt(t_parse *parse);
 void				ft_parse_brackets(t_parse *parse, char *prompt);
 void				ft_parse_quotes(t_parse *parse, char *prompt, char *signal);
 int					ft_error_brackets(int st);
+int					ft_error_brackets(int st);
+
 // File Tokenizer
 char				*ft_expand(char *str, t_shell *shell);
 char				*ft_parse_expand(char *str, t_shell *shell);

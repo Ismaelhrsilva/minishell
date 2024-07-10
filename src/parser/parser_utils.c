@@ -6,7 +6,7 @@
 /*   By: ishenriq <ishenriq@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/05 14:42:53 by ishenriq          #+#    #+#             */
-/*   Updated: 2024/07/06 15:56:11 by ishenriq         ###   ########.fr       */
+/*   Updated: 2024/07/10 17:48:41 by ishenriq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,15 +61,6 @@ int	ft_valid_brackets_str(char *str)
 		return (0);
 	else
 		return (1);
-}
-
-int	ft_error_brackets(int st)
-{
-	static int	status;
-
-	if (st != -1)
-		status = st;
-	return (status);
 }
 
 void	ft_parse_brackets(t_parse *parse, char *prompt)

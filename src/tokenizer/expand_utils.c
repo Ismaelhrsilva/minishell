@@ -6,7 +6,7 @@
 /*   By: ishenriq <ishenriq@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/13 19:12:24 by ishenriq          #+#    #+#             */
-/*   Updated: 2024/07/10 15:16:33 by ishenriq         ###   ########.fr       */
+/*   Updated: 2024/07/10 18:19:28 by ishenriq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 char	*ft_find_expand(char *str, t_shell *shell)
 {
-	size_t		i;
+	size_t	i;
 	char	*key;
 
 	i = 0;
@@ -38,7 +38,7 @@ char	*ft_expand(char *str, t_shell *shell)
 		if (str[1] == '?' && ft_strlen(str) == 2)
 			return (ft_itoa(ft_status(-1)));
 		else if (ft_isdigit(str[1]))
-            return (&str[2]);
+			return (&str[2]);
 		else if (ft_find_expand(&str[1], shell) != NULL)
 			return (ft_find_expand(&str[1], shell));
 		else if (ft_find_expand(&str[1], shell) == NULL)
@@ -87,19 +87,18 @@ char	*ft_parse_expand_heredoc(char *str, t_shell *shell)
 	free(vector);
 	if (not_expanded == 0)
 		return (ft_strdup("0x1A"));
-		//return ("0x1A");
 	return (final_str);
 }
 
 char	*ft_eliminate_signal(char *str, t_shell *shell)
 {
-	unsigned long int			i;
-	char						signal;
-	t_vector					*vector;
-	char	*final_str;
-	char	*s;
-	char		*temp;
-	char		*temp_2;
+	unsigned long int	i;
+	char				signal;
+	t_vector			*vector;
+	char				*final_str;
+	char				*s;
+	char				*temp;
+	char				*temp_2;
 
 	i = 0;
 	signal = '\0';
@@ -118,7 +117,7 @@ char	*ft_eliminate_signal(char *str, t_shell *shell)
 			if (signal == '\'')
 			{
 				temp_2 = ft_strdup(s);
-				final_str = ft_strjoin(temp, temp_2); 
+				final_str = ft_strjoin(temp, temp_2);
 				free(temp_2);
 				if (ft_strlen(temp) != 0)
 					free(temp);
@@ -127,7 +126,7 @@ char	*ft_eliminate_signal(char *str, t_shell *shell)
 			else if (ft_strncmp(ft_expand(s, shell), "0x1A", 4) != 0)
 			{
 				temp_2 = ft_strdup(s);
-				final_str = ft_strjoin(temp, temp_2); 
+				final_str = ft_strjoin(temp, temp_2);
 				free(temp_2);
 				if (ft_strlen(temp) != 0)
 					free(temp);

@@ -6,7 +6,7 @@
 /*   By: ishenriq <ishenriq@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/15 19:57:08 by ishenriq          #+#    #+#             */
-/*   Updated: 2024/07/06 22:40:16 by ishenriq         ###   ########.fr       */
+/*   Updated: 2024/07/10 17:46:04 by ishenriq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,32 +83,8 @@ void	ft_replace_char_between_signal(char *str,
 	}
 }
 
-void	ft_free_matrix(char **matrix)
-{
-	int	i;
-
-	i = 0;
-	while (matrix[i] != NULL)
-		free(matrix[i++]);
-	free(matrix);
-}
-
 char	ft_is_space(char c)
 {
 	return (c == '\f' || c == '\n' || c == '\r'
 		|| c == '\t' || c == '\v' || c == ' ');
-}
-
-void	ft_clear_ast(t_node	*root)
-{
-	if (root)
-	{
-		if (root->left)
-			ft_clear_ast(root->left);
-		if (root->right)
-			ft_clear_ast(root->right);
-		ft_inside_ast(root);
-		if (root)
-			free(root);
-	}
 }
