@@ -6,7 +6,7 @@
 /*   By: ishenriq <ishenriq@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/22 18:25:14 by ishenriq          #+#    #+#             */
-/*   Updated: 2024/07/09 20:00:32 by ishenriq         ###   ########.fr       */
+/*   Updated: 2024/07/09 22:22:02 by ishenriq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -202,6 +202,7 @@ t_vector			*ft_build_line_envp(char *str);
 t_vector			*ft_envp_dict(char **envp);
 void				ft_envp(t_shell *shell);
 void				ft_free_envp_dict(t_vector *envp_dict);
+void				ft_free_line_envp(t_vector *line_dict);
 
 //File Pathname
 char				*ft_get_pathname(char **matrix, char *str);

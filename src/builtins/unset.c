@@ -6,7 +6,7 @@
 /*   By: paranha <paranha@student.42sp.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/23 20:13:00 by paranha           #+#    #+#             */
-/*   Updated: 2024/07/02 17:28:37 by paranha          ###   ########.org.br   */
+/*   Updated: 2024/07/09 22:21:01 by ishenriq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@ void	ft_env_delete(t_vector *vars, char *name)
 		identifier = ft_vector_at(line_dict, 0);
 		if (identifier && ft_strcmp(identifier, name) == 0)
 		{
+			ft_free_line_envp(line_dict);
 			ft_vector_erase(vars, i);
 			return ;
 		}
