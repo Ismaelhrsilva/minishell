@@ -6,7 +6,7 @@
 /*   By: ishenriq <ishenriq@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/07 22:17:01 by ishenriq          #+#    #+#             */
-/*   Updated: 2024/07/10 19:06:56 by ishenriq         ###   ########.fr       */
+/*   Updated: 2024/07/11 16:45:23 by ishenriq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,39 +14,99 @@
 
 extern volatile sig_atomic_t	g_status;
 
-static long	ft_count(void)
+char	*expand_heredoc(char *gnl, t_node *root, t_shell *shell)
 {
-	static long	count;
+	char	*gnl_temp;
 
-	return (count++);
-}
-
-static void	ft_end_heredoc(int infile, const int std, char *gnl)
-{
-	if (gnl)
-		free (gnl);
-	else if (g_status != SIGINT)
+	if (ft_count_chr(root->str_not_expanded, '\'') == 0
+		&& ft_count_chr(root->str_not_expanded, '\"') == 0)
 	{
-		ft_putstr_fd("bash: warning: ", 2);
-		ft_putstr_fd("here-document delimited by end-of-file\n", 2);
+		gnl_temp = gnl;
+		gnl = ft_parse_expand_heredoc(gnl, shell);
+		free(gnl_temp);
 	}
-	close(infile);
-	close(std);
+	return (gnl);
 }
 
-void	ft_heredoc_sigint(char *gnl, const int std)
+void	write_heredoc(char *gnl, int infile)
 {
-	if (g_status == SIGINT)
+	char	*gnl_temp;
+
+	if (ft_strncmp(gnl, "0x1A", 4) != 0)
 	{
-		dup2(std, STDIN_FILENO);
-		if (gnl)
+		gnl_temp = gnl;
+		gnl = ft_strjoin(gnl, "\n");
+		free(gnl_temp);
+		ft_putstr_fd(gnl, infile);
+		free(gnl);
+	}
+	else if (gnl)
+		free(gnl);
+}
+
+char	*read_heredoc(t_node *root, const int std, t_shell *shell, int infile)
+{
+	char	*gnl;
+	char	*limiter;
+
+	while (1)
+	{
+		status_here(HERE_DOC, 1);
+		gnl = readline("> ");
+		status_here(HERE_DOC, 0);
+		ft_heredoc_sigint(gnl, std);
+		limiter = ft_limiter(root, shell);
+		if (gnl && ft_strncmp(gnl, limiter, ft_strlen(limiter)) == 0
+			&& ft_strlen(limiter) == ft_strlen(gnl))
 		{
-			free(gnl);
-			gnl = NULL;
+			free(limiter);
+			break ;
+		}
+		gnl = expand_heredoc(gnl, root, shell);
+		write_heredoc(gnl, infile);
+		free(limiter);
+	}
+	return (gnl);
+}
+
+char	*ft_heredoc(t_node *root, t_shell *shell)
+{
+	char		*gnl;
+	char		*temp_n;
+	int			infile;
+	const int	std = dup(STDIN_FILENO);
+	char		*itoa_count;
+
+	itoa_count = ft_itoa(ft_count());
+	temp_n = ft_strjoin(TEMP, itoa_count);
+	free(itoa_count);
+	infile = open(temp_n, O_CREAT | O_WRONLY | O_TRUNC, 0644);
+	gnl = read_heredoc(root, std, shell, infile);
+	ft_end_heredoc(infile, std, gnl);
+	free(root->str);
+	return (temp_n);
+}
+
+void	ft_open_heredoc(t_node *root, t_shell *shell)
+{
+	if (!root)
+		return ;
+	if (root->left)
+		ft_open_heredoc(root->left, shell);
+	if (root->right && root->right->str && root->type & HEREDOC)
+	{
+		root->right->str = ft_heredoc(root->right, shell);
+		root->type = REDIN;
+		if (g_status == SIGINT)
+		{
+			unlink(root->right->str);
+			free(root->right->str);
+			return ;
 		}
 	}
 }
 
+/*
 char	*ft_heredoc(t_node *root, t_shell *shell)
 {
 	char		*gnl;
@@ -106,23 +166,4 @@ char	*ft_heredoc(t_node *root, t_shell *shell)
 	ft_end_heredoc(infile, std, gnl);
 	free(root->str);
 	return (temp_n);
-}
-
-void	ft_open_heredoc(t_node *root, t_shell *shell)
-{
-	if (!root)
-		return ;
-	if (root->left)
-		ft_open_heredoc(root->left, shell);
-	if (root->right && root->right->str && root->type & HEREDOC)
-	{
-		root->right->str = ft_heredoc(root->right, shell);
-		root->type = REDIN;
-		if (g_status == SIGINT)
-		{
-			unlink(root->right->str);
-			free(root->right->str);
-			return ;
-		}
-	}
-}
+}*/

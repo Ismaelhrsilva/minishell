@@ -6,7 +6,7 @@
 #    By: ishenriq <ishenriq@student.42sp.org.br>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/12/11 20:08:54 by ishenriq          #+#    #+#              #
-#    Updated: 2024/07/11 15:32:24 by ishenriq         ###   ########.fr        #
+#    Updated: 2024/07/11 15:37:05 by ishenriq         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -56,6 +56,7 @@ SRCS := \
 	grammar/grammar_utils.c \
 	grammar/order.c \
 	heredoc/heredoc.c \
+	heredoc/heredoc_utils.c \
 	parser/parser.c \
 	parser/parser_utils.c \
 	principal/main.c \
