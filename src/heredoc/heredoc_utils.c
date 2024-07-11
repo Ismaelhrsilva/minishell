@@ -6,7 +6,7 @@
 /*   By: ishenriq <ishenriq@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/07 22:17:01 by ishenriq          #+#    #+#             */
-/*   Updated: 2024/07/11 16:46:40 by ishenriq         ###   ########.fr       */
+/*   Updated: 2024/07/11 18:38:12 by ishenriq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,11 @@ long	ft_count(void)
 void	ft_end_heredoc(int infile, const int std, char *gnl)
 {
 	(void ) gnl;
+	if (g_status != SIGINT)
+	{
+		ft_putstr_fd("minishell: warning: ", 2);
+		ft_putstr_fd("here-document delimited by end-of-file\n", 2);
+	}
 	close(infile);
 	close(std);
 }

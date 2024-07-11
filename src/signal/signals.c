@@ -6,7 +6,7 @@
 /*   By: ishenriq <ishenriq@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/11 18:26:39 by ishenriq          #+#    #+#             */
-/*   Updated: 2024/07/06 16:15:44 by ishenriq         ###   ########.fr       */
+/*   Updated: 2024/07/11 19:27:09 by ishenriq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 extern volatile sig_atomic_t	g_status;
 
-static void	ft_handle_sigint(int signal)
+void	ft_handle_sigint(int signal)
 {
 	g_status = signal;
 	if (status_here(FORK, -1))

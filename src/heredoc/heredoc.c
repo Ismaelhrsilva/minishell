@@ -6,7 +6,7 @@
 /*   By: ishenriq <ishenriq@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/07 22:17:01 by ishenriq          #+#    #+#             */
-/*   Updated: 2024/07/11 16:45:23 by ishenriq         ###   ########.fr       */
+/*   Updated: 2024/07/11 19:04:07 by ishenriq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ void	write_heredoc(char *gnl, int infile)
 		free(gnl);
 }
 
-char	*read_heredoc(t_node *root, const int std, t_shell *shell, int infile)
+char	*read_heredoc(t_node *root, t_shell *shell, int infile)
 {
 	char	*gnl;
 	char	*limiter;
@@ -54,7 +54,8 @@ char	*read_heredoc(t_node *root, const int std, t_shell *shell, int infile)
 		status_here(HERE_DOC, 1);
 		gnl = readline("> ");
 		status_here(HERE_DOC, 0);
-		ft_heredoc_sigint(gnl, std);
+		if (g_status == SIGINT || (gnl == NULL && g_status != SIGINT))
+			break ;
 		limiter = ft_limiter(root, shell);
 		if (gnl && ft_strncmp(gnl, limiter, ft_strlen(limiter)) == 0
 			&& ft_strlen(limiter) == ft_strlen(gnl))
@@ -81,16 +82,18 @@ char	*ft_heredoc(t_node *root, t_shell *shell)
 	temp_n = ft_strjoin(TEMP, itoa_count);
 	free(itoa_count);
 	infile = open(temp_n, O_CREAT | O_WRONLY | O_TRUNC, 0644);
-	gnl = read_heredoc(root, std, shell, infile);
+	gnl = read_heredoc(root, shell, infile);
 	ft_end_heredoc(infile, std, gnl);
 	free(root->str);
+	if (g_status == SIGINT)
+		dup2(std, STDIN_FILENO);
 	return (temp_n);
 }
 
-void	ft_open_heredoc(t_node *root, t_shell *shell)
+int	ft_open_heredoc(t_node *root, t_shell *shell)
 {
 	if (!root)
-		return ;
+		return (0);
 	if (root->left)
 		ft_open_heredoc(root->left, shell);
 	if (root->right && root->right->str && root->type & HEREDOC)
@@ -98,12 +101,12 @@ void	ft_open_heredoc(t_node *root, t_shell *shell)
 		root->right->str = ft_heredoc(root->right, shell);
 		root->type = REDIN;
 		if (g_status == SIGINT)
-		{
+		{	
 			unlink(root->right->str);
-			free(root->right->str);
-			return ;
+			return (0);
 		}
 	}
+	return (1);
 }
 
 /*
