@@ -6,7 +6,7 @@
 #    By: ishenriq <ishenriq@student.42sp.org.br>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/12/11 20:08:54 by ishenriq          #+#    #+#              #
-#    Updated: 2024/07/10 20:27:26 by ishenriq         ###   ########.fr        #
+#    Updated: 2024/07/11 13:53:22 by ishenriq         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -64,6 +64,7 @@ SRCS := \
 	signal/signals.c \
 	signal/signals_macros.c \
 	tokenizer/expand.c \
+	tokenizer/expand_heredoc.c \
 	tokenizer/expand_utils.c \
 	tokenizer/split_expand.c \
 	tokenizer/phrase.c \
