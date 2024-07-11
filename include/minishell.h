@@ -6,7 +6,7 @@
 /*   By: ishenriq <ishenriq@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/22 18:25:14 by ishenriq          #+#    #+#             */
-/*   Updated: 2024/07/10 20:29:34 by ishenriq         ###   ########.fr       */
+/*   Updated: 2024/07/11 14:59:23 by ishenriq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -143,13 +143,16 @@ int					ft_error_brackets(int st);
 // File Tokenizer
 char				*ft_expand(char *str, t_shell *shell);
 char				*ft_parse_expand(char *str, t_shell *shell);
-char				*ft_parse_expand_heredoc(char *str, t_shell *shell);
+char				*ft_parse_expand_heredoc(char *s, t_shell *shell);
 int					ft_set_token(char *str);
 t_vector			*ft_construct_phrase(char **split, t_shell *shell);
 void				ft_free_phrase(t_vector *phrase);
 void				ft_split_expand(char *str, t_vector *split);
 char				*ft_eliminate_signal(char *str, t_shell *shell);
 char				ft_signal(t_vector *vector, size_t *i, char signal);
+char				*ft_signal_str(t_vector *vector, size_t *i);
+unsigned long int	ft_i(unsigned long int st);
+int					ft_empty_str(t_vector *vector);
 
 // File Grammar
 int					ft_grammar_rules(t_vector *phrase);
@@ -225,6 +228,7 @@ void				ft_pid_status_without_flobal(pid_t pid);
 void				ft_expand_before_exec(t_node *root, t_shell *shell);
 char				**ft_build_argv_exec(t_vector *phrase);
 int					ft_builtins(t_node *root, t_shell *shell);
+void				ft_clean_vector(t_vector *vector);
 
 //File Heredoc
 void				ft_open_heredoc(t_node *root, t_shell *shell);

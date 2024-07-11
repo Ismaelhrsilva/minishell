@@ -6,11 +6,27 @@
 /*   By: ishenriq <ishenriq@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/13 19:12:24 by ishenriq          #+#    #+#             */
-/*   Updated: 2024/07/11 13:52:48 by ishenriq         ###   ########.fr       */
+/*   Updated: 2024/07/11 13:56:39 by ishenriq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+int	ft_empty_str(t_vector *vector)
+{
+	char	*str;
+	char	*str_1;
+
+	if (vector->size == 2)
+	{
+		str = ft_vector_at(vector, 0);
+		str_1 = ft_vector_at(vector, 1);
+		if (ft_strchr("\"\'", str[0]))
+			if (ft_strchr("\"\'", str_1[0]))
+				return (1);
+	}
+	return (0);
+}
 
 char	*ft_find_expand(char *str, t_shell *shell)
 {
@@ -45,4 +61,30 @@ char	*ft_expand(char *str, t_shell *shell)
 			return ("0x1A");
 	}
 	return (str);
+}
+
+unsigned long int	ft_i(unsigned long int st)
+{
+	static unsigned long int	i;
+
+	if (st != 9999)
+		i = st;
+	return (i);
+}
+
+char	*ft_signal_str(t_vector *vector, size_t *i)
+{
+	char	*signal;
+
+	if (ft_strchr("\'\"", ((char *)ft_vector_at(vector, *i))[0]))
+	{
+		if (ft_strchr((char *)ft_vector_at(vector, (*i)++), '\"'))
+			signal = "\"";
+		else
+			signal = "\'";
+	}
+	else
+		signal = "\0";
+	ft_i(*i);
+	return (signal);
 }

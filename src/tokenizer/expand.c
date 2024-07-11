@@ -6,67 +6,11 @@
 /*   By: ishenriq <ishenriq@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/13 19:12:24 by ishenriq          #+#    #+#             */
-/*   Updated: 2024/07/11 13:51:42 by ishenriq         ###   ########.fr       */
+/*   Updated: 2024/07/11 13:58:54 by ishenriq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-
-static unsigned long int	ft_i(unsigned long int st)
-{
-	static unsigned long int	i;
-
-	if (st != 9999)
-		i = st;
-	return (i);
-}
-
-char	ft_signal(t_vector *vector, size_t *i, char signal)
-{
-	if (ft_strchr("\'\"", ((char *)ft_vector_at(vector, *i))[0]))
-	{
-		if (ft_strchr((char *)ft_vector_at(vector, (*i)++), '\"'))
-			signal = '\"';
-		else
-			signal = '\'';
-	}
-	else
-		signal = '\0';
-	return (signal);
-}
-
-char	*ft_signal_str(t_vector *vector, size_t *i)
-{
-	char	*signal;
-
-	if (ft_strchr("\'\"", ((char *)ft_vector_at(vector, *i))[0]))
-	{
-		if (ft_strchr((char *)ft_vector_at(vector, (*i)++), '\"'))
-			signal = "\"";
-		else
-			signal = "\'";
-	}
-	else
-		signal = "\0";
-	ft_i(*i);
-	return (signal);
-}
-
-int	ft_empty_str(t_vector *vector)
-{
-	char	*str;
-	char	*str_1;
-
-	if (vector->size == 2)
-	{
-		str = ft_vector_at(vector, 0);
-		str_1 = ft_vector_at(vector, 1);
-		if (ft_strchr("\"\'", str[0]))
-			if (ft_strchr("\"\'", str_1[0]))
-				return (1);
-	}
-	return (0);
-}
 
 char	*ft_final_str(char **str, char *s, int *not_expanded)
 {
@@ -85,7 +29,7 @@ void	process_token(char **str, int *not_expanded,
 
 	i = ft_i(9999);
 	while ((i < vector->size) && (str[4][0] != '\0'
-			|| !ft_strchr("\'\"", str[2][0]))
+		|| !ft_strchr("\'\"", str[2][0]))
 			&& (str[2] == NULL || str[4][0] != str[2][0]))
 	{
 		str[3] = ft_expand(str[2], shell);
@@ -137,7 +81,6 @@ char	*ft_expand_aux(t_shell *shell, t_vector *vector, unsigned long int i)
 			str[4] = ft_signal_str(vector, &i);
 			str[2] = (char *)ft_vector_at(vector, ft_i(9999));
 		}
-
 		process_token(str, &not_expanded, vector, shell);
 		process_quotes(str, vector);
 	}

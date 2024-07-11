@@ -6,7 +6,7 @@
 /*   By: ishenriq <ishenriq@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/10 19:01:50 by ishenriq          #+#    #+#             */
-/*   Updated: 2024/07/10 19:06:34 by ishenriq         ###   ########.fr       */
+/*   Updated: 2024/07/11 14:51:25 by ishenriq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,4 +37,18 @@ void	clean_vector(t_vector *vector)
 		i++;
 	}
 	ft_vector_free(vector);
+}
+
+void	ft_clean_vector(t_vector *vector)
+{
+	size_t	i;
+
+	i = 0;
+	while (i < vector->size)
+	{
+		free(vector->values[i]);
+		i++;
+	}
+	free(vector->values);
+	free(vector);
 }

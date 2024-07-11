@@ -6,52 +6,67 @@
 /*   By: ishenriq <ishenriq@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/13 19:12:24 by ishenriq          #+#    #+#             */
-/*   Updated: 2024/07/11 13:52:51 by ishenriq         ###   ########.fr       */
+/*   Updated: 2024/07/11 15:06:40 by ishenriq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-char	*ft_parse_expand_heredoc(char *str, t_shell *shell)
+char	ft_signal(t_vector *vector, size_t *i, char signal)
+{
+	if (ft_strchr("\'\"", ((char *)ft_vector_at(vector, *i))[0]))
+	{
+		if (ft_strchr((char *)ft_vector_at(vector, (*i)++), '\"'))
+			signal = '\"';
+		else
+			signal = '\'';
+	}
+	else
+		signal = '\0';
+	return (signal);
+}
+
+char	*ft_parse_expand_heredoc_aux(char **str, t_shell *shell,
+		t_vector *vector)
 {
 	size_t		i;
-	char		*new_str;
-	char		*final_str;
-	char		*temp;
-	t_vector	*vector;
-	char		*split;
 	int			not_expanded;
 
 	i = 0;
-	vector = ft_vector_create();
-	ft_split_expand(str, vector);
-	final_str = "";
-	temp = "";
 	not_expanded = 0;
 	while (i < vector->size)
 	{
-		split = (char *)ft_vector_at(vector, i);
-		new_str = ft_expand(split, shell);
-		if (ft_strncmp(new_str, "0x1A", 4) != 0)
+		str[2] = (char *)ft_vector_at(vector, i);
+		str[3] = ft_expand(str[2], shell);
+		if (ft_strncmp(str[3], "0x1A", 4) != 0)
 		{
-			final_str = ft_strjoin(temp, new_str);
-			if (ft_strlen(temp) != 0)
-				free(temp);
-			temp = final_str;
+			str[0] = ft_strjoin(str[1], str[3]);
+			if (ft_strlen(str[1]) != 0)
+				free(str[1]);
+			str[1] = str[0];
 			not_expanded++;
 		}
 		i++;
 	}
-	i = 0;
-	while (i < vector->size)
-	{
-		free(vector->values[i]);
-		i++;
-	}
-	free(vector->values);
-	free(vector);
+	ft_clean_vector(vector);
 	if (not_expanded == 0)
 		return (ft_strdup("0x1A"));
+	return (str[0]);
+}
+
+char	*ft_parse_expand_heredoc(char *s, t_shell *shell)
+{
+	t_vector	*vector;
+	char		*str[4];
+	char		*final_str;
+
+	str[0] = "";
+	str[1] = "";
+	str[2] = "";
+	str[3] = "";
+	vector = ft_vector_create();
+	ft_split_expand(s, vector);
+	final_str = ft_parse_expand_heredoc_aux(str, shell, vector);
 	return (final_str);
 }
 
@@ -112,4 +127,3 @@ char	*ft_eliminate_signal(char *str, t_shell *shell)
 	free(vector);
 	return (final_str);
 }
-
