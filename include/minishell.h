@@ -6,7 +6,7 @@
 /*   By: ishenriq <ishenriq@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/22 18:25:14 by ishenriq          #+#    #+#             */
-/*   Updated: 2024/07/11 14:59:23 by ishenriq         ###   ########.fr       */
+/*   Updated: 2024/07/11 15:18:34 by ishenriq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -148,7 +148,7 @@ int					ft_set_token(char *str);
 t_vector			*ft_construct_phrase(char **split, t_shell *shell);
 void				ft_free_phrase(t_vector *phrase);
 void				ft_split_expand(char *str, t_vector *split);
-char				*ft_eliminate_signal(char *str, t_shell *shell);
+char				*ft_eliminate_signal(char *s, t_shell *shell);
 char				ft_signal(t_vector *vector, size_t *i, char signal);
 char				*ft_signal_str(t_vector *vector, size_t *i);
 unsigned long int	ft_i(unsigned long int st);
