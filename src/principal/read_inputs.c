@@ -6,7 +6,7 @@
 /*   By: ishenriq <ishenriq@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/05 14:42:53 by ishenriq          #+#    #+#             */
-/*   Updated: 2024/07/11 21:01:50 by ishenriq         ###   ########.fr       */
+/*   Updated: 2024/07/11 22:19:31 by ishenriq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,11 @@ int	ft_prompt_only_space(char *str)
 void	ft_to_execute_aux(t_shell *shell)
 {
 	if (!ft_open_heredoc(shell->root, shell))
+	{
+		ft_clear_ast(shell->root);
+		ft_freephrase(shell->parse->phrase_grammar);
 		return ;
+	}
 	if (ft_grammar_rules(shell->parse->phrase_grammar))
 	{
 		ft_freephrase(shell->parse->phrase_grammar);
@@ -64,7 +68,7 @@ void	ft_to_execute(char *str, t_shell *shell)
 	return ;
 }
 
-char	*read_line(void)
+char	*read_line(t_shell *shell)
 {
 	char	*prompt;
 
@@ -74,6 +78,7 @@ char	*read_line(void)
 	if (!prompt)
 	{
 		printf("exit\n");
+		ft_free_shell(shell);
 		exit(0);
 	}
 	add_history(prompt);

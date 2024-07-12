@@ -6,7 +6,7 @@
 /*   By: ishenriq <ishenriq@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/11 18:26:39 by ishenriq          #+#    #+#             */
-/*   Updated: 2024/07/11 20:54:42 by ishenriq         ###   ########.fr       */
+/*   Updated: 2024/07/11 22:19:40 by ishenriq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,6 @@ int	status_here(int where, int st)
 
 void	ft_sigquit(void)
 {
-	printf("%d\n", g_status);
 	if (g_status == 131)
 	{
 		ft_putendl_fd("Quit (core dumped)", STDERR_FILENO);

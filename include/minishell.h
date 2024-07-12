@@ -6,7 +6,7 @@
 /*   By: ishenriq <ishenriq@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/22 18:25:14 by ishenriq          #+#    #+#             */
-/*   Updated: 2024/07/11 20:49:07 by ishenriq         ###   ########.fr       */
+/*   Updated: 2024/07/11 22:19:46 by ishenriq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -125,7 +125,7 @@ typedef struct s_shell
 }					t_shell;
 
 // File: Read_inputs
-char				*read_line(void);
+char				*read_line(t_shell *shell);
 void				ft_return_terminal(int ret);
 void				ft_to_execute(char *str, t_shell *shell);
 
