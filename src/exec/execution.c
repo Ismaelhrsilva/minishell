@@ -6,7 +6,7 @@
 /*   By: ishenriq <ishenriq@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/03 19:15:25 by ishenriq          #+#    #+#             */
-/*   Updated: 2024/07/12 16:49:29 by ishenriq         ###   ########.fr       */
+/*   Updated: 2024/07/12 18:29:53 by ishenriq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,8 +37,10 @@ void	ft_fork_and_execute(char *cmd, t_vector *phrase, char **vars,
 		ft_free_matrix(argv_exec);
 		ft_free_matrix(vars);
 		ft_clear(shell);
+		free(cmd);
 		exit(ft_status(-1));
 	}
+	free(cmd);
 	ft_pid_status(pid);
 }
 
@@ -47,18 +49,23 @@ static void	ft_do(t_vector *phrase, t_shell *shell)
 	char	*cmd;
 	char	**vars;
 
-	cmd = ft_value(phrase, 0, 0);
+	cmd = ft_strdup(ft_value(phrase, 0, 0));
 	vars = ft_env_export(shell->envp_dict);
 	if (cmd && (cmd[0] == '/' || ft_strncmp(cmd, "./", 2) == 0))
 	{
 		ft_fork_and_execute(cmd, phrase, vars, shell);
+		free(cmd);
 	}
 	else
 	{
+		free(cmd);
 		shell->path = ft_getenv(shell->envp_dict, "PATH");
-		ft_free_matrix(shell->path_splitted);
 		shell->path_splitted = ft_split(shell->path, ':');
+		/*if (shell->path)
+			free(shell->path);*/
 		cmd = ft_get_pathname(shell->path_splitted, ft_value(phrase, 0, 0));
+		/*if (shell->path_splitted)
+			ft_free_matrix(shell->path_splitted);*/
 		if (cmd && (cmd[0] == '/' || ft_strncmp(cmd, "./", 2) == 0))
 			ft_fork_and_execute(cmd, phrase, vars, shell);
 		else
