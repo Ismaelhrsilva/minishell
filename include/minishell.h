@@ -6,7 +6,7 @@
 /*   By: ishenriq <ishenriq@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/22 18:25:14 by ishenriq          #+#    #+#             */
-/*   Updated: 2024/07/11 18:51:07 by ishenriq         ###   ########.fr       */
+/*   Updated: 2024/07/11 20:49:07 by ishenriq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -233,8 +233,7 @@ void				ft_clean_vector(t_vector *vector);
 //File Heredoc
 int					ft_open_heredoc(t_node *root, t_shell *shell);
 long				ft_count(void);
-void				ft_end_heredoc(int infile, const int std, char *gnl);
-void				ft_heredoc_sigint(char *gnl, const int std);
+void				ft_end_heredoc(int infile, char *gnl);
 char				*ft_heredoc(t_node *root, t_shell *shell);
 char				*ft_limiter(t_node *root, t_shell *shell);
 

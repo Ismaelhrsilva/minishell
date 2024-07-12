@@ -6,7 +6,7 @@
 /*   By: ishenriq <ishenriq@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/11 18:26:39 by ishenriq          #+#    #+#             */
-/*   Updated: 2024/07/11 19:27:09 by ishenriq         ###   ########.fr       */
+/*   Updated: 2024/07/11 20:54:42 by ishenriq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,12 +24,19 @@ void	ft_handle_sigint(int signal)
 		close(STDERR_FILENO);
 	}
 	if (status_here(HERE_DOC, -1))
+	{
+		ft_putstr_fd("\n", 1);
 		close(STDIN_FILENO);
-	ft_putstr_fd("\n", 1);
-	rl_on_new_line();
-	rl_replace_line("", 0);
-	if (!status_here(PROMPT, -1))
-		rl_redisplay();
+	}
+	else
+	{
+		ft_putstr_fd("\n", 1);
+		rl_on_new_line();
+		rl_replace_line("", 0);
+		if (!status_here(PROMPT, -1))
+			rl_redisplay();
+	}
+	ft_status(130);
 }
 
 static t_status	*ft_init_status(void)
@@ -68,6 +75,7 @@ int	status_here(int where, int st)
 
 void	ft_sigquit(void)
 {
+	printf("%d\n", g_status);
 	if (g_status == 131)
 	{
 		ft_putendl_fd("Quit (core dumped)", STDERR_FILENO);

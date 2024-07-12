@@ -6,7 +6,7 @@
 /*   By: ishenriq <ishenriq@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/05 14:42:53 by ishenriq          #+#    #+#             */
-/*   Updated: 2024/07/11 19:08:27 by ishenriq         ###   ########.fr       */
+/*   Updated: 2024/07/11 21:01:50 by ishenriq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,6 @@ int	ft_prompt_only_space(char *str)
 
 void	ft_to_execute_aux(t_shell *shell)
 {
-
 	if (!ft_open_heredoc(shell->root, shell))
 		return ;
 	if (ft_grammar_rules(shell->parse->phrase_grammar))
@@ -73,7 +72,10 @@ char	*read_line(void)
 	prompt = readline("minishell>$ ");
 	status_here(PROMPT, 1);
 	if (!prompt)
+	{
+		printf("exit\n");
 		exit(0);
+	}
 	add_history(prompt);
 	return (prompt);
 }
