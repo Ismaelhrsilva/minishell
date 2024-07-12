@@ -6,7 +6,7 @@
 /*   By: ishenriq <ishenriq@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/19 20:10:42 by ishenriq          #+#    #+#             */
-/*   Updated: 2024/07/12 15:33:38 by ishenriq         ###   ########.fr       */
+/*   Updated: 2024/07/12 16:51:19 by ishenriq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,8 +27,9 @@ void	ft_error(char *cmd, char *flag, char *msg, int status)
 		ft_putstr_fd(flag, STDERR_FILENO);
 		ft_putstr_fd(": ", STDERR_FILENO);
 	}
-	if ((ft_strchr("./", cmd[0]) || cmd[ft_strlen(cmd) - 1] == '/')
-		&& status != ENOENT && path_stat.st_mode & S_IFDIR)
+	if ((ft_strchr("./", cmd[0]) || cmd[ft_strlen(cmd) - 1] == '/'
+			|| cmd[0] == '/') && status != ENOENT
+		&& path_stat.st_mode & S_IFDIR)
 		ft_putstr_fd("Is a directory\n", STDERR_FILENO);
 	else
 		ft_putendl_fd(msg, STDERR_FILENO);
@@ -37,7 +38,7 @@ void	ft_error(char *cmd, char *flag, char *msg, int status)
 	else if (status == ENOENT)
 		ft_status(127);
 	else
-	ft_status(status);
+		ft_status(status);
 }
 
 void	close_open_fds(void)

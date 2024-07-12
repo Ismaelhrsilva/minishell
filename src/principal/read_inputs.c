@@ -6,7 +6,7 @@
 /*   By: ishenriq <ishenriq@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/05 14:42:53 by ishenriq          #+#    #+#             */
-/*   Updated: 2024/07/12 15:14:14 by ishenriq         ###   ########.fr       */
+/*   Updated: 2024/07/12 15:42:34 by ishenriq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,6 @@ void	ft_to_execute_aux(t_shell *shell)
 	{
 		ft_clear_ast(shell->root);
 		ft_freephrase(shell->parse->phrase_grammar);
-		ft_freephrase(shell->parse->phrase);
 		return ;
 	}
 	if (ft_grammar_rules(shell->parse->phrase_grammar))
