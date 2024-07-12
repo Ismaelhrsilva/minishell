@@ -6,7 +6,7 @@
 /*   By: ishenriq <ishenriq@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/03 19:15:25 by ishenriq          #+#    #+#             */
-/*   Updated: 2024/07/10 20:23:06 by ishenriq         ###   ########.fr       */
+/*   Updated: 2024/07/12 15:34:20 by ishenriq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,6 @@ void	ft_fork_and_execute(char *cmd, t_vector *phrase, char **vars,
 			ft_error(cmd, NULL, "Permission denied", EACCES);
 		else if (execve(cmd, argv_exec, vars) < 0)
 			ft_error(cmd, NULL, strerror(errno), errno);
-		close(g_status);
 		ft_free_matrix(argv_exec);
 		ft_free_matrix(vars);
 		free(cmd);

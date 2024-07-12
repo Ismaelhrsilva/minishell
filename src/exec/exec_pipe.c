@@ -6,13 +6,11 @@
 /*   By: ishenriq <ishenriq@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/04 20:34:11 by ishenriq          #+#    #+#             */
-/*   Updated: 2024/07/10 17:23:37 by ishenriq         ###   ########.fr       */
+/*   Updated: 2024/07/12 15:25:52 by ishenriq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-
-extern volatile sig_atomic_t	g_status;
 
 static void	dup_aux(int *fd, int side)
 {

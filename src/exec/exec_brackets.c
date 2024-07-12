@@ -6,13 +6,11 @@
 /*   By: ishenriq <ishenriq@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/08 22:28:52 by ishenriq          #+#    #+#             */
-/*   Updated: 2024/07/10 17:44:14 by ishenriq         ###   ########.fr       */
+/*   Updated: 2024/07/12 15:25:29 by ishenriq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-
-extern volatile sig_atomic_t	g_status;
 
 char	**ft_duplicate_matrix(char **matrix)
 {

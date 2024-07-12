@@ -6,13 +6,11 @@
 /*   By: ishenriq <ishenriq@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/06 20:44:17 by ishenriq          #+#    #+#             */
-/*   Updated: 2024/07/07 21:13:53 by ishenriq         ###   ########.fr       */
+/*   Updated: 2024/07/12 15:34:00 by ishenriq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-
-extern volatile sig_atomic_t	g_status;
 
 static void	ft_close_fd_tmp(const int *fd)
 {
@@ -71,7 +69,6 @@ void	ft_exec_redirects(t_node *root, t_shell *shell)
 		ft_redirects(root, shell);
 	if (root->fd == -1)
 	{
-		g_status = 1;
 		ft_status(1);
 		perror("minishell");
 		return (ft_close_fd_tmp(fd));

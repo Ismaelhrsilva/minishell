@@ -6,14 +6,12 @@
 /*   By: ishenriq <ishenriq@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/19 20:10:42 by ishenriq          #+#    #+#             */
-/*   Updated: 2024/07/10 17:22:52 by ishenriq         ###   ########.fr       */
+/*   Updated: 2024/07/12 15:33:38 by ishenriq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 #include <sys/stat.h>
-
-extern volatile sig_atomic_t	g_status;
 
 void	ft_error(char *cmd, char *flag, char *msg, int status)
 {
@@ -35,12 +33,11 @@ void	ft_error(char *cmd, char *flag, char *msg, int status)
 	else
 		ft_putendl_fd(msg, STDERR_FILENO);
 	if (status == EACCES)
-		g_status = 126;
+		ft_status(126);
 	else if (status == ENOENT)
-		g_status = 127;
+		ft_status(127);
 	else
-		g_status = status;
-	ft_status(g_status);
+	ft_status(status);
 }
 
 void	close_open_fds(void)
