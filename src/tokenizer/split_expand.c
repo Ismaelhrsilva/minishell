@@ -6,7 +6,7 @@
 /*   By: ishenriq <ishenriq@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/10 20:26:58 by ishenriq          #+#    #+#             */
-/*   Updated: 2024/07/11 17:09:11 by ishenriq         ###   ########.fr       */
+/*   Updated: 2024/07/13 18:17:30 by ishenriq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,6 +67,17 @@ void	ft_split_expand(char *str, t_vector *split)
 	idx.i = 0;
 	idx.j = 0;
 	if (!str)
-		return ;
+		return (ft_vector_push_back(split, ft_strdup("")));
 	ft_process_split(str, split, &idx);
 }
+
+/*void	ft_split_expand(char *str, t_vector *split)
+{
+	t_index	idx;
+
+	idx.i = 0;
+	idx.j = 0;
+	if (!str)
+		return ;
+	ft_process_split(str, split, &idx);
+}*/

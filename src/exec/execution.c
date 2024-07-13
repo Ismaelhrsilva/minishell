@@ -6,7 +6,7 @@
 /*   By: ishenriq <ishenriq@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/03 19:15:25 by ishenriq          #+#    #+#             */
-/*   Updated: 2024/07/12 18:29:53 by ishenriq         ###   ########.fr       */
+/*   Updated: 2024/07/13 17:51:21 by ishenriq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,11 +54,9 @@ static void	ft_do(t_vector *phrase, t_shell *shell)
 	if (cmd && (cmd[0] == '/' || ft_strncmp(cmd, "./", 2) == 0))
 	{
 		ft_fork_and_execute(cmd, phrase, vars, shell);
-		free(cmd);
 	}
 	else
 	{
-		free(cmd);
 		shell->path = ft_getenv(shell->envp_dict, "PATH");
 		shell->path_splitted = ft_split(shell->path, ':');
 		/*if (shell->path)

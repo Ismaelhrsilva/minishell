@@ -6,7 +6,7 @@
 /*   By: ishenriq <ishenriq@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/13 19:12:24 by ishenriq          #+#    #+#             */
-/*   Updated: 2024/07/11 15:32:03 by ishenriq         ###   ########.fr       */
+/*   Updated: 2024/07/13 18:46:27 by ishenriq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,11 @@ char	*ft_parse_expand_heredoc(char *s, t_shell *shell)
 	vector = ft_vector_create();
 	ft_split_expand(s, vector);
 	final_str = ft_parse_expand_heredoc_aux(str, shell, vector);
+	if (ft_strncmp(final_str, "0x1A", 4) == 0)
+	{
+		free(final_str);
+		return (ft_strdup(""));
+	}
 	return (final_str);
 }
 
@@ -74,6 +79,7 @@ char	*ft_eliminate_signal_aux(char **str, t_shell *shell,
 
 	i = 0;
 	signal = '\0';
+	(void )shell;
 	while (i < vector->size)
 	{
 		signal = ft_signal(vector, &i, signal);
@@ -83,7 +89,7 @@ char	*ft_eliminate_signal_aux(char **str, t_shell *shell,
 		{
 			if (signal == '\'')
 				ft_final_signal(str);
-			else if (ft_strncmp(ft_expand(str[3], shell), "0x1A", 4) != 0)
+			else if (ft_strncmp(str[3], "0x1A", 4) != 0)
 				ft_final_signal(str);
 			i++;
 			str[3] = (char *)ft_vector_at(vector, i);
