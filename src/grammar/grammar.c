@@ -6,7 +6,7 @@
 /*   By: ishenriq <ishenriq@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/15 18:38:12 by ishenriq          #+#    #+#             */
-/*   Updated: 2024/07/13 19:48:38 by ishenriq         ###   ########.fr       */
+/*   Updated: 2024/07/13 20:20:35 by ishenriq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,7 +86,8 @@ int	ft_before_brackets(t_vector *phrase)
 	pos = 0;
 	while (pos < phrase->size - 1)
 	{
-		if (ft_count_chr(ft_value(phrase, pos + 1, 0), '(') > 0)
+		str = ft_value(phrase, pos, 0);
+		if (str[0] == '(')
 		{
 			if (!((ft_value_int(phrase, pos, 1) & OR_AND)
 				|| (ft_value_int(phrase, pos, 1) & PIPE)))
