@@ -6,7 +6,7 @@
 /*   By: ishenriq <ishenriq@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/13 19:12:24 by ishenriq          #+#    #+#             */
-/*   Updated: 2024/07/11 13:58:54 by ishenriq         ###   ########.fr       */
+/*   Updated: 2024/07/14 12:36:53 by ishenriq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,9 +28,7 @@ void	process_token(char **str, int *not_expanded,
 	unsigned long int	i;
 
 	i = ft_i(9999);
-	while ((i < vector->size) && (str[4][0] != '\0'
-		|| !ft_strchr("\'\"", str[2][0]))
-			&& (str[2] == NULL || str[4][0] != str[2][0]))
+	while (i < vector->size && str[2] != NULL && str[2][0] != str[4][0])
 	{
 		str[3] = ft_expand(str[2], shell);
 		if (str[4][0] == '\'')
@@ -39,6 +37,14 @@ void	process_token(char **str, int *not_expanded,
 			str[0] = ft_final_str(str, str[3], not_expanded);
 		(i)++;
 		str[2] = (char *)ft_vector_at(vector, i);
+		if (str[2] && str[4][0] == '\0'
+			&& (str[2][0] == '\"' || str[2][0] == '\''))
+			break ;
+		if (str[2] && str[4][0] != '\0' && str[2][0] == str[4][0])
+		{
+			(i)++;
+			break ;
+		}
 	}
 	ft_i(i);
 }
@@ -49,15 +55,22 @@ void	process_quotes(char **str,
 	unsigned long int	i;
 
 	i = ft_i(9999);
-	if (str[2] && ft_strchr("\'\"", str[2][0]))
+	while (i < vector->size)
 	{
-		if (i + 1 < vector->size)
-			(i)++;
+		i = ft_i(9999);
 		str[4] = ft_signal_str(vector, &i);
-		str[2] = (char *)ft_vector_at(vector, i);
+		str[2] = (char *)ft_vector_at(vector, ft_i(9999));
+		if (str[2] && str[4][0] == str[2][0])
+		{
+			str[4] = "\0";
+			ft_i(i + 1);
+			str[2] = (char *)ft_vector_at(vector, ft_i(9999));
+			if (str[2] && !(str[2][0] != '\'' || str[2][0] != '\"'))
+				break ;
+		}
+		else
+			break ;
 	}
-	else
-		str[4] = "\0";
 	ft_i(i);
 }
 
@@ -72,17 +85,13 @@ char	*ft_expand_aux(t_shell *shell, t_vector *vector, unsigned long int i)
 	str[3] = "";
 	str[4] = "";
 	not_expanded = 0;
+	(void ) i;
 	if (ft_empty_str(vector))
 		return (ft_strdup(""));
 	while (ft_i(9999) < vector->size)
 	{
-		if (ft_i(9999) == 0)
-		{
-			str[4] = ft_signal_str(vector, &i);
-			str[2] = (char *)ft_vector_at(vector, ft_i(9999));
-		}
-		process_token(str, &not_expanded, vector, shell);
 		process_quotes(str, vector);
+		process_token(str, &not_expanded, vector, shell);
 	}
 	if (not_expanded == 0)
 		return (ft_strdup("0x1A"));

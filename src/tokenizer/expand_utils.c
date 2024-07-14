@@ -6,7 +6,7 @@
 /*   By: ishenriq <ishenriq@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/13 19:12:24 by ishenriq          #+#    #+#             */
-/*   Updated: 2024/07/11 15:30:43 by ishenriq         ###   ########.fr       */
+/*   Updated: 2024/07/14 12:35:40 by ishenriq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,10 +75,13 @@ unsigned long int	ft_i(unsigned long int st)
 char	*ft_signal_str(t_vector *vector, size_t *i)
 {
 	char	*signal;
+	char	*str;
 
-	if (ft_strchr("\'\"", ((char *)ft_vector_at(vector, *i))[0]))
+	str = (char *)ft_vector_at(vector, *i);
+	if (str && ft_strchr("\'\"", str[0]))
 	{
-		if (ft_strchr((char *)ft_vector_at(vector, (*i)++), '\"'))
+		(*i)++;
+		if (str[0] == '\"')
 			signal = "\"";
 		else
 			signal = "\'";
