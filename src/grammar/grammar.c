@@ -6,7 +6,7 @@
 /*   By: ishenriq <ishenriq@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/15 18:38:12 by ishenriq          #+#    #+#             */
-/*   Updated: 2024/07/13 20:20:35 by ishenriq         ###   ########.fr       */
+/*   Updated: 2024/07/13 21:06:56 by ishenriq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,46 +75,6 @@ static int	ft_valide_quotes(char *str, int i, char *signal)
 	return (0);
 }
 
-int	ft_before_brackets(t_vector *phrase)
-{
-	char	*str;
-	size_t	pos;
-	int		i;
-
-	if (phrase->size == 1)
-		return (0);
-	pos = 0;
-	while (pos < phrase->size - 1)
-	{
-		str = ft_value(phrase, pos, 0);
-		if (str[0] == '(')
-		{
-			if (!((ft_value_int(phrase, pos, 1) & OR_AND)
-				|| (ft_value_int(phrase, pos, 1) & PIPE)))
-				return (1);
-			str = ft_value(phrase, pos + 1, 0);
-			i = 0;
-			while (str[i] != '\0')
-			{
-				if (str[i] == '(')
-					if (str[i + 1] != '\0' && ((str[i + 1] == '|')
-						|| (str[i + 2] != '\0'
-						&& ft_strncmp(&str[i + 1], "&&", 2) == 0)))
-						return (1);
-				if (str[i] == ')')
-					if (str[i - 1] == '|' || str[i - 1] == '>'
-						|| str[i - 1] == '<'
-						|| ft_strncmp(&str[i - 2], "&&", 2) == 0)
-						return (1);
-				i++;
-			}
-		}
-		pos++;
-	}
-	return (0);
-}
-
-
 int	ft_grammar_rules(t_vector *phrase)
 {
 	size_t	i;
@@ -135,7 +95,7 @@ int	ft_grammar_rules(t_vector *phrase)
 	}
 	if (error(ft_bracks_inside_empty(phrase)))
 		return (0);
-	if (error(ft_before_brackets(phrase)))
+	if (error(ft_before_brackets(phrase, NULL, 0)))
 		return (0);
 	return (1);
 }

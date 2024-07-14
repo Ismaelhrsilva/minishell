@@ -6,7 +6,7 @@
 #    By: ishenriq <ishenriq@student.42sp.org.br>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/12/11 20:08:54 by ishenriq          #+#    #+#              #
-#    Updated: 2024/07/11 18:43:25 by ishenriq         ###   ########.fr        #
+#    Updated: 2024/07/13 20:23:11 by ishenriq         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -54,6 +54,7 @@ SRCS := \
 	exec/execution.c \
 	grammar/grammar.c \
 	grammar/grammar_utils.c \
+	grammar/grammar_subshell.c \
 	grammar/order.c \
 	heredoc/heredoc.c \
 	heredoc/heredoc_utils.c \

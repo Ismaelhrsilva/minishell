@@ -6,7 +6,7 @@
 /*   By: ishenriq <ishenriq@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/22 18:25:14 by ishenriq          #+#    #+#             */
-/*   Updated: 2024/07/13 19:30:58 by ishenriq         ###   ########.fr       */
+/*   Updated: 2024/07/13 21:06:48 by ishenriq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -158,6 +158,7 @@ int					ft_empty_str(t_vector *vector);
 int					ft_grammar_rules(t_vector *phrase);
 void				ft_order_redall(t_vector *vector);
 int					ft_bracks_inside_empty(t_vector *phrase);
+int					ft_before_brackets(t_vector *phrase, char *str, size_t pos);
 
 // File Utils
 int					ft_count_chr(char *str, char ch);
