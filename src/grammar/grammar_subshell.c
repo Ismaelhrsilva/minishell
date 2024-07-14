@@ -6,7 +6,7 @@
 /*   By: ishenriq <ishenriq@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/13 20:23:17 by ishenriq          #+#    #+#             */
-/*   Updated: 2024/07/13 22:07:48 by ishenriq         ###   ########.fr       */
+/*   Updated: 2024/07/14 15:25:55 by ishenriq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ int	ft_whiling(char *str)
 					|| (str[i + 2] != '\0'
 						&& ft_strncmp(&str[i + 1], "&&", 2) == 0)))
 				return (1);
-		if (str[i] == ')')
+		if (str[i] == ')' && ft_strlen(str) > 2)
 			if (str[i - 1] == '|' || str[i - 1] == '>'
 				|| str[i - 1] == '<'
 				|| ft_strncmp(&str[i - 2], "&&", 2) == 0)

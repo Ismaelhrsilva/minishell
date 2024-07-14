@@ -6,7 +6,7 @@
 /*   By: ishenriq <ishenriq@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/15 18:38:12 by ishenriq          #+#    #+#             */
-/*   Updated: 2024/07/14 13:24:20 by ishenriq         ###   ########.fr       */
+/*   Updated: 2024/07/14 16:00:08 by ishenriq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,11 +46,8 @@ char	*ft_which_sinal(char str, char *signal)
 	return (signal);
 }
 
-static int	ft_valide_quotes(char *str, int i, char *signal)
+static int	ft_valide_quotes(char *str, int i, char *signal, int s)
 {
-	int	s;
-
-	s = 0;
 	while (str[i] != '\0')
 	{
 		signal = ft_which_sinal(str[i++], signal);
@@ -59,8 +56,9 @@ static int	ft_valide_quotes(char *str, int i, char *signal)
 			s = 1;
 			break ;
 		}
-		if (str[i] != '\0' && (ft_count_chr(signal, '\'') == 1
-				|| ft_count_chr(signal, '\"') == 1))
+		/*if (str[i] != '\0' && (ft_count_chr(signal, '\'') == 1
+				|| ft_count_chr(signal, '\"') == 1))*/
+		if (ft_count_chr(signal, '\'') || ft_count_chr(signal, '\"'))
 		{
 			if (str[i] != '\0' && (str[i] == '\'' || str[i] == '\"'))
 				i++;
@@ -89,7 +87,7 @@ int	ft_grammar_rules(t_vector *phrase)
 	{
 		if (error(ft_metacharacter_edges(phrase, i))
 			|| error(ft_metacharacter_following(phrase, i))
-			|| error(ft_valide_quotes(ft_value(phrase, i, 0), 0, NULL)))
+			|| error(ft_valide_quotes(ft_value(phrase, i, 0), 0, NULL, 0)))
 			return (0);
 		i++;
 	}
@@ -104,33 +102,3 @@ int	ft_grammar_rules(t_vector *phrase)
 		return (0);
 	return (1);
 }
-
-/*
-static int	ft_valide_quotes(char *str, int i, char *signal)
-{
-	int	s;
-
-	s = 0;
-	while (str[i] != '\0')
-	{
-		signal = ft_which_sinal(str[i++], signal);
-		if (str[i] != '\0' && (ft_count_chr(signal, '\'') == 1
-				|| ft_count_chr(signal, '\"') == 1))
-		{
-			if (str[i] != '\0' && (str[i] == '\'' || str[i] == '\"'))
-				i++;
-			else
-			{
-				while (!ft_strchr(signal, str[i]) && str[i] != '\0')
-					i++;
-				if (!(str[i] == '\'' || str[i] == '\"'))
-					s = 1;
-				if (str[i] != '\0')
-					i++;
-			}
-		}
-	}
-	if (s == 1)
-		return (1);
-	return (0);
-}*/
