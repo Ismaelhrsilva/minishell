@@ -6,7 +6,7 @@
 /*   By: ishenriq <ishenriq@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/03 17:31:31 by ishenriq          #+#    #+#             */
-/*   Updated: 2024/07/10 19:08:53 by ishenriq         ###   ########.fr       */
+/*   Updated: 2024/07/14 15:06:51 by ishenriq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ char	*ft_get_pathname(char **matrix, char *str)
 
 	i = 0;
 	if (ft_strlen(str) == 0 || matrix == NULL)
-		return ("");
+		return (ft_strdup(""));
 	if (ft_is_cmd(str))
 		return (ft_strdup(str));
 	while (matrix[i] != NULL)

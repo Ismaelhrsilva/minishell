@@ -6,7 +6,7 @@
 /*   By: ishenriq <ishenriq@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/16 19:29:07 by ishenriq          #+#    #+#             */
-/*   Updated: 2024/07/03 15:03:25 by paranha          ###   ########.org.br   */
+/*   Updated: 2024/07/14 15:20:36 by ishenriq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,10 +22,10 @@ char	**ft_split(char const *s, char c)
 	size_t	wordlen;
 	size_t	i;
 
-	lst = (char **)ft_calloc(count_words(s, c) + 1, sizeof(char *));
 	i = 0;
-	if (!s || !lst)
+	if (!s)
 		return (NULL);
+	lst = (char **)ft_calloc(count_words(s, c) + 1, sizeof(char *));
 	while (*s)
 	{
 		while (*s == c && *s)

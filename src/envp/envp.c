@@ -6,7 +6,7 @@
 /*   By: ishenriq <ishenriq@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/02 16:46:44 by ishenriq          #+#    #+#             */
-/*   Updated: 2024/07/12 18:15:53 by ishenriq         ###   ########.fr       */
+/*   Updated: 2024/07/14 14:16:51 by ishenriq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,11 +92,11 @@ void	ft_envp(t_shell *shell)
 {
 	shell->envp_dict = ft_envp_dict(shell->envp);
 	shell->path = ft_getenv(shell->envp_dict, "PATH");
-	if (!shell->path)
+	/*if (!shell->path)
 	{
 		ft_env_add(shell->envp_dict,
 			"PATH", "/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin");
 		shell->path = ft_getenv(shell->envp_dict, "PATH");
-	}
+	}*/
 	shell->path_splitted = ft_split(shell->path, ':');
 }

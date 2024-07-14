@@ -6,7 +6,7 @@
 /*   By: ishenriq <ishenriq@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/03 19:15:25 by ishenriq          #+#    #+#             */
-/*   Updated: 2024/07/13 20:24:20 by ishenriq         ###   ########.fr       */
+/*   Updated: 2024/07/14 15:22:31 by ishenriq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,18 +52,22 @@ static void	ft_do(t_vector *phrase, t_shell *shell)
 	cmd = ft_strdup(ft_value(phrase, 0, 0));
 	vars = ft_env_export(shell->envp_dict);
 	if (cmd && (cmd[0] == '/' || ft_strncmp(cmd, "./", 2) == 0))
-	{
 		ft_fork_and_execute(cmd, phrase, vars, shell);
-	}
 	else
 	{
 		shell->path = ft_getenv(shell->envp_dict, "PATH");
+		if (shell->path_splitted)
+			ft_free_matrix(shell->path_splitted);
 		shell->path_splitted = ft_split(shell->path, ':');
+		free(cmd);
 		cmd = ft_get_pathname(shell->path_splitted, ft_value(phrase, 0, 0));
 		if (cmd && (cmd[0] == '/' || ft_strncmp(cmd, "./", 2) == 0))
 			ft_fork_and_execute(cmd, phrase, vars, shell);
 		else
+		{
 			ft_error(cmd, NULL, "command not found", ENOENT);
+			free(cmd);
+		}
 	}
 	ft_free_matrix(vars);
 }
