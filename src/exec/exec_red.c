@@ -6,7 +6,7 @@
 /*   By: ishenriq <ishenriq@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/06 20:44:17 by ishenriq          #+#    #+#             */
-/*   Updated: 2024/07/12 16:49:57 by ishenriq         ###   ########.fr       */
+/*   Updated: 2024/07/13 21:15:53 by ishenriq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,8 +51,8 @@ static void	ft_redirects(t_node *root, t_shell *shell)
 		ft_redirects(root->left, shell);
 	flag = 0;
 	flag |= root->type;
-	if (root->left && root->type & (REDALL)
-		&& (root->left->fd != -1))
+	if (root->type & (REDALL)
+		&& (!root->left || root->left->fd != -1))
 	{
 		ft_which_red(root, flag, shell);
 		ft_dup_right_flag(root);
