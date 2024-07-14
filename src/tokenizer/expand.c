@@ -6,7 +6,7 @@
 /*   By: ishenriq <ishenriq@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/13 19:12:24 by ishenriq          #+#    #+#             */
-/*   Updated: 2024/07/14 12:36:53 by ishenriq         ###   ########.fr       */
+/*   Updated: 2024/07/14 18:15:04 by ishenriq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,8 @@ char	*ft_final_str(char **str, char *s, int *not_expanded)
 	str[0] = ft_strjoin(str[1], s);
 	if (ft_strlen(str[1]) != 0)
 		free(str[1]);
+	if (str[2] && ft_strlen(str[2]) > 1 && str[2][1] == '?')
+		free(str[3]);
 	str[1] = str[0];
 	*not_expanded = *not_expanded + 1;
 	return (str[0]);
