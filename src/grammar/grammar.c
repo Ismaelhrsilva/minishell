@@ -6,7 +6,7 @@
 /*   By: ishenriq <ishenriq@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/15 18:38:12 by ishenriq          #+#    #+#             */
-/*   Updated: 2024/07/14 16:00:08 by ishenriq         ###   ########.fr       */
+/*   Updated: 2024/07/14 16:22:02 by ishenriq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,21 +56,12 @@ static int	ft_valide_quotes(char *str, int i, char *signal, int s)
 			s = 1;
 			break ;
 		}
-		/*if (str[i] != '\0' && (ft_count_chr(signal, '\'') == 1
-				|| ft_count_chr(signal, '\"') == 1))*/
 		if (ft_count_chr(signal, '\'') || ft_count_chr(signal, '\"'))
 		{
 			if (str[i] != '\0' && (str[i] == '\'' || str[i] == '\"'))
 				i++;
 			else
-			{
-				while (!ft_strchr(signal, str[i]) && str[i] != '\0')
-					i++;
-				if (!(str[i] == '\'' || str[i] == '\"'))
-					s = 1;
-				if (str[i] != '\0')
-					i++;
-			}
+				s = ft_valide_quotes_whiling(str, &i, &s, signal);
 		}
 	}
 	if (s == 1)
