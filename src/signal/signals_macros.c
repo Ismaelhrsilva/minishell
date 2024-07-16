@@ -12,29 +12,29 @@
 
 #include "minishell.h"
 
-int	term_by_signal(int status)
+int	ft_term_by_signal(int status)
 {
 	return (((signed char)((status & 0x7f) + 1) >> 1) > 0);
 }
 
-int	term_normaly(int status)
+int	ft_term_normaly(int status)
 {
-	return (term_by_signal(status) == 0);
+	return (ft_term_by_signal(status) == 0);
 }
 
-int	exit_status(int status)
+int	ft_exit_status(int status)
 {
 	return ((status >> 8) & 0xFF);
 }
 
-int	term_signal(int status)
+int	ft_term_signal(int status)
 {
 	return (status & 0x7F);
 }
 
-int	get_return_value(int status)
+int	ft_get_return_value(int status)
 {
-	if (term_by_signal(status))
-		return (term_signal(status) + 128);
-	return (exit_status(status));
+	if (ft_term_by_signal(status))
+		return (ft_term_signal(status) + 128);
+	return (ft_exit_status(status));
 }

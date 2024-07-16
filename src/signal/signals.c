@@ -17,13 +17,13 @@ extern volatile sig_atomic_t	g_status;
 void	ft_handle_sigint(int signal)
 {
 	g_status = signal;
-	if (status_here(FORK, -1))
+	if (ft_status_here(FORK, -1))
 	{
 		close(STDIN_FILENO);
 		close(STDOUT_FILENO);
 		close(STDERR_FILENO);
 	}
-	if (status_here(HERE_DOC, -1))
+	if (ft_status_here(HERE_DOC, -1))
 	{
 		ft_putstr_fd("\n", 1);
 		close(STDIN_FILENO);
@@ -33,7 +33,7 @@ void	ft_handle_sigint(int signal)
 		ft_putstr_fd("\n", 1);
 		rl_on_new_line();
 		rl_replace_line("", 0);
-		if (!status_here(PROMPT, -1))
+		if (!ft_status_here(PROMPT, -1))
 			rl_redisplay();
 	}
 	ft_status(130);
@@ -46,7 +46,7 @@ static t_status	*ft_init_status(void)
 	return (&status);
 }
 
-int	status_here(int where, int st)
+int	ft_status_here(int where, int st)
 {
 	t_status	*status;
 

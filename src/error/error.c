@@ -41,7 +41,7 @@ void	ft_error(char *cmd, char *flag, char *msg, int status)
 		ft_status(status);
 }
 
-void	close_open_fds(void)
+void	ft_close_open_fds(void)
 {
 	struct dirent	*file;
 	DIR				*root;
@@ -62,7 +62,7 @@ void	close_open_fds(void)
 
 void	ft_clear(t_shell *shell)
 {
-	close_open_fds();
+	ft_close_open_fds();
 	shell->parse->phrase_grammar = NULL;
 	shell->parse->phrase = NULL;
 	ft_free_matrix(shell->parse->prompt_splitted);

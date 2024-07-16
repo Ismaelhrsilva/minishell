@@ -55,7 +55,7 @@ void	ft_exec_brackets(t_node *root, t_shell *shell)
 	pid = fork();
 	if (!pid)
 	{
-		status_here(FORK, 1);
+		ft_status_here(FORK, 1);
 		shell_b->str = ft_strdup(root->str);
 		ft_envp(shell_b);
 		ft_free_matrix(shell_b->envp);

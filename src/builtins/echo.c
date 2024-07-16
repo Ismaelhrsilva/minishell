@@ -12,7 +12,7 @@
 
 #include "minishell.h"
 
-int	handle_flags(t_vector *cmd, size_t *index, size_t i, size_t j)
+int	ft_handle_flags(t_vector *cmd, size_t *index, size_t i, size_t j)
 {
 	int		no_newline;
 	int		valid_flag;
@@ -47,7 +47,7 @@ void	ft_builtin_echo(t_shell *shell, t_vector *cmd)
 
 	(void)shell;
 	ft_status(0);
-	no_newline = handle_flags(cmd, &i, 1, 1);
+	no_newline = ft_handle_flags(cmd, &i, 1, 1);
 	first_arg = 1;
 	while (i < cmd->size)
 	{

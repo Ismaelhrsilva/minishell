@@ -68,13 +68,13 @@ void	ft_to_execute(char *str, t_shell *shell)
 	return ;
 }
 
-char	*read_line(t_shell *shell)
+char	*ft_read_line(t_shell *shell)
 {
 	char	*prompt;
 
-	status_here(PROMPT, 0);
+	ft_status_here(PROMPT, 0);
 	prompt = readline("minishell>$ ");
-	status_here(PROMPT, 1);
+	ft_status_here(PROMPT, 1);
 	if (!prompt)
 	{
 		printf("exit\n");

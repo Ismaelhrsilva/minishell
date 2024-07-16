@@ -6,7 +6,7 @@
 /*   By: ishenriq <ishenriq@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/13 19:12:24 by ishenriq          #+#    #+#             */
-/*   Updated: 2024/07/14 18:15:04 by ishenriq         ###   ########.fr       */
+/*   Updated: 2024/07/16 19:08:22 by paranha          ###   ########.org.br   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ char	*ft_final_str(char **str, char *s, int *not_expanded)
 	return (str[0]);
 }
 
-void	process_token(char **str, int *not_expanded,
+void	ft_process_token(char **str, int *not_expanded,
 		t_vector *vector, t_shell *shell)
 {
 	unsigned long int	i;
@@ -51,7 +51,7 @@ void	process_token(char **str, int *not_expanded,
 	ft_i(i);
 }
 
-void	process_quotes(char **str,
+void	ft_process_quotes(char **str,
 		t_vector *vector)
 {
 	unsigned long int	i;
@@ -92,8 +92,8 @@ char	*ft_expand_aux(t_shell *shell, t_vector *vector, unsigned long int i)
 		return (ft_strdup(""));
 	while (ft_i(9999) < vector->size)
 	{
-		process_quotes(str, vector);
-		process_token(str, &not_expanded, vector, shell);
+		ft_process_quotes(str, vector);
+		ft_process_token(str, &not_expanded, vector, shell);
 	}
 	if (not_expanded == 0)
 		return (ft_strdup("0x1A"));
@@ -110,6 +110,6 @@ char	*ft_parse_expand(char *str, t_shell *shell)
 	vector = ft_vector_create();
 	ft_split_expand(str, vector);
 	result = ft_expand_aux(shell, vector, i);
-	clean_vector(vector);
+	ft_clear_vector(vector);
 	return (result);
 }

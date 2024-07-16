@@ -41,7 +41,7 @@ int	main(void)
 	while (true)
 	{
 		ft_sigquit();
-		ft_to_execute(read_line(shell), shell);
+		ft_to_execute(ft_read_line(shell), shell);
 	}
 	return (0);
 }

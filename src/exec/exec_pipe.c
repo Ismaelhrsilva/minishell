@@ -6,13 +6,13 @@
 /*   By: ishenriq <ishenriq@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/04 20:34:11 by ishenriq          #+#    #+#             */
-/*   Updated: 2024/07/12 15:25:52 by ishenriq         ###   ########.fr       */
+/*   Updated: 2024/07/16 18:59:33 by paranha          ###   ########.org.br   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-static void	dup_aux(int *fd, int side)
+static void	ft_dup_aux(int *fd, int side)
 {
 	if (side == LEFT)
 		dup2(fd[1], STDOUT_FILENO);
@@ -30,10 +30,10 @@ static void	ft_execution_side(t_node *root, t_shell *shell, int side)
 
 static void	ft_pipe_aux(t_node *root, t_shell *shell, int *fd, int side)
 {
-	status_here(FORK, 1);
+	ft_status_here(FORK, 1);
 	rl_clear_history();
-	dup_aux(fd, side);
-	close_fd(fd);
+	ft_dup_aux(fd, side);
+	ft_close_fd(fd);
 	ft_execution_side(root, shell, side);
 	ft_clear_pipe(shell);
 	exit (ft_status(-1));

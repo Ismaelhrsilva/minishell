@@ -6,7 +6,7 @@
 /*   By: ishenriq <ishenriq@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/10 19:01:50 by ishenriq          #+#    #+#             */
-/*   Updated: 2024/07/11 14:51:25 by ishenriq         ###   ########.fr       */
+/*   Updated: 2024/07/16 19:07:38 by paranha          ###   ########.org.br   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ void	ft_clear_ast(t_node	*root)
 	}
 }
 
-void	clean_vector(t_vector *vector)
+void	ft_clear_vector(t_vector *vector)
 {
 	size_t	i;
 

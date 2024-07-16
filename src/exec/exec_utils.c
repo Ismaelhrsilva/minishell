@@ -6,7 +6,7 @@
 /*   By: ishenriq <ishenriq@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/03 19:26:34 by ishenriq          #+#    #+#             */
-/*   Updated: 2024/07/12 15:34:14 by ishenriq         ###   ########.fr       */
+/*   Updated: 2024/07/16 19:00:13 by paranha          ###   ########.org.br   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ int	ft_status(int st)
 	return (status);
 }
 
-void	close_fd(int *fd)
+void	ft_close_fd(int *fd)
 {
 	if (!fd)
 		return ;
@@ -46,7 +46,7 @@ void	ft_pid_status(pid_t pid)
 
 	status = ft_status(-1);
 	waitpid(pid, &status, WUNTRACED);
-	status = get_return_value(status);
+	status = ft_get_return_value(status);
 	if (WIFEXITED(status))
 		status = WEXITSTATUS(status);
 	if (status == 139)

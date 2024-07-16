@@ -25,7 +25,7 @@ void	ft_fork_and_execute(char *cmd, t_vector *phrase, char **vars,
 	{
 		signal(SIGQUIT, SIG_DFL);
 		signal(SIGINT, SIG_DFL);
-		status_here(FORK, 1);
+		ft_status_here(FORK, 1);
 		rl_clear_history();
 		argv_exec = ft_build_argv_exec(phrase);
 		if (access(cmd, F_OK) < 0)

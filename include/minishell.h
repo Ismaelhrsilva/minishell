@@ -6,7 +6,7 @@
 /*   By: ishenriq <ishenriq@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/22 18:25:14 by ishenriq          #+#    #+#             */
-/*   Updated: 2024/07/14 16:22:25 by ishenriq         ###   ########.fr       */
+/*   Updated: 2024/07/16 19:07:57 by paranha          ###   ########.org.br   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -125,7 +125,7 @@ typedef struct s_shell
 }					t_shell;
 
 // File: Read_inputs
-char				*read_line(t_shell *shell);
+char				*ft_read_line(t_shell *shell);
 void				ft_return_terminal(int ret);
 void				ft_to_execute(char *str, t_shell *shell);
 
@@ -165,7 +165,7 @@ int					ft_valide_quotes_whiling(char *str,
 // File Utils
 int					ft_count_chr(char *str, char ch);
 int					ft_count_matrix(char **str);
-int					status_here(int where, int st);
+int					ft_status_here(int where, int st);
 void				ft_change_sub_space(char **split);
 void				ft_free_matrix(char **matrix);
 void				ft_replace_char_between_signal(char *str,
@@ -224,7 +224,7 @@ void				ft_execution(t_node *root, t_shell *shell);
 void				ft_pipe(t_node *root, t_shell *shell);
 
 //File exec_utils.c
-void				close_fd(int *fd);
+void				ft_close_fd(int *fd);
 void				ft_change_fds(int fd, int new);
 void				ft_pid_status(pid_t pid);
 void				ft_pid_status_without_flobal(pid_t pid);
@@ -244,15 +244,15 @@ char				*ft_limiter(t_node *root, t_shell *shell);
 void				ft_init_signal(void);
 void				ft_handle_sigint(int signal);
 void				ft_sigquit(void);
-int					get_return_value(int status);
+int					ft_get_return_value(int status);
 
 // File Error
 void				ft_clear(t_shell *shell);
 void				ft_error(char *cmd, char *flag, char *msg, int status);
-void				close_open_fds(void);
+void				ft_close_open_fds(void);
 void				ft_free_shell(t_shell *shell);
 void				ft_free_constructed_phrase(t_vector *phrase);
-void				clean_vector(t_vector *vector);
+void				ft_clear_vector(t_vector *vector);
 
 // Builtins
 char				**ft_env_export(const t_vector *vars);
