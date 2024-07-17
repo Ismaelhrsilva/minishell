@@ -6,7 +6,7 @@
 /*   By: ishenriq <ishenriq@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/13 20:23:17 by ishenriq          #+#    #+#             */
-/*   Updated: 2024/07/14 16:21:32 by ishenriq         ###   ########.fr       */
+/*   Updated: 2024/07/17 17:46:27 by ishenriq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,15 +49,4 @@ int	ft_before_brackets(t_vector *phrase, char *str, size_t pos)
 		pos++;
 	}
 	return (0);
-}
-
-int	ft_valide_quotes_whiling(char *str, int *i, int *s, char *signal)
-{
-	while (!ft_strchr(signal, str[*i]) && str[*i] != '\0')
-		(*i)++;
-	if (!(str[*i] == '\'' || str[*i] == '\"'))
-		*s = 1;
-	if (str[*i] != '\0')
-		(*i)++;
-	return (*s);
 }

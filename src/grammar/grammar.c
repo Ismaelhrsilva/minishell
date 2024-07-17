@@ -6,7 +6,7 @@
 /*   By: ishenriq <ishenriq@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/15 18:38:12 by ishenriq          #+#    #+#             */
-/*   Updated: 2024/07/14 16:22:02 by ishenriq         ###   ########.fr       */
+/*   Updated: 2024/07/17 17:46:00 by ishenriq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,28 +46,24 @@ char	*ft_which_sinal(char str, char *signal)
 	return (signal);
 }
 
-static int	ft_valide_quotes(char *str, int i, char *signal, int s)
+static int	ft_valide_quotes(char *str, int i)
 {
+	char	signal;
+
+	signal = '\0';
 	while (str[i] != '\0')
 	{
-		signal = ft_which_sinal(str[i++], signal);
-		if (str[i] == '\0' && signal != NULL)
-		{
-			s = 1;
-			break ;
-		}
-		if (ft_count_chr(signal, '\'') || ft_count_chr(signal, '\"'))
-		{
-			if (str[i] != '\0' && (str[i] == '\'' || str[i] == '\"'))
-				i++;
-			else
-				s = ft_valide_quotes_whiling(str, &i, &s, signal);
-		}
+		if (signal && signal == str[i])
+			signal = '\0';
+		else if (!signal && ft_strchr("\'\"", str[i]))
+			signal = str[i];
+		i++;
 	}
-	if (s == 1)
+	if (signal)
 		return (1);
 	return (0);
 }
+
 
 int	ft_grammar_rules(t_vector *phrase)
 {
@@ -78,7 +74,7 @@ int	ft_grammar_rules(t_vector *phrase)
 	{
 		if (error(ft_metacharacter_edges(phrase, i))
 			|| error(ft_metacharacter_following(phrase, i))
-			|| error(ft_valide_quotes(ft_value(phrase, i, 0), 0, NULL, 0)))
+			|| error(ft_valide_quotes(ft_value(phrase, i, 0), 0)))
 			return (0);
 		i++;
 	}

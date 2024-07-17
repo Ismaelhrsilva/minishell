@@ -6,7 +6,7 @@
 /*   By: ishenriq <ishenriq@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/05 14:42:53 by ishenriq          #+#    #+#             */
-/*   Updated: 2024/07/14 16:57:40 by ishenriq         ###   ########.fr       */
+/*   Updated: 2024/07/17 17:08:22 by ishenriq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,6 +81,7 @@ char	*ft_read_line(t_shell *shell)
 		ft_free_shell(shell);
 		exit(0);
 	}
-	add_history(prompt);
+	if (!ft_prompt_only_space(prompt))
+		add_history(prompt);
 	return (prompt);
 }
