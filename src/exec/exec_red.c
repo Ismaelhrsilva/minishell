@@ -6,7 +6,7 @@
 /*   By: ishenriq <ishenriq@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/06 20:44:17 by ishenriq          #+#    #+#             */
-/*   Updated: 2024/07/13 21:15:53 by ishenriq         ###   ########.fr       */
+/*   Updated: 2024/07/17 18:47:48 by ishenriq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,11 @@ static void	ft_which_red(t_node *root, int flag, t_shell *shell)
 
 	str = root->right->str;
 	root->right->str = ft_parse_expand(root->right->str, shell);
+	if (ft_strncmp(root->right->str, "0x1A", 4) == 0)
+	{
+		free(root->right->str);
+		root->right->str = ft_strdup("");
+	}
 	free(str);
 	if (flag & REDOUT)
 		root->fd = open(root->right->str, O_WRONLY | O_CREAT | O_TRUNC, 0666);
