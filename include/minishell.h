@@ -6,7 +6,7 @@
 /*   By: ishenriq <ishenriq@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/22 18:25:14 by ishenriq          #+#    #+#             */
-/*   Updated: 2024/07/17 17:46:50 by ishenriq         ###   ########.fr       */
+/*   Updated: 2024/07/18 19:02:24 by ishenriq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -263,6 +263,9 @@ void				ft_builtin_pwd(t_shell *shell, t_vector *cmd);
 void				ft_builtin_unset(t_shell *shell, t_vector *cmd);
 void				ft_env_add(t_vector *vars, char *name, char *data);
 void				ft_env_delete(t_vector *vars, char *name);
+int					ft_atoll_check(char *str, bool *error);
+bool				ft_check_limits(int signal,
+						unsigned long long num, bool *error);
 
 //Utils
 char				*ft_strjoinsep(char *s1, char *s2, unsigned int sep);

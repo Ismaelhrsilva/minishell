@@ -6,7 +6,7 @@
 /*   By: ishenriq <ishenriq@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/10 20:03:35 by ishenriq          #+#    #+#             */
-/*   Updated: 2024/07/10 20:17:29 by ishenriq         ###   ########.fr       */
+/*   Updated: 2024/07/18 18:59:26 by ishenriq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,3 +87,29 @@ int	ft_builtins(t_node *root, t_shell *shell)
 		return (0);
 	return (1);
 }
+
+/*t_vector	*ft_put_str_token_at_vector(t_vector *phrase, int i, char *str)
+{
+	t_vector	*innervector;
+	char		**split;
+	int			j;
+
+	innervector = ft_vector_create();
+	if (ft_count_chr(str, ' ') > 0)
+	{
+		split = ft_split(str, ' ');
+		j = 0;
+		while (j < ft_count_matrix(split))
+		{
+			ft_vector_push_back(innervector, ft_strdup(split[j]));
+			ft_vector_push_back(innervector, 0);
+			//ft_vector_push_back(innervector, ft_value(phrase, i, 1));
+			j++;
+		}
+		ft_free_matrix(split);
+	}
+	else
+		ft_vector_push_back(innervector, ft_strdup(str));
+	ft_vector_push_back(innervector, ft_value(phrase, i, 1));
+	return (innervector);
+}*/

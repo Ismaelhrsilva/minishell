@@ -6,7 +6,7 @@
 /*   By: ishenriq <ishenriq@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/08 22:28:52 by ishenriq          #+#    #+#             */
-/*   Updated: 2024/07/18 18:09:41 by ishenriq         ###   ########.fr       */
+/*   Updated: 2024/07/18 18:39:30 by ishenriq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,35 +62,6 @@ void	ft_exec_brackets(t_node *root, t_shell *shell)
 		ft_status_here(FORK, 1);
 		shell_b->str = ft_strdup(root->str);
 		ft_envp(shell_b);
-		ft_free_matrix(shell_b->envp);
-		ft_clear_brackets_before_exec(shell);
-		ft_to_execute(shell_b->str, shell_b);
-		free(shell_b->str);
-		ft_clear_brackets(shell_b);
-		exit(ft_status(-1));
-	}
-	ft_free_matrix(shell_b->envp);
-	free(shell_b);
-	ft_pid_status(pid);
-}
-
-void	ft_exec_brackets(t_node *root, t_shell *shell)
-{
-	pid_t		pid;
-	t_shell		*shell_b;
-
-	if (!shell->envp || shell->envp == NULL)
-		return ;
-	shell_b = malloc(sizeof(t_shell));
-	shell_b->envp = ft_duplicate_matrix(shell->envp);
-	pid = fork();
-	if (!pid)
-	{
-		ft_status_here(FORK, 1);
-		shell_b->str = ft_strdup(root->str);
-		ft_envp(shell_b);
-		if (shell_b && shell_b->envp != NULL)
-			ft_free_matrix(shell_b->envp);
 		ft_free_matrix(shell_b->envp);
 		ft_clear_brackets_before_exec(shell);
 		ft_to_execute(shell_b->str, shell_b);
