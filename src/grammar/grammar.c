@@ -6,7 +6,7 @@
 /*   By: ishenriq <ishenriq@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/15 18:38:12 by ishenriq          #+#    #+#             */
-/*   Updated: 2024/07/17 17:46:00 by ishenriq         ###   ########.fr       */
+/*   Updated: 2024/07/18 18:10:12 by paranha          ###   ########.org.br   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,6 @@ static int	ft_valide_quotes(char *str, int i)
 		return (1);
 	return (0);
 }
-
 
 int	ft_grammar_rules(t_vector *phrase)
 {

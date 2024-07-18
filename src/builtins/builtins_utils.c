@@ -6,7 +6,7 @@
 /*   By: paranha <paranha@student.42sp.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/27 17:55:32 by paranha           #+#    #+#             */
-/*   Updated: 2024/07/01 19:10:28 by paranha          ###   ########.org.br   */
+/*   Updated: 2024/07/18 18:11:08 by paranha          ###   ########.org.br   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,4 +76,32 @@ char	*ft_getenv(t_vector *env, char *name)
 		i++;
 	}
 	return (NULL);
+}
+
+int	ft_atoll_check(char *str, bool *error)
+{
+	unsigned long long	num;
+	int					signal;
+	int					i;
+
+	num = 0;
+	signal = 1;
+	i = 0;
+	while (str[i] && ft_is_space(str[i]))
+		i++;
+	if (str[i] == '+')
+		i++;
+	else if (str[i] == '-')
+	{
+		signal *= -1;
+		i++;
+	}
+	while (str[i] && ft_isdigit(str[i]))
+	{
+		num = (num * 10) + (str[i] - '0');
+		if (ft_check_limits(signal, num, error))
+			break ;
+		i++;
+	}
+	return (num * signal);
 }

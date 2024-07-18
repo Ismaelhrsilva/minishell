@@ -6,70 +6,41 @@
 /*   By: ishenriq <ishenriq@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/30 18:34:50 by paranha           #+#    #+#             */
-/*   Updated: 2024/07/10 17:28:16 by ishenriq         ###   ########.fr       */
+/*   Updated: 2024/07/18 18:10:00 by paranha          ###   ########.org.br   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-static int	ft_check_arg(char *arg)
+bool	ft_check_limits(int signal, unsigned long long num, bool *error)
 {
-	int	i;
-
-	i = 0;
-	if (!arg)
-		return (1);
-	if (arg[i] == '-' || arg[i] == '+')
-		i++;
-	while (ft_isdigit(arg[i]))
-		i++;
-	if (arg[i])
-		return (0);
-	return (1);
+	if ((signal == 1 && num > LONG_MAX) || (signal == -1 && num
+			> -(unsigned long)LONG_MIN))
+		*error = true;
+	return (*error);
 }
 
-static int	ft_is_number(char *str)
+static int	ft_is_number(char *str, bool *error)
 {
-	const size_t	exit_limit = ft_strlen(MAX_EXIT);
-	int				i;
-	size_t			len;
+	size_t	i;
 
-	if (!ft_check_arg(str))
-		return (0);
 	i = 0;
+	while (ft_is_space(str[i]))
+		i++;
+	if (str[i] == '\0')
+		*error = true;
 	if (str[i] == '-' || str[i] == '+')
 		i++;
-	while (str[i] == '0')
-		i++;
-	len = ft_strlen(&str[i]);
-	if (len < exit_limit)
-		return (1);
-	if (len > exit_limit)
-		return (0);
-	if (str[0] == '-')
-		return (ft_strcmp(&MIN_EXIT[1], &str[i]) >= 0);
-	return (ft_strcmp(&str[i], MAX_EXIT) <= 0);
-}
-
-unsigned char	ft_parse_exit_arguments(t_vector *cmd)
-{
-	size_t			i;
-	char			*arg;
-	unsigned char	ft_exit_status;
-
-	i = 1;
-	ft_exit_status = 0;
-	while (i < cmd->size)
+	if (!ft_isdigit(str[i]))
+		*error = true;
+	while (str[i])
 	{
-		arg = ft_value(cmd, i, 0);
-		if (ft_is_number(arg))
-		{
-			ft_exit_status = (unsigned char)ft_atoi(arg);
-			break ;
-		}
+		if (!ft_isdigit(str[i]) && !ft_is_space(str[i]))
+			*error = true;
 		i++;
 	}
-	return (ft_exit_status);
+	i = (unsigned char)ft_atoll_check(str, error);
+	return (i);
 }
 
 void	ft_clear2(t_shell *shell)
@@ -81,25 +52,39 @@ void	ft_clear2(t_shell *shell)
 	ft_free_shell(shell);
 }
 
+void	ft_numeric_argument_required(t_shell *shell)
+{
+	ft_putendl_fd("exit: numeric argument required", STDERR_FILENO);
+	ft_status(2);
+	ft_clear2(shell);
+	exit(2);
+}
+
 void	ft_builtin_exit(t_shell *shell, t_vector *cmd)
 {
 	unsigned char	ft_exit_status;
+	bool			error;
 
-	ft_putendl_fd("exit", STDOUT_FILENO);
-	if (cmd->size > 1 && !ft_is_number(ft_value(cmd, 1, 0)))
+	if (cmd == NULL || cmd->size == 1)
 	{
-		ft_putendl_fd("exit: numeric argument required", STDERR_FILENO);
-		ft_status(2);
 		ft_clear2(shell);
-		exit(2);
+		exit(0);
 	}
-	else if (cmd->size > 2)
+	ft_putendl_fd("exit", STDOUT_FILENO);
+	error = false;
+	if (cmd->size > 1)
 	{
-		ft_putendl_fd("exit: too many arguments", STDERR_FILENO);
-		ft_status(1);
-		return ;
+		ft_exit_status = ft_is_number(ft_value(cmd, 1, 0), &error);
+		if (error)
+			ft_numeric_argument_required(shell);
+		else if (cmd->size > 2)
+		{
+			ft_putendl_fd("exit: too many arguments", STDERR_FILENO);
+			ft_status(1);
+			return ;
+		}
 	}
-	ft_exit_status = ft_parse_exit_arguments(cmd);
+	ft_exit_status = ft_is_number(ft_value(cmd, 1, 0), &error);
 	ft_clear2(shell);
 	exit(ft_exit_status);
 }
