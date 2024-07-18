@@ -6,7 +6,7 @@
 /*   By: ishenriq <ishenriq@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/12 19:46:30 by ishenriq          #+#    #+#             */
-/*   Updated: 2024/07/01 19:21:36 by ishenriq         ###   ########.fr       */
+/*   Updated: 2024/07/17 21:05:36 by ishenriq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ size_t	ft_strlen(const char *s)
 	int	i;
 
 	i = 0;
-	if (!s)
+	if (!s || s == NULL)
 		return ((size_t) 0);
 	while (*s)
 	{
