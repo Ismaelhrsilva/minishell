@@ -6,7 +6,7 @@
 /*   By: ishenriq <ishenriq@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/13 19:12:24 by ishenriq          #+#    #+#             */
-/*   Updated: 2024/07/14 17:55:26 by ishenriq         ###   ########.fr       */
+/*   Updated: 2024/07/18 19:18:31 by paranha          ###   ########.org.br   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,8 +58,6 @@ char	*ft_expand(char *str, t_shell *shell)
 			status = ft_itoa(ft_status(-1));
 			return (status);
 		}
-		else if (ft_isdigit(str[1]))
-			return (&str[2]);
 		else if (ft_find_expand(&str[1], shell) != NULL)
 			return (ft_find_expand(&str[1], shell));
 		else if (ft_find_expand(&str[1], shell) == NULL)

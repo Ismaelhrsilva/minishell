@@ -6,7 +6,7 @@
 /*   By: ishenriq <ishenriq@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/22 18:25:14 by ishenriq          #+#    #+#             */
-/*   Updated: 2024/07/18 18:11:26 by paranha          ###   ########.org.br   */
+/*   Updated: 2024/07/18 18:36:31 by paranha          ###   ########.org.br   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,9 +38,6 @@
 # define HERE_DOC 0
 # define FORK 1
 # define PROMPT 2
-# define MAX_EXIT "9223372036854775807"
-# define MIN_EXIT "-9223372036854775808"
-# define PATH_MAX 4096
 
 typedef enum e_token
 {
