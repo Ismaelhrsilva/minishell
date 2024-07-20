@@ -6,7 +6,7 @@
 #    By: ishenriq <ishenriq@student.42sp.org.br>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/12/11 20:08:54 by ishenriq          #+#    #+#              #
-#    Updated: 2024/07/16 18:10:43 by paranha          ###   ########.org.br    #
+#    Updated: 2024/07/18 22:14:06 by ishenriq         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -40,7 +40,6 @@ SRCS := \
 	builtins/export_utils.c \
 	builtins/pwd.c \
 	builtins/unset.c \
-	debug/print_debug.c \
 	envp/envp.c \
 	envp/pathname.c \
 	error/error.c \

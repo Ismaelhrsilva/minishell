@@ -6,7 +6,7 @@
 /*   By: ishenriq <ishenriq@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/22 18:25:14 by ishenriq          #+#    #+#             */
-/*   Updated: 2024/07/18 19:02:24 by ishenriq         ###   ########.fr       */
+/*   Updated: 2024/07/18 22:19:26 by ishenriq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,6 @@
 # include <stdio.h>
 # include <stdlib.h>    // malloc, free
 # include <string.h>    // strerror
-# include <sys/ioctl.h> // ioctl
 # include <sys/types.h> // wait, waitpid,signal, stat, lstat, fstat, unlink
 # include <sys/wait.h>
 # include <termios.h>   // isatty, ttyname, tcsetattr, tcgetattr
@@ -282,9 +281,5 @@ void				ft_freephrase_2(t_vector *vector);
 void				ft_inside_ast(t_node *root);
 void				ft_clear_pipe(t_shell *shell);
 void				ft_clear_brackets(t_shell *shell);
-
-//remove at end
-void				ft_print_ast(t_node	*root, char *branch);
-void				ft_print_vector_content(t_vector *phrase);
 
 #endif
