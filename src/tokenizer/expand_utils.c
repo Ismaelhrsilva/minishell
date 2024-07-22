@@ -6,7 +6,7 @@
 /*   By: ishenriq <ishenriq@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/13 19:12:24 by ishenriq          #+#    #+#             */
-/*   Updated: 2024/07/17 18:01:24 by ishenriq         ###   ########.fr       */
+/*   Updated: 2024/07/22 18:16:02 by ishenriq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,7 @@ char	*ft_expand(char *str, t_shell *shell)
 	return (str);
 }
 
-unsigned long int	ft_i(unsigned long int st)
+unsigned long int	ft_index(unsigned long int st)
 {
 	static unsigned long int	i;
 
@@ -93,6 +93,6 @@ char	*ft_signal_str(t_vector *vector, size_t *i)
 	}
 	else
 		signal = "\0";
-	ft_i(*i);
+	ft_index(*i);
 	return (signal);
 }

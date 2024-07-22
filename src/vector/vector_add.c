@@ -6,7 +6,7 @@
 /*   By: paranha <paranha@student.42sp.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/27 17:56:52 by paranha           #+#    #+#             */
-/*   Updated: 2024/06/27 17:56:54 by paranha          ###   ########.org.br   */
+/*   Updated: 2024/07/22 18:12:04 by ishenriq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,29 +25,6 @@ void	ft_vector_push_back(t_vector *vector, void *value)
 			return ;
 	}
 	vector->values[vector->size] = value;
-	vector->size++;
-}
-
-void	ft_vector_push_front(t_vector *vector, void *value)
-{
-	unsigned long	new_capacity;
-	unsigned long	i;
-
-	if (vector == NULL)
-		return ;
-	if (vector->size >= vector->capacity)
-	{
-		new_capacity = vector->capacity + (vector->capacity >> 1);
-		if (!ft_vector_resize(vector, new_capacity))
-			return ;
-	}
-	i = vector->size;
-	while (i > 0)
-	{
-		vector->values[i] = vector->values[i - 1];
-		i--;
-	}
-	vector->values[0] = value;
 	vector->size++;
 }
 
@@ -76,15 +53,4 @@ unsigned long	ft_vector_insert(t_vector *vector, unsigned long position,
 	vector->values[position] = value;
 	vector->size++;
 	return (position);
-}
-
-void	ft_vector_reserve(t_vector *vector, unsigned long new_capacity)
-{
-	if (vector == NULL)
-		return ;
-	if (new_capacity > vector->capacity)
-	{
-		if (!ft_vector_resize(vector, new_capacity))
-			return ;
-	}
 }

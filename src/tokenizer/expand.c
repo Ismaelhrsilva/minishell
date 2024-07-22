@@ -6,7 +6,7 @@
 /*   By: ishenriq <ishenriq@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/13 19:12:24 by ishenriq          #+#    #+#             */
-/*   Updated: 2024/07/17 17:20:56 by ishenriq         ###   ########.fr       */
+/*   Updated: 2024/07/22 18:15:20 by ishenriq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ void	ft_process_token(char **str, int *not_expanded,
 {
 	unsigned long int	i;
 
-	i = ft_i(9999);
+	i = ft_index(9999);
 	while (i < vector->size && str[2] != NULL && str[2][0] != str[4][0])
 	{
 		str[3] = ft_expand(str[2], shell);
@@ -48,7 +48,7 @@ void	ft_process_token(char **str, int *not_expanded,
 			break ;
 		}
 	}
-	ft_i(i);
+	ft_index(i);
 }
 
 void	ft_process_quotes(char **str,
@@ -56,24 +56,24 @@ void	ft_process_quotes(char **str,
 {
 	unsigned long int	i;
 
-	i = ft_i(9999);
+	i = ft_index(9999);
 	while (i < vector->size)
 	{
-		i = ft_i(9999);
+		i = ft_index(9999);
 		str[4] = ft_signal_str(vector, &i);
-		str[2] = (char *)ft_vector_at(vector, ft_i(9999));
+		str[2] = (char *)ft_vector_at(vector, ft_index(9999));
 		if (str[2] && str[4][0] == str[2][0])
 		{
 			str[4] = "\0";
-			ft_i(i + 1);
-			str[2] = (char *)ft_vector_at(vector, ft_i(9999));
+			ft_index(i + 1);
+			str[2] = (char *)ft_vector_at(vector, ft_index(9999));
 			if (str[2] && !(str[2][0] != '\'' || str[2][0] != '\"'))
 				break ;
 		}
 		else
 			break ;
 	}
-	ft_i(i);
+	ft_index(i);
 }
 
 char	*ft_expand_aux(t_shell *shell, t_vector *vector, unsigned long int i)
@@ -90,7 +90,7 @@ char	*ft_expand_aux(t_shell *shell, t_vector *vector, unsigned long int i)
 	(void ) i;
 	if (ft_empty_str(vector))
 		return (ft_strdup(""));
-	while (ft_i(9999) < vector->size)
+	while (ft_index(9999) < vector->size)
 	{
 		ft_process_quotes(str, vector);
 		ft_process_token(str, &not_expanded, vector, shell);
@@ -106,7 +106,7 @@ char	*ft_parse_expand(char *str, t_shell *shell)
 	t_vector			*vector;
 	char				*result;
 
-	i = ft_i(0);
+	i = ft_index(0);
 	vector = ft_vector_create();
 	ft_split_expand(str, vector);
 	result = ft_expand_aux(shell, vector, i);

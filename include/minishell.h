@@ -6,7 +6,7 @@
 /*   By: ishenriq <ishenriq@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/22 18:25:14 by ishenriq          #+#    #+#             */
-/*   Updated: 2024/07/18 22:19:26 by ishenriq         ###   ########.fr       */
+/*   Updated: 2024/07/22 18:21:20 by ishenriq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,29 +16,27 @@
 # include "../lib/libft/gnl/get_next_line.h"
 # include "../lib/libft/libft.h"
 # include "../lib/printf/ft_printf.h"
-# include <curses.h> // tgetent, tgetflag, tgetnum, tgetstr, tgoto, tputs
-# include <dirent.h> // opendir, readdir, closedir
-# include <errno.h>  // perror
-# include <fcntl.h>  // open
+# include <curses.h>
+# include <dirent.h>
+# include <errno.h>
+# include <fcntl.h>
 # include <readline/history.h>
 # include <readline/readline.h>
-# include <signal.h> // sigaction, sigemptyset, sigaddset, kill
+# include <signal.h>
 # include <stdio.h>
-# include <stdlib.h>    // malloc, free
-# include <string.h>    // strerror
-# include <sys/types.h> // wait, waitpid,signal, stat, lstat, fstat, unlink
+# include <stdlib.h>
+# include <string.h>
+# include <sys/types.h>
 # include <sys/wait.h>
-# include <termios.h>   // isatty, ttyname, tcsetattr, tcgetattr
+# include <termios.h>
 # include <unistd.h>
-# include <limits.h> //PATH_MAX
+# include <limits.h>
 
 # define FT_VECTOR_INITIAL_CAPACITY	16
 # define TEMP "/tmp/heredoc"
 # define HERE_DOC 0
 # define FORK	1
 # define PROMPT	2
-# define MAX_EXIT "9223372036854775807"
-# define MIN_EXIT "-9223372036854775808"
 # define PATH_MAX 4096
 
 typedef enum e_token
@@ -150,7 +148,7 @@ void				ft_split_expand(char *str, t_vector *split);
 char				*ft_eliminate_signal(char *s, t_shell *shell);
 char				ft_signal(t_vector *vector, size_t *i, char signal);
 char				*ft_signal_str(t_vector *vector, size_t *i);
-unsigned long int	ft_i(unsigned long int st);
+unsigned long int	ft_index(unsigned long int st);
 int					ft_empty_str(t_vector *vector);
 
 // File Grammar
@@ -199,7 +197,6 @@ void				ft_vector_erase(t_vector *vector, unsigned long position);
 void				ft_vector_free(t_vector *vector);
 void				ft_vector_init(t_vector *vector);
 void				ft_vector_pop_back(t_vector *vector);
-void				ft_vector_pop_front(t_vector *vector);
 void				ft_vector_push_back(t_vector *vector, void *value);
 
 //File Envp
